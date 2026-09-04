@@ -2,33 +2,26 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Discord Dashboard</title>
+    <title>ThienCongDinh Network</title>
 
-    <meta
-        name="description"
-        content="Discord Bot Management Dashboard"
-    >
+    <meta name="description" content="ThienCongDinh Network">
+    <meta name="theme-color" content="#5865F2">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
     >
 
     <style>
 
-        /* =====================================================
+        /* =========================================================
            RESET
-        ===================================================== */
+        ========================================================= */
 
         * {
             margin: 0;
@@ -36,69 +29,24 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #070914;
-            --bg2: #0b0e1c;
-
-            --panel: rgba(17, 21, 40, .72);
-            --panel2: rgba(25, 30, 54, .72);
-
-            --border: rgba(255,255,255,.08);
-
-            --text: #f5f7ff;
-            --muted: #9298ad;
-
-            --primary: #5865f2;
-            --primary2: #7280ff;
-
-            --success: #23c483;
-            --danger: #ed4245;
-            --warning: #f0b232;
-
-            --shadow:
-                0 25px 70px rgba(0,0,0,.35);
-
-            --radius: 20px;
-        }
-
         html {
             scroll-behavior: smooth;
         }
 
         body {
-            min-height: 100vh;
-
-            background:
-                radial-gradient(
-                    circle at 15% 10%,
-                    rgba(88,101,242,.18),
-                    transparent 32%
-                ),
-                radial-gradient(
-                    circle at 85% 80%,
-                    rgba(114,80,255,.12),
-                    transparent 35%
-                ),
-                var(--bg);
-
-            color: var(--text);
-
-            font-family:
-                Inter,
-                system-ui,
-                sans-serif;
-
+            font-family: "Inter", sans-serif;
+            background: #07070d;
+            color: #fff;
             overflow-x: hidden;
         }
 
         button,
-        input,
-        textarea,
-        select {
-            font: inherit;
+        input {
+            font-family: inherit;
         }
 
         button {
+            border: 0;
             cursor: pointer;
         }
 
@@ -108,161 +56,139 @@
         }
 
 
-        /* =====================================================
+        /* =========================================================
            BACKGROUND
-        ===================================================== */
+        ========================================================= */
 
         .background {
             position: fixed;
             inset: 0;
-
+            z-index: -10;
             overflow: hidden;
-
-            pointer-events: none;
-
-            z-index: -5;
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(88,101,242,.17),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(140,70,255,.13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 90%,
+                    rgba(0,170,255,.08),
+                    transparent 35%
+                ),
+                #07070d;
         }
 
         .orb {
             position: absolute;
-
-            width: 420px;
-            height: 420px;
-
             border-radius: 50%;
-
-            filter: blur(90px);
-
-            opacity: .16;
-
-            animation:
-                floatOrb 14s ease-in-out infinite;
+            filter: blur(80px);
+            opacity: .35;
+            animation: floating 12s ease-in-out infinite;
         }
 
         .orb.one {
+            width: 400px;
+            height: 400px;
             background: #5865f2;
-
-            top: -180px;
+            top: -150px;
             left: -100px;
         }
 
         .orb.two {
-            background: #8b5cf6;
-
-            right: -150px;
-            bottom: -180px;
-
-            animation-delay: -5s;
+            width: 350px;
+            height: 350px;
+            background: #8a45ff;
+            right: -100px;
+            top: 20%;
+            animation-delay: -4s;
         }
 
         .orb.three {
-            background: #22d3ee;
-
-            width: 260px;
-            height: 260px;
-
-            left: 45%;
-            top: 35%;
-
-            opacity: .06;
-
-            animation-delay: -9s;
+            width: 300px;
+            height: 300px;
+            background: #00a8ff;
+            left: 35%;
+            bottom: -150px;
+            animation-delay: -8s;
         }
 
-        @keyframes floatOrb {
+        @keyframes floating {
 
-            0%,
-            100% {
-                transform:
-                    translate3d(0,0,0)
-                    scale(1);
+            0%, 100% {
+                transform: translate3d(0,0,0) scale(1);
             }
 
             50% {
-                transform:
-                    translate3d(50px,-35px,0)
-                    scale(1.12);
+                transform: translate3d(30px,-30px,0) scale(1.1);
             }
+
         }
 
 
-        /* =====================================================
+        /* =========================================================
            PARTICLES
-        ===================================================== */
+        ========================================================= */
 
-        .particles {
+        #particles {
             position: fixed;
             inset: 0;
-
+            z-index: -5;
             pointer-events: none;
-
-            z-index: -4;
         }
 
         .particle {
             position: absolute;
-
             width: 2px;
             height: 2px;
-
+            background: rgba(255,255,255,.7);
             border-radius: 50%;
-
-            background: rgba(255,255,255,.55);
-
-            animation:
-                particleFloat linear infinite;
+            animation: particleMove linear infinite;
         }
 
-        @keyframes particleFloat {
+        @keyframes particleMove {
 
             from {
-                transform:
-                    translateY(110vh);
+                transform: translateY(110vh);
                 opacity: 0;
             }
 
-            15% {
-                opacity: .7;
+            10% {
+                opacity: 1;
             }
 
-            85% {
-                opacity: .7;
+            90% {
+                opacity: 1;
             }
 
             to {
-                transform:
-                    translateY(-20vh);
+                transform: translateY(-10vh);
                 opacity: 0;
             }
+
         }
 
 
-        /* =====================================================
-           LOADING
-        ===================================================== */
+        /* =========================================================
+           LOADER
+        ========================================================= */
 
         #loader {
             position: fixed;
-
             inset: 0;
-
-            z-index: 9999;
-
+            z-index: 99999;
             display: flex;
-
-            align-items: center;
             justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #131936,
-                    #060811 70%
-                );
-
+            align-items: center;
+            background: #07070d;
             transition:
-                opacity .6s ease,
-                visibility .6s ease;
+                opacity .7s ease,
+                visibility .7s ease;
         }
 
         #loader.hide {
@@ -270,23 +196,18 @@
             visibility: hidden;
         }
 
-        .loader-box {
+        .loader-content {
             text-align: center;
         }
 
         .loader-logo {
-            width: 76px;
-            height: 76px;
-
-            margin: auto auto 25px;
-
+            width: 85px;
+            height: 85px;
             border-radius: 24px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 34px;
+            margin: auto;
 
             background:
                 linear-gradient(
@@ -296,4472 +217,2007 @@
                 );
 
             box-shadow:
-                0 0 45px
-                rgba(88,101,242,.5);
+                0 0 60px rgba(88,101,242,.55);
 
-            animation:
-                loaderPulse 1.8s ease-in-out infinite;
+            animation: logoPulse 2s infinite;
         }
 
-        @keyframes loaderPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.08);
-            }
+        .loader-logo span {
+            font-size: 34px;
+            font-weight: 900;
         }
 
         .loader-title {
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
+            margin-top: 25px;
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
-        .loader-text {
-            color: var(--muted);
-
-            margin-top: 7px;
-
-            font-size: 13px;
+        .loader-subtitle {
+            margin-top: 8px;
+            color: #8c8c9b;
+            font-size: 14px;
         }
 
         .loader-bar {
-            width: 180px;
+            width: 220px;
             height: 4px;
-
-            margin: 20px auto 0;
-
-            border-radius: 20px;
-
+            margin: 25px auto 0;
+            background: rgba(255,255,255,.08);
+            border-radius: 10px;
             overflow: hidden;
-
-            background:
-                rgba(255,255,255,.07);
         }
 
-        .loader-bar span {
+        .loader-bar::before {
+            content: "";
             display: block;
-
-            height: 100%;
             width: 45%;
-
-            border-radius: inherit;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #5865f2,
-                    #a78bfa
-                );
-
-            animation:
-                loaderMove 1.1s ease-in-out infinite;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                #5865f2,
+                #9b6cff
+            );
+            animation: loaderBar 1.5s infinite;
         }
 
-        @keyframes loaderMove {
+        @keyframes loaderBar {
 
             0% {
                 transform: translateX(-120%);
             }
 
             100% {
-                transform: translateX(420%);
+                transform: translateX(330%);
             }
+
+        }
+
+        @keyframes logoPulse {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
         }
 
 
-        /* =====================================================
-           LOGIN
-        ===================================================== */
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
 
-        #loginScreen {
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 1000;
+
+            height: 78px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(7,7,13,.55);
+            backdrop-filter: blur(20px);
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
+
+            transition: .3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(7,7,13,.88);
+            box-shadow: 0 10px 40px rgba(0,0,0,.25);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            letter-spacing: -.5px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5865f2,
+                    #8b5cf6
+                );
+
+            box-shadow:
+                0 8px 25px rgba(88,101,242,.3);
+        }
+
+        .brand-icon span {
+            font-size: 17px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aaaab8;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .25s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-login {
+            padding: 11px 18px;
+            border-radius: 12px;
+
+            background: rgba(88,101,242,.12);
+            border: 1px solid rgba(88,101,242,.3);
+
+            color: white !important;
+        }
+
+        .nav-login:hover {
+            background: #5865f2;
+            box-shadow: 0 10px 30px rgba(88,101,242,.25);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
             min-height: 100vh;
+            padding: 150px 7% 100px;
 
-            display: none;
-
+            display: flex;
             align-items: center;
             justify-content: center;
 
-            padding: 25px;
+            text-align: center;
+            position: relative;
         }
 
-        .login-card {
-            width: min(470px,100%);
+        .hero-content {
+            max-width: 950px;
+            animation: heroEnter 1s ease forwards;
+        }
 
+        @keyframes heroEnter {
+
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 9px 15px;
+
+            border-radius: 999px;
+
+            background: rgba(88,101,242,.10);
+            border: 1px solid rgba(88,101,242,.25);
+
+            color: #aeb5ff;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 25px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #5cff9a;
+            box-shadow: 0 0 12px #5cff9a;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 92px);
+            line-height: .98;
+            letter-spacing: -4px;
+            font-weight: 900;
+        }
+
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff,
+                    #8e96ff,
+                    #b77cff,
+                    #fff
+                );
+
+            background-size: 300%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+
+            from {
+                background-position: 0%;
+            }
+
+            to {
+                background-position: 300%;
+            }
+
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 28px auto 0;
+
+            color: #9696a6;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
             position: relative;
 
-            padding: 42px;
+            padding: 15px 25px;
+
+            border-radius: 14px;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    transparent,
+                    rgba(255,255,255,.2),
+                    transparent
+                );
+
+            transform: translateX(-120%);
+            transition: .6s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateX(120%);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-discord {
+            background: #5865f2;
+            color: white;
+
+            box-shadow:
+                0 12px 35px rgba(88,101,242,.3);
+        }
+
+        .btn-discord:hover {
+            box-shadow:
+                0 18px 50px rgba(88,101,242,.45);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.1);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,.1);
+        }
+
+
+        /* =========================================================
+           STATS
+        ========================================================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            max-width: 850px;
+            margin: 70px auto 0;
 
             border:
-                1px solid
-                rgba(255,255,255,.09);
+                1px solid rgba(255,255,255,.07);
 
-            border-radius: 28px;
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            backdrop-filter: blur(15px);
+
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 25px;
+            position: relative;
+        }
+
+        .stat:not(:last-child)::after {
+            content: "";
+            position: absolute;
+
+            right: 0;
+            top: 25%;
+            height: 50%;
+
+            width: 1px;
+
+            background: rgba(255,255,255,.08);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .stat span {
+            color: #777788;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+
+        /* =========================================================
+           SECTION
+        ========================================================= */
+
+        section {
+            padding: 110px 7%;
+            position: relative;
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .section-header small {
+            color: #7d86ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 {
+            margin-top: 12px;
+            font-size: clamp(32px, 5vw, 52px);
+            letter-spacing: -2px;
+        }
+
+        .section-header p {
+            color: #858594;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+
+        /* =========================================================
+           CARDS
+        ========================================================= */
+
+        .features {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .card {
+            position: relative;
+
+            padding: 30px;
+
+            min-height: 250px;
+
+            border-radius: 22px;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(26,31,57,.84),
-                    rgba(12,15,30,.82)
+                    rgba(255,255,255,.055),
+                    rgba(255,255,255,.018)
                 );
 
-            backdrop-filter:
-                blur(30px);
-
-            box-shadow:
-                var(--shadow);
+            border:
+                1px solid rgba(255,255,255,.07);
 
             overflow: hidden;
 
-            animation:
-                loginIn .8s cubic-bezier(.2,.8,.2,1);
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                box-shadow .35s ease;
         }
 
-        .login-card::before {
+        .card::before {
             content: "";
 
             position: absolute;
 
-            width: 220px;
-            height: 220px;
+            width: 180px;
+            height: 180px;
 
-            top: -120px;
+            top: -100px;
             right: -100px;
 
             border-radius: 50%;
 
             background: #5865f2;
 
-            filter: blur(80px);
-
-            opacity: .25;
+            filter: blur(70px);
+            opacity: .1;
         }
 
-        @keyframes loginIn {
+        .card:hover {
+            transform: translateY(-8px);
 
-            from {
-                opacity: 0;
-                transform:
-                    translateY(30px)
-                    scale(.97);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-        }
-
-        .login-icon {
-            width: 82px;
-            height: 82px;
-
-            margin: 0 auto 25px;
-
-            border-radius: 25px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 40px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #5865f2,
-                    #7658f2
-                );
+            border-color:
+                rgba(110,120,255,.35);
 
             box-shadow:
-                0 15px 40px
-                rgba(88,101,242,.35);
+                0 25px 60px rgba(0,0,0,.25);
         }
 
-        .login-card h1 {
-            text-align: center;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 30px;
-        }
-
-        .login-card p {
-            text-align: center;
-
-            color: var(--muted);
-
-            line-height: 1.7;
-
-            margin-top: 10px;
-        }
-
-        .discord-login {
-            width: 100%;
-
-            border: 0;
-
-            margin-top: 28px;
-
-            padding: 16px 20px;
-
-            border-radius: 14px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            gap: 12px;
-
-            color: white;
-
-            font-weight: 700;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #5865f2,
-                    #6f78ff
-                );
-
-            box-shadow:
-                0 12px 35px
-                rgba(88,101,242,.3);
-
-            transition:
-                .25s ease;
-        }
-
-        .discord-login:hover {
-            transform:
-                translateY(-3px);
-
-            box-shadow:
-                0 18px 45px
-                rgba(88,101,242,.45);
-        }
-
-        .discord-login:active {
-            transform:
-                translateY(0)
-                scale(.98);
-        }
-
-        .login-info {
-            margin-top: 25px;
-
-            padding: 13px;
-
-            border-radius: 12px;
-
-            background:
-                rgba(255,255,255,.035);
-
-            color: #777e94;
-
-            font-size: 12px;
-
-            text-align: center;
-        }
-
-
-        /* =====================================================
-           APP
-        ===================================================== */
-
-        #app {
-            display: none;
-
-            min-height: 100vh;
-        }
-
-        .layout {
-            display: flex;
-
-            min-height: 100vh;
-        }
-
-
-        /* =====================================================
-           SIDEBAR
-        ===================================================== */
-
-        .sidebar {
-            width: 260px;
-
-            position: fixed;
-
-            top: 0;
-            bottom: 0;
-            left: 0;
-
-            z-index: 100;
-
-            display: flex;
-
-            flex-direction: column;
-
-            padding: 22px 15px;
-
-            border-right:
-                1px solid
-                rgba(255,255,255,.07);
-
-            background:
-                rgba(7,9,20,.72);
-
-            backdrop-filter:
-                blur(25px);
-
-            transition:
-                transform .35s ease;
-        }
-
-        .brand {
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            padding:
-                7px 10px 25px;
-        }
-
-        .brand-logo {
-            width: 42px;
-            height: 42px;
-
-            flex: 0 0 auto;
-
-            border-radius: 13px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 20px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #5865f2,
-                    #8b5cf6
-                );
-
-            box-shadow:
-                0 8px 25px
-                rgba(88,101,242,.3);
-        }
-
-        .brand-name {
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 17px;
-
-            font-weight: 700;
-        }
-
-        .brand-sub {
-            color: #777e94;
-
-            font-size: 10px;
-
-            margin-top: 2px;
-        }
-
-        .nav-title {
-            color: #555c73;
-
-            font-size: 10px;
-
-            font-weight: 700;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1.3px;
-
-            padding:
-                15px 12px 8px;
-        }
-
-        .nav-item {
-            position: relative;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            padding:
-                12px 13px;
-
-            margin-bottom: 4px;
-
-            border-radius: 12px;
-
-            color: #8f96aa;
-
-            font-size: 13px;
-
-            font-weight: 600;
-
-            transition:
-                .22s ease;
-        }
-
-        .nav-item:hover {
-            color: white;
-
-            background:
-                rgba(255,255,255,.05);
-
-            transform:
-                translateX(2px);
-        }
-
-        .nav-item.active {
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(88,101,242,.24),
-                    rgba(88,101,242,.08)
-                );
-
-            box-shadow:
-                inset 0 0 0
-                1px rgba(88,101,242,.13);
-        }
-
-        .nav-item.active::before {
-            content: "";
-
-            position: absolute;
-
-            left: -15px;
-
-            width: 3px;
-            height: 22px;
-
-            border-radius: 0 5px 5px 0;
-
-            background:
-                #7280ff;
-
-            box-shadow:
-                0 0 15px
-                rgba(88,101,242,.7);
-        }
-
-        .nav-icon {
-            width: 20px;
-
-            text-align: center;
-
-            font-size: 16px;
-        }
-
-        .sidebar-bottom {
-            margin-top: auto;
-        }
-
-        .user-card {
-            padding: 12px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.06);
+        .card-icon {
+            width: 52px;
+            height: 52px;
 
             border-radius: 15px;
 
-            background:
-                rgba(255,255,255,.025);
-        }
-
-        .user-row {
             display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-        }
-
-        .avatar {
-            width: 36px;
-            height: 36px;
-
-            border-radius: 50%;
-
-            object-fit: cover;
-
-            background:
-                #5865f2;
-        }
-
-        .user-name {
-            max-width: 135px;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
-
-            white-space: nowrap;
-
-            font-size: 12px;
-
-            font-weight: 700;
-        }
-
-        .user-status {
-            display: flex;
-
-            align-items: center;
-
-            gap: 5px;
-
-            color: #6d758b;
-
-            font-size: 10px;
-
-            margin-top: 2px;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-
-            border-radius: 50%;
-
-            background: var(--success);
-
-            box-shadow:
-                0 0 8px
-                rgba(35,196,131,.8);
-        }
-
-        .logout {
-            width: 100%;
-
-            margin-top: 10px;
-
-            border: 0;
-
-            padding: 9px;
-
-            border-radius: 9px;
-
-            color: #777e94;
-
-            background:
-                transparent;
-
-            font-size: 11px;
-
-            transition: .2s;
-        }
-
-        .logout:hover {
-            color: #ff7779;
-
-            background:
-                rgba(237,66,69,.08);
-        }
-
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        .main {
-            width: calc(100% - 260px);
-
-            margin-left: 260px;
-
-            min-height: 100vh;
-
-            padding: 28px 35px 50px;
-        }
-
-        .topbar {
-            display: flex;
-
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 32px;
-        }
-
-        .mobile-menu {
-            display: none;
-
-            border: 0;
-
-            width: 42px;
-            height: 42px;
-
-            border-radius: 12px;
-
-            color: white;
-
-            background:
-                rgba(255,255,255,.05);
-        }
-
-        .page-title {
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 27px;
-
-            font-weight: 700;
-        }
-
-        .page-desc {
-            color: var(--muted);
-
-            margin-top: 6px;
-
-            font-size: 13px;
-        }
-
-        .top-actions {
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-        }
-
-        .bot-status {
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            padding:
-                9px 13px;
-
-            border:
-                1px solid
-                rgba(35,196,131,.12);
-
-            border-radius: 30px;
-
-            color: #a4abbb;
-
-            background:
-                rgba(35,196,131,.045);
-
-            font-size: 11px;
-        }
-
-        .online-dot {
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: var(--success);
-
-            box-shadow:
-                0 0 12px
-                rgba(35,196,131,.8);
-        }
-
-
-        /* =====================================================
-           PAGE
-        ===================================================== */
-
-        .page {
-            display: none;
-
-            animation:
-                pageIn .4s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes pageIn {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(12px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-        }
-
-
-        /* =====================================================
-           SERVER SELECT
-        ===================================================== */
-
-        .server-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fill,
-                    minmax(250px,1fr)
-                );
-
-            gap: 16px;
-        }
-
-        .server-card {
-            position: relative;
-
-            padding: 20px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius: var(--radius);
-
-            background:
-                var(--panel);
-
-            backdrop-filter:
-                blur(18px);
-
-            box-shadow:
-                0 15px 50px
-                rgba(0,0,0,.12);
-
-            overflow: hidden;
-
-            transition:
-                .3s cubic-bezier(.2,.8,.2,1);
-        }
-
-        .server-card::before {
-            content: "";
-
-            position: absolute;
-
-            inset: 0;
-
-            background:
-                radial-gradient(
-                    circle at 90% 0%,
-                    rgba(88,101,242,.12),
-                    transparent 35%
-                );
-
-            pointer-events: none;
-        }
-
-        .server-card:hover {
-            transform:
-                translateY(-6px);
-
-            border-color:
-                rgba(88,101,242,.22);
-
-            box-shadow:
-                0 25px 65px
-                rgba(0,0,0,.25);
-        }
-
-        .server-head {
-            display: flex;
-
-            align-items: center;
-
-            gap: 14px;
-        }
-
-        .server-icon {
-            width: 55px;
-            height: 55px;
-
-            border-radius: 17px;
-
-            object-fit: cover;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #5865f2,
-                    #8b5cf6
-                );
-        }
-
-        .server-icon-fallback {
-            width: 55px;
-            height: 55px;
-
-            border-radius: 17px;
-
-            display: flex;
-
-            align-items: center;
             justify-content: center;
-
-            font-size: 21px;
-            font-weight: 800;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #5865f2,
-                    #8b5cf6
-                );
-        }
-
-        .server-name {
-            font-weight: 700;
-
-            font-size: 14px;
-
-            max-width: 180px;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
-        }
-
-        .server-id {
-            color: #646b80;
-
-            font-size: 10px;
-
-            margin-top: 4px;
-        }
-
-        .server-meta {
-            display: flex;
-
             align-items: center;
-
-            gap: 8px;
-
-            margin-top: 18px;
-        }
-
-        .badge {
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 5px;
-
-            padding:
-                5px 8px;
-
-            border-radius: 7px;
-
-            font-size: 9px;
-
-            font-weight: 700;
-        }
-
-        .badge.green {
-            color: #58e2aa;
-
-            background:
-                rgba(35,196,131,.09);
-        }
-
-        .badge.gray {
-            color: #838a9e;
-
-            background:
-                rgba(255,255,255,.045);
-        }
-
-        .server-action {
-            width: 100%;
-
-            border: 0;
-
-            margin-top: 18px;
-
-            padding: 11px;
-
-            border-radius: 10px;
-
-            color: white;
-
-            background:
-                rgba(88,101,242,.16);
-
-            font-size: 11px;
-
-            font-weight: 700;
-
-            transition: .25s;
-        }
-
-        .server-action:hover {
-            background:
-                var(--primary);
-
-            transform:
-                translateY(-1px);
-        }
-
-        .server-action:disabled {
-            opacity: .4;
-
-            cursor: not-allowed;
-        }
-
-
-        /* =====================================================
-           DASHBOARD HERO
-        ===================================================== */
-
-        .hero {
-            position: relative;
-
-            padding: 28px;
-
-            margin-bottom: 18px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            border-radius: 24px;
-
-            overflow: hidden;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(88,101,242,.15),
-                    rgba(17,21,40,.72)
-                );
-
-            box-shadow:
-                var(--shadow);
-        }
-
-        .hero::after {
-            content: "";
-
-            position: absolute;
-
-            width: 260px;
-            height: 260px;
-
-            right: -100px;
-            top: -120px;
-
-            border-radius: 50%;
-
-            background:
-                #5865f2;
-
-            filter:
-                blur(90px);
-
-            opacity: .12;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-        }
-
-        .hero-server-icon {
-            width: 70px;
-            height: 70px;
-
-            border-radius: 21px;
-
-            object-fit: cover;
-
-            background:
-                #5865f2;
-
-            box-shadow:
-                0 10px 35px
-                rgba(88,101,242,.3);
-        }
-
-        .hero h2 {
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 22px;
-        }
-
-        .hero p {
-            color: #858ca0;
-
-            margin-top: 6px;
-
-            font-size: 12px;
-        }
-
-        .change-server {
-            margin-left: auto;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            padding:
-                10px 14px;
-
-            border-radius: 10px;
-
-            color: #aab0c0;
-
-            background:
-                rgba(255,255,255,.04);
-
-            font-size: 11px;
-
-            transition: .2s;
-        }
-
-        .change-server:hover {
-            color: white;
-
-            background:
-                rgba(255,255,255,.08);
-        }
-
-
-        /* =====================================================
-           STAT CARDS
-        ===================================================== */
-
-        .stats {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3,1fr);
-
-            gap: 15px;
-
-            margin-bottom: 18px;
-        }
-
-        .stat {
-            padding: 18px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius: 18px;
-
-            background:
-                var(--panel);
-
-            transition: .25s;
-        }
-
-        .stat:hover {
-            transform:
-                translateY(-3px);
-
-            border-color:
-                rgba(255,255,255,.12);
-        }
-
-        .stat-top {
-            display: flex;
-
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .stat-icon {
-            width: 36px;
-            height: 36px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
 
             background:
                 rgba(88,101,242,.12);
-        }
-
-        .stat-label {
-            color: #747c91;
-
-            font-size: 10px;
-
-            text-transform: uppercase;
-
-            letter-spacing: .8px;
-        }
-
-        .stat-value {
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 25px;
-
-            font-weight: 700;
-
-            margin-top: 12px;
-        }
-
-
-        /* =====================================================
-           SETTINGS
-        ===================================================== */
-
-        .settings-grid {
-            display: grid;
-
-            grid-template-columns:
-                minmax(0,1.2fr)
-                minmax(320px,.8fr);
-
-            gap: 18px;
-        }
-
-        .card {
-            border:
-                1px solid
-                var(--border);
-
-            border-radius: 20px;
-
-            background:
-                var(--panel);
-
-            backdrop-filter:
-                blur(18px);
-
-            overflow: hidden;
-        }
-
-        .card-head {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            padding: 18px 20px;
-
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.06);
-        }
-
-        .card-title {
-            font-size: 13px;
-
-            font-weight: 700;
-        }
-
-        .card-description {
-            color: #737a8f;
-
-            font-size: 10px;
-
-            margin-top: 4px;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .field {
-            margin-bottom: 17px;
-        }
-
-        .field:last-child {
-            margin-bottom: 0;
-        }
-
-        .label {
-            display: block;
-
-            color: #a8aec0;
-
-            font-size: 11px;
-
-            font-weight: 600;
-
-            margin-bottom: 8px;
-        }
-
-        .input,
-        .textarea,
-        .select {
-            width: 100%;
 
             border:
-                1px solid
-                rgba(255,255,255,.07);
+                1px solid rgba(88,101,242,.2);
 
-            outline: none;
+            font-size: 22px;
 
-            border-radius: 11px;
-
-            padding:
-                11px 12px;
-
-            color: #e9ebf5;
-
-            background:
-                rgba(0,0,0,.18);
-
-            transition:
-                border .2s,
-                box-shadow .2s,
-                background .2s;
+            margin-bottom: 25px;
         }
 
-        .textarea {
-            min-height: 95px;
-
-            resize: vertical;
+        .card h3 {
+            font-size: 19px;
         }
 
-        .input::placeholder,
-        .textarea::placeholder {
-            color: #555c70;
+        .card p {
+            color: #80808f;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-top: 10px;
         }
 
-        .input:focus,
-        .textarea:focus,
-        .select:focus {
-            border-color:
-                rgba(88,101,242,.55);
 
-            background:
-                rgba(88,101,242,.035);
+        /* =========================================================
+           LOGIN PANEL
+        ========================================================= */
 
-            box-shadow:
-                0 0 0 3px
-                rgba(88,101,242,.08);
-        }
-
-        .select option {
-            background:
-                #111527;
-
-            color: white;
-        }
-
-        .two-col {
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 12px;
-        }
-
-        .color-row {
+        .login-section {
             display: flex;
-
-            gap: 10px;
+            justify-content: center;
         }
 
-        .color-input {
-            width: 52px;
+        .login-box {
+            width: min(560px, 100%);
 
-            height: 43px;
+            padding: 45px;
 
-            padding: 4px;
+            text-align: center;
 
-            border:
-                1px solid
-                rgba(255,255,255,.07);
+            border-radius: 28px;
 
-            border-radius: 11px;
-
-            background:
-                rgba(0,0,0,.18);
-
-            cursor: pointer;
-        }
-
-
-        /* =====================================================
-           BUTTONS
-        ===================================================== */
-
-        .actions {
-            display: flex;
-
-            gap: 9px;
-
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            border: 0;
-
-            border-radius: 10px;
-
-            padding:
-                10px 14px;
-
-            color: white;
-
-            font-size: 11px;
-
-            font-weight: 700;
-
-            transition:
-                .22s ease;
-        }
-
-        .btn:hover {
-            transform:
-                translateY(-2px);
-        }
-
-        .btn.primary {
             background:
                 linear-gradient(
-                    135deg,
-                    #5865f2,
-                    #707aff
+                    145deg,
+                    rgba(255,255,255,.07),
+                    rgba(255,255,255,.025)
                 );
 
+            border:
+                1px solid rgba(255,255,255,.08);
+
             box-shadow:
-                0 8px 22px
-                rgba(88,101,242,.22);
+                0 30px 100px rgba(0,0,0,.25);
+
+            backdrop-filter: blur(20px);
         }
 
-        .btn.success {
-            background:
-                rgba(35,196,131,.12);
+        .login-logo {
+            width: 72px;
+            height: 72px;
 
-            color:
-                #5ee5ad;
-        }
+            margin: 0 auto 20px;
 
-        .btn.danger {
-            background:
-                rgba(237,66,69,.1);
-
-            color:
-                #ff7477;
-        }
-
-        .btn.secondary {
-            background:
-                rgba(255,255,255,.06);
-
-            color:
-                #aeb4c4;
-        }
-
-
-        /* =====================================================
-           PREVIEW
-        ===================================================== */
-
-        .preview-wrap {
-            min-height: 390px;
-
-            padding: 20px;
+            border-radius: 22px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             background:
-                radial-gradient(
-                    circle at center,
-                    rgba(88,101,242,.08),
-                    transparent 60%
+                linear-gradient(
+                    135deg,
+                    #5865f2,
+                    #8b5cf6
                 );
-        }
 
-        .discord-preview {
-            width: 100%;
-
-            max-width: 430px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            border-left:
-                4px solid
-                #5865f2;
-
-            border-radius: 8px;
-
-            padding: 18px;
-
-            background:
-                #171a23;
+            font-size: 30px;
 
             box-shadow:
-                0 25px 60px
-                rgba(0,0,0,.35);
+                0 15px 45px rgba(88,101,242,.3);
         }
 
-        .preview-title {
-            font-size: 16px;
-
-            font-weight: 700;
+        .login-box h2 {
+            font-size: 30px;
         }
 
-        .preview-description {
-            color: #b8bcc7;
-
-            font-size: 12px;
-
-            line-height: 1.6;
-
-            margin-top: 8px;
-
-            white-space: pre-wrap;
+        .login-box p {
+            color: #858594;
+            line-height: 1.7;
+            font-size: 14px;
+            margin: 12px 0 25px;
         }
 
-        .preview-footer {
-            color: #737985;
+        .login-box .btn {
+            width: 100%;
+        }
 
-            font-size: 10px;
 
-            margin-top: 18px;
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
-            padding-top: 10px;
+        footer {
+            padding: 50px 7%;
 
             border-top:
-                1px solid
-                rgba(255,255,255,.05);
-        }
-
-        .preview-buttons {
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 6px;
-
-            margin-top: 17px;
-        }
-
-        .preview-button {
-            border: 0;
-
-            border-radius: 5px;
-
-            padding:
-                8px 12px;
-
-            color: white;
-
-            font-size: 10px;
-
-            font-weight: 600;
-        }
-
-
-        /* =====================================================
-           BUTTON EDITOR
-        ===================================================== */
-
-        .button-editor {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 9px;
-        }
-
-        .button-row {
-            display: grid;
-
-            grid-template-columns:
-                38px
-                1fr
-                85px
-                105px
-                35px;
-
-            gap: 7px;
-
-            align-items: center;
-
-            padding: 9px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.05);
-
-            border-radius: 11px;
-
-            background:
-                rgba(255,255,255,.02);
-
-            animation:
-                pageIn .25s ease;
-        }
-
-        .mini-input {
-            min-width: 0;
-
-            width: 100%;
-
-            border:
-                1px solid
-                rgba(255,255,255,.06);
-
-            outline: none;
-
-            border-radius: 7px;
-
-            padding: 7px 8px;
-
-            color: white;
-
-            background:
-                rgba(0,0,0,.17);
-
-            font-size: 10px;
-        }
-
-        .mini-input:focus {
-            border-color:
-                rgba(88,101,242,.45);
-        }
-
-        .remove-btn {
-            width: 30px;
-            height: 30px;
-
-            border: 0;
-
-            border-radius: 8px;
-
-            color: #ff7275;
-
-            background:
-                rgba(237,66,69,.08);
-
-            transition: .2s;
-        }
-
-        .remove-btn:hover {
-            background:
-                rgba(237,66,69,.18);
-        }
-
-
-        /* =====================================================
-           SAVE BAR
-        ===================================================== */
-
-        .save-bar {
-            position: sticky;
-
-            bottom: 15px;
-
-            z-index: 20;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 15px;
-
-            margin-top: 18px;
-
-            padding:
-                13px 15px;
-
-            border:
-                1px solid
-                rgba(88,101,242,.16);
-
-            border-radius: 15px;
-
-            background:
-                rgba(15,18,34,.88);
-
-            backdrop-filter:
-                blur(20px);
-
-            box-shadow:
-                0 15px 50px
-                rgba(0,0,0,.3);
-        }
-
-        .save-status {
-            color: #777f93;
-
-            font-size: 10px;
-        }
-
-        .save-status strong {
-            color: #aab0c1;
-        }
-
-
-        /* =====================================================
-           EMPTY
-        ===================================================== */
-
-        .empty {
-            padding: 60px 20px;
+                1px solid rgba(255,255,255,.06);
 
             text-align: center;
 
-            color: #676e82;
-        }
+            color: #646474;
 
-        .empty-icon {
-            font-size: 35px;
-
-            opacity: .6;
-
-            margin-bottom: 12px;
+            font-size: 13px;
         }
 
 
-        /* =====================================================
-           TOAST
-        ===================================================== */
+        /* =========================================================
+           MODAL
+        ========================================================= */
 
-        #toastContainer {
+        .modal {
             position: fixed;
+            inset: 0;
 
-            right: 22px;
-            bottom: 22px;
-
-            z-index: 99999;
+            z-index: 9999;
 
             display: flex;
+            justify-content: center;
+            align-items: center;
 
-            flex-direction: column;
+            padding: 20px;
 
-            gap: 10px;
+            background: rgba(0,0,0,.7);
+
+            backdrop-filter: blur(12px);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: .3s ease;
         }
 
-        .toast {
-            min-width: 270px;
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-            max-width: 370px;
+        .modal-box {
+            width: min(430px, 100%);
 
-            padding: 13px 15px;
+            padding: 35px;
 
-            display: flex;
+            border-radius: 25px;
 
-            align-items: flex-start;
-
-            gap: 10px;
+            background:
+                #111119;
 
             border:
-                1px solid
-                rgba(255,255,255,.08);
+                1px solid rgba(255,255,255,.1);
+
+            transform:
+                scale(.9)
+                translateY(20px);
+
+            transition: .35s ease;
+
+            text-align: center;
+        }
+
+        .modal.active .modal-box {
+            transform:
+                scale(1)
+                translateY(0);
+        }
+
+        .modal-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .modal-box h3 {
+            font-size: 24px;
+        }
+
+        .modal-box p {
+            color: #858594;
+            line-height: 1.6;
+            margin: 12px 0 25px;
+            font-size: 14px;
+        }
+
+        .modal-close {
+            width: 100%;
+            padding: 13px;
+            border-radius: 12px;
+
+            background: rgba(255,255,255,.07);
+            color: white;
+        }
+
+
+        /* =========================================================
+           USER PANEL
+        ========================================================= */
+
+        #userPanel {
+            display: none;
+        }
+
+        #userPanel.show {
+            display: block;
+        }
+
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 10px 14px;
 
             border-radius: 13px;
 
-            background:
-                rgba(20,24,42,.92);
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.08);
+        }
 
-            backdrop-filter:
-                blur(18px);
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            background: #5865f2;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .logout-btn {
+            margin-left: 8px;
+
+            background: transparent;
+
+            color: #ff6b7a;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        #toast {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            z-index: 10000;
+
+            min-width: 260px;
+
+            padding: 15px 18px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(20,20,30,.95);
+
+            border:
+                1px solid rgba(255,255,255,.1);
 
             box-shadow:
-                0 15px 45px
-                rgba(0,0,0,.3);
+                0 20px 50px rgba(0,0,0,.35);
 
-            animation:
-                toastIn .35s
-                cubic-bezier(.2,.8,.2,1);
+            transform:
+                translateY(100px);
+
+            opacity: 0;
+
+            transition: .35s ease;
         }
 
-        .toast.hide {
-            animation:
-                toastOut .3s ease forwards;
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
         }
 
-        .toast-icon {
-            font-size: 15px;
+        .toast-title {
+            font-weight: 800;
+            font-size: 13px;
         }
 
-        .toast-text {
-            font-size: 11px;
-
-            line-height: 1.5;
-
-            color: #c7cbd7;
-        }
-
-        @keyframes toastIn {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    translateX(35px)
-                    scale(.95);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    translateX(0)
-                    scale(1);
-            }
-        }
-
-        @keyframes toastOut {
-
-            to {
-                opacity: 0;
-
-                transform:
-                    translateX(35px)
-                    scale(.95);
-            }
+        .toast-message {
+            color: #898998;
+            font-size: 12px;
+            margin-top: 4px;
         }
 
 
-        /* =====================================================
+        /* =========================================================
            RESPONSIVE
-        ===================================================== */
+        ========================================================= */
 
-        @media (max-width: 1100px) {
+        @media (max-width: 850px) {
 
-            .settings-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .preview-wrap {
-                min-height: 300px;
-            }
-        }
-
-        @media (max-width: 800px) {
-
-            .sidebar {
-                transform:
-                    translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform:
-                    translateX(0);
-            }
-
-            .main {
-                width: 100%;
-
-                margin-left: 0;
-
-                padding:
-                    22px 18px 40px;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .topbar {
-                gap: 10px;
-            }
-
-            .top-actions {
-                margin-left: auto;
-            }
-
-            .bot-status {
+            .nav-links a:not(.nav-login) {
                 display: none;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
             }
 
             .stats {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .hero-content {
-                align-items: flex-start;
-
-                flex-wrap: wrap;
-            }
-
-            .change-server {
-                margin-left: 0;
-
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 560px) {
-
-            .login-card {
-                padding: 30px 22px;
-            }
-
-            .page-title {
-                font-size: 23px;
-            }
-
-            .two-col {
                 grid-template-columns: 1fr;
             }
 
-            .button-row {
-                grid-template-columns:
-                    32px
-                    1fr
-                    30px;
-            }
-
-            .button-row .mini-input:nth-child(3),
-            .button-row .mini-input:nth-child(4) {
+            .stat:not(:last-child)::after {
                 display: none;
             }
 
-            .save-bar {
-                align-items:
-                    flex-start;
-
-                flex-direction:
-                    column;
+            .stat:not(:last-child) {
+                border-bottom:
+                    1px solid rgba(255,255,255,.07);
             }
 
-            .save-bar .btn {
-                width: 100%;
+            .hero h1 {
+                letter-spacing: -2px;
             }
 
-            #toastContainer {
-                left: 15px;
-                right: 15px;
-
-                bottom: 15px;
+            .login-box {
+                padding: 30px 22px;
             }
 
-            .toast {
-                min-width: 0;
-                width: 100%;
-            }
         }
 
     </style>
 </head>
 
+
 <body>
 
-    <!-- =====================================================
+    <!-- =========================================================
          BACKGROUND
-    ====================================================== -->
+    ========================================================= -->
 
     <div class="background">
+
         <div class="orb one"></div>
         <div class="orb two"></div>
         <div class="orb three"></div>
+
     </div>
 
-    <div
-        class="particles"
-        id="particles"
-    ></div>
+    <div id="particles"></div>
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          LOADER
-    ====================================================== -->
+    ========================================================= -->
 
     <div id="loader">
 
-        <div class="loader-box">
+        <div class="loader-content">
 
             <div class="loader-logo">
-                🤖
+                <span>TD</span>
             </div>
 
             <div class="loader-title">
-                Discord Dashboard
+                ThienCongDinh
             </div>
 
-            <div class="loader-text">
+            <div class="loader-subtitle">
                 Đang khởi động hệ thống...
             </div>
 
-            <div class="loader-bar">
-                <span></span>
-            </div>
+            <div class="loader-bar"></div>
 
         </div>
 
     </div>
 
 
-    <!-- =====================================================
-         LOGIN
-    ====================================================== -->
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
 
-    <section id="loginScreen">
+    <nav class="navbar" id="navbar">
 
-        <div class="login-card">
+        <a href="#" class="brand">
 
-            <div class="login-icon">
-                💠
+            <div class="brand-icon">
+                <span>TD</span>
             </div>
 
-            <h1>
-                Chào mừng trở lại
-            </h1>
+            <span>
+                ThienCongDinh
+            </span>
 
-            <p>
-                Quản lý Discord Bot của bạn
-                nhanh chóng, trực quan và hiện đại.
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="#home">
+                Trang chủ
+            </a>
+
+            <a href="#features">
+                Chức năng
+            </a>
+
+            <a href="#login">
+                Discord
+            </a>
+
+
+            <div id="userPanel">
+
+                <div class="user-card">
+
+                    <img
+                        id="userAvatar"
+                        class="user-avatar"
+                        src=""
+                        alt="Avatar"
+                    >
+
+                    <span
+                        id="userName"
+                        class="user-name">
+                        Discord User
+                    </span>
+
+                    <button
+                        class="logout-btn"
+                        onclick="logout()">
+                        Đăng xuất
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="navLogin"
+                class="nav-login"
+                onclick="loginDiscord()">
+
+                Đăng nhập
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="badge">
+
+                    <span class="badge-dot"></span>
+
+                    HỆ THỐNG ĐANG HOẠT ĐỘNG
+
+                </div>
+
+
+                <h1>
+
+                    <span class="gradient-text">
+                        ThienCongDinh
+                    </span>
+
+                    <br>
+
+                    Network
+
+                </h1>
+
+
+                <p>
+                    Một hệ thống hiện đại dành cho cộng đồng Discord,
+                    được thiết kế với giao diện đẹp, tốc độ nhanh
+                    và trải nghiệm mượt mà trên mọi thiết bị.
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="btn btn-discord"
+                        onclick="loginDiscord()">
+
+                        🎮 Đăng nhập Discord
+
+                    </button>
+
+
+                    <a
+                        href="#features"
+                        class="btn btn-secondary">
+
+                        Khám phá hệ thống
+
+                    </a>
+
+                </div>
+
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <strong>24/7</strong>
+
+                        <span>
+                            Hoạt động liên tục
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <strong>⚡</strong>
+
+                        <span>
+                            Phản hồi nhanh
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <strong>∞</strong>
+
+                        <span>
+                            Khả năng mở rộng
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FEATURES
+        ===================================================== -->
+
+        <section id="features">
+
+            <div class="section-header">
+
+                <small>
+                    FEATURES
+                </small>
+
+                <h2>
+                    Mọi thứ trong một hệ thống
+                </h2>
+
+                <p>
+                    Giao diện được thiết kế tập trung vào tốc độ,
+                    hiệu ứng mượt và trải nghiệm người dùng.
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        Nhanh & Mượt
+                    </h3>
+
+                    <p>
+                        Animation được tối ưu để giao diện
+                        chuyển động mượt mà nhưng vẫn nhẹ.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        🎮
+                    </div>
+
+                    <h3>
+                        Discord
+                    </h3>
+
+                    <p>
+                        Đăng nhập trực tiếp bằng tài khoản
+                        Discord của bạn.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        🛡️
+                    </div>
+
+                    <h3>
+                        Bảo mật
+                    </h3>
+
+                    <p>
+                        Chỉ yêu cầu các quyền Discord cần thiết
+                        cho chức năng của website.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Animation
+                    </h3>
+
+                    <p>
+                        Background động, particles, glow,
+                        hover effect và chuyển cảnh mượt.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        📱
+                    </div>
+
+                    <h3>
+                        Responsive
+                    </h3>
+
+                    <p>
+                        Hoạt động tốt trên máy tính,
+                        tablet và điện thoại.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        🚀
+                    </div>
+
+                    <h3>
+                        GitHub Pages
+                    </h3>
+
+                    <p>
+                        Có thể chạy trực tiếp trên GitHub Pages
+                        mà không cần route backend /auth/discord.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             LOGIN
+        ===================================================== -->
+
+        <section id="login" class="login-section">
+
+            <div class="login-box">
+
+                <div class="login-logo">
+                    🎮
+                </div>
+
+                <h2>
+                    Kết nối Discord
+                </h2>
+
+                <p>
+                    Đăng nhập bằng Discord để sử dụng
+                    các chức năng dành cho thành viên.
+                </p>
+
+                <button
+                    class="btn btn-discord"
+                    onclick="loginDiscord()">
+
+                    <span>
+                        Đăng nhập với Discord
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        © 2026 ThienCongDinh Network.
+        All rights reserved.
+
+    </footer>
+
+
+    <!-- =========================================================
+         MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="modal">
+
+        <div class="modal-box">
+
+            <div
+                class="modal-icon"
+                id="modalIcon">
+
+                ⚠️
+
+            </div>
+
+            <h3 id="modalTitle">
+                Thông báo
+            </h3>
+
+            <p id="modalMessage">
+                Nội dung thông báo
             </p>
 
             <button
-                class="discord-login"
-                onclick="loginDiscord()"
-            >
-                <span style="font-size:19px">
-                    💬
-                </span>
+                class="modal-close"
+                onclick="closeModal()">
 
-                Đăng nhập bằng Discord
+                Đóng
+
             </button>
 
-            <div class="login-info">
-                🔒 Đăng nhập an toàn bằng Discord OAuth2
-            </div>
-
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- =====================================================
-         APP
-    ====================================================== -->
-
-    <section id="app">
-
-        <div class="layout">
-
-
-            <!-- =================================================
-                 SIDEBAR
-            ================================================== -->
-
-            <aside
-                class="sidebar"
-                id="sidebar"
-            >
-
-                <div class="brand">
-
-                    <div class="brand-logo">
-                        🤖
-                    </div>
-
-                    <div>
-                        <div class="brand-name">
-                            Bot Dashboard
-                        </div>
-
-                        <div class="brand-sub">
-                            DISCORD MANAGEMENT
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="nav-title">
-                    Tổng quan
-                </div>
-
-                <a
-                    href="#"
-                    class="nav-item active"
-                    data-page="home"
-                >
-                    <span class="nav-icon">
-                        ◈
-                    </span>
-
-                    Trang chủ
-                </a>
-
-
-                <a
-                    href="#"
-                    class="nav-item"
-                    data-page="servers"
-                >
-                    <span class="nav-icon">
-                        🏠
-                    </span>
-
-                    Server
-                </a>
-
-
-                <div class="nav-title">
-                    Cấu hình
-                </div>
-
-                <a
-                    href="#"
-                    class="nav-item"
-                    data-page="panel"
-                >
-                    <span class="nav-icon">
-                        🎫
-                    </span>
-
-                    Ticket Panel
-                </a>
-
-                <a
-                    href="#"
-                    class="nav-item"
-                    data-page="ticket"
-                >
-                    <span class="nav-icon">
-                        ⚙️
-                    </span>
-
-                    Ticket Settings
-                </a>
-
-
-                <div class="sidebar-bottom">
-
-                    <div class="user-card">
-
-                        <div class="user-row">
-
-                            <img
-                                id="userAvatar"
-                                class="avatar"
-                                src=""
-                                alt=""
-                            >
-
-                            <div>
-
-                                <div
-                                    id="userName"
-                                    class="user-name"
-                                >
-                                    Đang tải...
-                                </div>
-
-                                <div class="user-status">
-
-                                    <span class="status-dot"></span>
-
-                                    Đang hoạt động
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            class="logout"
-                            onclick="logout()"
-                        >
-                            ↪ Đăng xuất
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </aside>
-
-
-            <!-- =================================================
-                 MAIN
-            ================================================== -->
-
-            <main class="main">
-
-
-                <!-- TOPBAR -->
-
-                <div class="topbar">
-
-                    <button
-                        class="mobile-menu"
-                        onclick="toggleSidebar()"
-                    >
-                        ☰
-                    </button>
-
-                    <div>
-
-                        <div
-                            class="page-title"
-                            id="pageTitle"
-                        >
-                            Trang chủ
-                        </div>
-
-                        <div
-                            class="page-desc"
-                            id="pageDesc"
-                        >
-                            Quản lý Discord Bot của bạn.
-                        </div>
-
-                    </div>
-
-
-                    <div class="top-actions">
-
-                        <div class="bot-status">
-
-                            <span class="online-dot"></span>
-
-                            Bot Online
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     HOME
-                ================================================== -->
-
-                <section
-                    class="page active"
-                    id="page-home"
-                >
-
-                    <div
-                        class="hero"
-                        id="hero"
-                    >
-
-                        <div class="hero-content">
-
-                            <img
-                                id="heroIcon"
-                                class="hero-server-icon"
-                                src=""
-                                alt=""
-                            >
-
-                            <div>
-
-                                <h2 id="heroName">
-                                    Chưa chọn server
-                                </h2>
-
-                                <p id="heroMembers">
-                                    Chọn một server để bắt đầu.
-                                </p>
-
-                            </div>
-
-                            <button
-                                class="change-server"
-                                onclick="showPage('servers')"
-                            >
-                                Đổi server
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="stats">
-
-                        <div class="stat">
-
-                            <div class="stat-top">
-
-                                <div class="stat-label">
-                                    Thành viên
-                                </div>
-
-                                <div class="stat-icon">
-                                    👥
-                                </div>
-
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="memberCount"
-                            >
-                                —
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat">
-
-                            <div class="stat-top">
-
-                                <div class="stat-label">
-                                    Server
-                                </div>
-
-                                <div class="stat-icon">
-                                    🏠
-                                </div>
-
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="guildCount"
-                            >
-                                —
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat">
-
-                            <div class="stat-top">
-
-                                <div class="stat-label">
-                                    Trạng thái Bot
-                                </div>
-
-                                <div class="stat-icon">
-                                    ⚡
-                                </div>
-
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                style="font-size:18px"
-                            >
-                                Online
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-head">
-
-                            <div>
-
-                                <div class="card-title">
-                                    ⚡ Truy cập nhanh
-                                </div>
-
-                                <div class="card-description">
-                                    Các chức năng thường dùng
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="actions">
-
-                                <button
-                                    class="btn primary"
-                                    onclick="showPage('panel')"
-                                >
-                                    🎫 Cấu hình Panel
-                                </button>
-
-                                <button
-                                    class="btn secondary"
-                                    onclick="showPage('ticket')"
-                                >
-                                    ⚙️ Ticket Settings
-                                </button>
-
-                                <button
-                                    class="btn secondary"
-                                    onclick="showPage('servers')"
-                                >
-                                    🏠 Chọn Server
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     SERVERS
-                ================================================== -->
-
-                <section
-                    class="page"
-                    id="page-servers"
-                >
-
-                    <div
-                        class="server-grid"
-                        id="serverGrid"
-                    >
-
-                        <div class="empty">
-
-                            <div class="empty-icon">
-                                ⏳
-                            </div>
-
-                            Đang tải server...
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     PANEL
-                ================================================== -->
-
-                <section
-                    class="page"
-                    id="page-panel"
-                >
-
-                    <div class="settings-grid">
-
-
-                        <!-- LEFT -->
-
-                        <div>
-
-                            <div class="card">
-
-                                <div class="card-head">
-
-                                    <div>
-
-                                        <div class="card-title">
-                                            🎫 Panel Ticket
-                                        </div>
-
-                                        <div class="card-description">
-                                            Cấu hình nội dung hiển thị trên Discord
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div class="card-body">
-
-
-                                    <div class="field">
-
-                                        <label class="label">
-                                            Tiêu đề
-                                        </label>
-
-                                        <input
-                                            id="panelTitle"
-                                            class="input"
-                                            placeholder="Hỗ Trợ"
-                                        >
-
-                                    </div>
-
-
-                                    <div class="field">
-
-                                        <label class="label">
-                                            Mô tả
-                                        </label>
-
-                                        <textarea
-                                            id="panelDescription"
-                                            class="textarea"
-                                            placeholder="Nhấn vào nút bên dưới để tạo một ticket."
-                                        ></textarea>
-
-                                    </div>
-
-
-                                    <div class="two-col">
-
-                                        <div class="field">
-
-                                            <label class="label">
-                                                Màu Panel
-                                            </label>
-
-                                            <div class="color-row">
-
-                                                <input
-                                                    id="panelColor"
-                                                    class="input"
-                                                    value="#5865F2"
-                                                >
-
-                                                <input
-                                                    id="panelColorPicker"
-                                                    class="color-input"
-                                                    type="color"
-                                                    value="#5865F2"
-                                                >
-
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="field">
-
-                                            <label class="label">
-                                                Footer
-                                            </label>
-
-                                            <input
-                                                id="panelFooter"
-                                                class="input"
-                                                placeholder="Hệ thống hỗ trợ"
-                                            >
-
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-
-
-                            <div
-                                class="card"
-                                style="margin-top:18px"
-                            >
-
-                                <div class="card-head">
-
-                                    <div>
-
-                                        <div class="card-title">
-                                            🔘 Buttons
-                                        </div>
-
-                                        <div class="card-description">
-                                            Tối đa 25 button
-                                        </div>
-
-                                    </div>
-
-                                    <button
-                                        class="btn primary"
-                                        onclick="addButton()"
-                                    >
-                                        + Thêm
-                                    </button>
-
-                                </div>
-
-
-                                <div class="card-body">
-
-                                    <div
-                                        id="buttonEditor"
-                                        class="button-editor"
-                                    ></div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- RIGHT -->
-
-                        <div>
-
-                            <div class="card">
-
-                                <div class="card-head">
-
-                                    <div>
-
-                                        <div class="card-title">
-                                            👀 Preview
-                                        </div>
-
-                                        <div class="card-description">
-                                            Xem trước panel
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="preview-wrap">
-
-                                    <div class="discord-preview">
-
-                                        <div
-                                            class="preview-title"
-                                            id="previewTitle"
-                                        >
-                                            Hỗ Trợ
-                                        </div>
-
-                                        <div
-                                            class="preview-description"
-                                            id="previewDescription"
-                                        >
-                                            Nhấn vào nút bên dưới để tạo một ticket.
-                                        </div>
-
-                                        <div
-                                            class="preview-buttons"
-                                            id="previewButtons"
-                                        ></div>
-
-                                        <div
-                                            class="preview-footer"
-                                            id="previewFooter"
-                                        >
-                                            Hệ thống hỗ trợ
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="save-bar">
-
-                        <div class="save-status">
-
-                            <strong id="saveServerName">
-                                Chưa chọn server
-                            </strong>
-
-                            <br>
-
-                            Thay đổi chưa được lưu
-
-                        </div>
-
-                        <div class="actions">
-
-                            <button
-                                class="btn secondary"
-                                onclick="loadConfig()"
-                            >
-                                ↻ Hoàn tác
-                            </button>
-
-                            <button
-                                class="btn primary"
-                                onclick="saveConfig()"
-                            >
-                                💾 Lưu cấu hình
-                            </button>
-
-                            <button
-                                class="btn success"
-                                onclick="sendPanel()"
-                            >
-                                🚀 Gửi Panel
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     TICKET
-                ================================================== -->
-
-                <section
-                    class="page"
-                    id="page-ticket"
-                >
-
-                    <div class="card">
-
-                        <div class="card-head">
-
-                            <div>
-
-                                <div class="card-title">
-                                    ⚙️ Ticket Settings
-                                </div>
-
-                                <div class="card-description">
-                                    Thiết lập Category, Staff Role và Log Channel
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="two-col">
-
-                                <div class="field">
-
-                                    <label class="label">
-                                        📂 Ticket Category
-                                    </label>
-
-                                    <select
-                                        id="categoryId"
-                                        class="select"
-                                    >
-                                        <option value="">
-                                            Chưa chọn
-                                        </option>
-                                    </select>
-
-                                </div>
-
-
-                                <div class="field">
-
-                                    <label class="label">
-                                        👮 Staff Role
-                                    </label>
-
-                                    <select
-                                        id="staffRoleId"
-                                        class="select"
-                                    >
-                                        <option value="">
-                                            Chưa chọn
-                                        </option>
-                                    </select>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label class="label">
-                                    📝 Log Channel
-                                </label>
-
-                                <select
-                                    id="logChannelId"
-                                    class="select"
-                                >
-                                    <option value="">
-                                        Chưa chọn
-                                    </option>
-                                </select>
-
-                            </div>
-
-
-                            <div class="two-col">
-
-                                <div class="field">
-
-                                    <label class="label">
-                                        Tên Ticket
-                                    </label>
-
-                                    <input
-                                        id="ticketName"
-                                        class="input"
-                                        placeholder="ticket-{username}"
-                                    >
-
-                                    <div
-                                        style="
-                                        color:#5e6578;
-                                        font-size:9px;
-                                        margin-top:6px;
-                                        "
-                                    >
-                                        Có thể dùng:
-                                        {username},
-                                        {user},
-                                        {userid},
-                                        {number}
-                                    </div>
-
-                                </div>
-
-
-                                <div class="field">
-
-                                    <label class="label">
-                                        Nút đóng Ticket
-                                    </label>
-
-                                    <input
-                                        id="closeLabel"
-                                        class="input"
-                                        placeholder="Đóng Ticket"
-                                    >
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="two-col">
-
-                                <div class="field">
-
-                                    <label class="label">
-                                        Emoji nút đóng
-                                    </label>
-
-                                    <input
-                                        id="closeEmoji"
-                                        class="input"
-                                        placeholder="🔒"
-                                    >
-
-                                </div>
-
-
-                                <div class="field">
-
-                                    <label class="label">
-                                        Style nút đóng
-                                    </label>
-
-                                    <select
-                                        id="closeStyle"
-                                        class="select"
-                                    >
-
-                                        <option value="DANGER">
-                                            Đỏ — Danger
-                                        </option>
-
-                                        <option value="PRIMARY">
-                                            Xanh — Primary
-                                        </option>
-
-                                        <option value="SECONDARY">
-                                            Xám — Secondary
-                                        </option>
-
-                                        <option value="SUCCESS">
-                                            Xanh lá — Success
-                                        </option>
-
-                                    </select>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label class="label">
-                                    Tiêu đề Ticket
-                                </label>
-
-                                <input
-                                    id="welcomeTitle"
-                                    class="input"
-                                    placeholder="Ticket Hỗ Trợ"
-                                >
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label class="label">
-                                    Nội dung khi tạo Ticket
-                                </label>
-
-                                <textarea
-                                    id="welcomeDescription"
-                                    class="textarea"
-                                    placeholder="Nhân viên sẽ hỗ trợ bạn trong thời gian sớm nhất."
-                                ></textarea>
-
-                            </div>
-
-
-                            <div
-                                class="actions"
-                                style="margin-top:20px"
-                            >
-
-                                <button
-                                    class="btn primary"
-                                    onclick="saveConfig()"
-                                >
-                                    💾 Lưu cấu hình
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-            </main>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
+    <!-- =========================================================
          TOAST
-    ====================================================== -->
+    ========================================================= -->
 
-    <div id="toastContainer"></div>
+    <div id="toast">
+
+        <div
+            class="toast-title"
+            id="toastTitle">
+
+            Thông báo
+
+        </div>
+
+        <div
+            class="toast-message"
+            id="toastMessage">
+
+            ...
+
+        </div>
+
+    </div>
 
 
     <script>
 
-        /* =====================================================
-           STATE
-        ===================================================== */
+        /* =========================================================
+           CONFIG
+        ========================================================= */
 
-        let me = null;
-
-        let guilds = [];
-
-        let currentGuild = null;
-
-        let config = null;
-
-        let channels = [];
-
-        let roles = [];
+        const CLIENT_ID =
+            "1532642645862518874";
 
 
-        /* =====================================================
-           HELPERS
-        ===================================================== */
+        /*
+         * Đây là URL GitHub Pages của website.
+         *
+         * QUAN TRỌNG:
+         * URL này phải được thêm vào
+         * Discord Developer Portal
+         * -> OAuth2
+         * -> Redirects
+         */
 
-        const $ = id =>
-            document.getElementById(id);
-
-
-        function escapeHtml(value) {
-
-            return String(value ?? "")
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
+        const REDIRECT_URI =
+            "https://thiencongdinh1811-netizen.github.io/";
 
 
-        function loginDiscord() {
-            window.location.href =
-                "/auth/discord";
-        }
+        const OAUTH_URL =
+            "https://discord.com/oauth2/authorize";
 
 
-        /* =====================================================
+        /*
+         * Chỉ lấy thông tin cơ bản của tài khoản.
+         */
+
+        const SCOPES =
+            "identify email";
+
+
+        /* =========================================================
            PARTICLES
-        ===================================================== */
+        ========================================================= */
 
         function createParticles() {
 
             const container =
-                $("particles");
+                document.getElementById("particles");
 
-            for (let i = 0; i < 45; i++) {
+            for (let i = 0; i < 65; i++) {
 
-                const p =
-                    document.createElement("span");
+                const particle =
+                    document.createElement("div");
 
-                p.className = "particle";
+                particle.className =
+                    "particle";
 
-                p.style.left =
+                particle.style.left =
                     Math.random() * 100 + "%";
 
-                p.style.animationDuration =
+                particle.style.animationDuration =
                     (8 + Math.random() * 15) + "s";
 
-                p.style.animationDelay =
+                particle.style.animationDelay =
                     (-Math.random() * 15) + "s";
 
-                p.style.opacity =
-                    .2 + Math.random() * .6;
+                particle.style.opacity =
+                    Math.random();
 
-                container.appendChild(p);
-            }
-        }
+                container.appendChild(particle);
 
-
-        /* =====================================================
-           TOAST
-        ===================================================== */
-
-        function toast(
-            message,
-            type = "success"
-        ) {
-
-            const container =
-                $("toastContainer");
-
-            const item =
-                document.createElement("div");
-
-            item.className = "toast";
-
-            const icon =
-                type === "success"
-                    ? "✓"
-                    : type === "error"
-                    ? "!"
-                    : "i";
-
-            item.innerHTML = `
-                <div class="toast-icon">
-                    ${icon}
-                </div>
-
-                <div class="toast-text">
-                    ${escapeHtml(message)}
-                </div>
-            `;
-
-            container.appendChild(item);
-
-            setTimeout(() => {
-
-                item.classList.add("hide");
-
-                setTimeout(
-                    () => item.remove(),
-                    300
-                );
-
-            }, 3000);
-        }
-
-
-        /* =====================================================
-           API
-        ===================================================== */
-
-        async function api(
-            url,
-            options = {}
-        ) {
-
-            const response =
-                await fetch(
-                    url,
-                    {
-                        credentials: "same-origin",
-                        ...options,
-
-                        headers: {
-                            "Content-Type":
-                                "application/json",
-
-                            ...(options.headers || {})
-                        }
-                    }
-                );
-
-            let data = null;
-
-            try {
-                data = await response.json();
-            } catch {}
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data?.error ||
-                    "Có lỗi xảy ra."
-                );
             }
 
-            return data;
         }
 
 
-        /* =====================================================
-           AUTH
-        ===================================================== */
+        createParticles();
 
-        async function checkAuth() {
 
-            try {
+        /* =========================================================
+           LOADER
+        ========================================================= */
 
-                const data =
-                    await api("/api/me");
-
-                me = data.user;
-
-                showApp();
-
-                await loadGuilds();
-
-            } catch {
-
-                showLogin();
-
-            } finally {
+        window.addEventListener(
+            "load",
+            () => {
 
                 setTimeout(() => {
 
-                    $("loader")
-                        .classList.add("hide");
+                    document
+                        .getElementById("loader")
+                        .classList
+                        .add("hide");
 
-                }, 450);
+                }, 700);
+
             }
-        }
+        );
 
 
-        function showLogin() {
+        /* =========================================================
+           NAVBAR SCROLL
+        ========================================================= */
 
-            $("loginScreen").style.display =
-                "flex";
+        window.addEventListener(
+            "scroll",
+            () => {
 
-            $("app").style.display =
-                "none";
-        }
+                const navbar =
+                    document.getElementById("navbar");
 
+                if (window.scrollY > 40) {
 
-        function showApp() {
-
-            $("loginScreen").style.display =
-                "none";
-
-            $("app").style.display =
-                "block";
-
-            if (me) {
-
-                $("userName").textContent =
-                    me.global_name ||
-                    me.username ||
-                    "Discord User";
-
-                if (me.avatar) {
-
-                    $("userAvatar").src =
-                        `https://cdn.discordapp.com/avatars/${me.id}/${me.avatar}.png?size=128`;
+                    navbar.classList.add("scrolled");
 
                 } else {
 
-                    $("userAvatar").src =
-                        `https://cdn.discordapp.com/embed/avatars/0.png`;
+                    navbar.classList.remove("scrolled");
 
-                }
-            }
-        }
-
-
-        async function logout() {
-
-            try {
-
-                await api(
-                    "/api/logout",
-                    {
-                        method: "POST"
-                    }
-                );
-
-            } catch {}
-
-            window.location.reload();
-        }
-
-
-        /* =====================================================
-           GUILDS
-        ===================================================== */
-
-        async function loadGuilds() {
-
-            try {
-
-                guilds =
-                    await api(
-                        "/api/guilds"
-                    );
-
-                $("guildCount").textContent =
-                    guilds.length;
-
-                renderGuilds();
-
-            } catch (err) {
-
-                toast(
-                    err.message,
-                    "error"
-                );
-            }
-        }
-
-
-        function renderGuilds() {
-
-            const grid =
-                $("serverGrid");
-
-            if (!guilds.length) {
-
-                grid.innerHTML = `
-                    <div class="empty">
-                        <div class="empty-icon">
-                            🏠
-                        </div>
-
-                        Không tìm thấy server nào.
-                    </div>
-                `;
-
-                return;
-            }
-
-
-            grid.innerHTML =
-                guilds.map(guild => {
-
-                    const initial =
-                        (guild.name || "S")
-                            .charAt(0)
-                            .toUpperCase();
-
-                    const icon =
-                        guild.icon
-                            ? `
-                                <img
-                                    class="server-icon"
-                                    src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128"
-                                    alt=""
-                                >
-                              `
-                            : `
-                                <div class="server-icon-fallback">
-                                    ${escapeHtml(initial)}
-                                </div>
-                              `;
-
-                    const installed =
-                        guild.botInstalled;
-
-                    const manage =
-                        guild.canManage;
-
-                    return `
-                        <div class="server-card">
-
-                            <div class="server-head">
-
-                                ${icon}
-
-                                <div>
-
-                                    <div class="server-name">
-                                        ${escapeHtml(guild.name)}
-                                    </div>
-
-                                    <div class="server-id">
-                                        ID: ${escapeHtml(guild.id)}
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="server-meta">
-
-                                <span class="badge ${
-                                    installed
-                                        ? "green"
-                                        : "gray"
-                                }">
-
-                                    ${
-                                        installed
-                                            ? "● Bot đã cài"
-                                            : "○ Chưa cài Bot"
-                                    }
-
-                                </span>
-
-                                ${
-                                    manage
-                                        ? `
-                                            <span class="badge green">
-                                                ✓ Có quyền
-                                            </span>
-                                          `
-                                        : `
-                                            <span class="badge gray">
-                                                Không có quyền
-                                            </span>
-                                          `
-                                }
-
-                            </div>
-
-                            <button
-                                class="server-action"
-                                ${
-                                    !installed ||
-                                    !manage
-                                        ? "disabled"
-                                        : ""
-                                }
-                                onclick="selectGuild('${guild.id}')"
-                            >
-                                ${
-                                    installed && manage
-                                        ? "Quản lý Server →"
-                                        : "Không thể quản lý"
-                                }
-                            </button>
-
-                        </div>
-                    `;
-
-                }).join("");
-        }
-
-
-        async function selectGuild(id) {
-
-            const found =
-                guilds.find(
-                    g => g.id === id
-                );
-
-            if (!found) return;
-
-            currentGuild = found;
-
-            $("heroName").textContent =
-                found.name;
-
-            $("saveServerName").textContent =
-                found.name;
-
-            if (found.icon) {
-
-                $("heroIcon").src =
-                    `https://cdn.discordapp.com/icons/${found.id}/${found.icon}.png?size=256`;
-
-            } else {
-
-                $("heroIcon").src =
-                    "https://cdn.discordapp.com/embed/avatars/0.png";
-            }
-
-
-            try {
-
-                const info =
-                    await api(
-                        `/api/guild/${id}`
-                    );
-
-                $("memberCount").textContent =
-                    Number(
-                        info.memberCount || 0
-                    ).toLocaleString("vi-VN");
-
-                $("heroMembers").textContent =
-                    `${Number(info.memberCount || 0).toLocaleString("vi-VN")} thành viên`;
-
-            } catch {
-
-                $("memberCount").textContent =
-                    "—";
-            }
-
-
-            await loadConfig();
-
-            await loadChannels();
-
-            await loadRoles();
-
-            showPage("home");
-
-            toast(
-                `Đã chọn server ${found.name}`
-            );
-        }
-
-
-        /* =====================================================
-           CONFIG
-        ===================================================== */
-
-        async function loadConfig() {
-
-            if (!currentGuild) {
-
-                toast(
-                    "Hãy chọn server trước.",
-                    "error"
-                );
-
-                return;
-            }
-
-            try {
-
-                config =
-                    await api(
-                        `/api/guild/${currentGuild.id}/config`
-                    );
-
-                fillConfig();
-
-            } catch (err) {
-
-                toast(
-                    err.message,
-                    "error"
-                );
-            }
-        }
-
-
-        function fillConfig() {
-
-            if (!config) return;
-
-
-            /* PANEL */
-
-            $("panelTitle").value =
-                config.panel?.title ||
-                "Hỗ Trợ";
-
-            $("panelDescription").value =
-                config.panel?.description ||
-                "";
-
-            $("panelColor").value =
-                config.panel?.color ||
-                "#5865F2";
-
-            $("panelColorPicker").value =
-                normalizeColor(
-                    config.panel?.color
-                );
-
-            $("panelFooter").value =
-                config.panel?.footer ||
-                "";
-
-
-            /* TICKET */
-
-            $("ticketName").value =
-                config.ticket?.name ||
-                "ticket-{username}";
-
-            $("welcomeTitle").value =
-                config.ticket?.welcomeTitle ||
-                "Ticket Hỗ Trợ";
-
-            $("welcomeDescription").value =
-                config.ticket?.welcomeDescription ||
-                "";
-
-            $("closeLabel").value =
-                config.ticket?.closeLabel ||
-                "Đóng Ticket";
-
-            $("closeEmoji").value =
-                config.ticket?.closeEmoji ||
-                "🔒";
-
-            $("closeStyle").value =
-                config.ticket?.closeStyle ||
-                "DANGER";
-
-
-            /* IDs */
-
-            $("categoryId").value =
-                config.categoryId || "";
-
-            $("staffRoleId").value =
-                config.staffRoleId || "";
-
-            $("logChannelId").value =
-                config.logChannelId || "";
-
-
-            renderButtons();
-
-            updatePreview();
-        }
-
-
-        function normalizeColor(color) {
-
-            let value =
-                String(color || "#5865F2")
-                    .trim();
-
-            if (!value.startsWith("#")) {
-                value = "#" + value;
-            }
-
-            if (
-                !/^#[0-9a-fA-F]{6}$/.test(value)
-            ) {
-                return "#5865F2";
-            }
-
-            return value;
-        }
-
-
-        function collectConfig() {
-
-            if (!config) return null;
-
-
-            const buttons =
-                [...document.querySelectorAll(
-                    ".button-row"
-                )].map(row => {
-
-                    return {
-
-                        id:
-                            row.dataset.id ||
-                            `button_${Date.now()}`,
-
-                        label:
-                            row.querySelector(
-                                "[data-field='label']"
-                            )?.value ||
-                            "Ticket",
-
-                        emoji:
-                            row.querySelector(
-                                "[data-field='emoji']"
-                            )?.value ||
-                            "",
-
-                        style:
-                            row.querySelector(
-                                "[data-field='style']"
-                            )?.value ||
-                            "PRIMARY",
-
-                        action:
-                            row.querySelector(
-                                "[data-field='action']"
-                            )?.value ||
-                            "open_ticket",
-
-                        url:
-                            row.querySelector(
-                                "[data-field='url']"
-                            )?.value ||
-                            ""
-                    };
-                });
-
-
-            return {
-
-                categoryId:
-                    $("categoryId").value ||
-                    null,
-
-                staffRoleId:
-                    $("staffRoleId").value ||
-                    null,
-
-                logChannelId:
-                    $("logChannelId").value ||
-                    null,
-
-                panel: {
-
-                    ...config.panel,
-
-                    title:
-                        $("panelTitle").value,
-
-                    description:
-                        $("panelDescription").value,
-
-                    color:
-                        normalizeColor(
-                            $("panelColor").value
-                        ),
-
-                    footer:
-                        $("panelFooter").value,
-
-                    buttons
-
-                },
-
-                ticket: {
-
-                    ...config.ticket,
-
-                    name:
-                        $("ticketName").value,
-
-                    welcomeTitle:
-                        $("welcomeTitle").value,
-
-                    welcomeDescription:
-                        $("welcomeDescription").value,
-
-                    closeLabel:
-                        $("closeLabel").value,
-
-                    closeEmoji:
-                        $("closeEmoji").value,
-
-                    closeStyle:
-                        $("closeStyle").value
-                }
-            };
-        }
-
-
-        async function saveConfig() {
-
-            if (!currentGuild) {
-
-                toast(
-                    "Hãy chọn server trước.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            const newConfig =
-                collectConfig();
-
-            try {
-
-                const data =
-                    await api(
-                        `/api/guild/${currentGuild.id}/config`,
-                        {
-                            method: "PUT",
-
-                            body:
-                                JSON.stringify(
-                                    newConfig
-                                )
-                        }
-                    );
-
-                config =
-                    data.config ||
-                    newConfig;
-
-                fillConfig();
-
-                toast(
-                    "Đã lưu cấu hình thành công!"
-                );
-
-            } catch (err) {
-
-                toast(
-                    err.message,
-                    "error"
-                );
-            }
-        }
-
-
-        /* =====================================================
-           CHANNELS
-        ===================================================== */
-
-        async function loadChannels() {
-
-            if (!currentGuild) return;
-
-            try {
-
-                channels =
-                    await api(
-                        `/api/guild/${currentGuild.id}/channels`
-                    );
-
-                populateChannels();
-
-            } catch (err) {
-
-                toast(
-                    err.message,
-                    "error"
-                );
-            }
-        }
-
-
-        function populateChannels() {
-
-            const category =
-                $("categoryId");
-
-            const log =
-                $("logChannelId");
-
-
-            category.innerHTML = `
-                <option value="">
-                    Chưa chọn
-                </option>
-            `;
-
-            log.innerHTML = `
-                <option value="">
-                    Chưa chọn
-                </option>
-            `;
-
-
-            channels
-                .filter(
-                    c => c.type === "category"
-                )
-                .forEach(c => {
-
-                    category.innerHTML += `
-                        <option value="${escapeHtml(c.id)}">
-                            📂 ${escapeHtml(c.name)}
-                        </option>
-                    `;
-                });
-
-
-            channels
-                .filter(
-                    c => c.type === "text"
-                )
-                .forEach(c => {
-
-                    log.innerHTML += `
-                        <option value="${escapeHtml(c.id)}">
-                            # ${escapeHtml(c.name)}
-                        </option>
-                    `;
-                });
-
-
-            if (config) {
-
-                category.value =
-                    config.categoryId || "";
-
-                log.value =
-                    config.logChannelId || "";
-            }
-        }
-
-
-        /* =====================================================
-           ROLES
-        ===================================================== */
-
-        async function loadRoles() {
-
-            if (!currentGuild) return;
-
-            try {
-
-                roles =
-                    await api(
-                        `/api/guild/${currentGuild.id}/roles`
-                    );
-
-                populateRoles();
-
-            } catch (err) {
-
-                toast(
-                    err.message,
-                    "error"
-                );
-            }
-        }
-
-
-        function populateRoles() {
-
-            const select =
-                $("staffRoleId");
-
-            select.innerHTML = `
-                <option value="">
-                    Chưa chọn
-                </option>
-            `;
-
-
-            roles.forEach(role => {
-
-                select.innerHTML += `
-                    <option value="${escapeHtml(role.id)}">
-                        👤 ${escapeHtml(role.name)}
-                    </option>
-                `;
-
-            });
-
-
-            if (config) {
-
-                select.value =
-                    config.staffRoleId || "";
-            }
-        }
-
-
-        /* =====================================================
-           BUTTON EDITOR
-        ===================================================== */
-
-        function renderButtons() {
-
-            const editor =
-                $("buttonEditor");
-
-            const buttons =
-                config?.panel?.buttons || [];
-
-
-            if (!buttons.length) {
-
-                editor.innerHTML = `
-                    <div class="empty">
-                        <div class="empty-icon">
-                            🔘
-                        </div>
-
-                        Chưa có button.
-                    </div>
-                `;
-
-                return;
-            }
-
-
-            editor.innerHTML =
-                buttons
-                    .slice(0,25)
-                    .map((button,index) => {
-
-                        return `
-                            <div
-                                class="button-row"
-                                data-id="${escapeHtml(
-                                    button.id ||
-                                    `button_${index+1}`
-                                )}"
-                            >
-
-                                <input
-                                    class="mini-input"
-                                    data-field="emoji"
-                                    value="${escapeHtml(
-                                        button.emoji || ""
-                                    )}"
-                                    placeholder="🎫"
-                                >
-
-                                <input
-                                    class="mini-input"
-                                    data-field="label"
-                                    value="${escapeHtml(
-                                        button.label || "Ticket"
-                                    )}"
-                                    placeholder="Tên button"
-                                    oninput="updatePreview()"
-                                >
-
-                                <select
-                                    class="mini-input"
-                                    data-field="style"
-                                    onchange="updatePreview()"
-                                >
-
-                                    ${styleOption(
-                                        "PRIMARY",
-                                        button.style
-                                    )}
-
-                                    ${styleOption(
-                                        "SECONDARY",
-                                        button.style
-                                    )}
-
-                                    ${styleOption(
-                                        "SUCCESS",
-                                        button.style
-                                    )}
-
-                                    ${styleOption(
-                                        "DANGER",
-                                        button.style
-                                    )}
-
-                                    ${styleOption(
-                                        "LINK",
-                                        button.style
-                                    )}
-
-                                </select>
-
-                                <select
-                                    class="mini-input"
-                                    data-field="action"
-                                >
-
-                                    ${actionOption(
-                                        "open_ticket",
-                                        "Mở Ticket",
-                                        button.action
-                                    )}
-
-                                </select>
-
-                                <button
-                                    class="remove-btn"
-                                    onclick="removeButton(this)"
-                                    title="Xóa"
-                                >
-                                    ×
-                                </button>
-
-                                <input
-                                    class="mini-input"
-                                    data-field="url"
-                                    value="${escapeHtml(
-                                        button.url || ""
-                                    )}"
-                                    placeholder="URL nếu là Link"
-                                    style="display:none"
-                                >
-
-                            </div>
-                        `;
-
-                    })
-                    .join("");
-
-
-            updatePreview();
-        }
-
-
-        function styleOption(
-            value,
-            selected
-        ) {
-
-            return `
-                <option
-                    value="${value}"
-                    ${
-                        String(selected)
-                            .toUpperCase() === value
-                            ? "selected"
-                            : ""
-                    }
-                >
-                    ${value}
-                </option>
-            `;
-        }
-
-
-        function actionOption(
-            value,
-            label,
-            selected
-        ) {
-
-            return `
-                <option
-                    value="${value}"
-                    ${
-                        selected === value
-                            ? "selected"
-                            : ""
-                    }
-                >
-                    ${label}
-                </option>
-            `;
-        }
-
-
-        function addButton() {
-
-            if (!config) {
-
-                toast(
-                    "Hãy chọn server trước.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            const buttons =
-                config.panel.buttons || [];
-
-
-            if (buttons.length >= 25) {
-
-                toast(
-                    "Discord chỉ cho tối đa 25 button.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            buttons.push({
-
-                id:
-                    `button_${Date.now()}`,
-
-                label:
-                    "Ticket",
-
-                emoji:
-                    "🎫",
-
-                style:
-                    "PRIMARY",
-
-                action:
-                    "open_ticket",
-
-                url:
-                    ""
-            });
-
-
-            config.panel.buttons =
-                buttons;
-
-            renderButtons();
-        }
-
-
-        function removeButton(button) {
-
-            const row =
-                button.closest(".button-row");
-
-            if (!row) return;
-
-            row.remove();
-
-            updatePreview();
-        }
-
-
-        /* =====================================================
-           PREVIEW
-        ===================================================== */
-
-        function updatePreview() {
-
-            const title =
-                $("panelTitle")?.value ||
-                "Hỗ Trợ";
-
-            const description =
-                $("panelDescription")?.value ||
-                "";
-
-            const footer =
-                $("panelFooter")?.value ||
-                "";
-
-
-            $("previewTitle").textContent =
-                title;
-
-            $("previewDescription").textContent =
-                description;
-
-            $("previewFooter").textContent =
-                footer;
-
-
-            const color =
-                normalizeColor(
-                    $("panelColor")?.value
-                );
-
-            const preview =
-                document.querySelector(
-                    ".discord-preview"
-                );
-
-            preview.style.borderLeftColor =
-                color;
-
-
-            const buttons =
-                document.querySelectorAll(
-                    ".button-row"
-                );
-
-
-            const container =
-                $("previewButtons");
-
-            container.innerHTML = "";
-
-
-            buttons.forEach(row => {
-
-                const label =
-                    row.querySelector(
-                        "[data-field='label']"
-                    )?.value ||
-                    "Ticket";
-
-                const emoji =
-                    row.querySelector(
-                        "[data-field='emoji']"
-                    )?.value ||
-                    "";
-
-                const style =
-                    row.querySelector(
-                        "[data-field='style']"
-                    )?.value ||
-                    "PRIMARY";
-
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-                button.className =
-                    "preview-button";
-
-                button.textContent =
-                    `${emoji} ${label}`;
-
-
-                const colors = {
-
-                    PRIMARY:
-                        "#5865F2",
-
-                    SECONDARY:
-                        "#4f545c",
-
-                    SUCCESS:
-                        "#248046",
-
-                    DANGER:
-                        "#da373c",
-
-                    LINK:
-                        "#5865F2"
-                };
-
-
-                button.style.background =
-                    colors[style] ||
-                    "#5865F2";
-
-
-                container.appendChild(
-                    button
-                );
-
-            });
-        }
-
-
-        /* =====================================================
-           SEND PANEL
-        ===================================================== */
-
-        async function sendPanel() {
-
-            if (!currentGuild) {
-
-                toast(
-                    "Hãy chọn server trước.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            const channelId =
-                $("logChannelId").value;
-
-
-            if (!channelId) {
-
-                toast(
-                    "Hãy chọn channel để gửi panel.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            try {
-
-                const saved =
-                    collectConfig();
-
-                await api(
-                    `/api/guild/${currentGuild.id}/config`,
-                    {
-                        method: "PUT",
-
-                        body:
-                            JSON.stringify(
-                                saved
-                            )
-                    }
-                );
-
-
-                const result =
-                    await api(
-                        `/api/guild/${currentGuild.id}/panel`,
-                        {
-                            method: "POST",
-
-                            body:
-                                JSON.stringify({
-                                    channelId
-                                })
-                        }
-                    );
-
-
-                toast(
-                    `Đã gửi panel thành công! Message ID: ${result.messageId}`
-                );
-
-            } catch (err) {
-
-                toast(
-                    err.message,
-                    "error"
-                );
-            }
-        }
-
-
-        /* =====================================================
-           NAVIGATION
-        ===================================================== */
-
-        const pageInfo = {
-
-            home: {
-                title:
-                    "Trang chủ",
-
-                desc:
-                    "Quản lý Discord Bot của bạn."
-            },
-
-            servers: {
-                title:
-                    "Server",
-
-                desc:
-                    "Chọn server bạn muốn quản lý."
-            },
-
-            panel: {
-                title:
-                    "Ticket Panel",
-
-                desc:
-                    "Thiết kế và cấu hình panel hỗ trợ."
-            },
-
-            ticket: {
-                title:
-                    "Ticket Settings",
-
-                desc:
-                    "Thiết lập hệ thống ticket."
-            }
-        };
-
-
-        function showPage(page) {
-
-            document
-                .querySelectorAll(".page")
-                .forEach(el => {
-
-                    el.classList.remove(
-                        "active"
-                    );
-                });
-
-
-            const target =
-                $(`page-${page}`);
-
-            if (target) {
-
-                target.classList.add(
-                    "active"
-                );
-            }
-
-
-            document
-                .querySelectorAll(".nav-item")
-                .forEach(item => {
-
-                    item.classList.toggle(
-                        "active",
-
-                        item.dataset.page === page
-                    );
-                });
-
-
-            $("pageTitle").textContent =
-                pageInfo[page]?.title ||
-                "Dashboard";
-
-            $("pageDesc").textContent =
-                pageInfo[page]?.desc ||
-                "";
-
-
-            $("sidebar")
-                .classList.remove("open");
-        }
-
-
-        document
-            .querySelectorAll(".nav-item")
-            .forEach(item => {
-
-                item.addEventListener(
-                    "click",
-                    event => {
-
-                        event.preventDefault();
-
-                        showPage(
-                            item.dataset.page
-                        );
-                    }
-                );
-
-            });
-
-
-        function toggleSidebar() {
-
-            $("sidebar")
-                .classList.toggle("open");
-        }
-
-
-        /* =====================================================
-           LIVE INPUTS
-        ===================================================== */
-
-        [
-            "panelTitle",
-            "panelDescription",
-            "panelColor",
-            "panelFooter"
-        ].forEach(id => {
-
-            const element =
-                $(id);
-
-            if (!element) return;
-
-            element.addEventListener(
-                "input",
-                updatePreview
-            );
-
-        });
-
-
-        $("panelColorPicker")
-            .addEventListener(
-                "input",
-                event => {
-
-                    $("panelColor").value =
-                        event.target.value;
-
-                    updatePreview();
-                }
-            );
-
-
-        $("panelColor")
-            .addEventListener(
-                "input",
-                event => {
-
-                    const value =
-                        normalizeColor(
-                            event.target.value
-                        );
-
-                    $("panelColorPicker").value =
-                        value;
-
-                    updatePreview();
-                }
-            );
-
-
-        /* =====================================================
-           KEYBOARD SHORTCUT
-        ===================================================== */
-
-        document.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    (event.ctrlKey ||
-                     event.metaKey) &&
-                    event.key.toLowerCase() === "s"
-                ) {
-
-                    event.preventDefault();
-
-                    saveConfig();
                 }
 
             }
         );
 
 
-        /* =====================================================
-           START
-        ===================================================== */
+        /* =========================================================
+           DISCORD LOGIN
+        ========================================================= */
 
-        createParticles();
+        function loginDiscord() {
 
-        checkAuth();
+            /*
+             * State chống CSRF.
+             */
+
+            const state =
+                crypto.randomUUID();
+
+            sessionStorage.setItem(
+                "discord_oauth_state",
+                state
+            );
+
+
+            const params =
+                new URLSearchParams({
+
+                    client_id:
+                        CLIENT_ID,
+
+                    response_type:
+                        "token",
+
+                    redirect_uri:
+                        REDIRECT_URI,
+
+                    scope:
+                        SCOPES,
+
+                    state:
+                        state
+
+                });
+
+
+            const url =
+                `${OAUTH_URL}?${params.toString()}`;
+
+
+            window.location.href =
+                url;
+
+        }
+
+
+        /* =========================================================
+           READ DISCORD TOKEN
+        ========================================================= */
+
+        function readDiscordToken() {
+
+            /*
+             * Discord implicit grant trả token
+             * trong URL fragment:
+             *
+             * #access_token=...
+             */
+
+            const hash =
+                window.location.hash.substring(1);
+
+            if (!hash) {
+                return null;
+            }
+
+
+            const params =
+                new URLSearchParams(hash);
+
+
+            const accessToken =
+                params.get("access_token");
+
+            const tokenType =
+                params.get("token_type");
+
+            const expiresIn =
+                params.get("expires_in");
+
+            const state =
+                params.get("state");
+
+
+            if (!accessToken) {
+                return null;
+            }
+
+
+            /*
+             * Kiểm tra state.
+             */
+
+            const savedState =
+                sessionStorage.getItem(
+                    "discord_oauth_state"
+                );
+
+
+            if (
+                savedState &&
+                state &&
+                savedState !== state
+            ) {
+
+                showModal(
+                    "❌",
+                    "Xác thực thất bại",
+                    "State OAuth2 không hợp lệ. Vui lòng đăng nhập lại."
+                );
+
+                return null;
+
+            }
+
+
+            sessionStorage.removeItem(
+                "discord_oauth_state"
+            );
+
+
+            /*
+             * Lưu phiên đăng nhập.
+             */
+
+            const authData = {
+
+                access_token:
+                    accessToken,
+
+                token_type:
+                    tokenType || "Bearer",
+
+                expires_in:
+                    Number(expiresIn || 604800),
+
+                created_at:
+                    Date.now()
+
+            };
+
+
+            localStorage.setItem(
+                "discord_auth",
+                JSON.stringify(authData)
+            );
+
+
+            /*
+             * Xóa token khỏi URL.
+             */
+
+            window.history.replaceState(
+                {},
+                document.title,
+                REDIRECT_URI
+            );
+
+
+            return authData;
+
+        }
+
+
+        /* =========================================================
+           DISCORD API
+        ========================================================= */
+
+        async function getDiscordUser(
+            accessToken
+        ) {
+
+            const response =
+                await fetch(
+                    "https://discord.com/api/v10/users/@me",
+                    {
+                        headers: {
+                            Authorization:
+                                `Bearer ${accessToken}`
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Không thể lấy thông tin Discord."
+                );
+
+            }
+
+
+            return await response.json();
+
+        }
+
+
+        /* =========================================================
+           LOAD SESSION
+        ========================================================= */
+
+        async function loadSession() {
+
+            let auth =
+                readDiscordToken();
+
+
+            /*
+             * Nếu không có token mới,
+             * kiểm tra token cũ.
+             */
+
+            if (!auth) {
+
+                const saved =
+                    localStorage.getItem(
+                        "discord_auth"
+                    );
+
+                if (saved) {
+
+                    try {
+
+                        auth =
+                            JSON.parse(saved);
+
+                    } catch {
+
+                        localStorage.removeItem(
+                            "discord_auth"
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            if (!auth) {
+                return;
+            }
+
+
+            /*
+             * Kiểm tra token đã hết hạn.
+             */
+
+            if (
+                auth.created_at &&
+                auth.expires_in &&
+                Date.now() >
+                    auth.created_at +
+                    auth.expires_in * 1000
+            ) {
+
+                logout(false);
+
+                return;
+
+            }
+
+
+            try {
+
+                const user =
+                    await getDiscordUser(
+                        auth.access_token
+                    );
+
+
+                showUser(user);
+
+
+                showToast(
+                    "Đăng nhập thành công",
+                    `Xin chào ${user.global_name || user.username}!`
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                logout(false);
+
+                showModal(
+                    "⚠️",
+                    "Phiên đăng nhập hết hạn",
+                    "Vui lòng đăng nhập Discord lại."
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           SHOW USER
+        ========================================================= */
+
+        function showUser(user) {
+
+            const navLogin =
+                document.getElementById(
+                    "navLogin"
+                );
+
+            const userPanel =
+                document.getElementById(
+                    "userPanel"
+                );
+
+            const userAvatar =
+                document.getElementById(
+                    "userAvatar"
+                );
+
+            const userName =
+                document.getElementById(
+                    "userName"
+                );
+
+
+            navLogin.style.display =
+                "none";
+
+
+            userPanel.classList.add(
+                "show"
+            );
+
+
+            userName.textContent =
+                user.global_name ||
+                user.username;
+
+
+            if (user.avatar) {
+
+                userAvatar.src =
+                    `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
+
+            } else {
+
+                const index =
+                    Number(
+                        user.discriminator || 0
+                    ) % 5;
+
+                userAvatar.src =
+                    `https://cdn.discordapp.com/embed/avatars/${index}.png`;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           LOGOUT
+        ========================================================= */
+
+        function logout(showMessage = true) {
+
+            localStorage.removeItem(
+                "discord_auth"
+            );
+
+            sessionStorage.removeItem(
+                "discord_oauth_state"
+            );
+
+
+            const userPanel =
+                document.getElementById(
+                    "userPanel"
+                );
+
+            const navLogin =
+                document.getElementById(
+                    "navLogin"
+                );
+
+
+            userPanel.classList.remove(
+                "show"
+            );
+
+            navLogin.style.display =
+                "";
+
+
+            if (showMessage) {
+
+                showToast(
+                    "Đã đăng xuất",
+                    "Phiên Discord đã được xóa."
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        function showModal(
+            icon,
+            title,
+            message
+        ) {
+
+            document.getElementById(
+                "modalIcon"
+            ).textContent = icon;
+
+
+            document.getElementById(
+                "modalTitle"
+            ).textContent = title;
+
+
+            document.getElementById(
+                "modalMessage"
+            ).textContent = message;
+
+
+            document.getElementById(
+                "modal"
+            ).classList.add(
+                "active"
+            );
+
+        }
+
+
+        function closeModal() {
+
+            document.getElementById(
+                "modal"
+            ).classList.remove(
+                "active"
+            );
+
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        let toastTimer;
+
+
+        function showToast(
+            title,
+            message
+        ) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+
+            document.getElementById(
+                "toastTitle"
+            ).textContent =
+                title;
+
+
+            document.getElementById(
+                "toastMessage"
+            ).textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            clearTimeout(
+                toastTimer
+            );
+
+
+            toastTimer =
+                setTimeout(() => {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                }, 4000);
+
+        }
+
+
+        /* =========================================================
+           ESC MODAL
+        ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (event.key === "Escape") {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           INITIALIZE
+        ========================================================= */
+
+        loadSession();
+
 
     </script>
 
