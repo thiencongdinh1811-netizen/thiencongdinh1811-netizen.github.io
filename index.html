@@ -1,21 +1,1716 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Documentation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bot Documentation</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #050611;
+    --panel: #0b0d1b;
+    --panel2: #101226;
+    --purple: #8b3dff;
+    --purple2: #b66cff;
+    --text: #ffffff;
+    --muted: #9295a9;
+    --border: rgba(255,255,255,0.08);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(115,40,255,.16), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(70,70,255,.12), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    height: 72px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(5,6,17,.85);
+    backdrop-filter: blur(15px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg,#722cff,#b75cff);
+
+    box-shadow: 0 0 25px rgba(139,61,255,.45);
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav button {
+    border: 0;
+    background: transparent;
+    color: #a7a9ba;
+
+    padding: 10px 15px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: .2s;
+}
+
+nav button:hover,
+nav button.active {
+    color: white;
+    background: rgba(139,61,255,.12);
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: white;
+
+    padding: 10px 17px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--purple);
+}
+
+.btn-primary {
+    border: none;
+    background: linear-gradient(135deg,#722cff,#a848ff);
+
+    box-shadow: 0 0 25px rgba(139,61,255,.25);
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    position: fixed;
+    top: 72px;
+    bottom: 0;
+    left: 0;
+
+    width: 245px;
+
+    border-right: 1px solid var(--border);
+
+    background: rgba(7,8,18,.9);
+
+    padding: 25px 15px;
+
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    color: #626579;
+    font-size: 11px;
+    font-weight: bold;
+
+    margin: 20px 12px 8px;
+    text-transform: uppercase;
+}
+
+.sidebar button {
+    width: 100%;
+
+    border: 0;
+    background: transparent;
+
+    color: #999caf;
+
+    text-align: left;
+
+    padding: 11px 13px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: .2s;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+    color: white;
+    background: rgba(139,61,255,.15);
+}
+
+/* ================= CONTENT ================= */
+
+main {
+    margin-left: 245px;
+    padding-top: 72px;
+}
+
+.page {
+    display: none;
+    min-height: calc(100vh - 72px);
+
+    padding: 70px 7%;
+}
+
+.page.active {
+    display: block;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 60px;
+}
+
+.badge {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border: 1px solid rgba(160,80,255,.3);
+    border-radius: 30px;
+
+    color: #c28cff;
+
+    background: rgba(139,61,255,.08);
+
+    font-size: 12px;
+}
+
+h1 {
+    font-size: clamp(38px,5vw,68px);
+    line-height: 1.05;
+
+    margin: 20px 0;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg,#fff,#b66cff,#7f4cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.bot-visual {
+    height: 430px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.bot-circle {
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,rgba(151,75,255,.4),transparent 60%);
+
+    box-shadow:
+        0 0 80px rgba(139,61,255,.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 100px;
+
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ================= CARDS ================= */
+
+.cards {
+    max-width: 1100px;
+    margin: 70px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+
+    gap: 15px;
+}
+
+.card {
+    background: rgba(12,14,29,.8);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+    transition: .25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(139,61,255,.45);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}
+
+.card-icon {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ================= AUTH ================= */
+
+.auth-container {
+    width: 100%;
+    max-width: 470px;
+
+    margin: auto;
+
+    background: rgba(11,13,27,.9);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow: 0 25px 80px rgba(0,0,0,.4);
+}
+
+.auth-container h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+
+    color: #c9cada;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border-radius: 9px;
+
+    border: 1px solid var(--border);
+
+    background: #070916;
+
+    color: white;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+.form-group input:focus {
+    border-color: var(--purple);
+
+    box-shadow: 0 0 15px rgba(139,61,255,.15);
+}
+
+.password-note {
+    color: #777b91;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.auth-submit {
+    width: 100%;
+    margin-top: 5px;
+
+    padding: 13px;
+
+    border: none;
+    border-radius: 9px;
+
+    color: white;
+    font-weight: bold;
+
+    background: linear-gradient(135deg,#722cff,#a848ff);
+
+    cursor: pointer;
+}
+
+.auth-bottom {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.auth-bottom a {
+    color: #b66cff;
+    cursor: pointer;
+}
+
+/* ================= COMMANDS ================= */
+
+.docs-title {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.docs-title h2 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.docs-title p {
+    color: var(--muted);
+}
+
+.search {
+    max-width: 1100px;
+
+    margin: 30px auto;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+.search input {
+    flex: 1;
+
+    padding: 14px;
+
+    border-radius: 9px;
+
+    border: 1px solid var(--border);
+
+    background: var(--panel);
+
+    color: white;
+
+    outline: none;
+}
+
+.command-list {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.command {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 18px 20px;
+
+    margin-bottom: 10px;
+
+    background: rgba(12,14,29,.8);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+}
+
+.command-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.command-name {
+    color: #c084ff;
+    font-family: monospace;
+    font-size: 15px;
+}
+
+.command-description {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ================= INVITE ================= */
+
+.center-box {
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+}
+
+.center-box h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.center-box p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.invite-box {
+    margin-top: 35px;
+
+    padding: 20px;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    display: flex;
+    gap: 10px;
+}
+
+.invite-box input {
+    flex: 1;
+
+    background: #060713;
+
+    border: 1px solid var(--border);
+
+    color: #aaa;
+
+    padding: 12px;
+
+    border-radius: 8px;
+}
+
+/* ================= VIP ================= */
+
+.vip-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.vip-title h2 {
+    font-size: 44px;
+}
+
+.vip-title p {
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.pricing {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 20px;
+}
+
+.price-card {
+    position: relative;
+
+    background: rgba(11,13,27,.9);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 30px;
+}
+
+.price-card.featured {
+    border-color: #8b3dff;
+
+    box-shadow: 0 0 40px rgba(139,61,255,.12);
+}
+
+.popular {
+    position: absolute;
+
+    top: -12px;
+    right: 20px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    background: #8b3dff;
+}
+
+.price {
+    font-size: 38px;
+
+    color: #bd7dff;
+
+    margin: 20px 0;
+}
+
+.features {
+    list-style: none;
+
+    color: #a9acbd;
+
+    line-height: 2;
+}
+
+.price-card .btn {
+    width: 100%;
+    margin-top: 25px;
+}
+
+/* ================= LOADING ================= */
+
+.loading-screen {
+    position: fixed;
+
+    inset: 0;
+
+    background: #050611;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    transition: opacity .5s;
+}
+
+.loader {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    border: 4px solid rgba(255,255,255,.08);
+
+    border-top-color: #9a4dff;
+
+    animation: spin 1s linear infinite;
+
+    margin-bottom: 25px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-screen h2 {
+    margin-bottom: 8px;
+}
+
+.loading-screen p {
+    color: var(--muted);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px) {
+
+    header {
+        padding: 0 15px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    main {
+        margin-left: 0;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .pricing {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:550px) {
+
+    .page {
+        padding: 45px 20px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions .btn:first-child {
+        display: none;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .invite-box {
+        flex-direction: column;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <h1>Bot Documentation</h1>
+<!-- ================= LOADING ================= -->
 
-    <p>Chào mừng đến với trang hướng dẫn sử dụng Bot.</p>
+<div class="loading-screen" id="loading">
+    <div class="loader"></div>
 
-    <h2>Im Congthienzz</h2>
-    <p>Hướng dẫn sử dụng Bot Classic.</p>
+    <h2>Đang khởi động Bot...</h2>
 
-    <h2>Bot Độc Quyền</h2>
-    <p>Hướng dẫn sử dụng Bot Độc Quyền.</p>
+    <p>Vui lòng chờ trong giây lát</p>
+</div>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🤖
+        </div>
+
+        Bot Documentation
+
+    </div>
+
+    <nav>
+
+        <button class="nav-btn active" data-page="home">
+            Trang chủ
+        </button>
+
+        <button class="nav-btn" data-page="commands">
+            Lệnh
+        </button>
+
+        <button class="nav-btn" data-page="invite">
+            Mời Bot
+        </button>
+
+        <button class="nav-btn" data-page="vip">
+            Mua Bot VIP
+        </button>
+
+    </nav>
+
+    <div class="header-actions">
+
+        <button class="btn" onclick="showPage('login')">
+            Đăng nhập
+        </button>
+
+        <button class="btn btn-primary" onclick="showPage('register')">
+            Đăng ký
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Tổng quan
+    </div>
+
+    <button class="active" onclick="showPage('home')">
+        🏠 Trang chủ
+    </button>
+
+    <button onclick="showPage('commands')">
+        📖 Danh sách lệnh
+    </button>
+
+    <button onclick="showPage('invite')">
+        🤖 Mời Bot
+    </button>
+
+
+    <div class="sidebar-title">
+        Bot Classic
+    </div>
+
+    <button onclick="showPage('commands')">
+        ⚙️ Chức năng
+    </button>
+
+    <button onclick="showPage('commands')">
+        🎵 Nhạc
+    </button>
+
+    <button onclick="showPage('commands')">
+        🎫 Ticket
+    </button>
+
+    <button onclick="showPage('commands')">
+        👋 Welcome & Goodbye
+    </button>
+
+
+    <div class="sidebar-title">
+        Bot Pro
+    </div>
+
+    <button onclick="showPage('commands')">
+        🔐 Bảo mật
+    </button>
+
+    <button onclick="showPage('commands')">
+        🛡️ Moderation
+    </button>
+
+    <button onclick="showPage('commands')">
+        ⚡ Nâng cao
+    </button>
+
+
+    <div class="sidebar-title">
+        Khác
+    </div>
+
+    <button onclick="showPage('vip')">
+        💎 Mua Bot VIP
+    </button>
+
+    <button onclick="showPage('login')">
+        👤 Tài khoản
+    </button>
+
+</aside>
+
+
+<main>
+
+<!-- ================= HOME ================= -->
+
+<section class="page active" id="home">
+
+    <div class="hero">
+
+        <div>
+
+            <span class="badge">
+                #1 DISCORD BOT
+            </span>
+
+            <h1>
+                Bot Discord
+                <br>
+                <span class="gradient-text">
+                    Tốt Nhất
+                </span>
+                <br>
+                Dành Cho Server Của Bạn
+            </h1>
+
+            <p>
+                Một hệ thống bot Discord mạnh mẽ, dễ sử dụng
+                và được thiết kế để giúp server của bạn trở nên
+                chuyên nghiệp hơn.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="btn btn-primary"
+                        onclick="showPage('invite')">
+                    🤖 Mời Bot
+                </button>
+
+                <button class="btn"
+                        onclick="showPage('commands')">
+                    Xem lệnh →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="bot-visual">
+
+            <div class="bot-circle">
+                🤖
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">
+                🛡️
+            </div>
+
+            <h3>
+                Dễ sử dụng
+            </h3>
+
+            <p>
+                Giao diện thân thiện,
+                dễ dàng cấu hình.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Đầy đủ tính năng
+            </h3>
+
+            <p>
+                Từ quản lý server đến
+                giải trí và tiện ích.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎵
+            </div>
+
+            <h3>
+                Ổn định
+            </h3>
+
+            <p>
+                Bot hoạt động 24/7
+                với hiệu suất cao.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💬
+            </div>
+
+            <h3>
+                Hỗ trợ nhanh
+            </h3>
+
+            <p>
+                Đội ngũ hỗ trợ luôn
+                sẵn sàng giúp bạn.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COMMANDS ================= -->
+
+<section class="page" id="commands">
+
+    <div class="docs-title">
+
+        <h2>
+            Danh sách lệnh
+            <span class="gradient-text">
+                Bot Classic
+            </span>
+        </h2>
+
+        <p>
+            Danh sách các lệnh và cách sử dụng bot.
+        </p>
+
+    </div>
+
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="commandSearch"
+            placeholder="🔎 Tìm kiếm lệnh..."
+            oninput="searchCommands()"
+        >
+
+        <button class="btn">
+            Tất cả danh mục
+        </button>
+
+    </div>
+
+
+    <div class="command-list" id="commandList">
+
+        <div class="command">
+
+            <div class="command-left">
+
+                <span class="command-name">
+                    /avatar
+                </span>
+
+                <span class="command-description">
+                    Xem avatar của người dùng
+                </span>
+
+            </div>
+
+            <button class="btn"
+                    onclick="copyCommand('/avatar')">
+                Copy
+            </button>
+
+        </div>
+
+
+        <div class="command">
+
+            <div class="command-left">
+
+                <span class="command-name">
+                    /server
+                </span>
+
+                <span class="command-description">
+                    Xem thông tin server
+                </span>
+
+            </div>
+
+            <button class="btn"
+                    onclick="copyCommand('/server')">
+                Copy
+            </button>
+
+        </div>
+
+
+        <div class="command">
+
+            <div class="command-left">
+
+                <span class="command-name">
+                    /play
+                </span>
+
+                <span class="command-description">
+                    Phát nhạc từ YouTube
+                </span>
+
+            </div>
+
+            <button class="btn"
+                    onclick="copyCommand('/play')">
+                Copy
+            </button>
+
+        </div>
+
+
+        <div class="command">
+
+            <div class="command-left">
+
+                <span class="command-name">
+                    /skip
+                </span>
+
+                <span class="command-description">
+                    Bỏ qua bài hát hiện tại
+                </span>
+
+            </div>
+
+            <button class="btn"
+                    onclick="copyCommand('/skip')">
+                Copy
+            </button>
+
+        </div>
+
+
+        <div class="command">
+
+            <div class="command-left">
+
+                <span class="command-name">
+                    /stop
+                </span>
+
+                <span class="command-description">
+                    Dừng phát nhạc
+                </span>
+
+            </div>
+
+            <button class="btn"
+                    onclick="copyCommand('/stop')">
+                Copy
+            </button>
+
+        </div>
+
+
+        <div class="command">
+
+            <div class="command-left">
+
+                <span class="command-name">
+                    /ticket
+                </span>
+
+                <span class="command-description">
+                    Tạo hệ thống hỗ trợ Ticket
+                </span>
+
+            </div>
+
+            <button class="btn"
+                    onclick="copyCommand('/ticket')">
+                Copy
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= INVITE ================= -->
+
+<section class="page" id="invite">
+
+    <div class="center-box">
+
+        <h2>
+            Mời Bot vào server
+        </h2>
+
+        <p>
+            Chỉ với một cú nhấp chuột,
+            bạn có thể thêm bot vào server Discord của mình.
+        </p>
+
+
+        <div style="font-size:100px;margin:40px 0;">
+            🤖
+        </div>
+
+
+        <button class="btn btn-primary"
+                style="padding:15px 35px;"
+                onclick="alert('Đặt link Invite Bot của mày ở đây!')">
+
+            💬 Mời Bot ngay
+
+        </button>
+
+
+        <div class="invite-box">
+
+            <input
+                id="inviteLink"
+                value="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID"
+                readonly
+            >
+
+            <button class="btn"
+                    onclick="copyInvite()">
+                Sao chép
+            </button>
+
+        </div>
+
+        <p style="margin-top:15px;font-size:12px;">
+            ⚠️ Nhớ thay YOUR_CLIENT_ID bằng Client ID thật của bot.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= VIP ================= -->
+
+<section class="page" id="vip">
+
+    <div class="vip-title">
+
+        <h2>
+            Nâng cấp
+            <span class="gradient-text">
+                Bot VIP
+            </span>
+        </h2>
+
+        <p>
+            Trải nghiệm đầy đủ tính năng nâng cao
+            và hỗ trợ ưu tiên.
+        </p>
+
+    </div>
+
+
+    <div class="pricing">
+
+
+        <div class="price-card">
+
+            <h3>
+                VIP 1 THÁNG
+            </h3>
+
+            <div class="price">
+                49.000đ
+            </div>
+
+            <ul class="features">
+
+                <li>✓ Tất cả tính năng cơ bản</li>
+                <li>✓ Tính năng nâng cao</li>
+                <li>✓ Hỗ trợ ưu tiên</li>
+                <li>✓ Không giới hạn server</li>
+
+            </ul>
+
+            <button class="btn btn-primary">
+                Mua ngay
+            </button>
+
+        </div>
+
+
+        <div class="price-card featured">
+
+            <span class="popular">
+                PHỔ BIẾN
+            </span>
+
+            <h3>
+                VIP 6 THÁNG
+            </h3>
+
+            <div class="price">
+                249.000đ
+            </div>
+
+            <ul class="features">
+
+                <li>✓ Tất cả tính năng cơ bản</li>
+                <li>✓ Tính năng nâng cao</li>
+                <li>✓ Hỗ trợ ưu tiên</li>
+                <li>✓ Không giới hạn server</li>
+                <li>✓ Cập nhật sớm</li>
+
+            </ul>
+
+            <button class="btn btn-primary">
+                Mua ngay
+            </button>
+
+        </div>
+
+
+        <div class="price-card">
+
+            <h3>
+                VIP 12 THÁNG
+            </h3>
+
+            <div class="price">
+                449.000đ
+            </div>
+
+            <ul class="features">
+
+                <li>✓ Tất cả tính năng cơ bản</li>
+                <li>✓ Tính năng nâng cao</li>
+                <li>✓ Hỗ trợ ưu tiên</li>
+                <li>✓ Không giới hạn server</li>
+                <li>✓ Cập nhật sớm</li>
+
+            </ul>
+
+            <button class="btn btn-primary">
+                Mua ngay
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= REGISTER ================= -->
+
+<section class="page" id="register">
+
+    <div class="auth-container">
+
+        <h2>
+            Tạo tài khoản mới
+        </h2>
+
+        <p class="auth-subtitle">
+            Tham gia cộng đồng người dùng Bot.
+        </p>
+
+
+        <form onsubmit="register(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Tên người dùng
+                </label>
+
+                <input
+                    type="text"
+                    id="registerUsername"
+                    placeholder="Nhập tên người dùng"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Nhập email của bạn"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mật khẩu
+                </label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Nhập mật khẩu"
+                    required
+                >
+
+                <div class="password-note">
+                    Mật khẩu nên có ít nhất 8 ký tự.
+                </div>
+
+            </div>
+
+
+            <!-- NHẬP LẠI MẬT KHẨU -->
+
+            <div class="form-group">
+
+                <label>
+                    Nhập lại mật khẩu
+                </label>
+
+                <input
+                    type="password"
+                    id="registerPasswordConfirm"
+                    placeholder="Nhập lại mật khẩu"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="auth-submit"
+                type="submit"
+            >
+                Đăng ký
+            </button>
+
+        </form>
+
+
+        <div class="auth-bottom">
+
+            Đã có tài khoản?
+
+            <a onclick="showPage('login')">
+                Đăng nhập
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LOGIN ================= -->
+
+<section class="page" id="login">
+
+    <div class="auth-container">
+
+        <h2>
+            Chào mừng trở lại!
+        </h2>
+
+        <p class="auth-subtitle">
+            Đăng nhập để tiếp tục sử dụng Bot.
+        </p>
+
+
+        <form onsubmit="login(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    placeholder="Nhập email của bạn"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mật khẩu
+                </label>
+
+                <input
+                    type="password"
+                    placeholder="Nhập mật khẩu"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="auth-submit"
+                type="submit"
+            >
+                Đăng nhập
+            </button>
+
+        </form>
+
+
+        <div class="auth-bottom">
+
+            Chưa có tài khoản?
+
+            <a onclick="showPage('register')">
+                Đăng ký
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* ================= PAGE SYSTEM ================= */
+
+function showPage(page) {
+
+    document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+    const target = document.getElementById(page);
+
+    if (target) {
+        target.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* ================= LOADING ================= */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        const loading =
+            document.getElementById("loading");
+
+        loading.style.opacity = "0";
+
+        setTimeout(() => {
+            loading.style.display = "none";
+        },500);
+
+    },1000);
+
+});
+
+
+/* ================= REGISTER ================= */
+
+function register(event) {
+
+    event.preventDefault();
+
+    const password =
+        document.getElementById("registerPassword").value;
+
+    const confirmPassword =
+        document.getElementById("registerPasswordConfirm").value;
+
+
+    if (password !== confirmPassword) {
+
+        alert("❌ Mật khẩu nhập lại không trùng khớp!");
+
+        return;
+    }
+
+
+    if (password.length < 8) {
+
+        alert("❌ Mật khẩu phải có ít nhất 8 ký tự!");
+
+        return;
+    }
+
+
+    alert("✅ Đăng ký thành công!");
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function login(event) {
+
+    event.preventDefault();
+
+    alert("✅ Đăng nhập thành công!");
+
+}
+
+
+/* ================= COPY COMMAND ================= */
+
+function copyCommand(command) {
+
+    navigator.clipboard.writeText(command);
+
+    alert("Đã copy: " + command);
+
+}
+
+
+/* ================= COPY INVITE ================= */
+
+function copyInvite() {
+
+    const link =
+        document.getElementById("inviteLink").value;
+
+    navigator.clipboard.writeText(link);
+
+    alert("✅ Đã sao chép link mời Bot!");
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchCommands() {
+
+    const keyword =
+        document
+        .getElementById("commandSearch")
+        .value
+        .toLowerCase();
+
+
+    document
+        .querySelectorAll(".command")
+        .forEach(command => {
+
+            const text =
+                command.innerText.toLowerCase();
+
+            command.style.display =
+                text.includes(keyword)
+                ? "flex"
+                : "none";
+
+        });
+
+}
+
+</script>
 
 </body>
 </html>
