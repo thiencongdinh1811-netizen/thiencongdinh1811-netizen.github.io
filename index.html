@@ -1,603 +1,882 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="vi">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<meta charset="utf-8">
-
-<meta
-    name="viewport"
-    content="width=device-width,initial-scale=1"
->
-
-<title>Tickets | Dashboard</title>
+<title>Tickets | Bảng điều khiển</title>
 
 <style>
 
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #0f192b;
-    color: #f5f7fb;
+:root{
+    --bg:#101a2b;
+    --side:#1c293b;
+    --card:#1f2d41;
+    --card2:#24344a;
+    --input:#3a485d;
+    --line:#35445a;
+    --blue:#2166f3;
+    --green:#19a463;
+    --red:#e53935;
+    --text:#f4f7fb;
+    --muted:#b7c4d7;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 }
 
 button,
 input,
-select,
-textarea {
-    font: inherit;
+textarea,
+select{
+    font:inherit;
 }
 
-button {
-    cursor: pointer;
-    border: 0;
+button{
+    cursor:pointer;
+    border:0;
 }
 
-:root {
-    --p: #1e2a3d;
-    --p2: #202e43;
-    --in: #3a485d;
-    --line: #35445a;
-    --blue: #2166f3;
-    --muted: #b5c2d5;
+.hidden{
+    display:none!important;
 }
 
-#login {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* =====================================================
+   LOGIN
+===================================================== */
+
+#login{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     background:
         radial-gradient(
-            circle at 50% 20%,
-            #172746,
-            #080d17
+            circle at 50% 15%,
+            #1d3155,
+            #080d17 65%
         );
 }
 
-.loginbox {
-    width: 430px;
-    padding: 42px;
-    background: #181f2b;
-    border: 1px solid #394456;
-    border-radius: 16px;
-    text-align: center;
+.loginbox{
+    width:430px;
+    padding:42px;
+
+    background:#181f2b;
+
+    border:
+        1px solid #394456;
+
+    border-radius:16px;
+
+    text-align:center;
+
     box-shadow:
-        0 20px 70px #0007;
+        0 25px 80px #0009;
 }
 
-.logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: auto;
-    background: #5865f2;
-    display: grid;
-    place-items: center;
-    font-size: 42px;
-    font-weight: 900;
+.logo{
+    width:82px;
+    height:82px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:grid;
+    place-items:center;
+
+    background:#5865f2;
+
+    font-size:38px;
+    font-weight:900;
 }
 
-.loginbox h1 {
-    margin: 25px 0 12px;
+.loginbox h1{
+    margin:22px 0 10px;
 }
 
-.loginbox p {
-    color: #aebbd0;
-    line-height: 1.7;
+.loginbox p{
+    color:#abb8cc;
+    line-height:1.7;
 }
 
-.primary {
-    background: #2166f3;
-    color: white;
-    border-radius: 6px;
-    padding: 11px 17px;
-    font-weight: 700;
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.app{
+    min-height:100vh;
 }
 
-.loginbtn {
-    width: 100%;
-    margin-top: 18px;
+.side{
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:80px;
+
+    background:var(--side);
+
+    border-right:
+        1px solid #2d3b4f;
+
+    z-index:50;
 }
 
-.hidden {
-    display: none !important;
+.brand{
+    height:82px;
+
+    display:grid;
+    place-items:center;
+
+    font-size:25px;
+
+    border-bottom:
+        1px solid #2d3b4f;
 }
 
-.app {
-    min-height: 100vh;
-    display: flex;
-}
+.nav button{
+    position:relative;
 
-.side {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 80px;
-    background: #1c293b;
-    border-right: 1px solid #2c3a4d;
-    z-index: 10;
-}
+    width:100%;
+    height:64px;
 
-.brand {
-    height: 82px;
-    display: grid;
-    place-items: center;
-    font-size: 25px;
-    border-bottom: 1px solid #2d3a4e;
-}
+    background:transparent;
 
-.nav button {
-    width: 100%;
-    height: 64px;
-    background: transparent;
-    color: #fff;
-    font-size: 21px;
-    border-left: 3px solid transparent;
+    color:white;
+
+    font-size:21px;
+
+    border-left:
+        3px solid transparent;
+
+    transition:.15s;
 }
 
 .nav button:hover,
-.nav button.active {
-    background: #24344b;
-    border-left-color: #2775ff;
+.nav button.active{
+    background:#26364c;
+
+    border-left-color:
+        #2775ff;
 }
 
-.main {
-    margin-left: 80px;
-    width: calc(100% - 80px);
-    min-height: 100vh;
+/* TOOLTIP */
+
+.nav button::after{
+    content:attr(data-tip);
+
+    position:absolute;
+
+    left:72px;
+    top:50%;
+
+    transform:
+        translateY(-50%)
+        translateX(-5px);
+
+    padding:
+        8px 12px;
+
+    background:#111827;
+
+    color:white;
+
+    font-size:13px;
+
+    border-radius:6px;
+
+    white-space:nowrap;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.15s;
+
+    box-shadow:
+        0 5px 20px #0008;
+
+    z-index:100;
 }
 
-.top {
-    height: 70px;
-    background: #111c2e;
-    border-bottom: 1px solid #27364b;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 28px;
-    position: sticky;
-    top: 0;
-    z-index: 5;
+.nav button:hover::after{
+    opacity:1;
+
+    transform:
+        translateY(-50%)
+        translateX(0);
 }
 
-.server-select {
-    background: #35445a;
-    border: 1px solid #506078;
-    color: white;
-    border-radius: 5px;
-    padding: 10px 13px;
-    min-width: 280px;
+.main{
+    margin-left:80px;
+
+    min-height:100vh;
 }
 
-.user {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.top{
+    height:70px;
+
+    background:#111c2e;
+
+    border-bottom:
+        1px solid #27364b;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+        0 28px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
 }
 
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    background: #5865f2;
+.server-select{
+    background:#35445a;
+
+    color:white;
+
+    border:
+        1px solid #506078;
+
+    border-radius:5px;
+
+    padding:
+        10px 13px;
+
+    min-width:300px;
 }
 
-.content {
-    max-width: 1160px;
-    margin: auto;
-    padding: 34px 30px 70px;
+.user{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
 }
 
-.title {
-    text-align: center;
-    margin: 8px 0 6px;
-    font-size: 30px;
+.avatar{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    background:#5865f2;
 }
 
-.subtitle {
-    text-align: center;
-    color: #b8c5d7;
-    margin-bottom: 34px;
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+    max-width:1220px;
+
+    margin:auto;
+
+    padding:
+        34px 30px 80px;
 }
 
-.card {
-    background: var(--p);
-    border-radius: 12px;
-    margin: 22px 0;
-    border: 1px solid #25354b;
-    overflow: hidden;
+.title{
+    text-align:center;
+
+    margin:
+        8px 0 7px;
+
+    font-size:30px;
 }
 
-.cardhead {
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.subtitle{
+    text-align:center;
+
+    color:var(--muted);
+
+    margin-bottom:34px;
 }
 
-.cardhead h2 {
-    margin: 0;
-    font-size: 22px;
+.card{
+    background:var(--card);
+
+    border:
+        1px solid #293a51;
+
+    border-radius:12px;
+
+    margin:
+        22px 0;
+
+    overflow:hidden;
 }
 
-.body {
-    padding: 20px;
+.cardhead{
+    padding:
+        18px 16px;
+
+    border-bottom:
+        1px solid var(--line);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
 }
 
-.grid2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
+.cardhead h2{
+    margin:0;
+
+    font-size:20px;
 }
 
-.field {
-    margin-bottom: 17px;
+.body{
+    padding:20px;
 }
 
-.field label {
-    display: block;
-    margin-bottom: 8px;
+.grid2{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+}
+
+.grid3{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+}
+
+.filtergrid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.field label{
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#eef3fb;
 }
 
 .input,
 .select,
-.textarea {
-    width: 100%;
-    background: var(--in);
-    border: 1px solid #55657d;
-    color: #fff;
-    border-radius: 5px;
-    padding: 11px 12px;
-    outline: none;
+.textarea{
+    width:100%;
+
+    background:var(--input);
+
+    color:white;
+
+    border:
+        1px solid #536179;
+
+    border-radius:5px;
+
+    padding:
+        11px 13px;
+
+    outline:none;
 }
 
-.textarea {
-    min-height: 100px;
-    resize: vertical;
+.input:focus,
+.select:focus,
+.textarea:focus{
+    border-color:#638cff;
 }
 
-.actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+.textarea{
+    min-height:170px;
+
+    resize:vertical;
 }
 
-.secondary {
-    background: #586579;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
+.actions{
+    display:flex;
+
+    gap:9px;
+
+    flex-wrap:wrap;
 }
 
-.danger {
-    background: #ed1b2f;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
+.primary,
+.secondary,
+.success,
+.danger{
+    padding:
+        10px 16px;
+
+    border-radius:6px;
+
+    color:white;
+
+    font-weight:700;
 }
 
-.success {
-    background: #087f4f;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
+.primary{
+    background:var(--blue);
 }
 
-.tablewrap {
-    overflow: auto;
+.secondary{
+    background:#536176;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
+.success{
+    background:var(--green);
 }
 
-.table th {
-    background: #3a485d;
-    text-align: left;
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #d8e1ed;
+.danger{
+    background:var(--red);
 }
 
-.table td,
-.table th {
-    padding: 14px 10px;
-    border-bottom: 1px solid #344359;
+.primary:hover,
+.secondary:hover,
+.success:hover,
+.danger:hover{
+    filter:brightness(1.1);
 }
 
-.badge {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    background: #24539b;
-    color: #fff;
-    font-size: 12px;
+.badge{
+    display:inline-block;
+
+    padding:
+        4px 9px;
+
+    border-radius:5px;
+
+    background:#285493;
+
+    color:#eaf2ff;
+
+    font-size:12px;
+
+    font-weight:700;
 }
 
-.muted {
-    color: #93a3ba;
+.muted{
+    color:var(--muted);
 }
 
-.empty {
-    text-align: center;
-    padding: 55px;
-    color: #b4c0d0;
+.empty{
+    padding:
+        55px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
 }
 
-.panelrow {
-    display: grid;
+.empty h3{
+    color:white;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.tablewrap{
+    overflow:auto;
+}
+
+.table{
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+.table th{
+    background:#3c4b61;
+
+    color:white;
+
+    text-align:left;
+
+    padding:
+        14px 15px;
+
+    font-size:13px;
+
+    text-transform:uppercase;
+}
+
+.table td{
+    padding:
+        16px 15px;
+
+    border-bottom:
+        1px solid #334359;
+}
+
+.table tr:hover td{
+    background:#24354a;
+}
+
+/* =====================================================
+   PANEL ROW
+===================================================== */
+
+.panelrow{
+    display:grid;
+
     grid-template-columns:
         1.2fr 1fr .7fr .8fr auto;
-    gap: 8px;
-    align-items: center;
-    padding: 13px 8px;
-    border-bottom: 1px solid #344359;
+
+    gap:10px;
+
+    align-items:center;
+
+    padding:
+        14px 8px;
+
+    border-bottom:
+        1px solid #344359;
 }
 
-.panelrow.head {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #b8c5d7;
+.panelrow.head{
+    color:#b8c5d7;
+
+    font-size:12px;
+
+    text-transform:uppercase;
 }
 
-.smallbtn {
-    padding: 8px 11px;
-    border-radius: 5px;
-    background: #46546a;
-    color: white;
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    background:#0009;
+
+    display:grid;
+
+    place-items:center;
+
+    z-index:200;
 }
 
-.filtergrid {
-    display: grid;
-    grid-template-columns:
-        repeat(4, 1fr);
-    gap: 15px;
+.modalbox{
+    width:
+        min(1000px,94vw);
+
+    max-height:92vh;
+
+    overflow:auto;
+
+    background:#1b2739;
+
+    border:
+        1px solid #46566e;
+
+    border-radius:10px;
 }
 
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.modalhead{
+    padding:18px;
+
+    border-bottom:
+        1px solid #3b4a60;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
 }
 
-.listitem {
-    background: #26364b;
-    padding: 13px;
-    border-radius: 7px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.modalhead h2{
+    margin:0;
 }
 
-.modal {
-    position: fixed;
-    inset: 0;
-    background: #0008;
-    display: grid;
-    place-items: center;
-    z-index: 50;
+.modalbody{
+    padding:22px;
 }
 
-.modalbox {
-    width: min(720px, 92vw);
-    max-height: 90vh;
-    overflow: auto;
-    background: #1b2739;
-    border: 1px solid #45566e;
-    border-radius: 10px;
+.closex{
+    background:transparent;
+
+    color:white;
+
+    font-size:24px;
 }
 
-.modalhead {
-    padding: 18px;
-    border-bottom: 1px solid #3b4a60;
-    display: flex;
-    justify-content: space-between;
+/* =====================================================
+   PANEL PREVIEW
+===================================================== */
+
+.preview{
+    background:#292929;
+
+    border-radius:5px;
+
+    padding:16px;
+
+    min-height:130px;
 }
 
-.modalbody {
-    padding: 20px;
+.preview h3{
+    margin:
+        0 0 12px;
 }
 
-.closex {
-    background: transparent;
-    color: #fff;
-    font-size: 22px;
+.preview button{
+    background:#5865f2;
+
+    color:white;
+
+    border-radius:5px;
+
+    padding:
+        9px 14px;
+
+    font-weight:700;
 }
 
-.toast {
-    position: fixed;
-    right: 22px;
-    bottom: 22px;
-    background: #222e42;
-    border: 1px solid #53637a;
-    padding: 13px 18px;
-    border-radius: 7px;
-    z-index: 100;
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+
+    right:22px;
+
+    bottom:22px;
+
+    background:#222e42;
+
+    border:
+        1px solid #53637a;
+
+    padding:
+        13px 18px;
+
+    border-radius:7px;
+
+    z-index:500;
+
+    box-shadow:
+        0 10px 30px #0008;
 }
 
-@media(max-width:800px) {
+/* =====================================================
+   MOBILE
+===================================================== */
 
-    .side {
-        width: 58px;
+@media(max-width:900px){
+
+    .side{
+        width:60px;
     }
 
-    .main {
-        margin-left: 58px;
-        width: calc(100% - 58px);
+    .main{
+        margin-left:60px;
     }
 
     .grid2,
-    .filtergrid {
-        grid-template-columns: 1fr;
+    .grid3,
+    .filtergrid{
+        grid-template-columns:1fr;
     }
 
-    .panelrow {
-        grid-template-columns: 1fr;
+    .panelrow{
+        grid-template-columns:1fr;
     }
 
-    .top {
-        padding: 0 12px;
+    .top{
+        padding:
+            0 12px;
     }
 
-    .server-select {
-        min-width: 160px;
+    .server-select{
+        min-width:170px;
     }
 
-    .content {
-        padding: 20px 12px;
+    .content{
+        padding:
+            20px 12px 60px;
     }
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
 <div id="login">
 
     <div class="loginbox">
 
         <div class="logo">
-            T
+            🎫
         </div>
 
         <h1>
-            Tickets
+            Hệ Thống Ticket
         </h1>
 
         <p>
-            Login with Discord to manage
-            your server, panels, tickets
-            and support system.
+            Đăng nhập bằng Discord để quản lý
+            server, Panel, Ticket và hệ thống hỗ trợ.
         </p>
 
         <button
             class="primary loginbtn"
+            style="width:100%;margin-top:15px"
             onclick="login()"
         >
-            🎮 Login with Discord
+            🎮 Đăng nhập bằng Discord
         </button>
 
     </div>
 
 </div>
 
-
-<!-- APP -->
+<!-- =====================================================
+     APP
+===================================================== -->
 
 <div
     id="app"
     class="app hidden"
 >
 
-    <aside class="side">
+<aside class="side">
 
-        <div class="brand">
-            🎫
-        </div>
+    <div class="brand">
+        🎫
+    </div>
 
-        <div class="nav">
+    <div class="nav">
 
-            <button
-                data-page="tickets"
-                title="Tickets"
-            >
-                🎟️
-            </button>
+        <button
+            data-page="tickets"
+            data-tip="Ticket đang mở"
+        >
+            🎟️
+        </button>
 
-            <button
-                data-page="transcripts"
-                title="Transcripts"
-            >
-                🧾
-            </button>
+        <button
+            data-page="transcripts"
+            data-tip="Transcript"
+        >
+            🧾
+        </button>
 
-            <button
-                data-page="panels"
-                title="Panels"
-            >
-                ▣
-            </button>
+        <button
+            data-page="panels"
+            data-tip="Panels"
+        >
+            ▣
+        </button>
 
-            <button
-                data-page="teams"
-                title="Teams"
-            >
-                👥
-            </button>
+        <button
+            data-page="teams"
+            data-tip="Nhóm hỗ trợ"
+        >
+            👥
+        </button>
 
-            <button
-                data-page="blacklist"
-                title="Blacklist"
-            >
-                ⊘
-            </button>
+        <button
+            data-page="blacklist"
+            data-tip="Danh sách đen"
+        >
+            ⊘
+        </button>
 
-            <button
-                data-page="audit-log"
-                title="Audit Log"
-            >
-                ↶
-            </button>
+        <button
+            data-page="audit-log"
+            data-tip="Nhật ký hoạt động"
+        >
+            ↶
+        </button>
 
-            <button
-                data-page="settings"
-                title="Settings"
-            >
-                ⚙
-            </button>
+        <button
+            data-page="settings"
+            data-tip="Cài đặt"
+        >
+            ⚙
+        </button>
 
-        </div>
+    </div>
 
-    </aside>
+</aside>
 
+<main class="main">
 
-    <main class="main">
+<header class="top">
 
-        <header class="top">
+    <select
+        id="serverSelect"
+        class="server-select"
+    ></select>
 
-            <select
-                id="serverSelect"
-                class="server-select"
-            ></select>
+    <div class="user">
 
-            <div class="user">
+        <img
+            id="userAvatar"
+            class="avatar"
+        >
 
-                <img
-                    id="userAvatar"
-                    class="avatar"
-                >
+        <span id="userName"></span>
 
-                <span
-                    id="userName"
-                ></span>
+    </div>
 
-            </div>
+</header>
 
-        </header>
+<section
+    id="content"
+    class="content"
+></section>
 
-
-        <section
-            id="content"
-            class="content"
-        ></section>
-
-    </main>
+</main>
 
 </div>
-
 
 <div
     id="modal"
@@ -609,8 +888,11 @@ button {
     class="toast hidden"
 ></div>
 
-
 <script>
+
+/* =====================================================
+   CONFIG
+===================================================== */
 
 const API =
     "https://imcongthienzz.freesrv.com";
@@ -620,64 +902,52 @@ let TOKEN =
         "dashboard_token"
     ) || "";
 
-let ME =
-    null;
+let ME = null;
 
-let GUILDS =
-    [];
+let GUILDS = [];
 
-let GUILD =
-    null;
+let GUILD = null;
 
-let DATA =
-    {};
+let DATA = {};
 
+/* =====================================================
+   HELPERS
+===================================================== */
 
-function esc(value) {
+const $ =
+    id =>
+        document.getElementById(id);
+
+function esc(value){
 
     return String(
         value ?? ""
-    ).replace(
+    )
+    .replace(
         /[&<>"']/g,
-        char => ({
-
-            "&":
-                "&amp;",
-
-            "<":
-                "&lt;",
-
-            ">":
-                "&gt;",
-
-            '"':
-                "&quot;",
-
-            "'":
-                "&#39;"
-
-        }[char])
+        c => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#39;"
+        }[c])
     );
 }
 
-
-function val(id) {
+function val(id){
 
     return (
-        document.getElementById(
-            id
-        )?.value || ""
+        $(id)?.value || ""
     );
 }
-
 
 async function api(
     path,
     options = {}
-) {
+){
 
     options.headers = {
-
         ...(options.headers || {}),
 
         Authorization:
@@ -694,79 +964,72 @@ async function api(
             options
         );
 
-    let data =
-        {};
+    let data = {};
 
-    try {
-
+    try{
         data =
             await response.json();
+    }catch{}
 
-    } catch {}
-
-    if (!response.ok) {
-
+    if(
+        !response.ok
+    ){
         throw new Error(
             data.error ||
-            "Request failed"
+            "Có lỗi xảy ra."
         );
     }
 
     return data;
 }
 
+function toast(message){
 
-function toast(
-    message
-) {
+    const t =
+        $("toast");
 
-    const element =
-        document.getElementById(
-            "toast"
-        );
-
-    element.textContent =
+    t.textContent =
         message;
 
-    element.classList.remove(
+    t.classList.remove(
         "hidden"
     );
 
     setTimeout(
-        () => {
-
-            element.classList.add(
+        () =>
+            t.classList.add(
                 "hidden"
-            );
-
-        },
-        2500
+            ),
+        3000
     );
 }
 
-
-function login() {
+function login(){
 
     location.href =
         API +
         "/auth/discord";
 }
 
+/* =====================================================
+   ROUTING
+===================================================== */
 
-function route() {
+function route(){
 
     const parts =
         location.hash
-            .slice(1)
+            .replace(
+                /^#/,
+                ""
+            )
             .split("/");
 
-    if (
+    if(
         parts[0] ===
         "manage"
-    ) {
-
+    ){
         return {
-
             guildId:
                 parts[1],
 
@@ -782,35 +1045,34 @@ function route() {
     };
 }
 
+function go(page){
 
-function go(page) {
-
-    if (!GUILD) {
+    if(!GUILD)
         return;
-    }
 
     location.hash =
         `manage/${GUILD.id}/${page}`;
 }
 
+/* =====================================================
+   BOOT
+===================================================== */
 
-// ============================================================
-// BOOT
-// ============================================================
-
-async function boot() {
+async function boot(){
 
     const hash =
-        location.hash.slice(1);
+        location.hash;
 
-    if (
+    if(
         hash.startsWith(
-            "auth="
+            "#auth="
         )
-    ) {
+    ){
 
         TOKEN =
-            hash.slice(5);
+            hash.substring(
+                6
+            );
 
         localStorage.setItem(
             "dashboard_token",
@@ -820,19 +1082,18 @@ async function boot() {
         history.replaceState(
             null,
             "",
-            location.pathname +
-            "#"
+            location.pathname
         );
     }
 
-    if (!TOKEN) {
+    if(!TOKEN){
 
         showLogin();
 
         return;
     }
 
-    try {
+    try{
 
         ME =
             (
@@ -841,12 +1102,22 @@ async function boot() {
                 )
             ).user;
 
-        userName.textContent =
+        $("userName").textContent =
             ME.global_name ||
             ME.username;
 
-        userAvatar.src =
-            ME.avatarUrl;
+        if(
+            ME.avatar
+        ){
+
+            $("userAvatar").src =
+                `https://cdn.discordapp.com/avatars/${ME.id}/${ME.avatar}.png?size=128`;
+
+        }else{
+
+            $("userAvatar").src =
+                "https://cdn.discordapp.com/embed/avatars/0.png";
+        }
 
         GUILDS =
             (
@@ -857,289 +1128,324 @@ async function boot() {
 
         renderServers();
 
-        const routeData =
+        const r =
             route();
 
-        if (
-            routeData.guildId
-        ) {
+        if(
+            r.guildId
+        ){
 
             await selectGuild(
-                routeData.guildId,
+                r.guildId,
                 false
             );
 
-            renderPage(
-                routeData.page
+            await renderPage(
+                r.page
             );
 
-        } else {
+        }else{
 
             showServers();
+
         }
 
-    } catch (error) {
+    }catch(err){
 
         localStorage.removeItem(
             "dashboard_token"
         );
 
-        TOKEN =
-            "";
+        TOKEN = "";
 
         showLogin();
 
         toast(
-            error.message
+            err.message
         );
     }
 }
 
+/* =====================================================
+   LOGIN / SERVERS
+===================================================== */
 
-function showLogin() {
+function showLogin(){
 
-    document
-        .getElementById("login")
-        .classList.remove(
+    $("login")
+        .classList
+        .remove(
             "hidden"
         );
 
-    document
-        .getElementById("app")
-        .classList.add(
-            "hidden"
-        );
-}
-
-
-function showApp() {
-
-    document
-        .getElementById("login")
-        .classList.add(
-            "hidden"
-        );
-
-    document
-        .getElementById("app")
-        .classList.remove(
+    $("app")
+        .classList
+        .add(
             "hidden"
         );
 }
 
+function showApp(){
 
-// ============================================================
-// SERVERS
-// ============================================================
+    $("login")
+        .classList
+        .add(
+            "hidden"
+        );
 
-function renderServers() {
+    $("app")
+        .classList
+        .remove(
+            "hidden"
+        );
+}
 
-    serverSelect.innerHTML =
+function renderServers(){
+
+    $("serverSelect").innerHTML =
         GUILDS.map(
-            guild => `
-
-                <option
-                    value="${guild.id}"
-                >
-                    ${esc(guild.name)}
-                    ${
-                        guild.botInstalled
-                            ? ""
-                            : " — Bot not installed"
-                    }
-                </option>
-            `
+            g =>
+                `<option value="${g.id}">
+                    ${esc(g.name)}
+                </option>`
         ).join("");
-
-    serverSelect.onchange =
-        () =>
-            selectGuild(
-                serverSelect.value,
-                true
-            );
 }
 
-
-function showServers() {
+function showServers(){
 
     showApp();
 
-    content.innerHTML = `
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Your Servers
+            Server của bạn
         </h1>
 
         <p class="subtitle">
-            Select a server to manage
+            Chọn một server để quản lý
         </p>
 
         <div class="grid2">
 
-            ${GUILDS.map(
-                guild => `
+        ${
+            GUILDS.map(
+                g => `
 
-                    <div class="card">
+                <div class="card">
 
-                        <div class="body">
+                    <div class="body">
 
-                            <div
+                        <div
+                            style="
+                                display:flex;
+                                gap:15px;
+                                align-items:center
+                            "
+                        >
+
+                            <img
+                                class="avatar"
                                 style="
-                                    display:flex;
-                                    gap:15px;
-                                    align-items:center
+                                    width:58px;
+                                    height:58px
                                 "
+                                src="${
+                                    g.icon ||
+                                    "https://cdn.discordapp.com/embed/avatars/0.png"
+                                }"
                             >
 
-                                <img
-                                    class="avatar"
-                                    style="
-                                        width:58px;
-                                        height:58px
-                                    "
-                                    src="${
-                                        guild.icon ||
-                                        "https://cdn.discordapp.com/embed/avatars/0.png"
-                                    }"
-                                >
+                            <div>
 
-                                <div>
+                                <h2>
+                                    ${esc(g.name)}
+                                </h2>
 
-                                    <h2>
-                                        ${esc(guild.name)}
-                                    </h2>
+                                <div class="muted">
 
-                                    <div class="muted">
-
-                                        ${
-                                            guild.botInstalled
-                                                ? "🟢 Bot is in server"
-                                                : "⚪ Bot is not in server"
-                                        }
-
-                                    </div>
+                                    ${
+                                        g.botInstalled
+                                        ? "🟢 Bot đang ở server"
+                                        : "⚪ Bot chưa vào server"
+                                    }
 
                                 </div>
 
                             </div>
 
-                            <button
-                                class="primary"
-                                style="
-                                    width:100%;
-                                    margin-top:18px
-                                "
-                                ${
-                                    guild.botInstalled
-                                        ? ""
-                                        : "disabled"
-                                }
-                                onclick="
-                                    selectGuild(
-                                        '${guild.id}',
-                                        true
-                                    )
-                                "
-                            >
-
-                                ${
-                                    guild.botInstalled
-                                        ? "⚙ Manage Server"
-                                        : "＋ Bot not in server"
-                                }
-
-                            </button>
-
                         </div>
 
+                        <button
+                            class="primary"
+                            style="
+                                width:100%;
+                                margin-top:18px
+                            "
+                            ${
+                                g.botInstalled
+                                ? ""
+                                : "disabled"
+                            }
+
+                            onclick="
+                                selectGuild(
+                                    '${g.id}',
+                                    true
+                                )
+                            "
+                        >
+
+                            ${
+                                g.botInstalled
+                                ? "⚙ Quản lý server"
+                                : "＋ Bot chưa vào server"
+                            }
+
+                        </button>
+
                     </div>
-                `
-            ).join("")}
+
+                </div>
+            `
+            ).join("")
+        }
 
         </div>
     `;
 }
 
-
 async function selectGuild(
     id,
     redirect = true
-) {
+){
 
-    const guild =
+    const g =
         GUILDS.find(
             x =>
                 x.id === id
         );
 
-    if (!guild) {
+    if(!g)
+        return;
 
-        return showServers();
-    }
+    if(
+        !g.botInstalled
+    ){
 
-    if (!guild.botInstalled) {
-
-        return toast(
-            "Bot chưa vào server này"
+        toast(
+            "Bot chưa vào server này."
         );
+
+        return;
     }
 
-    try {
+    try{
+
+        const result =
+            await api(
+                `/api/guild/${g.id}`
+            );
 
         GUILD = {
-
-            ...guild,
-
-            ...(
-                await api(
-                    "/api/guild/" +
-                    guild.id
-                )
-            ).guild
+            ...g,
+            ...result.guild
         };
 
         showApp();
 
-        serverSelect.value =
-            guild.id;
+        $("serverSelect").value =
+            g.id;
 
-        if (redirect) {
-
+        if(
+            redirect
+        ){
             go(
                 "panels"
             );
         }
 
-    } catch (error) {
+    }catch(err){
 
         toast(
-            error.message
+            err.message
         );
     }
 }
 
+/* =====================================================
+   NAV
+===================================================== */
 
-// ============================================================
-// NAVIGATION
-// ============================================================
+document
+.querySelectorAll(
+    ".nav button"
+)
+.forEach(
+    button => {
+
+        button.onclick =
+            () =>
+                go(
+                    button.dataset.page
+                );
+    }
+);
+
+$("serverSelect").onchange =
+    () =>
+        selectGuild(
+            $("serverSelect").value,
+            true
+        );
+
+window.addEventListener(
+    "hashchange",
+    async () => {
+
+        const r =
+            route();
+
+        if(
+            r.guildId &&
+            (
+                !GUILD ||
+                GUILD.id !==
+                r.guildId
+            )
+        ){
+
+            await selectGuild(
+                r.guildId,
+                false
+            );
+        }
+
+        if(
+            r.page
+        ){
+
+            await renderPage(
+                r.page
+            );
+        }
+    }
+);
 
 async function renderPage(
     page
-) {
+){
 
     document
         .querySelectorAll(
             ".nav button"
         )
         .forEach(
-            button => {
-
-                button.classList.toggle(
+            b =>
+                b.classList.toggle(
                     "active",
-                    button.dataset.page ===
+                    b.dataset.page ===
                     page
-                );
-            }
+                )
         );
 
     const pages = {
@@ -1172,57 +1478,11 @@ async function renderPage(
     )();
 }
 
+/* =====================================================
+   CHANNELS / ROLES
+===================================================== */
 
-document
-    .querySelectorAll(
-        ".nav button"
-    )
-    .forEach(
-        button => {
-
-            button.onclick =
-                () =>
-                    go(
-                        button.dataset.page
-                    );
-        }
-    );
-
-
-addEventListener(
-    "hashchange",
-    async () => {
-
-        const routeData =
-            route();
-
-        if (
-            routeData.guildId &&
-            (
-                !GUILD ||
-                GUILD.id !==
-                routeData.guildId
-            )
-        ) {
-
-            await selectGuild(
-                routeData.guildId,
-                false
-            );
-        }
-
-        renderPage(
-            routeData.page
-        );
-    }
-);
-
-
-// ============================================================
-// CHANNELS / ROLES
-// ============================================================
-
-async function channels() {
+async function getChannels(){
 
     DATA.channels =
         (
@@ -1234,8 +1494,7 @@ async function channels() {
     return DATA.channels;
 }
 
-
-async function roles() {
+async function getRoles(){
 
     DATA.roles =
         (
@@ -1247,31 +1506,31 @@ async function roles() {
     return DATA.roles;
 }
 
+/* =====================================================
+   PANELS
+===================================================== */
 
-// ============================================================
-// PANELS
-// ============================================================
+async function renderPanels(){
 
-async function renderPanels() {
-
-    const data =
+    const result =
         await api(
             `/api/guild/${GUILD.id}/panels`
         );
 
-    DATA.channels =
-        DATA.channels ||
-        [];
+    await getChannels();
 
-    content.innerHTML = `
+    const panels =
+        result.panels;
+
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Panels for Server
+            Panels của Server
             ${esc(GUILD.name)}
         </h1>
 
         <p class="subtitle">
-            View and manage all panels and multi-panels
+            Xem và quản lý toàn bộ Panel
         </p>
 
         <div class="card">
@@ -1286,15 +1545,16 @@ async function renderPanels() {
 
                     <button
                         class="secondary"
+                        onclick="alert('Thư viện mẫu Panel sẽ được mở rộng.')"
                     >
-                        ◉ Browse Gallery
+                        ◉ Thư viện mẫu
                     </button>
 
                     <button
                         class="primary"
                         onclick="panelModal()"
                     >
-                        ＋ Create Panel
+                        ＋ Tạo Panel
                     </button>
 
                 </div>
@@ -1304,136 +1564,140 @@ async function renderPanels() {
             <div class="body">
 
                 <p>
-                    You've used
-                    <b>
-                        ${data.panels.length}
-                    </b>
-                    out of
-                    <b>
-                        3
-                    </b>
-                    panels
+                    Bạn đã sử dụng
+                    <b>${panels.length}</b>
+                    trên
+                    <b>3</b>
+                    Panel
                 </p>
 
                 ${
-                    data.panels.length
-                        ? `
+                    panels.length
+                    ?
 
-                            <div class="panelrow head">
+                    `
 
-                                <div>
-                                    CHANNEL
-                                </div>
+                    <div class="panelrow head">
 
-                                <div>
-                                    PANEL NAME
-                                </div>
+                        <div>
+                            KÊNH
+                        </div>
 
-                                <div>
-                                    STATUS
-                                </div>
+                        <div>
+                            TÊN PANEL
+                        </div>
 
-                                <div>
-                                    MESSAGE
-                                </div>
+                        <div>
+                            TRẠNG THÁI
+                        </div>
 
-                                <div>
-                                    ACTION
-                                </div>
+                        <div>
+                            TIN NHẮN
+                        </div>
 
-                            </div>
+                        <div>
+                            THAO TÁC
+                        </div>
 
-                            ${data.panels.map(
-                                panel => `
+                    </div>
 
-                                    <div class="panelrow">
+                    ${
+                        panels.map(
+                            p => {
 
-                                        <div>
-                                            #${
-                                                esc(
-                                                    (
-                                                        DATA.channels.find(
-                                                            channel =>
-                                                                channel.id ===
-                                                                panel.channelId
-                                                        ) ||
-                                                        {}
-                                                    ).name ||
-                                                    panel.channelId ||
-                                                    "—"
+                                const c =
+                                    DATA.channels.find(
+                                        x =>
+                                            x.id ===
+                                            p.channelId
+                                    );
+
+                                return `
+
+                                <div class="panelrow">
+
+                                    <div>
+                                        #${esc(
+                                            c?.name ||
+                                            p.channelId
+                                        )}
+                                    </div>
+
+                                    <div>
+                                        <b>
+                                            ${esc(
+                                                p.name
+                                            )}
+                                        </b>
+                                    </div>
+
+                                    <div>
+                                        <span class="badge">
+                                            ${esc(
+                                                p.status
+                                            )}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        ${
+                                            p.messageId
+                                            ? "Đã gửi"
+                                            : "Chưa gửi"
+                                        }
+                                    </div>
+
+                                    <div>
+
+                                        <button
+                                            class="secondary"
+                                            onclick="
+                                                editPanel(
+                                                    '${p.id}'
                                                 )
-                                            }
-                                        </div>
-
-                                        <div>
-                                            <b>
-                                                ${esc(panel.name)}
-                                            </b>
-                                        </div>
-
-                                        <div>
-
-                                            <span class="badge">
-                                                ${esc(
-                                                    panel.status ||
-                                                    "24/7"
-                                                )}
-                                            </span>
-
-                                        </div>
-
-                                        <div>
-                                            ${
-                                                panel.messageId
-                                                    ? "Sent"
-                                                    : "—"
-                                            }
-                                        </div>
-
-                                        <div>
-
-                                            <button
-                                                class="smallbtn"
-                                                onclick="
-                                                    editPanel(
-                                                        '${panel.id}'
-                                                    )
-                                                "
-                                            >
-                                                ⋮
-                                            </button>
-
-                                        </div>
+                                            "
+                                        >
+                                            ⋮
+                                        </button>
 
                                     </div>
-                                `
-                            ).join("")}
 
-                        `
-                        : `
+                                </div>
+                                `;
+                            }
+                        ).join("")
+                    }
 
-                            <div class="empty">
+                    `
 
-                                ▱
+                    :
 
-                                <h3>
-                                    No panels yet
-                                </h3>
+                    `
 
-                                <p>
-                                    Create a panel and it
-                                    will be sent automatically
-                                    to Discord.
-                                </p>
+                    <div class="empty">
 
-                            </div>
-                        `
+                        <div style="font-size:45px">
+                            ▱
+                        </div>
+
+                        <h3>
+                            Chưa có Panel
+                        </h3>
+
+                        <p>
+                            Tạo Panel trên web,
+                            bot sẽ tự động gửi Panel
+                            vào Discord.
+                        </p>
+
+                    </div>
+
+                    `
                 }
 
             </div>
 
         </div>
-
 
         <div class="card">
 
@@ -1447,69 +1711,80 @@ async function renderPanels() {
                     class="secondary"
                     disabled
                 >
-                    ＋ Create Multi-Panel
+                    ＋ Tạo Multi-Panel
                 </button>
 
             </div>
 
             <div class="empty">
 
-                ▱
+                <div style="font-size:45px">
+                    ▱
+                </div>
 
                 <h3>
-                    No multi-panels yet
+                    Chưa có Multi-Panel
                 </h3>
 
                 <p>
-                    Multi-panels combine multiple
-                    panels into a single message.
+                    Có thể mở rộng chức năng này
+                    sau khi hệ thống Panel chính
+                    hoàn thiện.
                 </p>
 
             </div>
 
         </div>
     `;
-
-    await channels();
 }
 
+/* =====================================================
+   PANEL MODAL
+===================================================== */
 
 async function panelModal(
     existing = null
-) {
+){
 
-    const channelList =
-        await channels();
+    const channels =
+        await getChannels();
 
-    const roleList =
-        await roles();
+    const roles =
+        await getRoles();
 
-    const panel =
-        existing || {
+    const data =
+        existing ||
+        {
 
             name:
                 "Ticket Panel",
 
             title:
-                "Need Help?",
+                "Mở Ticket",
 
             description:
-                "Click the button below to open a ticket.",
+                "Nhấn nút bên dưới để mở một ticket.",
 
             color:
                 "#5865F2",
 
             footer:
-                "Ticket Support",
+                "Hệ thống hỗ trợ",
 
-            buttonLabel:
-                "Open Ticket",
+            thumbnailUrl:
+                "",
+
+            imageUrl:
+                "",
+
+            buttonText:
+                "Mở Ticket",
+
+            buttonColor:
+                "PRIMARY",
 
             buttonEmoji:
                 "🎫",
-
-            buttonStyle:
-                "Primary",
 
             channelId:
                 "",
@@ -1520,10 +1795,33 @@ async function panelModal(
 
             supportRoleId:
                 GUILD.setup?.supportRoleId ||
-                ""
+                "",
+
+            welcomeTitle:
+                "Cảm ơn bạn đã mở ticket!",
+
+            welcomeDescription:
+                "Nhân viên hỗ trợ sẽ hỗ trợ bạn trong thời gian sớm nhất.",
+
+            transcripts:
+                true
         };
 
-    modal.innerHTML = `
+    const categories =
+        channels.filter(
+            c =>
+                c.type ===
+                "category"
+        );
+
+    const textChannels =
+        channels.filter(
+            c =>
+                c.type ===
+                "text"
+        );
+
+    $("modal").innerHTML = `
 
         <div class="modalbox">
 
@@ -1532,8 +1830,8 @@ async function panelModal(
                 <h2>
                     ${
                         existing
-                            ? "Edit Panel"
-                            : "Create Panel"
+                        ? "Chỉnh sửa Panel"
+                        : "Tạo Panel"
                     }
                 </h2>
 
@@ -1548,257 +1846,561 @@ async function panelModal(
 
             <div class="modalbody">
 
-                <div class="grid2">
+                <!-- ===================================
+                     APPEARANCE
+                ==================================== -->
 
-                    <div class="field">
+                <div class="card">
 
-                        <label>
-                            Panel Name
-                        </label>
+                    <div class="cardhead">
 
-                        <input
-                            id="pn"
-                            class="input"
-                            value="${esc(panel.name)}"
-                        >
+                        <div>
+                            <h2>
+                                Giao diện Panel
+                            </h2>
+
+                            <div class="muted">
+                                Chỉnh giao diện hiển thị
+                                của Panel
+                            </div>
+                        </div>
 
                     </div>
 
-                    <div class="field">
+                    <div class="body">
 
-                        <label>
-                            Channel
-                        </label>
+                        <div class="grid2">
 
-                        <select
-                            id="pc"
-                            class="select"
-                        >
+                            <div>
 
-                            ${
-                                channelList
-                                    .filter(
-                                        channel =>
-                                            channel.type ===
-                                                0 ||
-                                            channel.type ===
-                                                5
-                                    )
+                                <div class="field">
+
+                                    <label>
+                                        Tên Panel
+                                    </label>
+
+                                    <input
+                                        id="pn"
+                                        class="input"
+                                        value="${esc(
+                                            data.name
+                                        )}"
+                                    >
+
+                                </div>
+
+                                <div class="field">
+
+                                    <label>
+                                        Tiêu đề Panel
+                                    </label>
+
+                                    <input
+                                        id="pt"
+                                        class="input"
+                                        value="${esc(
+                                            data.title
+                                        )}"
+                                        oninput="previewPanel()"
+                                    >
+
+                                </div>
+
+                                <div class="field">
+
+                                    <label>
+                                        Nội dung Panel
+                                    </label>
+
+                                    <textarea
+                                        id="pd"
+                                        class="textarea"
+                                        oninput="previewPanel()"
+                                    >${esc(
+                                        data.description
+                                    )}</textarea>
+
+                                </div>
+
+                                <div class="grid2">
+
+                                    <div class="field">
+
+                                        <label>
+                                            Màu Panel
+                                        </label>
+
+                                        <input
+                                            id="pco"
+                                            class="input"
+                                            value="${esc(
+                                                data.color
+                                            )}"
+                                            oninput="previewPanel()"
+                                        >
+
+                                    </div>
+
+                                    <div class="field">
+
+                                        <label>
+                                            Chân trang
+                                        </label>
+
+                                        <input
+                                            id="pf"
+                                            class="input"
+                                            value="${esc(
+                                                data.footer
+                                            )}"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Xem trước Panel
+                                </h3>
+
+                                <div
+                                    id="panelPreview"
+                                    class="preview"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Kênh gửi Panel
+                            </label>
+
+                            <select
+                                id="pc"
+                                class="select"
+                            >
+
+                                <option value="">
+                                    Chọn kênh...
+                                </option>
+
+                                ${
+                                    textChannels
                                     .map(
-                                        channel => `
-
+                                        c =>
+                                            `
                                             <option
-                                                value="${channel.id}"
+                                                value="${c.id}"
                                                 ${
-                                                    channel.id ===
-                                                    panel.channelId
-                                                        ? "selected"
-                                                        : ""
+                                                    c.id ===
+                                                    data.channelId
+                                                    ? "selected"
+                                                    : ""
                                                 }
                                             >
                                                 #${esc(
-                                                    channel.name
+                                                    c.name
                                                 )}
                                             </option>
-                                        `
+                                            `
                                     )
                                     .join("")
-                            }
+                                }
 
-                        </select>
+                            </select>
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Thumbnail URL
+                            </label>
+
+                            <input
+                                id="pthumb"
+                                class="input"
+                                placeholder="https://..."
+                                value="${esc(
+                                    data.thumbnailUrl
+                                )}"
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Image URL
+                            </label>
+
+                            <input
+                                id="pimage"
+                                class="input"
+                                placeholder="https://..."
+                                value="${esc(
+                                    data.imageUrl
+                                )}"
+                            >
+
+                        </div>
+
+                        <div class="grid2">
+
+                            <div class="field">
+
+                                <label>
+                                    Chữ trên nút
+                                </label>
+
+                                <input
+                                    id="pbl"
+                                    class="input"
+                                    value="${esc(
+                                        data.buttonText
+                                    )}"
+                                    oninput="previewPanel()"
+                                >
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    Màu nút
+                                </label>
+
+                                <select
+                                    id="pbc"
+                                    class="select"
+                                    onchange="previewPanel()"
+                                >
+
+                                    <option
+                                        value="PRIMARY"
+                                        ${
+                                            data.buttonColor ===
+                                            "PRIMARY"
+                                            ? "selected"
+                                            : ""
+                                        }
+                                    >
+                                        Xanh dương
+                                    </option>
+
+                                    <option
+                                        value="SECONDARY"
+                                        ${
+                                            data.buttonColor ===
+                                            "SECONDARY"
+                                            ? "selected"
+                                            : ""
+                                        }
+                                    >
+                                        Xám
+                                    </option>
+
+                                    <option
+                                        value="SUCCESS"
+                                        ${
+                                            data.buttonColor ===
+                                            "SUCCESS"
+                                            ? "selected"
+                                            : ""
+                                        }
+                                    >
+                                        Xanh lá
+                                    </option>
+
+                                    <option
+                                        value="DANGER"
+                                        ${
+                                            data.buttonColor ===
+                                            "DANGER"
+                                            ? "selected"
+                                            : ""
+                                        }
+                                    >
+                                        Đỏ
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Emoji nút
+                            </label>
+
+                            <input
+                                id="pbe"
+                                class="input"
+                                value="${esc(
+                                    data.buttonEmoji
+                                )}"
+                                oninput="previewPanel()"
+                            >
+
+                        </div>
 
                     </div>
 
                 </div>
 
+                <!-- ===================================
+                     ROUTING
+                ==================================== -->
 
-                <div class="field">
+                <div class="card">
 
-                    <label>
-                        Title
-                    </label>
+                    <div class="cardhead">
 
-                    <input
-                        id="pt"
-                        class="input"
-                        value="${esc(panel.title)}"
-                    >
+                        <div>
 
-                </div>
+                            <h2>
+                                Định tuyến
+                            </h2>
 
+                            <div class="muted">
+                                Cấu hình nhóm hỗ trợ,
+                                Category và Transcript
+                            </div>
 
-                <div class="field">
-
-                    <label>
-                        Description
-                    </label>
-
-                    <textarea
-                        id="pd"
-                        class="textarea"
-                    >${esc(panel.description)}</textarea>
-
-                </div>
-
-
-                <div class="grid2">
-
-                    <div class="field">
-
-                        <label>
-                            Color
-                        </label>
-
-                        <input
-                            id="pco"
-                            class="input"
-                            value="${esc(panel.color)}"
-                        >
+                        </div>
 
                     </div>
 
-                    <div class="field">
+                    <div class="body">
 
-                        <label>
-                            Footer
-                        </label>
+                        <div class="grid2">
 
-                        <input
-                            id="pf"
-                            class="input"
-                            value="${esc(panel.footer)}"
-                        >
+                            <div class="field">
 
-                    </div>
+                                <label>
+                                    Nhóm hỗ trợ
+                                </label>
 
-                </div>
+                                <select
+                                    id="pr"
+                                    class="select"
+                                >
 
+                                    <option value="">
+                                        Mặc định
+                                    </option>
 
-                <div class="grid2">
-
-                    <div class="field">
-
-                        <label>
-                            Button Label
-                        </label>
-
-                        <input
-                            id="pbl"
-                            class="input"
-                            value="${esc(panel.buttonLabel)}"
-                        >
-
-                    </div>
-
-                    <div class="field">
-
-                        <label>
-                            Button Emoji
-                        </label>
-
-                        <input
-                            id="pbe"
-                            class="input"
-                            value="${esc(panel.buttonEmoji)}"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <div class="grid2">
-
-                    <div class="field">
-
-                        <label>
-                            Ticket Category
-                        </label>
-
-                        <select
-                            id="pca"
-                            class="select"
-                        >
-
-                            <option value="">
-                                Default setup category
-                            </option>
-
-                            ${
-                                channelList
-                                    .filter(
-                                        channel =>
-                                            channel.type ===
-                                            4
-                                    )
-                                    .map(
-                                        channel => `
-
-                                            <option
-                                                value="${channel.id}"
-                                                ${
-                                                    channel.id ===
-                                                    panel.categoryId
+                                    ${
+                                        roles
+                                        .map(
+                                            r =>
+                                                `
+                                                <option
+                                                    value="${r.id}"
+                                                    ${
+                                                        r.id ===
+                                                        data.supportRoleId
                                                         ? "selected"
                                                         : ""
-                                                }
-                                            >
-                                                ${esc(
-                                                    channel.name
-                                                )}
-                                            </option>
-                                        `
-                                    )
-                                    .join("")
-                            }
+                                                    }
+                                                >
+                                                    @${esc(
+                                                        r.name
+                                                    )}
+                                                </option>
+                                                `
+                                        )
+                                        .join("")
+                                    }
 
-                        </select>
+                                </select>
 
-                    </div>
+                            </div>
 
+                            <div class="field">
 
-                    <div class="field">
+                                <label>
+                                    Category Ticket
+                                </label>
 
-                        <label>
-                            Support Role
-                        </label>
+                                <select
+                                    id="pca"
+                                    class="select"
+                                >
 
-                        <select
-                            id="pr"
-                            class="select"
-                        >
+                                    <option value="">
+                                        Category mặc định
+                                    </option>
 
-                            <option value="">
-                                Default Tickets Support
-                            </option>
+                                    ${
+                                        categories
+                                        .map(
+                                            c =>
+                                                `
+                                                <option
+                                                    value="${c.id}"
+                                                    ${
+                                                        c.id ===
+                                                        data.categoryId
+                                                        ? "selected"
+                                                        : ""
+                                                    }
+                                                >
+                                                    ${esc(
+                                                        c.name
+                                                    )}
+                                                </option>
+                                                `
+                                        )
+                                        .join("")
+                                    }
 
-                            ${
-                                roleList.map(
-                                    role => `
+                                </select>
 
-                                        <option
-                                            value="${role.id}"
-                                            ${
-                                                role.id ===
-                                                panel.supportRoleId
-                                                    ? "selected"
-                                                    : ""
-                                            }
-                                        >
-                                            @${esc(
-                                                role.name
-                                            )}
-                                        </option>
-                                    `
-                                ).join("")
-                            }
+                            </div>
 
-                        </select>
+                        </div>
+
+                        <div class="grid2">
+
+                            <div class="field">
+
+                                <label>
+                                    Kênh Transcript
+                                </label>
+
+                                <select
+                                    id="ptr"
+                                    class="select"
+                                >
+
+                                    <option value="">
+                                        Kênh transcripts mặc định
+                                    </option>
+
+                                    ${
+                                        textChannels
+                                        .map(
+                                            c =>
+                                                `
+                                                <option
+                                                    value="${c.id}"
+                                                >
+                                                    #${esc(
+                                                        c.name
+                                                    )}
+                                                </option>
+                                                `
+                                        )
+                                        .join("")
+                                    }
+
+                                </select>
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    Transcript
+                                </label>
+
+                                <select
+                                    id="pts"
+                                    class="select"
+                                >
+
+                                    <option value="true">
+                                        Bật Transcript
+                                    </option>
+
+                                    <option value="false">
+                                        Tắt Transcript
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
 
+                <!-- ===================================
+                     WELCOME
+                ==================================== -->
+
+                <div class="card">
+
+                    <div class="cardhead">
+
+                        <div>
+
+                            <h2>
+                                Tin nhắn chào mừng
+                            </h2>
+
+                            <div class="muted">
+                                Tin nhắn được gửi khi
+                                người dùng mở Ticket
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="body">
+
+                        <div class="field">
+
+                            <label>
+                                Tiêu đề
+                            </label>
+
+                            <input
+                                id="pwt"
+                                class="input"
+                                value="${esc(
+                                    data.welcomeTitle
+                                )}"
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Nội dung
+                            </label>
+
+                            <textarea
+                                id="pwd"
+                                class="textarea"
+                            >${esc(
+                                data.welcomeDescription
+                            )}</textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ===================================
+                     ACTIONS
+                ==================================== -->
 
                 <div class="actions">
 
@@ -1810,31 +2412,51 @@ async function panelModal(
                             )
                         "
                     >
-
                         ${
                             existing
-                                ? "Save Changes"
-                                : "Create Panel"
+                            ? "💾 Lưu thay đổi"
+                            : "＋ Tạo Panel"
                         }
-
                     </button>
 
                     <button
                         class="secondary"
                         onclick="closeModal()"
                     >
-                        Cancel
+                        Hủy
                     </button>
+
+                    ${
+                        existing
+                        ?
+                        `
+                        <button
+                            class="danger"
+                            onclick="
+                                deletePanel(
+                                    '${existing.id}'
+                                )
+                            "
+                        >
+                            🗑 Xóa Panel
+                        </button>
+                        `
+                        :
+                        ""
+                    }
 
                 </div>
 
-
                 <p class="muted">
 
-                    Create Panel sẽ gửi panel
-                    ngay lập tức vào Discord.
+                    ${
+                        existing
+                        ?
+                        "Thay đổi sẽ được cập nhật trực tiếp vào Panel trong Discord."
+                        :
+                        "Sau khi tạo, bot sẽ tự động gửi Panel vào kênh bạn chọn. Không cần /panel."
 
-                    Không có /panel.
+                    }
 
                 </p>
 
@@ -1843,52 +2465,88 @@ async function panelModal(
         </div>
     `;
 
-    modal.classList.remove(
-        "hidden"
-    );
+    $("modal")
+        .classList
+        .remove(
+            "hidden"
+        );
+
+    previewPanel();
 }
 
+function previewPanel(){
 
-function closeModal() {
+    const title =
+        val("pt") ||
+        "Mở Ticket";
 
-    modal.classList.add(
-        "hidden"
-    );
+    const description =
+        val("pd") ||
+        "Nhấn nút bên dưới để mở một ticket.";
+
+    const button =
+        val("pbl") ||
+        "Mở Ticket";
+
+    const emoji =
+        val("pbe") ||
+        "🎫";
+
+    $("panelPreview").innerHTML = `
+
+        <h3>
+            ${esc(title)}
+        </h3>
+
+        <p>
+            ${esc(description)}
+        </p>
+
+        <button>
+            ${esc(emoji)}
+            ${esc(button)}
+        </button>
+
+    `;
 }
 
+function closeModal(){
 
-async function editPanel(
-    id
-) {
+    $("modal")
+        .classList
+        .add(
+            "hidden"
+        );
+}
 
-    const data =
+async function editPanel(id){
+
+    const result =
         await api(
             `/api/guild/${GUILD.id}/panels`
         );
 
     const panel =
-        data.panels.find(
-            x =>
-                x.id === id
+        result.panels.find(
+            p =>
+                p.id === id
         );
 
-    panelModal(
+    if(
         panel
-    );
+    ){
+        panelModal(
+            panel
+        );
+    }
 }
 
-
-async function savePanel(
-    id
-) {
+async function savePanel(id){
 
     const body = {
 
         name:
             val("pn"),
-
-        channelId:
-            val("pc"),
 
         title:
             val("pt"),
@@ -1902,95 +2560,169 @@ async function savePanel(
         footer:
             val("pf"),
 
-        buttonLabel:
+        thumbnailUrl:
+            val("pthumb"),
+
+        imageUrl:
+            val("pimage"),
+
+        buttonText:
             val("pbl"),
+
+        buttonColor:
+            val("pbc"),
 
         buttonEmoji:
             val("pbe"),
+
+        channelId:
+            val("pc"),
 
         categoryId:
             val("pca"),
 
         supportRoleId:
-            val("pr")
+            val("pr"),
+
+        transcripts:
+            val("pts") !==
+            "false",
+
+        welcomeTitle:
+            val("pwt"),
+
+        welcomeDescription:
+            val("pwd")
     };
 
-    try {
+    try{
+
+        if(id){
+
+            await api(
+                `/api/guild/${GUILD.id}/panels/${id}`,
+                {
+                    method:
+                        "PATCH",
+
+                    body:
+                        JSON.stringify(
+                            body
+                        )
+                }
+            );
+
+            toast(
+                "✅ Đã cập nhật Panel."
+            );
+
+        }else{
+
+            await api(
+                `/api/guild/${GUILD.id}/panels`,
+                {
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            body
+                        )
+                }
+            );
+
+            toast(
+                "✅ Đã tạo Panel và bot đã gửi vào Discord."
+            );
+        }
+
+        closeModal();
+
+        await renderPanels();
+
+    }catch(err){
+
+        toast(
+            err.message
+        );
+    }
+}
+
+async function deletePanel(
+    id
+){
+
+    if(
+        !confirm(
+            "Bạn chắc chắn muốn xóa Panel này?"
+        )
+    ){
+        return;
+    }
+
+    try{
 
         await api(
-
-            `/api/guild/${GUILD.id}/panels${
-                id
-                    ? "/" + id
-                    : ""
-            }`,
-
+            `/api/guild/${GUILD.id}/panels/${id}`,
             {
-
                 method:
-                    id
-                        ? "PATCH"
-                        : "POST",
-
-                body:
-                    JSON.stringify(
-                        body
-                    )
+                    "DELETE"
             }
         );
 
         closeModal();
 
         toast(
-            id
-                ? "Panel updated"
-                : "Panel created and sent to Discord"
+            "🗑 Đã xóa Panel."
         );
 
         renderPanels();
 
-    } catch (error) {
+    }catch(err){
 
         toast(
-            error.message
+            err.message
         );
     }
 }
 
+/* =====================================================
+   TICKETS
+===================================================== */
 
-// ============================================================
-// TICKETS PAGE
-// ============================================================
+async function renderTickets(){
 
-async function renderTickets() {
-
-    const data =
+    const result =
         await api(
             `/api/guild/${GUILD.id}/tickets`
         );
 
-    content.innerHTML = `
+    const tickets =
+        result.tickets;
+
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Open Tickets for Server
+            Ticket đang mở của
             ${esc(GUILD.name)}
         </h1>
 
         <p class="subtitle">
-            View and manage all open tickets
+            Xem và quản lý tất cả Ticket đang mở
         </p>
-
 
         <div class="card">
 
             <div class="cardhead">
 
                 <h2>
-                    Filter tickets by
+                    Lọc Ticket
                 </h2>
 
-                <button class="secondary">
-                    🏷 Manage Labels
+                <button
+                    class="secondary"
+                >
+                    🏷 Quản lý Nhãn
                 </button>
 
             </div>
@@ -2006,7 +2738,7 @@ async function renderTickets() {
 
                     <input
                         class="input"
-                        placeholder="Username"
+                        placeholder="Tên người dùng"
                     >
 
                     <input
@@ -2022,27 +2754,30 @@ async function renderTickets() {
                 </div>
 
                 <p>
-                    Only Show Unclaimed &
-                    My Tickets
+                    Chỉ hiển thị Ticket chưa Claim
+                    và Ticket của tôi
                 </p>
 
-                <button class="secondary">
+                <button
+                    class="secondary"
+                >
                     ◯
                 </button>
 
                 <p>
-                    Unclaimed &
-                    Awaiting Response First
+                    Ticket chưa Claim và đang chờ
+                    phản hồi trước
                 </p>
 
-                <button class="primary">
+                <button
+                    class="primary"
+                >
                     ●
                 </button>
 
             </div>
 
         </div>
-
 
         <div class="card">
 
@@ -2071,11 +2806,11 @@ async function renderTickets() {
                             </th>
 
                             <th>
-                                Status
+                                Trạng thái
                             </th>
 
                             <th>
-                                Actions
+                                Thao tác
                             </th>
 
                         </tr>
@@ -2084,83 +2819,83 @@ async function renderTickets() {
 
                     <tbody>
 
-                        ${
-                            data.tickets.length
-                                ? data.tickets
-                                    .map(
-                                        ticket => `
+                    ${
+                        tickets.length
+                        ?
 
-                                            <tr>
-
-                                                <td>
-                                                    ${esc(
-                                                        ticket.id
-                                                    )}
-                                                </td>
-
-                                                <td>
-                                                    ${esc(
-                                                        ticket.username
-                                                    )}
-                                                </td>
-
-                                                <td>
-                                                    ${esc(
-                                                        ticket.userId
-                                                    )}
-                                                </td>
-
-                                                <td>
-                                                    ${
-                                                        esc(
-                                                            ticket.claimedById ||
-                                                            "Unclaimed"
-                                                        )
-                                                    }
-                                                </td>
-
-                                                <td>
-
-                                                    <span class="badge">
-                                                        Open
-                                                    </span>
-
-                                                </td>
-
-                                                <td>
-
-                                                    <a
-                                                        style="
-                                                            color:#6fa0ff
-                                                        "
-                                                        target="_blank"
-                                                        href="
-                                                            https://discord.com/channels/${GUILD.id}/${ticket.channelId}
-                                                        "
-                                                    >
-                                                        Open
-                                                    </a>
-
-                                                </td>
-
-                                            </tr>
-                                        `
-                                    )
-                                    .join("")
-                                : `
-
-                                    <tr>
-
-                                        <td
-                                            colspan="6"
-                                            class="empty"
-                                        >
-                                            No open tickets
-                                        </td>
-
-                                    </tr>
+                        tickets.map(
+                            t =>
                                 `
-                        }
+
+                                <tr>
+
+                                    <td>
+                                        ${esc(t.id)}
+                                    </td>
+
+                                    <td>
+                                        ${esc(t.username)}
+                                    </td>
+
+                                    <td>
+                                        ${esc(t.userId)}
+                                    </td>
+
+                                    <td>
+                                        ${
+                                            t.claimedById
+                                            ? esc(
+                                                t.claimedById
+                                            )
+                                            : "Chưa Claim"
+                                        }
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge">
+                                            Đang mở
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <a
+                                            target="_blank"
+                                            style="
+                                                color:#70a2ff
+                                            "
+                                            href="
+                                                https://discord.com/channels/${GUILD.id}/${t.channelId}
+                                            "
+                                        >
+                                            Mở Discord
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+                                `
+                        ).join("")
+
+                        :
+
+                        `
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="empty"
+                            >
+                                Không có Ticket đang mở
+                            </td>
+
+                        </tr>
+
+                        `
+                    }
 
                     </tbody>
 
@@ -2172,71 +2907,69 @@ async function renderTickets() {
     `;
 }
 
+/* =====================================================
+   TRANSCRIPTS
+===================================================== */
 
-// ============================================================
-// TRANSCRIPTS
-// ============================================================
+async function renderTranscripts(){
 
-async function renderTranscripts() {
-
-    const data =
+    const result =
         await api(
             `/api/guild/${GUILD.id}/transcripts`
         );
 
-    content.innerHTML = `
+    const transcripts =
+        result.transcripts;
+
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Transcripts for Server
+            Transcript của Server
             ${esc(GUILD.name)}
         </h1>
 
         <p class="subtitle">
-            View all closed ticket transcripts
+            Xem toàn bộ lịch sử Ticket đã đóng
         </p>
-
 
         <div class="card">
 
             <div class="cardhead">
 
                 <h2>
-                    Filter transcripts by
+                    Lọc Transcript
                 </h2>
 
-                <button class="secondary">
-                    🏷 Manage Labels
+                <button
+                    class="secondary"
+                >
+                    🏷 Quản lý Nhãn
                 </button>
 
             </div>
 
             <div class="body">
 
-                <div class="grid2">
+                <div class="grid3">
 
-                    <select class="select">
+                    <select
+                        class="select"
+                    >
 
                         <option>
-                            Select a topic...
+                            Chọn chủ đề...
                         </option>
 
                     </select>
 
                     <input
                         class="input"
-                        placeholder="Closed By ID"
+                        placeholder="Đóng bởi ID"
                     >
-
-                </div>
-
-                <div
-                    class="grid2"
-                    style="margin-top:15px"
-                >
 
                     <input
                         class="input"
-                        placeholder="Claimed By ID"
+                        placeholder="Claimed bởi ID"
                     >
 
                 </div>
@@ -2245,18 +2978,19 @@ async function renderTranscripts() {
 
         </div>
 
-
         <div class="card">
 
             <div class="cardhead">
 
                 <h2>
-                    Transcripts
-                    (${data.transcripts.length})
+                    Transcript
+                    (${transcripts.length})
                 </h2>
 
-                <button class="secondary">
-                    ▦ Columns
+                <button
+                    class="secondary"
+                >
+                    ▦ Cột
                 </button>
 
             </div>
@@ -2278,11 +3012,11 @@ async function renderTranscripts() {
                             </th>
 
                             <th>
-                                Rating
+                                Đánh giá
                             </th>
 
                             <th>
-                                Close Reason
+                                Lý do đóng
                             </th>
 
                             <th>
@@ -2290,7 +3024,7 @@ async function renderTranscripts() {
                             </th>
 
                             <th>
-                                Actions
+                                Thao tác
                             </th>
 
                         </tr>
@@ -2299,88 +3033,88 @@ async function renderTranscripts() {
 
                     <tbody>
 
-                        ${
-                            data.transcripts.length
-                                ? data.transcripts
-                                    .map(
-                                        transcript => `
+                    ${
+                        transcripts.length
 
-                                            <tr>
+                        ?
 
-                                                <td>
-                                                    ${esc(
-                                                        transcript.ticketId
-                                                    )}
-                                                </td>
-
-                                                <td>
-                                                    ${esc(
-                                                        transcript.username
-                                                    )}
-                                                </td>
-
-                                                <td>
-                                                    No rating
-                                                </td>
-
-                                                <td>
-                                                    ${esc(
-                                                        transcript.closeReason
-                                                    )}
-                                                </td>
-
-                                                <td>
-                                                    ${esc(
-                                                        transcript.claimedById ||
-                                                        "—"
-                                                    )}
-                                                </td>
-
-                                                <td>
-
-                                                    <button
-                                                        class="smallbtn"
-                                                        onclick="
-                                                            alert(
-                                                                ${JSON.stringify(
-                                                                    (
-                                                                        transcript.messages ||
-                                                                        []
-                                                                    )
-                                                                        .join(
-                                                                            "\n"
-                                                                        )
-                                                                        .slice(
-                                                                            0,
-                                                                            5000
-                                                                        )
-                                                                )}
-                                                            )
-                                                        "
-                                                    >
-                                                        ⋮
-                                                    </button>
-
-                                                </td>
-
-                                            </tr>
-                                        `
-                                    )
-                                    .join("")
-                                : `
-
-                                    <tr>
-
-                                        <td
-                                            colspan="6"
-                                            class="empty"
-                                        >
-                                            No transcripts yet
-                                        </td>
-
-                                    </tr>
+                        transcripts.map(
+                            t =>
                                 `
-                        }
+
+                                <tr>
+
+                                    <td>
+                                        ${esc(
+                                            t.ticketId
+                                        )}
+                                    </td>
+
+                                    <td>
+                                        ${esc(
+                                            t.username
+                                        )}
+                                    </td>
+
+                                    <td>
+                                        Chưa đánh giá
+                                    </td>
+
+                                    <td>
+                                        ${esc(
+                                            t.closeReason ||
+                                            "Không có lý do"
+                                        )}
+                                    </td>
+
+                                    <td>
+                                        ${
+                                            t.claimedById
+                                            ?
+                                            esc(
+                                                t.claimedById
+                                            )
+                                            :
+                                            "—"
+                                        }
+                                    </td>
+
+                                    <td>
+
+                                        <button
+                                            class="secondary"
+                                            onclick="
+                                                viewTranscript(
+                                                    '${t.ticketId}'
+                                                )
+                                            "
+                                        >
+                                            ⋮
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+                                `
+                        ).join("")
+
+                        :
+
+                        `
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="empty"
+                            >
+                                Chưa có Transcript
+                            </td>
+
+                        </tr>
+
+                        `
+                    }
 
                     </tbody>
 
@@ -2392,58 +3126,134 @@ async function renderTranscripts() {
     `;
 }
 
+async function viewTranscript(
+    ticketId
+){
 
-// ============================================================
-// TEAMS
-// ============================================================
+    try{
 
-async function renderTeams() {
+        const result =
+            await api(
+                `/api/guild/${GUILD.id}/transcripts/${ticketId}`
+            );
 
-    const data =
+        const t =
+            result.transcript;
+
+        $("modal").innerHTML = `
+
+            <div class="modalbox">
+
+                <div class="modalhead">
+
+                    <h2>
+                        Transcript Ticket #${esc(
+                            t.ticketId
+                        )}
+                    </h2>
+
+                    <button
+                        class="closex"
+                        onclick="closeModal()"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+                <div class="modalbody">
+
+                    <p>
+                        <b>Người mở:</b>
+                        ${esc(t.username)}
+                    </p>
+
+                    <p>
+                        <b>Lý do đóng:</b>
+                        ${esc(
+                            t.closeReason ||
+                            "Không có lý do"
+                        )}
+                    </p>
+
+                    <textarea
+                        class="textarea"
+                        readonly
+                        style="min-height:450px"
+                    >${esc(
+                        (t.messages || [])
+                        .join("\n")
+                    )}</textarea>
+
+                </div>
+
+            </div>
+        `;
+
+        $("modal")
+            .classList
+            .remove(
+                "hidden"
+            );
+
+    }catch(err){
+
+        toast(
+            err.message
+        );
+    }
+}
+
+/* =====================================================
+   TEAMS
+===================================================== */
+
+async function renderTeams(){
+
+    const result =
         await api(
             `/api/guild/${GUILD.id}/teams`
         );
 
-    const roleList =
-        await roles();
+    const roles =
+        await getRoles();
 
     DATA.teams =
-        data.teams;
+        result.teams;
 
-    content.innerHTML = `
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Support Teams for Server
+            Nhóm hỗ trợ của
             ${esc(GUILD.name)}
         </h1>
 
         <p class="subtitle">
-            Manage support teams and their members
+            Quản lý nhóm hỗ trợ và thành viên
         </p>
-
 
         <div class="card">
 
             <div class="body">
 
                 <h2>
-                    Create Team
+                    Tạo nhóm
                 </h2>
 
                 <div class="actions">
 
                     <input
-                        id="tn"
+                        id="teamName"
                         class="input"
                         style="max-width:450px"
-                        placeholder="Team Name"
+                        placeholder="Tên nhóm"
                     >
 
                     <button
                         class="success"
                         onclick="createTeam()"
                     >
-                        ➤ Submit
+                        ➤ Tạo
                     </button>
 
                 </div>
@@ -2452,49 +3262,50 @@ async function renderTeams() {
 
         </div>
 
-
         <div class="card">
 
             <div class="body">
 
                 <h2>
-                    Manage Teams
+                    Quản lý nhóm
                 </h2>
 
                 <div class="field">
 
                     <label>
-                        Team
+                        Nhóm
                     </label>
 
                     <select
-                        id="ts"
+                        id="teamSelect"
                         class="select"
-                        onchange="teamMembers()"
+                        onchange="showTeamMembers()"
                     >
 
                         ${
-                            data.teams
-                                .map(
-                                    team => `
-
-                                        <option
-                                            value="${team.id}"
-                                        >
-                                            ${esc(
-                                                team.name
-                                            )}
-                                        </option>
+                            result.teams
+                            .map(
+                                t =>
                                     `
-                                )
-                                .join("")
+                                    <option
+                                        value="${t.id}"
+                                    >
+                                        ${esc(
+                                            t.name
+                                        )}
+                                    </option>
+                                    `
+                            )
+                            .join("")
                         }
 
                     </select>
 
                 </div>
 
-                <div id="tm"></div>
+                <div
+                    id="teamMembers"
+                ></div>
 
             </div>
 
@@ -2502,110 +3313,108 @@ async function renderTeams() {
     `;
 
     DATA.roles =
-        roleList;
+        roles;
 
-    teamMembers();
+    showTeamMembers();
 }
 
-
-function teamMembers() {
+function showTeamMembers(){
 
     const team =
         DATA.teams.find(
-            x =>
-                x.id ===
-                val("ts")
+            t =>
+                t.id ===
+                val(
+                    "teamSelect"
+                )
         );
 
-    if (!team) {
+    if(!team)
         return;
-    }
 
-    tm.innerHTML = `
+    $("teamMembers").innerHTML = `
 
         <div class="grid2">
 
             <div>
 
                 <h3>
-                    Manage Members
+                    Thành viên
                 </h3>
 
                 ${
                     team.roleIds.length
-                        ? team.roleIds
-                            .map(
-                                roleId => `
 
-                                    <div class="listitem">
+                    ?
 
-                                        @${esc(
-                                            (
-                                                DATA.roles.find(
-                                                    role =>
-                                                        role.id ===
-                                                        roleId
-                                                ) ||
-                                                {}
-                                            ).name ||
-                                            roleId
-                                        )}
-
-                                    </div>
-                                `
-                            )
-                            .join("")
-                        : `
-
-                            <div class="empty">
-                                No members
+                    team.roleIds
+                    .map(
+                        id =>
+                            `
+                            <div class="card">
+                                <div class="body">
+                                    @${esc(
+                                        DATA.roles.find(
+                                            r =>
+                                                r.id ===
+                                                id
+                                        )?.name ||
+                                        id
+                                    )}
+                                </div>
                             </div>
-                        `
+                            `
+                    )
+                    .join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+                        Chưa có thành viên
+                    </div>
+                    `
                 }
 
             </div>
 
-
             <div>
 
                 <h3>
-                    Add Role
+                    Thêm Role
                 </h3>
 
-                <div class="actions">
+                <select
+                    id="teamRole"
+                    class="select"
+                >
 
-                    <select
-                        id="ar"
-                        class="select"
-                    >
+                    ${
+                        DATA.roles
+                        .map(
+                            r =>
+                                `
+                                <option
+                                    value="${r.id}"
+                                >
+                                    @${esc(
+                                        r.name
+                                    )}
+                                </option>
+                                `
+                        )
+                        .join("")
+                    }
 
-                        ${
-                            DATA.roles
-                                .map(
-                                    role => `
+                </select>
 
-                                        <option
-                                            value="${role.id}"
-                                        >
-                                            ${esc(
-                                                role.name
-                                            )}
-                                        </option>
-                                    `
-                                )
-                                .join("")
-                        }
-
-                    </select>
-
-                    <button
-                        class="success"
-                        onclick="addRole()"
-                    >
-                        ＋ Add To Team
-                    </button>
-
-                </div>
+                <button
+                    class="success"
+                    style="margin-top:12px"
+                    onclick="addTeamRole()"
+                >
+                    ＋ Thêm vào nhóm
+                </button>
 
             </div>
 
@@ -2613,94 +3422,117 @@ function teamMembers() {
     `;
 }
 
+async function createTeam(){
 
-async function createTeam() {
+    const name =
+        val(
+            "teamName"
+        ).trim();
 
-    if (
-        !val("tn").trim()
-    ) {
+    if(!name){
 
-        return toast(
-            "Nhập tên team"
+        toast(
+            "Nhập tên nhóm."
         );
+
+        return;
     }
 
-    await api(
-        `/api/guild/${GUILD.id}/teams`,
-        {
+    try{
 
-            method:
-                "POST",
+        await api(
+            `/api/guild/${GUILD.id}/teams`,
+            {
+                method:
+                    "POST",
 
-            body:
-                JSON.stringify({
-                    name:
-                        val("tn")
-                })
-        }
-    );
+                body:
+                    JSON.stringify({
+                        name
+                    })
+            }
+        );
 
-    renderTeams();
+        toast(
+            "✅ Đã tạo nhóm."
+        );
+
+        renderTeams();
+
+    }catch(err){
+
+        toast(
+            err.message
+        );
+    }
 }
 
+async function addTeamRole(){
 
-async function addRole() {
+    try{
 
-    await api(
-        `/api/guild/${GUILD.id}/teams/${val("ts")}/roles`,
-        {
+        await api(
+            `/api/guild/${GUILD.id}/teams/${val("teamSelect")}/roles`,
+            {
+                method:
+                    "POST",
 
-            method:
-                "POST",
+                body:
+                    JSON.stringify({
+                        roleId:
+                            val("teamRole")
+                    })
+            }
+        );
 
-            body:
-                JSON.stringify({
-                    roleId:
-                        val("ar")
-                })
-        }
-    );
+        toast(
+            "✅ Đã thêm Role."
+        );
 
-    renderTeams();
+        renderTeams();
+
+    }catch(err){
+
+        toast(
+            err.message
+        );
+    }
 }
 
+/* =====================================================
+   BLACKLIST
+===================================================== */
 
-// ============================================================
-// BLACKLIST
-// ============================================================
+async function renderBlacklist(){
 
-async function renderBlacklist() {
-
-    const data =
+    const result =
         await api(
             `/api/guild/${GUILD.id}/blacklist`
         );
 
-    const roleList =
-        await roles();
+    const roles =
+        await getRoles();
 
-    DATA.roles =
-        roleList;
+    const b =
+        result.blacklist;
 
-    content.innerHTML = `
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Blacklist for Server
+            Danh sách đen của
             ${esc(GUILD.name)}
         </h1>
 
         <p class="subtitle">
-            Manage blacklisted users and roles
-            who cannot open tickets
+            Quản lý người dùng và Role không được mở Ticket
         </p>
-
 
         <div class="card">
 
             <div class="body">
 
                 <h2>
-                    Blacklist
+                    Danh sách đen
                 </h2>
 
                 <div class="actions">
@@ -2709,14 +3541,14 @@ async function renderBlacklist() {
                         class="primary"
                         onclick="blackUser()"
                     >
-                        ⊘ Blacklist User
+                        ⊘ Chặn User
                     </button>
 
                     <button
                         class="primary"
                         onclick="blackRole()"
                     >
-                        ⊘ Blacklist Role
+                        ⊘ Chặn Role
                     </button>
 
                 </div>
@@ -2725,118 +3557,122 @@ async function renderBlacklist() {
 
         </div>
 
-
         <div class="card">
 
             <div class="body">
 
                 <h2>
-                    Blacklisted Roles
+                    Role bị chặn
                 </h2>
 
                 ${
-                    data.blacklist.roles.length
-                        ? data.blacklist.roles
-                            .map(
-                                roleId => `
+                    b.roles.length
 
-                                    <div class="listitem">
+                    ?
 
-                                        @${esc(
-                                            (
-                                                roleList.find(
-                                                    role =>
-                                                        role.id ===
-                                                        roleId
-                                                ) ||
-                                                {}
-                                            ).name ||
-                                            roleId
-                                        )}
+                    b.roles
+                    .map(
+                        id =>
+                            `
+                            <div class="listitem">
 
-                                        <button
-                                            class="danger"
-                                            onclick="
-                                                unblack(
-                                                    'role',
-                                                    '${roleId}'
-                                                )
-                                            "
-                                        >
-                                            Remove
-                                        </button>
+                                @${esc(
+                                    roles.find(
+                                        r =>
+                                            r.id ===
+                                            id
+                                    )?.name ||
+                                    id
+                                )}
 
-                                    </div>
-                                `
-                            )
-                            .join("")
-                        : `
-
-                            <div class="empty">
-
-                                ⊘
-
-                                <h3>
-                                    No blacklisted roles
-                                </h3>
-
-                                <p>
-                                    Blacklisted roles
-                                    cannot open tickets
-                                    in your server.
-                                </p>
+                                <button
+                                    class="danger"
+                                    onclick="
+                                        unblack(
+                                            'role',
+                                            '${id}'
+                                        )
+                                    "
+                                >
+                                    Xóa
+                                </button>
 
                             </div>
-                        `
+                            `
+                    )
+                    .join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+
+                        <div style="font-size:45px">
+                            ⊘
+                        </div>
+
+                        <h3>
+                            Chưa có Role bị chặn
+                        </h3>
+
+                        <p>
+                            Role bị chặn sẽ không thể
+                            mở Ticket.
+                        </p>
+
+                    </div>
+                    `
                 }
 
             </div>
 
         </div>
 
-
         <div class="card">
 
             <div class="body">
 
                 <h2>
-                    Blacklisted Users
+                    User bị chặn
                 </h2>
 
                 ${
-                    data.blacklist.users.length
-                        ? data.blacklist.users
-                            .map(
-                                userId => `
+                    b.users.length
 
-                                    <div class="listitem">
+                    ?
 
-                                        ${esc(
-                                            userId
-                                        )}
+                    b.users
+                    .map(
+                        id =>
+                            `
+                            <div class="listitem">
 
-                                        <button
-                                            class="danger"
-                                            onclick="
-                                                unblack(
-                                                    'user',
-                                                    '${userId}'
-                                                )
-                                            "
-                                        >
-                                            Remove
-                                        </button>
+                                ${esc(id)}
 
-                                    </div>
-                                `
-                            )
-                            .join("")
-                        : `
+                                <button
+                                    class="danger"
+                                    onclick="
+                                        unblack(
+                                            'user',
+                                            '${id}'
+                                        )
+                                    "
+                                >
+                                    Xóa
+                                </button>
 
-                            <div class="empty">
-                                No blacklisted users
                             </div>
-                        `
+                            `
+                    )
+                    .join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+                        Chưa có User bị chặn
+                    </div>
+                    `
                 }
 
             </div>
@@ -2845,66 +3681,81 @@ async function renderBlacklist() {
     `;
 }
 
-
-async function blackUser() {
+async function blackUser(){
 
     const id =
         prompt(
-            "User ID"
+            "Nhập User ID:"
         );
 
-    if (!id) {
+    if(!id)
         return;
-    }
 
     await api(
         `/api/guild/${GUILD.id}/blacklist/user`,
         {
-
             method:
                 "POST",
 
             body:
                 JSON.stringify({
                     userId:
-                        id
+                        id.trim()
                 })
         }
+    );
+
+    toast(
+        "✅ Đã chặn User."
     );
 
     renderBlacklist();
 }
 
+async function blackRole(){
 
-async function blackRole() {
+    const roles =
+        await getRoles();
 
-    const input =
+    const text =
+        roles
+        .map(
+            (r,i) =>
+                `${i}: ${r.name}`
+        )
+        .join("\n");
+
+    const choice =
         prompt(
-            DATA.roles
-                .map(
-                    (role, index) =>
-                        `${index}: ${role.name}`
-                )
-                .join("\n")
+            "Nhập số Role:\n\n" +
+            text
         );
 
-    if (input === null) {
+    if(
+        choice ===
+        null
+    )
         return;
-    }
 
     const role =
-        DATA.roles[
-            Number(input)
+        roles[
+            Number(
+                choice
+            )
         ];
 
-    if (!role) {
+    if(!role){
+
+        toast(
+            "Role không hợp lệ."
+        );
+
         return;
     }
 
     await api(
         `/api/guild/${GUILD.id}/blacklist/role`,
         {
-
             method:
                 "POST",
 
@@ -2916,52 +3767,59 @@ async function blackRole() {
         }
     );
 
-    renderBlacklist();
-}
-
-
-async function unblack(
-    kind,
-    id
-) {
-
-    await api(
-        `/api/guild/${GUILD.id}/blacklist/${kind}/${id}`,
-        {
-
-            method:
-                "DELETE"
-        }
+    toast(
+        "✅ Đã chặn Role."
     );
 
     renderBlacklist();
 }
 
+async function unblack(
+    kind,
+    id
+){
 
-// ============================================================
-// AUDIT
-// ============================================================
+    await api(
+        `/api/guild/${GUILD.id}/blacklist/${kind}/${id}`,
+        {
+            method:
+                "DELETE"
+        }
+    );
 
-async function renderAudit() {
+    toast(
+        "✅ Đã bỏ chặn."
+    );
 
-    const data =
+    renderBlacklist();
+}
+
+/* =====================================================
+   AUDIT LOG
+===================================================== */
+
+async function renderAudit(){
+
+    const result =
         await api(
             `/api/guild/${GUILD.id}/audit-log`
         );
 
-    content.innerHTML = `
+    const logs =
+        result.logs;
+
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Audit Log
+            Nhật ký hoạt động
         </h1>
-
 
         <div class="card">
 
             <div class="cardhead">
 
                 <h2>
-                    ⌁ Filter Audit Logs
+                    🔎 Lọc nhật ký
                 </h2>
 
             </div>
@@ -2975,18 +3833,22 @@ async function renderAudit() {
                         placeholder="User ID"
                     >
 
-                    <select class="select">
+                    <select
+                        class="select"
+                    >
 
                         <option>
-                            All Actions
+                            Tất cả hành động
                         </option>
 
                     </select>
 
-                    <select class="select">
+                    <select
+                        class="select"
+                    >
 
                         <option>
-                            All Resources
+                            Tất cả tài nguyên
                         </option>
 
                     </select>
@@ -3002,19 +3864,19 @@ async function renderAudit() {
 
         </div>
 
-
         <div class="card">
 
             <div class="cardhead">
 
                 <h2>
-                    ↶ Audit Logs
-                    (${data.logs.length}
-                    entries)
+                    ↶ Nhật ký
+                    (${logs.length})
                 </h2>
 
-                <button class="secondary">
-                    ▦ Columns
+                <button
+                    class="secondary"
+                >
+                    ▦ Cột
                 </button>
 
             </div>
@@ -3028,23 +3890,23 @@ async function renderAudit() {
                         <tr>
 
                             <th>
-                                Timestamp
+                                Thời gian
                             </th>
 
                             <th>
-                                User
+                                Người dùng
                             </th>
 
                             <th>
-                                Action
+                                Hành động
                             </th>
 
                             <th>
-                                Resource
+                                Tài nguyên
                             </th>
 
                             <th>
-                                Details
+                                Chi tiết
                             </th>
 
                         </tr>
@@ -3053,55 +3915,72 @@ async function renderAudit() {
 
                     <tbody>
 
-                        ${
-                            data.logs
-                                .map(
-                                    log => `
+                    ${
+                        logs.length
 
-                                        <tr>
+                        ?
 
-                                            <td>
-                                                ${new Date(
-                                                    log.timestamp
-                                                ).toLocaleString()}
-                                            </td>
+                        logs.map(
+                            l =>
+                                `
+                                <tr>
 
-                                            <td>
-                                                ${esc(
-                                                    log.username
-                                                )}
-                                            </td>
+                                    <td>
+                                        ${new Date(
+                                            l.timestamp
+                                        ).toLocaleString(
+                                            "vi-VN"
+                                        )}
+                                    </td>
 
-                                            <td>
+                                    <td>
+                                        ${esc(
+                                            l.username
+                                        )}
+                                    </td>
 
-                                                <span class="badge">
-                                                    ${esc(
-                                                        log.action
-                                                    )}
-                                                </span>
+                                    <td>
+                                        <span class="badge">
+                                            ${esc(
+                                                l.action
+                                            )}
+                                        </span>
+                                    </td>
 
-                                            </td>
+                                    <td>
+                                        ${esc(
+                                            l.resource
+                                        )}
+                                    </td>
 
-                                            <td>
-                                                ${esc(
-                                                    log.resource
-                                                )}
-                                            </td>
+                                    <td>
+                                        ${esc(
+                                            JSON.stringify(
+                                                l.details ||
+                                                {}
+                                            )
+                                        )}
+                                    </td>
 
-                                            <td>
-                                                ${esc(
-                                                    JSON.stringify(
-                                                        log.details ||
-                                                        {}
-                                                    )
-                                                )}
-                                            </td>
+                                </tr>
+                                `
+                        ).join("")
 
-                                        </tr>
-                                    `
-                                )
-                                .join("")
-                        }
+                        :
+
+                        `
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="empty"
+                            >
+                                Chưa có nhật ký
+                            </td>
+
+                        </tr>
+                        `
+                    }
 
                     </tbody>
 
@@ -3113,24 +3992,30 @@ async function renderAudit() {
     `;
 }
 
+/* =====================================================
+   SETTINGS / SETUP
+===================================================== */
 
-// ============================================================
-// SETTINGS
-// ============================================================
+async function renderSettings(){
 
-async function renderSettings() {
+    const result =
+        await api(
+            `/api/guild/${GUILD.id}`
+        );
 
-    content.innerHTML = `
+    GUILD.setup =
+        result.guild.setup;
+
+    $("content").innerHTML = `
 
         <h1 class="title">
-            Settings for Server
+            Cài đặt Server
             ${esc(GUILD.name)}
         </h1>
 
         <p class="subtitle">
-            Configure the Ticket system
+            Cấu hình hệ thống Ticket
         </p>
-
 
         <div class="card">
 
@@ -3141,56 +4026,56 @@ async function renderSettings() {
                 </h2>
 
                 <p>
-                    Ticket v2 style setup creates
-                    staff roles, transcripts channel
-                    and Tickets category.
+                    Dùng Setup để tạo tự động
+                    Role, Category và Transcript
+                    giống hệ thống Ticket.
                 </p>
 
                 <p>
-                    Admin role:
+                    <b>Tickets Admin:</b>
                     <code>
                         ${
                             GUILD.setup?.adminRoleId ||
-                            "Not configured"
+                            "Chưa cấu hình"
                         }
                     </code>
                 </p>
 
                 <p>
-                    Support role:
+                    <b>Tickets Support:</b>
                     <code>
                         ${
                             GUILD.setup?.supportRoleId ||
-                            "Not configured"
+                            "Chưa cấu hình"
                         }
                     </code>
                 </p>
 
                 <p>
-                    Category:
+                    <b>Category:</b>
                     <code>
                         ${
                             GUILD.setup?.categoryId ||
-                            "Not configured"
+                            "Chưa cấu hình"
                         }
                     </code>
                 </p>
 
                 <p>
-                    Transcripts:
+                    <b>Transcript:</b>
                     <code>
                         ${
                             GUILD.setup?.transcriptChannelId ||
-                            "Not configured"
+                            "Chưa cấu hình"
                         }
                     </code>
                 </p>
 
                 <button
                     class="primary"
-                    onclick="runSetup()"
+                    onclick="runSetupWeb()"
                 >
-                    ✓ Run /setup
+                    ✓ Chạy Setup
                 </button>
 
             </div>
@@ -3199,39 +4084,35 @@ async function renderSettings() {
     `;
 }
 
+async function runSetupWeb(){
 
-async function runSetup() {
+    try{
 
-    await api(
-        `/api/guild/${GUILD.id}/setup`,
-        {
-            method:
-                "POST"
-        }
-    );
+        await api(
+            `/api/guild/${GUILD.id}/setup`,
+            {
+                method:
+                    "POST"
+            }
+        );
 
-    GUILD = {
+        toast(
+            "✅ Setup hoàn tất."
+        );
 
-        ...GUILD,
+        renderSettings();
 
-        ...(
-            await api(
-                `/api/guild/${GUILD.id}`
-            )
-        ).guild
-    };
+    }catch(err){
 
-    toast(
-        "Setup complete"
-    );
-
-    renderSettings();
+        toast(
+            err.message
+        );
+    }
 }
 
-
-// ============================================================
-// START
-// ============================================================
+/* =====================================================
+   START
+===================================================== */
 
 boot();
 
