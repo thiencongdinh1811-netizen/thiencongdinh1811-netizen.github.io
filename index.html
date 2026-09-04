@@ -617,7 +617,1286 @@ function cleanOAuthUrl() {
         "success"
     ) {
 
+        console.log(<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bot Manager</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(88, 101, 242, .18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(114, 46, 209, .12),
+                    transparent 35%
+                ),
+                #080b12;
+
+            color: #fff;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+
+        #loginPage {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 430px;
+            max-width: 100%;
+
+            padding: 40px;
+
+            text-align: center;
+
+            background: rgba(21, 25, 39, .96);
+
+            border: 1px solid #30364a;
+            border-radius: 20px;
+
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, .5);
+        }
+
+        .logo {
+            width: 82px;
+            height: 82px;
+
+            margin: 0 auto 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 22px;
+
+            background: #5865f2;
+
+            font-size: 38px;
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 35px rgba(88, 101, 242, .35);
+        }
+
+        .login-box h1 {
+            margin: 0 0 10px;
+
+            font-size: 29px;
+        }
+
+        .login-box p {
+            margin: 0;
+
+            color: #aeb6c7;
+
+            line-height: 1.65;
+        }
+
+        .login-button {
+            width: 100%;
+
+            margin-top: 28px;
+            padding: 15px 18px;
+
+            border: 0;
+            border-radius: 10px;
+
+            background: #5865f2;
+            color: white;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .15s,
+                background .15s;
+        }
+
+        .login-button:hover {
+            background: #4752c4;
+            transform: translateY(-1px);
+        }
+
+        .login-button:disabled {
+            opacity: .7;
+            cursor: wait;
+            transform: none;
+        }
+
+        .error {
+            margin-top: 18px;
+
+            color: #ff7070;
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        #loadingPage {
+            min-height: 100vh;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .loading-box {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 42px;
+            height: 42px;
+
+            margin: 0 auto 18px;
+
+            border: 4px solid #30364a;
+            border-top-color: #5865f2;
+
+            border-radius: 50%;
+
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            color: #aeb6c7;
+        }
+
+        /* =====================================================
+           DASHBOARD
+        ===================================================== */
+
+        #dashboard {
+            display: none;
+
+            min-height: 100vh;
+        }
+
+        .topbar {
+            min-height: 70px;
+
+            padding: 0 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #111522;
+
+            border-bottom:
+                1px solid #292f40;
+        }
+
+        .brand {
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .username {
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #5865f2;
+
+            font-weight: 700;
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .logout {
+            width: auto;
+
+            margin: 0;
+            padding: 9px 15px;
+
+            border: 0;
+            border-radius: 8px;
+
+            background: #ed4245;
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            background: #c93639;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1150px;
+
+            margin: 0 auto;
+
+            padding: 40px 25px 60px;
+        }
+
+        .welcome {
+            padding: 25px;
+
+            margin-bottom: 30px;
+
+            background: #151927;
+
+            border: 1px solid #2b3040;
+            border-radius: 16px;
+        }
+
+        .welcome h2 {
+            margin: 0 0 8px;
+        }
+
+        .welcome p {
+            margin: 0;
+
+            color: #aeb6c7;
+        }
+
+        .section-title {
+            margin: 0 0 18px;
+        }
+
+        /* =====================================================
+           GUILDS
+        ===================================================== */
+
+        .guild-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(260px, 1fr)
+                );
+
+            gap: 18px;
+        }
+
+        .guild {
+            padding: 22px;
+
+            background: #151927;
+
+            border: 1px solid #2b3040;
+            border-radius: 15px;
+
+            transition:
+                transform .15s,
+                border-color .15s;
+        }
+
+        .guild:hover {
+            transform: translateY(-2px);
+
+            border-color: #5865f2;
+        }
+
+        .guild-icon {
+            width: 58px;
+            height: 58px;
+
+            margin-bottom: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 15px;
+
+            background: #5865f2;
+
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .guild-icon img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .guild-name {
+            margin-bottom: 8px;
+
+            font-size: 18px;
+            font-weight: 800;
+
+            word-break: break-word;
+        }
+
+        .guild-status {
+            margin-bottom: 17px;
+
+            color: #55d17a;
+
+            font-size: 14px;
+        }
+
+        .guild-status.offline {
+            color: #aeb6c7;
+        }
+
+        .manage-button {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 0;
+            border-radius: 8px;
+
+            background: #5865f2;
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .manage-button:hover {
+            background: #4752c4;
+        }
+
+        .manage-button:disabled {
+            background: #363b4d;
+            color: #858c9e;
+
+            cursor: not-allowed;
+        }
+
+        .empty {
+            padding: 30px;
+
+            text-align: center;
+
+            color: #aeb6c7;
+
+            background: #151927;
+
+            border: 1px solid #2b3040;
+            border-radius: 15px;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .topbar {
+                padding: 15px 18px;
+
+                gap: 15px;
+
+                flex-wrap: wrap;
+            }
+
+            .user-area {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .username {
+                display: none;
+            }
+
+            .content {
+                padding:
+                    25px 15px 40px;
+            }
+
+            .login-box {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     LOADING
+========================================================= -->
+
+<div id="loadingPage">
+
+    <div class="loading-box">
+
+        <div class="spinner"></div>
+
+        <div class="loading-text">
+            Đang kiểm tra đăng nhập Discord...
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<div id="loginPage">
+
+    <div class="login-box">
+
+        <div class="logo">
+            B
+        </div>
+
+        <h1>
+            Bot Manager
+        </h1>
+
+        <p>
+            Đăng nhập bằng Discord để quản lý
+            bot và các server của bạn.
+        </p>
+
+        <button
+            id="loginButton"
+            class="login-button"
+            onclick="loginDiscord()">
+
+            🎮 Đăng nhập bằng Discord
+
+        </button>
+
+        <div
+            id="error"
+            class="error">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<div id="dashboard">
+
+    <div class="topbar">
+
+        <div class="brand">
+            🤖 Bot Manager
+        </div>
+
+        <div class="user-area">
+
+            <div
+                id="username"
+                class="username">
+
+                User
+
+            </div>
+
+            <div
+                id="avatar"
+                class="avatar">
+
+                U
+
+            </div>
+
+            <button
+                class="logout"
+                onclick="logout()">
+
+                Đăng xuất
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <main class="content">
+
+        <div class="welcome">
+
+            <h2>
+                Xin chào,
+                <span id="welcomeName">
+                    User
+                </span>
+                👋
+            </h2>
+
+            <p>
+                Chọn server bên dưới để bắt đầu
+                quản lý bot.
+            </p>
+
+        </div>
+
+
+        <h2 class="section-title">
+            Server của bạn
+        </h2>
+
+
+        <div
+            id="guilds"
+            class="guild-grid">
+
+            <div class="empty">
+                Đang tải danh sách server...
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   CONFIG
+============================================================ */
+
+const BACKEND_URL =
+    "https://imcongthienzz.freesrv.com";
+
+
+/* ============================================================
+   DOM
+============================================================ */
+
+const loginPage =
+    document.getElementById("loginPage");
+
+const loadingPage =
+    document.getElementById("loadingPage");
+
+const dashboard =
+    document.getElementById("dashboard");
+
+const errorBox =
+    document.getElementById("error");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+
+/* ============================================================
+   UI
+============================================================ */
+
+function showLoading() {
+
+    loadingPage.style.display = "flex";
+
+    loginPage.style.display = "none";
+
+    dashboard.style.display = "none";
+
+}
+
+
+function showLogin() {
+
+    loadingPage.style.display = "none";
+
+    loginPage.style.display = "flex";
+
+    dashboard.style.display = "none";
+
+}
+
+
+function showDashboard() {
+
+    loadingPage.style.display = "none";
+
+    loginPage.style.display = "none";
+
+    dashboard.style.display = "block";
+
+}
+
+
+/* ============================================================
+   DISCORD LOGIN
+============================================================ */
+
+function loginDiscord() {
+
+    if (loginButton) {
+
+        loginButton.disabled = true;
+
+        loginButton.textContent =
+            "⏳ Đang chuyển tới Discord...";
+
+    }
+
+    /*
+     * Chuyển thẳng tới backend.
+     *
+     * Backend sẽ:
+     *
+     * /auth/discord
+     *      ↓
+     * Discord
+     *      ↓
+     * /auth/discord/callback
+     *      ↓
+     * GitHub Pages
+     */
+
+    window.location.assign(
+        BACKEND_URL +
+        "/auth/discord"
+    );
+}
+
+
+/* ============================================================
+   API HELPER
+============================================================ */
+
+async function api(path) {
+
+    const response =
+        await fetch(
+            BACKEND_URL + path,
+            {
+                method: "GET",
+
+                credentials: "include",
+
+                cache: "no-store",
+
+                headers: {
+                    "Accept":
+                        "application/json"
+                }
+            }
+        );
+
+    let data = null;
+
+    try {
+        data =
+            await response.json();
+    } catch (_) {
+        data = null;
+    }
+
+    return {
+        response,
+        data
+    };
+}
+
+
+/* ============================================================
+   CHECK LOGIN
+============================================================ */
+
+async function checkLogin() {
+
+    showLoading();
+
+    /*
+     * Đợi một chút sau OAuth callback.
+     *
+     * Quan trọng:
+     * Không tự động chuyển tới /auth/discord lần nữa.
+     */
+
+    try {
+
+        const {
+            response,
+            data
+        } = await api("/api/me");
+
+
+        /*
+         * 401 = chưa có session
+         */
+
+        if (
+            response.status === 401 ||
+            !data ||
+            !data.loggedIn
+        ) {
+
+            showLogin();
+
+            return;
+        }
+
+
+        /*
+         * Đăng nhập thành công.
+         */
+
         console.log(
+            "✅ Discord session:",
+            data.user
+        );
+
+
+        setUser(data.user);
+
+        showDashboard();
+
+
+        await loadGuilds();
+
+
+    } catch (error) {
+
+        console.error(
+            "❌ API /api/me:",
+            error
+        );
+
+
+        showLogin();
+
+
+        errorBox.textContent =
+            "❌ Không kết nối được backend.";
+    }
+
+}
+
+
+/* ============================================================
+   SET USER
+============================================================ */
+
+function setUser(user) {
+
+    const name =
+        user.global_name ||
+        user.username ||
+        "User";
+
+
+    document.getElementById(
+        "username"
+    ).textContent = name;
+
+
+    document.getElementById(
+        "welcomeName"
+    ).textContent = name;
+
+
+    const avatar =
+        document.getElementById(
+            "avatar"
+        );
+
+
+    avatar.style.backgroundImage =
+        "";
+
+
+    if (user.avatar) {
+
+        avatar.style.backgroundImage =
+            `url("https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128")`;
+
+        avatar.textContent =
+            "";
+
+    } else {
+
+        avatar.textContent =
+            name
+                .charAt(0)
+                .toUpperCase();
+    }
+
+}
+
+
+/* ============================================================
+   LOAD GUILDS
+============================================================ */
+
+async function loadGuilds() {
+
+    const container =
+        document.getElementById(
+            "guilds"
+        );
+
+
+    container.innerHTML = `
+        <div class="empty">
+            Đang tải server...
+        </div>
+    `;
+
+
+    try {
+
+        const {
+            response,
+            data
+        } = await api("/api/guilds");
+
+
+        if (!response.ok) {
+
+            if (
+                response.status === 401
+            ) {
+
+                showLogin();
+
+                return;
+            }
+
+
+            throw new Error(
+                data?.error ||
+                "Không lấy được server"
+            );
+        }
+
+
+        const guilds =
+            Array.isArray(data?.guilds)
+                ? data.guilds
+                : [];
+
+
+        if (guilds.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty">
+                    Không tìm thấy server nào
+                    mà bạn có quyền quản lý.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        container.innerHTML = "";
+
+
+        guilds.forEach(
+            guild => {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "guild";
+
+
+                const icon =
+                    document.createElement(
+                        "div"
+                    );
+
+                icon.className =
+                    "guild-icon";
+
+
+                if (guild.icon) {
+
+                    const img =
+                        document.createElement(
+                            "img"
+                        );
+
+                    img.src =
+                        guild.icon;
+
+                    img.alt =
+                        "";
+
+                    img.onerror =
+                        () => {
+                            img.remove();
+
+                            icon.textContent =
+                                "🏠";
+                        };
+
+                    icon.appendChild(
+                        img
+                    );
+
+                } else {
+
+                    icon.textContent =
+                        "🏠";
+                }
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.className =
+                    "guild-name";
+
+                name.textContent =
+                    guild.name ||
+                    "Server";
+
+
+                const status =
+                    document.createElement(
+                        "div"
+                    );
+
+                status.className =
+                    "guild-status";
+
+
+                if (
+                    guild.botInstalled
+                ) {
+
+                    status.textContent =
+                        "🟢 Bot đang ở server";
+
+                } else {
+
+                    status.textContent =
+                        "⚪ Bot chưa vào server";
+
+                    status.classList.add(
+                        "offline"
+                    );
+                }
+
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+                button.className =
+                    "manage-button";
+
+
+                if (
+                    guild.botInstalled
+                ) {
+
+                    button.textContent =
+                        "⚙️ Quản lý server";
+
+                    button.onclick =
+                        () => {
+
+                            openGuild(
+                                guild.id
+                            );
+
+                        };
+
+                } else {
+
+                    button.textContent =
+                        "Bot chưa ở server";
+
+                    button.disabled =
+                        true;
+                }
+
+
+                card.appendChild(
+                    icon
+                );
+
+                card.appendChild(
+                    name
+                );
+
+                card.appendChild(
+                    status
+                );
+
+                card.appendChild(
+                    button
+                );
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "❌ Load guilds:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty">
+                ❌ Không thể tải danh sách server.<br><br>
+                ${escapeHtml(
+                    error.message ||
+                    "Unknown error"
+                )}
+            </div>
+        `;
+    }
+
+}
+
+
+/* ============================================================
+   OPEN GUILD
+============================================================ */
+
+function openGuild(guildId) {
+
+    /*
+     * Hiện tại backend đã có API
+     *
+     * /api/guild/:guildId
+     *
+     * nên tạm lưu server đang chọn.
+     *
+     * Sau này phần Dashboard ticket
+     * sẽ dùng guildId này.
+     */
+
+    localStorage.setItem(
+        "selectedGuildId",
+        guildId
+    );
+
+
+    /*
+     * Chưa chuyển sang URL khác
+     * để tránh phá GitHub Pages routing.
+     *
+     * Khi phần quản lý ticket hoàn thiện,
+     * đây sẽ mở giao diện quản lý server.
+     */
+
+    alert(
+        "Đã chọn server.\nGuild ID: " +
+        guildId
+    );
+
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout() {
+
+    window.location.assign(
+        BACKEND_URL +
+        "/auth/logout"
+    );
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHtml(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        String(value ?? "");
+
+    return div.innerHTML;
+}
+
+
+/* ============================================================
+   OAUTH RESULT
+============================================================ */
+
+function handleOAuthResult() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const login =
+        params.get("login");
+
+
+    const error =
+        params.get("error");
+
+
+    /*
+     * OAuth callback thành công.
+     *
+     * KHÔNG redirect lại Discord.
+     *
+     * Chỉ xóa query và kiểm tra session.
+     */
+
+    if (
+        login === "success"
+    ) {
+
+        console.log(
+            "✅ OAuth callback thành công."
+        );
+
+
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+
+        return;
+    }
+
+
+    if (error) {
+
+        console.error(
+            "❌ OAuth error:",
+            error
+        );
+
+
+        errorBox.textContent =
+            "❌ Đăng nhập Discord thất bại: " +
+            error;
+
+
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+    }
+
+}
+
+
+/* ============================================================
+   START
+============================================================ */
+
+(async function start() {
+
+    handleOAuthResult();
+
+    await checkLogin();
+
+})();
+
+</script>
+
+</body>
+</html>
             "✅ OAuth login thành công"
         );
 
