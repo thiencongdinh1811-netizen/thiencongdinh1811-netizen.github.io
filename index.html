@@ -313,9 +313,16 @@ async function savePanel(p){
 async function deletePanel(id){if(!confirm("Xóa panel này và message panel trên Discord?"))return;try{await api(`/api/guild/${state.guildId}/panels/${id}`,{method:"DELETE"});toast("Đã xóa panel");navigate("panels")}catch(e){toast(e.message,"err")}}
 async function createTeam(){const n=prompt("Tên Team:");if(!n)return;try{await api(`/api/guild/${state.guildId}/teams`,{method:"POST",body:JSON.stringify({name:n})});toast("Đã tạo team");navigate("teams")}catch(e){toast(e.message,"err")}}
 async function deleteTeam(id){if(!confirm("Xóa team này?"))return;try{await api(`/api/guild/${state.guildId}/teams/${id}`,{method:"DELETE"});toast("Đã xóa team");navigate("teams")}catch(e){toast(e.message,"err")}}
-async function addRoleToTeam(teamId){const roles=state.cache.roles||(await api(`/api/guild/${state.guildId}/roles`)).roles||[];const name=prompt("Nhập Role ID:
-"+roles.slice(0,30).map(r=>`${r.name} = ${r.id}`).join("
-"));if(!name)return;try{await api(`/api/guild/${state.guildId}/teams/${teamId}/roles`,{method:"POST",body:JSON.stringify({roleId:name.trim()})});toast("Đã thêm role");navigate("teams")}catch(e){toast(e.message,"err")}}
+async function addRoleToTeam(teamId){
+  const roles=state.cache.roles||((await api(`/api/guild/${state.guildId}/roles`)).roles||[]);
+  const list=roles.slice(0,30).map(r=>`${r.name} = ${r.id}`).join("\n");
+  const name=prompt("Nhập Role ID:\n\n"+list);
+  if(!name)return;
+  try{
+    await api(`/api/guild/${state.guildId}/teams/${teamId}/roles`,{method:"POST",body:JSON.stringify({roleId:name.trim()})});
+    toast("Đã thêm role");navigate("teams");
+  }catch(e){toast(e.message,"err")}
+}
 async function addBlacklistUser(){const id=prompt("Discord User ID:");if(!id)return;try{await api(`/api/guild/${state.guildId}/blacklist/user`,{method:"POST",body:JSON.stringify({userId:id.trim()})});toast("Đã blacklist user");navigate("blacklist")}catch(e){toast(e.message,"err")}}
 async function addBlacklistRole(){const id=prompt("Discord Role ID:");if(!id)return;try{await api(`/api/guild/${state.guildId}/blacklist/role`,{method:"POST",body:JSON.stringify({roleId:id.trim()})});toast("Đã blacklist role");navigate("blacklist")}catch(e){toast(e.message,"err")}}
 async function removeBlacklist(kind,id){try{await api(`/api/guild/${state.guildId}/blacklist/${kind}/${id}`,{method:"DELETE"});toast("Đã gỡ blacklist");navigate("blacklist")}catch(e){toast(e.message,"err")}}
