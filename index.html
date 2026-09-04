@@ -9,74 +9,42 @@
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            min-height: 100vh;
             background:
-                radial-gradient(circle at top, #151936 0%, #0b0d14 45%, #08090d 100%);
+                radial-gradient(circle at top left, #151b3d 0%, transparent 40%),
+                radial-gradient(circle at bottom right, #101b38 0%, transparent 40%),
+                #080b12;
             color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .center {
             min-height: 100vh;
-        }
-
-        button {
-            font-family: inherit;
-        }
-
-        .loading-screen {
-            position: fixed;
-            inset: 0;
-            background: #090b10;
             display: flex;
-            align-items: center;
             justify-content: center;
-            z-index: 9999;
-        }
-
-        .loading-box {
-            text-align: center;
-        }
-
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 5px solid rgba(255,255,255,.15);
-            border-top-color: #5865f2;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: auto auto 18px;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .login-page {
-            min-height: 100vh;
-            display: none;
             align-items: center;
-            justify-content: center;
             padding: 20px;
         }
 
-        .login-card {
-            width: 100%;
-            max-width: 430px;
-            background: rgba(25, 27, 35, .96);
-            border: 1px solid #30333d;
-            border-radius: 18px;
+        .login-box {
+            width: 430px;
+            max-width: 100%;
             padding: 40px;
+            background: rgba(25, 28, 38, 0.95);
+            border: 1px solid #303544;
+            border-radius: 18px;
             text-align: center;
-            box-shadow: 0 25px 80px rgba(0,0,0,.45);
+            box-shadow: 0 20px 60px rgba(0,0,0,.45);
         }
 
         .logo {
             width: 82px;
             height: 82px;
+            margin: 0 auto 25px;
             border-radius: 50%;
             background: #5865f2;
             display: flex;
@@ -84,47 +52,37 @@
             justify-content: center;
             font-size: 42px;
             font-weight: bold;
-            margin: 0 auto 25px;
         }
 
-        .login-card h1 {
+        h1 {
+            margin: 0 0 12px;
             font-size: 28px;
-            margin-bottom: 12px;
         }
 
-        .login-card p {
-            color: #a7aab5;
+        p {
+            color: #aeb4c2;
             line-height: 1.6;
-            margin-bottom: 28px;
         }
 
-        .discord-login {
+        button {
             width: 100%;
+            margin-top: 20px;
+            padding: 15px;
             border: 0;
             border-radius: 9px;
-            padding: 15px;
             background: #5865f2;
             color: white;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: .2s;
         }
 
-        .discord-login:hover {
+        button:hover {
             background: #4752c4;
-            transform: translateY(-1px);
         }
 
-        .error {
-            display: none;
-            background: rgba(237, 66, 69, .12);
-            border: 1px solid rgba(237, 66, 69, .4);
-            color: #ff8588;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 18px;
-            font-size: 14px;
+        .loading {
+            color: #aeb4c2;
         }
 
         .dashboard {
@@ -132,123 +90,31 @@
             min-height: 100vh;
         }
 
-        .navbar {
+        .topbar {
             height: 70px;
-            border-bottom: 1px solid #272a34;
-            background: rgba(12, 14, 21, .95);
+            padding: 0 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 30px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: #111522;
+            border-bottom: 1px solid #292e3d;
         }
 
         .brand {
-            font-size: 20px;
+            font-size: 21px;
             font-weight: bold;
         }
 
-        .user-area {
+        .user {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
         .avatar {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            object-fit: cover;
-            background: #5865f2;
-        }
-
-        .logout {
-            border: 1px solid #343741;
-            background: #191b23;
-            color: #ddd;
-            padding: 9px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .container {
-            width: min(1150px, calc(100% - 30px));
-            margin: 40px auto;
-        }
-
-        .welcome {
-            margin-bottom: 30px;
-        }
-
-        .welcome h2 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .welcome p {
-            color: #9296a4;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .card {
-            background: #141720;
-            border: 1px solid #292d37;
-            border-radius: 14px;
-            padding: 24px;
-        }
-
-        .card-title {
-            color: #9296a4;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .card-value {
-            font-size: 25px;
-            font-weight: bold;
-        }
-
-        .servers {
-            margin-top: 25px;
-        }
-
-        .servers h3 {
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .server-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .server {
-            background: #141720;
-            border: 1px solid #292d37;
-            border-radius: 12px;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .server-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .server-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
             background: #5865f2;
             display: flex;
             align-items: center;
@@ -256,65 +122,86 @@
             font-weight: bold;
         }
 
-        .server-name {
-            font-weight: bold;
+        .content {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 25px;
         }
 
-        .server-id {
-            color: #777c89;
-            font-size: 12px;
-            margin-top: 4px;
+        .welcome {
+            background: #151927;
+            border: 1px solid #2b3040;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
         }
 
-        .manage {
-            border: 0;
+        .guild-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .guild {
+            background: #151927;
+            border: 1px solid #2b3040;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .guild-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
             background: #5865f2;
-            color: white;
-            border-radius: 8px;
-            padding: 10px 16px;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .guild-name {
+            font-size: 18px;
             font-weight: bold;
+            margin-bottom: 8px;
         }
 
-        .manage:hover {
-            background: #4752c4;
+        .status {
+            color: #55d17a;
+            font-size: 14px;
         }
 
-        @media (max-width: 750px) {
-            .cards {
-                grid-template-columns: 1fr;
-            }
+        .logout {
+            width: auto;
+            margin: 0;
+            padding: 9px 15px;
+            background: #ed4245;
+            font-size: 14px;
+        }
 
-            .navbar {
-                padding: 0 15px;
-            }
+        .logout:hover {
+            background: #c93639;
+        }
 
-            .username {
-                display: none;
-            }
-
-            .login-card {
-                padding: 30px 22px;
-            }
+        .error {
+            color: #ff6b6b;
+            margin-top: 15px;
         }
     </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div class="loading-screen" id="loadingScreen">
-    <div class="loading-box">
-        <div class="loader"></div>
-        <div>Đang kiểm tra đăng nhập...</div>
-    </div>
-</div>
+<!-- ================= LOGIN ================= -->
 
-<!-- LOGIN -->
-<section class="login-page" id="loginPage">
-    <div class="login-card">
+<div id="loginPage" class="center">
 
-        <div class="logo">B</div>
+    <div class="login-box">
+
+        <div class="logo">
+            B
+        </div>
 
         <h1>Bot Manager</h1>
 
@@ -323,300 +210,158 @@
             và cấu hình các server mà bot đang tham gia.
         </p>
 
-        <div class="error" id="loginError"></div>
-
-        <button class="discord-login" id="loginButton">
+        <button onclick="loginDiscord()">
             🎮 Đăng nhập bằng Discord
         </button>
 
+        <div id="error" class="error"></div>
+
     </div>
-</section>
 
-<!-- DASHBOARD -->
-<section class="dashboard" id="dashboard">
+</div>
 
-    <nav class="navbar">
+
+<!-- ================= DASHBOARD ================= -->
+
+<div id="dashboard" class="dashboard">
+
+    <div class="topbar">
 
         <div class="brand">
             🤖 Bot Manager
         </div>
 
-        <div class="user-area">
+        <div class="user">
 
-            <img
-                id="userAvatar"
-                class="avatar"
-                src=""
-                alt="Avatar"
-            >
-
-            <span
-                id="username"
-                class="username"
-            >
+            <div id="username">
                 Đang tải...
-            </span>
+            </div>
+
+            <div id="avatar" class="avatar">
+                U
+            </div>
 
             <button
                 class="logout"
-                id="logoutButton"
-            >
+                onclick="logout()">
                 Đăng xuất
             </button>
 
         </div>
 
-    </nav>
+    </div>
 
-    <main class="container">
+
+    <div class="content">
 
         <div class="welcome">
+
             <h2>
                 Xin chào, <span id="welcomeName">User</span> 👋
             </h2>
 
             <p>
-                Quản lý bot Discord của bạn tại đây.
+                Đây là trang quản lý bot Discord của mày.
             </p>
-        </div>
-
-        <div class="cards">
-
-            <div class="card">
-                <div class="card-title">
-                    Trạng thái Bot
-                </div>
-
-                <div
-                    class="card-value"
-                    id="botStatus"
-                >
-                    Đang tải...
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">
-                    Số Server
-                </div>
-
-                <div
-                    class="card-value"
-                    id="serverCount"
-                >
-                    0
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">
-                    Tài khoản Discord
-                </div>
-
-                <div
-                    class="card-value"
-                    id="discordId"
-                >
-                    -
-                </div>
-            </div>
 
         </div>
 
-        <div class="servers">
 
-            <h3>
-                Server của bạn
-            </h3>
+        <h2>
+            Server của bạn
+        </h2>
 
-            <div
-                class="server-list"
-                id="serverList"
-            >
-                <div class="card">
-                    Đang tải danh sách server...
-                </div>
-            </div>
+        <div id="guilds"
+             class="guild-grid">
+
+            <p class="loading">
+                Đang tải danh sách server...
+            </p>
 
         </div>
 
-    </main>
+    </div>
 
-</section>
+</div>
+
 
 <script>
 
-/*
-==================================================
- CẤU HÌNH
-==================================================
-*/
-
-const BACKEND = "https://imcongthienzz.freesrv.com";
-
-/*
- Không dùng localhost.
- Không dùng 78.154.103.31:13031 trong trình duyệt.
- Domain freesrv sẽ chuyển request tới server Wispbyte.
-*/
+const BACKEND_URL =
+    "https://imcongthienzz.freesrv.com";
 
 
-/*
-==================================================
- DOM
-==================================================
-*/
+// =====================================================
+// ĐĂNG NHẬP DISCORD
+// =====================================================
 
-const loadingScreen = document.getElementById("loadingScreen");
-const loginPage = document.getElementById("loginPage");
-const dashboard = document.getElementById("dashboard");
-
-const loginButton = document.getElementById("loginButton");
-const logoutButton = document.getElementById("logoutButton");
-
-const loginError = document.getElementById("loginError");
-
-const username = document.getElementById("username");
-const welcomeName = document.getElementById("welcomeName");
-const userAvatar = document.getElementById("userAvatar");
-
-const botStatus = document.getElementById("botStatus");
-const serverCount = document.getElementById("serverCount");
-const discordId = document.getElementById("discordId");
-
-const serverList = document.getElementById("serverList");
-
-
-/*
-==================================================
- HIỂN THỊ TRANG
-==================================================
-*/
-
-function showLogin() {
-
-    loadingScreen.style.display = "none";
-    dashboard.style.display = "none";
-    loginPage.style.display = "flex";
-
-}
-
-
-function showDashboard() {
-
-    loadingScreen.style.display = "none";
-    loginPage.style.display = "none";
-    dashboard.style.display = "block";
-
-}
-
-
-/*
-==================================================
- LỖI
-==================================================
-*/
-
-function showError(message) {
-
-    loginError.textContent = message;
-    loginError.style.display = "block";
-
-}
-
-
-/*
-==================================================
- LOGIN DISCORD
-==================================================
-*/
-
-loginButton.addEventListener("click", () => {
-
-    /*
-     Quan trọng:
-
-     Không gửi thẳng tới Discord OAuth2 từ GitHub Pages.
-
-     GitHub Pages -> Wispbyte -> Discord
-    */
+function loginDiscord() {
 
     window.location.href =
-        BACKEND + "/auth/discord";
+        BACKEND_URL + "/auth/discord";
 
-});
+}
 
 
-/*
-==================================================
- KIỂM TRA ĐĂNG NHẬP
-==================================================
-*/
+// =====================================================
+// KIỂM TRA ĐĂNG NHẬP
+// =====================================================
 
 async function checkLogin() {
 
     try {
 
-        /*
-         credentials: include rất quan trọng
-         vì session được lưu ở backend.
-        */
+        const response =
+            await fetch(
+                BACKEND_URL + "/api/me",
+                {
+                    method: "GET",
 
-        const response = await fetch(
-            BACKEND + "/api/me",
-            {
-                method: "GET",
-                credentials: "include",
-                headers: {
-                    "Accept": "application/json"
+                    credentials: "include",
+
+                    cache: "no-store"
                 }
-            }
-        );
+            );
 
 
         if (!response.ok) {
 
             showLogin();
-            return;
 
+            return;
         }
 
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
 
-        if (!data || !data.user) {
+        if (!data.loggedIn) {
 
             showLogin();
-            return;
 
+            return;
         }
 
 
-        /*
-         Đã đăng nhập
-        */
-
-        localStorage.setItem(
-            "discord_logged_in",
-            "true"
+        console.log(
+            "✅ Đã đăng nhập:",
+            data.user
         );
 
 
-        displayUser(data.user);
+        showDashboard(
+            data.user
+        );
 
 
-        await loadDashboard(data);
+        loadGuilds();
 
 
-        showDashboard();
-
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Lỗi kiểm tra đăng nhập:",
+            "❌ Không kiểm tra được đăng nhập:",
             error
         );
 
@@ -627,273 +372,239 @@ async function checkLogin() {
 }
 
 
-/*
-==================================================
- HIỂN THỊ USER
-==================================================
-*/
+// =====================================================
+// HIỆN LOGIN
+// =====================================================
 
-function displayUser(user) {
+function showLogin() {
+
+    document.getElementById(
+        "loginPage"
+    ).style.display = "flex";
+
+
+    document.getElementById(
+        "dashboard"
+    ).style.display = "none";
+
+}
+
+
+// =====================================================
+// HIỆN DASHBOARD
+// =====================================================
+
+function showDashboard(user) {
+
+    document.getElementById(
+        "loginPage"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "dashboard"
+    ).style.display = "block";
+
 
     const name =
         user.global_name ||
         user.username ||
-        "Discord User";
+        "User";
 
 
-    username.textContent = name;
-    welcomeName.textContent = name;
+    document.getElementById(
+        "username"
+    ).textContent = name;
 
 
-    if (user.id) {
-
-        discordId.textContent = user.id;
-
-    }
+    document.getElementById(
+        "welcomeName"
+    ).textContent = name;
 
 
-    /*
-     Discord avatar
-    */
+    const avatar =
+        document.getElementById("avatar");
+
 
     if (user.avatar) {
 
-        userAvatar.src =
-            `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
+        avatar.style.backgroundImage =
+            `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128)`;
 
-    }
-    else {
+        avatar.style.backgroundSize =
+            "cover";
 
-        userAvatar.src =
-            `https://cdn.discordapp.com/embed/avatars/0.png`;
+        avatar.textContent = "";
+
+    } else {
+
+        avatar.textContent =
+            name.charAt(0).toUpperCase();
 
     }
 
 }
 
 
-/*
-==================================================
- LOAD DASHBOARD
-==================================================
-*/
+// =====================================================
+// LOAD SERVER
+// =====================================================
 
-async function loadDashboard(data) {
+async function loadGuilds() {
+
+    const container =
+        document.getElementById("guilds");
+
 
     try {
 
-        /*
-         Nếu backend trả về bot
-        */
-
-        if (data.bot) {
-
-            if (data.bot.online) {
-
-                botStatus.textContent =
-                    "🟢 Online";
-
-            }
-            else {
-
-                botStatus.textContent =
-                    "🔴 Offline";
-
-            }
-
-        }
-        else {
-
-            /*
-             Bot đang chạy theo console của bạn.
-            */
-
-            botStatus.textContent =
-                "🟢 Online";
-
-        }
-
-
-        /*
-         Server
-        */
-
-        let servers = [];
-
-
-        if (Array.isArray(data.servers)) {
-
-            servers = data.servers;
-
-        }
-
-
-        serverCount.textContent =
-            servers.length;
-
-
-        renderServers(servers);
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Dashboard error:",
-            error
-        );
-
-    }
-
-}
-
-
-/*
-==================================================
- HIỂN THỊ SERVER
-==================================================
-*/
-
-function renderServers(servers) {
-
-    if (!servers.length) {
-
-        serverList.innerHTML = `
-            <div class="card">
-                <div class="card-title">
-                    Không có dữ liệu server.
-                </div>
-
-                <div style="color:#777c89;margin-top:8px;">
-                    Backend chưa trả về danh sách server.
-                </div>
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    serverList.innerHTML = "";
-
-
-    servers.forEach(server => {
-
-        const div =
-            document.createElement("div");
-
-
-        div.className = "server";
-
-
-        div.innerHTML = `
-
-            <div class="server-left">
-
-                <div class="server-icon">
-                    ${escapeHtml(
-                        (server.name || "S")
-                            .charAt(0)
-                            .toUpperCase()
-                    )}
-                </div>
-
-                <div>
-
-                    <div class="server-name">
-                        ${escapeHtml(
-                            server.name || "Server"
-                        )}
-                    </div>
-
-                    <div class="server-id">
-                        ${escapeHtml(
-                            server.id || ""
-                        )}
-                    </div>
-
-                </div>
-
-            </div>
-
-            <button class="manage">
-                Quản lý
-            </button>
-
-        `;
-
-
-        serverList.appendChild(div);
-
-    });
-
-}
-
-
-/*
-==================================================
- ESCAPE HTML
-==================================================
-*/
-
-function escapeHtml(value) {
-
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-}
-
-
-/*
-==================================================
- LOGOUT
-==================================================
-*/
-
-logoutButton.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
+        const response =
             await fetch(
-                BACKEND + "/auth/logout",
+                BACKEND_URL + "/api/guilds",
                 {
-                    method: "GET",
-                    credentials: "include"
+                    credentials: "include",
+                    cache: "no-store"
                 }
             );
 
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Không lấy được server"
+            );
+
         }
-        catch (error) {
 
-            console.error(error);
 
+        const data =
+            await response.json();
+
+
+        container.innerHTML = "";
+
+
+        if (
+            !data.guilds ||
+            data.guilds.length === 0
+        ) {
+
+            container.innerHTML = `
+                <p>
+                    Không tìm thấy server nào
+                    mà bạn có quyền quản lý.
+                </p>
+            `;
+
+            return;
         }
 
 
-        localStorage.removeItem(
-            "discord_logged_in"
-        );
+        data.guilds.forEach(guild => {
+
+            const card =
+                document.createElement("div");
 
 
-        window.location.href = "/";
+            card.className =
+                "guild";
+
+
+            card.innerHTML = `
+
+                <div class="guild-icon">
+
+                    ${
+                        guild.icon
+                        ? `<img
+                            src="${guild.icon}"
+                            style="
+                                width:55px;
+                                height:55px;
+                                border-radius:15px;
+                            "
+                        >`
+                        : "🏠"
+                    }
+
+                </div>
+
+
+                <div class="guild-name">
+
+                    ${escapeHtml(guild.name)}
+
+                </div>
+
+
+                <div class="status">
+
+                    ${
+                        guild.botInstalled
+                        ? "🟢 Bot đang ở server"
+                        : "⚪ Bot chưa vào server"
+                    }
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        container.innerHTML = `
+            <p class="error">
+                ❌ Không thể tải danh sách server.
+            </p>
+        `;
+
     }
-);
+
+}
 
 
-/*
-==================================================
- XỬ LÝ CALLBACK
-==================================================
-*/
+// =====================================================
+// LOGOUT
+// =====================================================
 
-function handleCallback() {
+function logout() {
+
+    window.location.href =
+        BACKEND_URL + "/auth/logout";
+
+}
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+// =====================================================
+// XỬ LÝ URL SAU OAUTH
+// =====================================================
+
+function cleanOAuthUrl() {
 
     const params =
         new URLSearchParams(
@@ -901,21 +612,17 @@ function handleCallback() {
         );
 
 
-    const login =
-        params.get("login");
+    if (
+        params.get("login") ===
+        "success"
+    ) {
 
+        console.log(
+            "✅ OAuth login thành công"
+        );
 
-    /*
-     Backend hiện tại đang redirect kiểu:
-
-     https://thiencongdinh1811-netizen.github.io/?login=success
-    */
-
-    if (login === "success") {
-
-        /*
-         Xóa ?login=success khỏi URL
-         */
+        // Xóa ?login=success
+        // khỏi thanh địa chỉ
 
         window.history.replaceState(
             {},
@@ -926,30 +633,30 @@ function handleCallback() {
     }
 
 
-    if (login === "error") {
+    const error =
+        params.get("error");
 
-        showError(
-            "Đăng nhập Discord thất bại."
-        );
+
+    if (error) {
+
+        document.getElementById(
+            "error"
+        ).textContent =
+            "❌ Đăng nhập Discord thất bại: " +
+            error;
 
     }
 
 }
 
 
-/*
-==================================================
- START
-==================================================
-*/
+// =====================================================
+// START
+// =====================================================
 
-(async function () {
+cleanOAuthUrl();
 
-    handleCallback();
-
-    await checkLogin();
-
-})();
+checkLogin();
 
 </script>
 
