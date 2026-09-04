@@ -1,720 +1,4748 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#070914">
-<title>Im Congthienzz Network</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tickets | Bảng điều khiển</title>
+
 <style>
-:root{
-  --bg:#05060d;--panel:#0b0e1b;--panel2:#101426;--line:#ffffff14;
-  --text:#f6f7ff;--muted:#9299b3;--purple:#765cff;--purple2:#a78bfa;
-  --cyan:#38d9ff;--green:#48e6a0;--red:#ff5f7a;--yellow:#ffd166;
-  --shadow:0 25px 90px #0009;--r:20px
+* {
+    box-sizing: border-box;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;color:var(--text);background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;overflow-x:hidden}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
-a{text-decoration:none;color:inherit}
-.hidden{display:none!important}
-body:before{
- content:"";position:fixed;inset:-25%;z-index:-5;
- background:
- radial-gradient(circle at 15% 12%,#765cff35,transparent 26%),
- radial-gradient(circle at 86% 20%,#b04cff20,transparent 25%),
- radial-gradient(circle at 48% 90%,#22d8ff14,transparent 32%),
- linear-gradient(135deg,#090a1b,#03040a 60%,#0a0612);
- animation:bgMove 16s ease-in-out infinite alternate
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b1425;
+    color: #fff;
 }
-body:after{
- content:"";position:fixed;inset:0;z-index:-4;opacity:.16;
- background-image:radial-gradient(#fff 1px,transparent 1px);
- background-size:95px 95px;animation:stars 35s linear infinite
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
 }
-@keyframes bgMove{to{transform:scale(1.06) translate3d(1%,-1%,0)}}
-@keyframes stars{to{background-position:0 95px}}
-@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pulse{50%{box-shadow:0 0 0 10px #48e6a000}}
-@keyframes float{50%{transform:translateY(-8px)}}
-@keyframes glow{50%{filter:drop-shadow(0 0 20px #765cff66)}}
 
-.loaderScreen{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#05060df5;transition:.45s}
-.loaderScreen.hide{opacity:0;pointer-events:none}
-.loaderBox{text-align:center}.loaderRing{width:58px;height:58px;margin:auto;border:4px solid #ffffff10;border-top-color:var(--purple);border-right-color:var(--cyan);border-radius:50%;animation:spin .75s linear infinite}
-.loaderBox h3{margin:18px 0 6px}.loaderBox p{margin:0;color:var(--muted);font-size:13px}
+button {
+    cursor: pointer;
+}
 
-.topbar{height:76px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid var(--line);background:#05060dcc;backdrop-filter:blur(22px)}
-.brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-.4px}
-.brandMark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#7059ff,#bd7cff);box-shadow:0 12px 40px #765cff45;overflow:hidden}
-.brandMark img{width:100%;height:100%;object-fit:cover}
-.navlinks{display:flex;gap:4px;align-items:center}
-.navlinks button,.navUser{border:0;background:transparent;color:#aeb4ca;padding:11px 14px;border-radius:12px;font-weight:800;transition:.2s}
-.navlinks button:hover,.navUser:hover{background:#ffffff09;color:#fff;transform:translateY(-1px)}
-.navUser{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:#ffffff06}
-.navUser img{width:36px;height:36px;border-radius:50%;object-fit:cover}.navUser span{max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hidden {
+    display: none !important;
+}
 
-#landing{display:block}
-.hero{min-height:690px;display:grid;place-items:center;text-align:center;padding:75px 20px}
-.heroInner{max-width:1000px;animation:rise .8s ease both}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border:1px solid #765cff55;background:#11142aaa;border-radius:999px;color:#c9c3ff;font-size:13px;font-weight:900}
-.dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-.hero h1{font-size:clamp(55px,9vw,118px);line-height:.9;letter-spacing:-6px;margin:32px 0 25px;background:linear-gradient(100deg,#fff 5%,#8876ff 45%,#e3d7ff 80%,#fff);background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 8s linear infinite}
-@keyframes shimmer{to{background-position:220% center}}
-.hero h1 span{display:block;color:#fff;-webkit-text-fill-color:#fff}
-.hero p{max-width:780px;margin:auto;color:var(--muted);font-size:18px;line-height:1.75}
-.actions{display:flex;justify-content:center;gap:11px;flex-wrap:wrap;margin-top:28px}
-.btn{border:1px solid var(--line);border-radius:13px;padding:12px 17px;font-weight:900;color:#fff;background:#ffffff08;transition:.22s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 15px 35px #0005}
-.btn.primary{border-color:#765cff66;background:linear-gradient(135deg,#765cff,#936eff);box-shadow:0 14px 35px #765cff28}
-.btn.invite{border-color:#39d9ff45;background:linear-gradient(135deg,#11677a,#1b9cba)}
-.btn.secondary{background:#ffffff06}
-.section{padding:75px 5%;max-width:1400px;margin:auto}
-.sectionHead{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}
-.sectionTitle{font-size:32px;font-weight:950;letter-spacing:-1px}.sectionSub{color:var(--muted);margin-top:6px}
-.featureGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.feature{position:relative;overflow:hidden;padding:24px;border:1px solid var(--line);background:#ffffff05;border-radius:var(--r);box-shadow:var(--shadow);transition:.3s}
-.feature:before{content:"";position:absolute;inset:-80px auto auto -70px;width:180px;height:180px;background:#765cff20;filter:blur(50px)}
-.feature:hover{transform:translateY(-7px);border-color:#765cff44}
-.featureIcon{font-size:32px;position:relative}.feature h3{position:relative;margin:17px 0 8px}.feature p{position:relative;color:var(--muted);line-height:1.65;margin:0}
+/* =========================================================
+   LOGIN
+========================================================= */
 
-#app{display:none;min-height:calc(100vh - 76px)}
-.appLayout{display:grid;grid-template-columns:245px 1fr;min-height:calc(100vh - 76px)}
-.sidebar{border-right:1px solid var(--line);background:#080a13cc;padding:22px 13px;position:sticky;top:76px;height:calc(100vh - 76px);overflow:auto}
-.sideLabel{font-size:10px;text-transform:uppercase;letter-spacing:1.6px;color:#666e86;font-weight:950;padding:10px 12px 7px}
-.sideBtn{width:100%;border:1px solid transparent;background:transparent;color:#aab1c7;border-radius:13px;padding:11px 12px;display:flex;align-items:center;gap:11px;text-align:left;font-weight:800;margin:2px 0;transition:.2s}
-.sideBtn:hover{background:#ffffff07;color:#fff;transform:translateX(2px)}
-.sideBtn.active{color:#fff;background:linear-gradient(90deg,#765cff22,#765cff08);border-color:#765cff30;box-shadow:inset 3px 0 var(--purple)}
-.sideIcon{width:24px;text-align:center;font-size:16px}
-.appMain{padding:30px 4%;min-width:0}
-.appTop{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:26px}
-.crumb{font-size:13px;color:#8f97b0;font-weight:800}.serverSelect{min-width:260px;max-width:360px;border:1px solid var(--line);background:#0b0e1a;color:#fff;padding:11px 13px;border-radius:12px;outline:0}
-.serverSelect:focus{border-color:#765cff66}
-.page{animation:rise .35s ease both}.pageTitle{font-size:31px;font-weight:950;letter-spacing:-1px}.pageDesc{color:var(--muted);margin:7px 0 22px}
-.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:17px}
-.stat,.panel{border:1px solid var(--line);background:linear-gradient(145deg,#0e1221e8,#090c17e8);border-radius:var(--r);box-shadow:var(--shadow)}
-.stat{padding:20px;position:relative;overflow:hidden}.stat:after{content:"";position:absolute;width:90px;height:90px;right:-35px;top:-35px;background:#765cff18;filter:blur(20px);border-radius:50%}
-.label{font-size:12px;color:#838ca6;font-weight:850}.num{font-size:28px;font-weight:950;margin-top:9px}
-.panel{padding:20px;margin-bottom:15px}.panelHead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}.panel h3{margin:0;font-size:17px}.muted{color:var(--muted)}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
-.btnSmall{border:1px solid var(--line);background:#ffffff07;color:#e8eaff;padding:9px 12px;border-radius:10px;font-weight:800;transition:.2s}.btnSmall:hover{background:#ffffff0d;transform:translateY(-1px)}.btnSmall.danger{color:#ff91a4;border-color:#ff607d2e;background:#ff607d0b}
-.tag{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;border:1px solid var(--line);background:#ffffff06;font-size:12px;font-weight:850}.tag.green{color:#72efb5;border-color:#45e69b35;background:#45e69b09}.tag.red{color:#ff91a4;border-color:#ff607d35;background:#ff607d09}
-.tableWrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.table th{color:#7e879f;font-size:11px;text-transform:uppercase;letter-spacing:.6px}.table code{font-size:11px;color:#bfc5d8}
-.empty{text-align:center;padding:38px;color:#777f97}
-.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#aab1c5;font-weight:850}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#070914;color:#fff;border-radius:11px;padding:11px 12px;outline:0}.field textarea{min-height:110px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#765cff70;box-shadow:0 0 0 3px #765cff10}.colorRow{display:flex;gap:10px}.colorRow input[type=color]{width:58px;height:44px;padding:3px}
-.notice{padding:13px 15px;border:1px solid #ffd16630;background:#ffd16609;border-radius:12px;color:#d7dbe7;line-height:1.55;margin-bottom:15px}
-.loginState{padding:70px 20px;text-align:center}.spinner{width:45px;height:45px;margin:auto;border:4px solid #ffffff10;border-top-color:var(--purple);border-radius:50%;animation:spin .75s linear infinite}
-.modalBack{position:fixed;inset:0;z-index:1000;background:#000b;backdrop-filter:blur(10px);display:grid;place-items:center;padding:18px}.modal{width:min(740px,100%);max-height:90vh;overflow:auto;background:#0b0e1b;border:1px solid #ffffff1a;border-radius:22px;padding:23px;box-shadow:var(--shadow);animation:rise .25s ease}.modal h2{margin:0 0 20px}.modalActions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}
-.toastBox{position:fixed;right:20px;bottom:20px;z-index:2000;width:min(380px,calc(100% - 40px));display:flex;flex-direction:column;gap:9px}.toast{padding:14px 16px;border:1px solid var(--line);background:#0d1120ee;backdrop-filter:blur(18px);border-radius:14px;box-shadow:var(--shadow);animation:rise .25s ease}.toast.ok{border-color:#45e69b40}.toast.err{border-color:#ff607d40}
-footer{text-align:center;border-top:1px solid var(--line);padding:34px;color:#697189;font-size:12px}
-@media(max-width:1050px){.appLayout{grid-template-columns:78px 1fr}.sideBtn{justify-content:center}.sideBtn span:not(.sideIcon),.sideLabel{display:none}.cards4{grid-template-columns:repeat(2,1fr)}.featureGrid{grid-template-columns:1fr 1fr}}
-@media(max-width:700px){.topbar{padding:0 15px}.navlinks{display:none}.brand{font-size:14px}.brandMark{width:40px;height:40px}.appLayout{display:block}.sidebar{height:auto;position:sticky;top:76px;z-index:80;display:flex;overflow:auto;padding:8px;border-right:0;border-bottom:1px solid var(--line)}.sideBtn{min-width:52px;width:auto;margin:0}.sideBtn span:not(.sideIcon),.sideLabel{display:none}.appMain{padding:20px 14px}.appTop{align-items:stretch;flex-direction:column}.serverSelect{max-width:none;width:100%}.cards4,.featureGrid,.formGrid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero{min-height:610px}.hero h1{letter-spacing:-4px}.section{padding:55px 16px}.navUser span{display:none}}
+#loginPage {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(44, 91, 180, .18),
+            transparent 40%
+        ),
+        #09111f;
+}
+
+.login-box {
+    width: 430px;
+    max-width: 100%;
+    padding: 40px;
+    border-radius: 18px;
+    background: #182232;
+    border: 1px solid #344258;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    text-align: center;
+}
+
+.login-logo {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: #5865f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.login-box h1 {
+    margin: 0 0 18px;
+    font-size: 34px;
+}
+
+.login-box p {
+    color: #b9c4d5;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.discord-login {
+    width: 100%;
+    border: 0;
+    padding: 14px 20px;
+    border-radius: 7px;
+    background: #5865f2;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.discord-login:hover {
+    background: #4752c4;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    background: #172438;
+    border-right: 1px solid #29384d;
+    z-index: 50;
+}
+
+.sidebar-logo {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #29384d;
+    font-size: 27px;
+}
+
+.side-btn {
+    width: 100%;
+    height: 64px;
+    border: 0;
+    background: transparent;
+    color: #8d9ab0;
+    font-size: 22px;
+    border-left: 3px solid transparent;
+}
+
+.side-btn:hover {
+    background: #203149;
+    color: white;
+}
+
+.side-btn.active {
+    background: #203149;
+    color: white;
+    border-left-color: #2f7df6;
+}
+
+.main {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+    height: 80px;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #111d30;
+    border-bottom: 1px solid #26364c;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+}
+
+.server-select {
+    min-width: 280px;
+    padding: 11px 15px;
+    background: #3a4c65;
+    border: 1px solid #566983;
+    color: white;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: 600;
+}
+
+.logout-btn {
+    border: 0;
+    background: transparent;
+    color: #ff7777;
+    margin-left: 15px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+    padding: 28px;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.page-title {
+    margin-bottom: 28px;
+}
+
+.page-title h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.page-title p {
+    margin: 0;
+    color: #94a4ba;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card {
+    background: #203149;
+    border: 1px solid #2d4059;
+    border-radius: 13px;
+    margin-bottom: 22px;
+    overflow: hidden;
+}
+
+.card-header {
+    min-height: 65px;
+    padding: 17px 20px;
+    border-bottom: 1px solid #30435d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn {
+    border: 0;
+    border-radius: 7px;
+    padding: 11px 17px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #2f72ed;
+}
+
+.btn-primary:hover {
+    background: #2563d5;
+}
+
+.btn-secondary {
+    background: #52627a;
+}
+
+.btn-danger {
+    background: #dc4545;
+}
+
+.btn-success {
+    background: #2da66c;
+}
+
+.btn-small {
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+/* =========================================================
+   PANEL EMPTY
+========================================================= */
+
+.empty {
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #c1ccda;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 52px;
+    opacity: .55;
+    margin-bottom: 15px;
+}
+
+.empty h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.empty p {
+    margin: 0;
+    color: #95a5ba;
+}
+
+/* =========================================================
+   PANEL LIST
+========================================================= */
+
+.panel-item {
+    padding: 18px;
+    border: 1px solid #344963;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: #1a2a40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.panel-info h3 {
+    margin: 0 0 7px;
+}
+
+.panel-info p {
+    margin: 0;
+    color: #9eafc4;
+}
+
+.panel-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.modal-backdrop.show {
+    display: flex;
+}
+
+.modal {
+    width: 1100px;
+    max-width: 100%;
+    max-height: 94vh;
+    overflow-y: auto;
+    background: #182538;
+    border: 1px solid #3b4e68;
+    border-radius: 14px;
+    box-shadow: 0 25px 80px rgba(0,0,0,.5);
+}
+
+.modal-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid #30445e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.close-modal {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 6px;
+    background: #2b3a50;
+    color: white;
+    font-size: 20px;
+}
+
+.modal-content {
+    padding: 22px;
+}
+
+.modal-footer {
+    padding: 17px 22px;
+    border-top: 1px solid #30445e;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* =========================================================
+   CREATE PANEL LAYOUT
+========================================================= */
+
+.create-grid {
+    display: grid;
+    grid-template-columns: 1fr 430px;
+    gap: 25px;
+}
+
+@media(max-width: 900px) {
+    .create-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #d9e1ec;
+}
+
+.form-control {
+    width: 100%;
+    padding: 11px 13px;
+    border-radius: 7px;
+    border: 1px solid #40546e;
+    background: #101b2b;
+    color: white;
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: #377df2;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+@media(max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   COLOR
+========================================================= */
+
+.color-row {
+    display: flex;
+    gap: 10px;
+}
+
+.color-picker {
+    width: 55px;
+    height: 42px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+}
+
+/* =========================================================
+   TICKET PREVIEW
+========================================================= */
+
+.preview-container {
+    background: #0f1827;
+    border: 1px solid #344962;
+    border-radius: 12px;
+    padding: 17px;
+}
+
+.preview-title {
+    color: #9dacbf;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 13px;
+    text-transform: uppercase;
+}
+
+.discord-preview {
+    background: #313338;
+    border-radius: 8px;
+    padding: 18px;
+    min-height: 270px;
+}
+
+.discord-message {
+    display: flex;
+    gap: 12px;
+}
+
+.discord-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #5865f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.discord-message-body {
+    width: 100%;
+}
+
+.discord-username {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.discord-bot-tag {
+    font-size: 10px;
+    background: #5865f2;
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin-left: 4px;
+}
+
+.discord-time {
+    color: #949ba4;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.ticket-embed {
+    margin-top: 7px;
+    border-left: 4px solid #5865f2;
+    background: #2b2d31;
+    border-radius: 4px;
+    padding: 14px;
+}
+
+.ticket-embed-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+
+.ticket-embed-description {
+    color: #dbdee1;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.ticket-footer {
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #44474c;
+    color: #949ba4;
+    font-size: 11px;
+}
+
+.ticket-button {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 0;
+    border-radius: 4px;
+    padding: 9px 15px;
+    color: white;
+    font-weight: 700;
+    background: #5865f2;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 13px;
+    border-bottom: 1px solid #34475f;
+}
+
+th {
+    color: #aebdd0;
+    font-size: 13px;
+}
+
+td {
+    font-size: 14px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+#toastContainer {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 300;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 420px;
+    margin-top: 10px;
+    padding: 14px 17px;
+    border-radius: 8px;
+    background: #202d40;
+    border: 1px solid #40536c;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.toast.success {
+    border-left: 4px solid #2ecc71;
+}
+
+.toast.error {
+    border-left: 4px solid #e74c3c;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
+    position: fixed;
+    inset: 0;
+    background: #09111f;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid #33435a;
+    border-top-color: #5865f2;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================================================
+   PAGES
+========================================================= */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+@media(max-width: 900px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stat {
+    background: #203149;
+    border: 1px solid #2f435d;
+    border-radius: 11px;
+    padding: 20px;
+}
+
+.stat-label {
+    color: #9aabc0;
+    font-size: 13px;
+}
+
+.stat-value {
+    margin-top: 8px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width: 700px) {
+
+    .sidebar {
+        width: 60px;
+    }
+
+    .main {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .topbar {
+        padding: 0 12px;
+    }
+
+    .server-select {
+        min-width: 160px;
+        max-width: 190px;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .panel-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .panel-actions {
+        width: 100%;
+    }
+}
 </style>
 </head>
+
 <body>
 
-<div class="loaderScreen" id="boot">
-  <div class="loaderBox"><div class="loaderRing"></div><h3>Im Congthienzz</h3><p>Đang kiểm tra phiên đăng nhập...</p></div>
+<!-- =======================================================
+     LOADING
+======================================================= -->
+
+<div id="loading" class="loading">
+    <div class="spinner"></div>
+    <div>Đang tải Dashboard...</div>
 </div>
 
-<header class="topbar">
-  <a class="brand" href="#" onclick="showHome();return false">
-    <span class="brandMark" id="brandMark">IC</span><span>Im Congthienzz</span>
-  </a>
-  <div class="navlinks">
-    <button type="button" onclick="showHome()">Trang chủ</button>
-    <button type="button" onclick="scrollFeatures()">Chức năng</button>
-    <button type="button" onclick="goDashboard()">Dashboard</button>
-    <button type="button" onclick="openInvite()">Mời Bot</button>
-  </div>
-  <button type="button" class="navUser hidden" id="navUser" onclick="goDashboard()">
-    <img id="navAvatar" alt=""><span id="navName">Discord User</span>
-  </button>
-</header>
+<!-- =======================================================
+     LOGIN
+======================================================= -->
 
-<main id="landing">
-  <section class="hero">
-    <div class="heroInner">
-      <div class="eyebrow"><i class="dot"></i> HỆ THỐNG ĐANG HOẠT ĐỘNG</div>
-      <h1>Im Congthienzz<span>Network</span></h1>
-      <p>Dashboard Discord hiện đại với Ticket, Server, Panels, Teams, Blacklist, Transcripts, Logs, Welcome / Goodbye và Bot Manager.</p>
-      <div class="actions">
-        <button type="button" class="btn primary" id="loginBtn" onclick="login()">🎮 Đăng nhập Discord</button>
-        <button type="button" class="btn invite" onclick="openInvite()">🤖 Mời Bot vào Server</button>
-        <button type="button" class="btn secondary" onclick="scrollFeatures()">Khám phá hệ thống</button>
-      </div>
-    </div>
-  </section>
-  <section class="section" id="features">
-    <div class="sectionHead"><div><div class="sectionTitle">Mọi thứ ở một nơi</div><div class="sectionSub">Các chức năng được nối trực tiếp với backend hiện tại.</div></div></div>
-    <div class="featureGrid">
-      <article class="feature"><div class="featureIcon">🎫</div><h3>Ticket System</h3><p>Quản lý ticket đang mở và các Ticket Panel.</p></article>
-      <article class="feature"><div class="featureIcon">🛡️</div><h3>Server Manager</h3><p>Thiết lập category, role và transcript channel.</p></article>
-      <article class="feature"><div class="featureIcon">👥</div><h3>Teams</h3><p>Tạo team và gắn role Discord.</p></article>
-      <article class="feature"><div class="featureIcon">🚫</div><h3>Blacklist</h3><p>Quản lý user và role bị chặn.</p></article>
-      <article class="feature"><div class="featureIcon">📄</div><h3>Transcripts</h3><p>Xem lịch sử transcript ticket.</p></article>
-      <article class="feature"><div class="featureIcon">🤖</div><h3>Bot Manager</h3><p>Kiểm tra trạng thái bot và mời bot vào server.</p></article>
-    </div>
-  </section>
-</main>
+<section id="loginPage" class="hidden">
 
-<section id="app">
-  <div class="appLayout">
-    <aside class="sidebar">
-      <div class="sideLabel">Dashboard</div>
-      <button type="button" class="sideBtn active" data-page="overview" onclick="navigate('overview')"><span class="sideIcon">⌂</span><span>Tổng quan</span></button>
-      <button type="button" class="sideBtn" data-page="tickets" onclick="navigate('tickets')"><span class="sideIcon">🎫</span><span>Ticket</span></button>
-      <button type="button" class="sideBtn" data-page="server" onclick="navigate('server')"><span class="sideIcon">🛡️</span><span>Server</span></button>
-      <button type="button" class="sideBtn" data-page="panels" onclick="navigate('panels')"><span class="sideIcon">📨</span><span>Panels</span></button>
-      <button type="button" class="sideBtn" data-page="teams" onclick="navigate('teams')"><span class="sideIcon">👥</span><span>Teams</span></button>
-      <button type="button" class="sideBtn" data-page="blacklist" onclick="navigate('blacklist')"><span class="sideIcon">🚫</span><span>Blacklist</span></button>
-      <button type="button" class="sideBtn" data-page="transcripts" onclick="navigate('transcripts')"><span class="sideIcon">📄</span><span>Transcripts</span></button>
-      <button type="button" class="sideBtn" data-page="logs" onclick="navigate('logs')"><span class="sideIcon">📋</span><span>Logs</span></button>
-      <button type="button" class="sideBtn" data-page="welcome" onclick="navigate('welcome')"><span class="sideIcon">👋</span><span>Welcome / Goodbye</span></button>
-      <button type="button" class="sideBtn" data-page="bot" onclick="navigate('bot')"><span class="sideIcon">🤖</span><span>Bot Manager</span></button>
-      <button type="button" class="sideBtn" data-page="settings" onclick="navigate('settings')"><span class="sideIcon">⚙️</span><span>Settings</span></button>
-      <div class="sideLabel">Account</div>
-      <button type="button" class="sideBtn" onclick="logout()"><span class="sideIcon">↪</span><span>Đăng xuất</span></button>
-    </aside>
-    <main class="appMain">
-      <div class="appTop">
-        <div class="crumb" id="crumb">Dashboard / Tổng quan</div>
-        <select class="serverSelect" id="serverSelect" onchange="selectGuild(this.value)">
-          <option value="">Đang tải server...</option>
-        </select>
-      </div>
-      <div id="pageRoot"></div>
-    </main>
-  </div>
+    <div class="login-box">
+
+        <div class="login-logo">
+            🎟️
+        </div>
+
+        <h1>Tickets</h1>
+
+        <p>
+            Đăng nhập bằng Discord để quản lý server,
+            ticket, transcript, panel và hệ thống hỗ trợ.
+        </p>
+
+        <button
+            class="discord-login"
+            id="discordLoginBtn"
+            type="button"
+        >
+            🎮 Đăng nhập bằng Discord
+        </button>
+
+    </div>
+
 </section>
 
-<footer>© 2026 Im Congthienzz Network · Discord Dashboard</footer>
-<div class="toastBox" id="toastBox"></div>
-<div id="modalRoot"></div>
+<!-- =======================================================
+     APP
+======================================================= -->
+
+<div id="app" class="hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            🎟️
+        </div>
+
+        <button
+            class="side-btn active"
+            data-page="dashboard"
+            title="Dashboard"
+        >
+            📊
+        </button>
+
+        <button
+            class="side-btn"
+            data-page="tickets"
+            title="Tickets"
+        >
+            🎫
+        </button>
+
+        <button
+            class="side-btn"
+            data-page="transcripts"
+            title="Transcripts"
+        >
+            📜
+        </button>
+
+        <button
+            class="side-btn"
+            data-page="panels"
+            title="Panels"
+        >
+            ▣
+        </button>
+
+        <button
+            class="side-btn"
+            data-page="teams"
+            title="Teams"
+        >
+            👥
+        </button>
+
+        <button
+            class="side-btn"
+            data-page="blacklist"
+            title="Blacklist"
+        >
+            ⛔
+        </button>
+
+        <button
+            class="side-btn"
+            data-page="audit"
+            title="Audit Log"
+        >
+            ↩
+        </button>
+
+        <button
+            class="side-btn"
+            data-page="settings"
+            title="Settings"
+        >
+            ⚙️
+        </button>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <select
+                id="guildSelect"
+                class="server-select"
+            >
+                <option>Đang tải server...</option>
+            </select>
+
+            <div class="user-area">
+
+                <img
+                    id="userAvatar"
+                    class="user-avatar"
+                    src="https://cdn.discordapp.com/embed/avatars/0.png"
+                    alt=""
+                >
+
+                <span
+                    id="userName"
+                    class="user-name"
+                >
+                    User
+                </span>
+
+                <button
+                    id="logoutBtn"
+                    class="logout-btn"
+                    type="button"
+                >
+                    Đăng xuất
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+            <!-- DASHBOARD -->
+
+            <section
+                id="page-dashboard"
+                class="page active"
+            >
+
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                    <p>
+                        Quản lý hệ thống Ticket của server.
+                    </p>
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat">
+                        <div class="stat-label">
+                            Thành viên
+                        </div>
+                        <div
+                            id="statMembers"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-label">
+                            Channels
+                        </div>
+                        <div
+                            id="statChannels"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-label">
+                            Tickets đang mở
+                        </div>
+                        <div
+                            id="statTickets"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-label">
+                            Panels
+                        </div>
+                        <div
+                            id="statPanels"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+                    </div>
+
+                </div>
+
+                <div
+                    class="card"
+                    style="margin-top:22px"
+                >
+
+                    <div class="card-header">
+                        <h2>Thiết lập nhanh</h2>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p>
+                            Tạo hệ thống Ticket tự động cho server.
+                        </p>
+
+                        <button
+                            id="setupBtn"
+                            class="btn btn-primary"
+                            type="button"
+                        >
+                            ⚙️ Thiết lập Ticket
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- TICKETS -->
+
+            <section
+                id="page-tickets"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h1>Tickets</h1>
+                    <p>Danh sách Ticket đang mở.</p>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h2>Ticket đang mở</h2>
+                        <button
+                            class="btn btn-secondary btn-small"
+                            onclick="loadTickets()"
+                        >
+                            🔄 Làm mới
+                        </button>
+                    </div>
+
+                    <div
+                        id="ticketsList"
+                        class="card-body"
+                    >
+                        Đang tải...
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- TRANSCRIPTS -->
+
+            <section
+                id="page-transcripts"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h1>Transcripts</h1>
+                    <p>Lịch sử các Ticket đã đóng.</p>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h2>Transcript</h2>
+                        <button
+                            class="btn btn-secondary btn-small"
+                            onclick="loadTranscripts()"
+                        >
+                            🔄 Làm mới
+                        </button>
+                    </div>
+
+                    <div
+                        id="transcriptsList"
+                        class="card-body"
+                    >
+                        Đang tải...
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- PANELS -->
+
+            <section
+                id="page-panels"
+                class="page"
+            >
+
+                <div class="page-title">
+
+                    <h1>Panels</h1>
+
+                    <p>
+                        Quản lý toàn bộ Panel và gửi Panel trực tiếp vào Discord.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>Panels</h2>
+
+                        <div
+                            style="
+                                display:flex;
+                                gap:8px;
+                            "
+                        >
+
+                            <button
+                                class="btn btn-secondary"
+                                type="button"
+                                onclick="showPanelLibrary()"
+                            >
+                                🌐 Thư viện
+                            </button>
+
+                            <button
+                                class="btn btn-primary"
+                                type="button"
+                                onclick="openCreatePanel()"
+                            >
+                                ＋ Tạo Panel
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="panelsList"
+                        class="card-body"
+                    >
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>Multi-Panels</h2>
+
+                        <button
+                            class="btn btn-primary"
+                            type="button"
+                            onclick="openCreatePanel()"
+                        >
+                            ＋ Tạo Multi-Panel
+                        </button>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <p style="color:#9eafc4">
+                            Bạn có thể tạo nhiều Panel Ticket
+                            trong các kênh khác nhau.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- TEAMS -->
+
+            <section
+                id="page-teams"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h1>Teams</h1>
+                    <p>Quản lý nhóm hỗ trợ Ticket.</p>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h2>Teams</h2>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="createTeam()"
+                            type="button"
+                        >
+                            ＋ Tạo Team
+                        </button>
+                    </div>
+
+                    <div
+                        id="teamsList"
+                        class="card-body"
+                    >
+                        Đang tải...
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- BLACKLIST -->
+
+            <section
+                id="page-blacklist"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h1>Blacklist</h1>
+                    <p>
+                        Chặn User hoặc Role mở Ticket.
+                    </p>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h2>Blacklist</h2>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-row">
+
+                            <div>
+
+                                <h3>Chặn User</h3>
+
+                                <input
+                                    id="blacklistUserId"
+                                    class="form-control"
+                                    placeholder="Discord User ID"
+                                >
+
+                                <button
+                                    class="btn btn-danger"
+                                    style="margin-top:10px"
+                                    onclick="addBlacklistUser()"
+                                >
+                                    Chặn User
+                                </button>
+
+                            </div>
+
+                            <div>
+
+                                <h3>Chặn Role</h3>
+
+                                <select
+                                    id="blacklistRoleId"
+                                    class="form-control"
+                                >
+                                </select>
+
+                                <button
+                                    class="btn btn-danger"
+                                    style="margin-top:10px"
+                                    onclick="addBlacklistRole()"
+                                >
+                                    Chặn Role
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="blacklistList"
+                            style="margin-top:30px"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- AUDIT -->
+
+            <section
+                id="page-audit"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h1>Audit Log</h1>
+                    <p>Lịch sử thao tác trên Dashboard.</p>
+                </div>
+
+                <div class="card">
+
+                    <div
+                        id="auditList"
+                        class="card-body"
+                    >
+                        Đang tải...
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- SETTINGS -->
+
+            <section
+                id="page-settings"
+                class="page"
+            >
+
+                <div class="page-title">
+                    <h1>Settings</h1>
+                    <p>Cấu hình hệ thống Ticket.</p>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h2>Thông tin Setup</h2>
+                    </div>
+
+                    <div
+                        id="settingsContent"
+                        class="card-body"
+                    >
+                        Đang tải...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- =======================================================
+     CREATE PANEL MODAL
+======================================================= -->
+
+<div
+    id="panelModal"
+    class="modal-backdrop"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2 id="panelModalTitle">
+                Tạo Panel Ticket
+            </h2>
+
+            <button
+                class="close-modal"
+                onclick="closePanelModal()"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-content">
+
+            <div class="create-grid">
+
+                <!-- FORM -->
+
+                <div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Tên Panel
+                        </label>
+
+                        <input
+                            id="panelName"
+                            class="form-control"
+                            value="Ticket Panel"
+                            placeholder="Tên Panel"
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Kênh gửi Panel
+                        </label>
+
+                        <select
+                            id="panelChannel"
+                            class="form-control"
+                        >
+                            <option value="">
+                                Chọn kênh...
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Tiêu đề
+                        </label>
+
+                        <input
+                            id="panelTitle"
+                            class="form-control"
+                            value="Mở Ticket"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Nội dung
+                        </label>
+
+                        <textarea
+                            id="panelDescription"
+                            class="form-control"
+                            oninput="updatePreview()"
+                        >Nhấn nút bên dưới để mở ticket.</textarea>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Màu Panel
+                            </label>
+
+                            <div class="color-row">
+
+                                <input
+                                    id="panelColorPicker"
+                                    class="color-picker"
+                                    type="color"
+                                    value="#5865F2"
+                                    oninput="updatePreview()"
+                                >
+
+                                <input
+                                    id="panelColor"
+                                    class="form-control"
+                                    value="#5865F2"
+                                    oninput="updatePreview()"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Footer
+                            </label>
+
+                            <input
+                                id="panelFooter"
+                                class="form-control"
+                                value="Hỗ trợ Ticket"
+                                oninput="updatePreview()"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Chữ nút
+                            </label>
+
+                            <input
+                                id="panelButtonLabel"
+                                class="form-control"
+                                value="Mở Ticket"
+                                oninput="updatePreview()"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Emoji nút
+                            </label>
+
+                            <input
+                                id="panelButtonEmoji"
+                                class="form-control"
+                                value="🎫"
+                                oninput="updatePreview()"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Màu nút
+                            </label>
+
+                            <select
+                                id="panelButtonStyle"
+                                class="form-control"
+                                onchange="updatePreview()"
+                            >
+
+                                <option value="Primary">
+                                    Xanh Discord
+                                </option>
+
+                                <option value="Success">
+                                    Xanh lá
+                                </option>
+
+                                <option value="Danger">
+                                    Đỏ
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Trạng thái
+                            </label>
+
+                            <select
+                                id="panelStatus"
+                                class="form-control"
+                                onchange="updatePreview()"
+                            >
+
+                                <option value="24/7">
+                                    24/7
+                                </option>
+
+                                <option value="Online">
+                                    Online
+                                </option>
+
+                                <option value="Offline">
+                                    Offline
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Category Ticket
+                            </label>
+
+                            <select
+                                id="panelCategory"
+                                class="form-control"
+                            >
+                                <option value="">
+                                    Mặc định
+                                </option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Support Role
+                            </label>
+
+                            <select
+                                id="panelSupportRole"
+                                class="form-control"
+                            >
+                                <option value="">
+                                    Mặc định
+                                </option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PREVIEW -->
+
+                <div>
+
+                    <div class="preview-container">
+
+                        <div class="preview-title">
+                            👁️ Xem trước mẫu Ticket
+                        </div>
+
+                        <div class="discord-preview">
+
+                            <div class="discord-message">
+
+                                <div class="discord-avatar">
+                                    🤖
+                                </div>
+
+                                <div class="discord-message-body">
+
+                                    <div class="discord-username">
+
+                                        Tickets
+
+                                        <span class="discord-bot-tag">
+                                            BOT
+                                        </span>
+
+                                        <span class="discord-time">
+                                            Hôm nay lúc 18:00
+                                        </span>
+
+                                    </div>
+
+                                    <div
+                                        id="previewEmbed"
+                                        class="ticket-embed"
+                                    >
+
+                                        <div
+                                            id="previewTitle"
+                                            class="ticket-embed-title"
+                                        >
+                                            Mở Ticket
+                                        </div>
+
+                                        <div
+                                            id="previewDescription"
+                                            class="ticket-embed-description"
+                                        >
+                                            Nhấn nút bên dưới để mở ticket.
+                                        </div>
+
+                                        <div
+                                            id="previewFooter"
+                                            class="ticket-footer"
+                                        >
+                                            Hỗ trợ Ticket
+                                        </div>
+
+                                    </div>
+
+                                    <button
+                                        id="previewButton"
+                                        class="ticket-button"
+                                        type="button"
+                                    >
+                                        🎫 Mở Ticket
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        style="
+                            margin-top:14px;
+                            color:#91a1b6;
+                            font-size:13px;
+                            line-height:1.5;
+                        "
+                    >
+                        Đây là bản xem trước gần giống
+                        Panel mà Bot sẽ gửi vào Discord.
+                        Thay đổi bên trái sẽ cập nhật
+                        ngay tại đây.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="closePanelModal()"
+                type="button"
+            >
+                Hủy
+            </button>
+
+            <button
+                id="savePanelBtn"
+                class="btn btn-primary"
+                onclick="savePanel()"
+                type="button"
+            >
+                🚀 Tạo Panel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =======================================================
+     TRANSCRIPT MODAL
+======================================================= -->
+
+<div
+    id="transcriptModal"
+    class="modal-backdrop"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                📜 Transcript
+            </h2>
+
+            <button
+                class="close-modal"
+                onclick="closeTranscriptModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="transcriptContent"
+            class="modal-content"
+        >
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div id="toastContainer"></div>
 
 <script>
-"use strict";
 
-const CLIENT_ID="1532642645862518874";
-const BACKEND_URL=(location.hostname.endsWith("github.io")
-  ?"https://imcongthienzz.freesrv.com"
-  :location.origin).replace(/\/$/,"");
-const FRONTEND_URL=location.origin+location.pathname;
-const INVITE_URL="https://discord.com/oauth2/authorize?client_id=1532642645862518874&permissions=8&integration_type=0&scope=applications.commands+bot";
+/* =========================================================
+   CONFIG
+========================================================= */
 
-const SESSION_KEY="im_congthienzz_dashboard_session";
-const USER_KEY="im_congthienzz_dashboard_user";
-const GUILD_KEY="im_congthienzz_selected_guild";
-const PAGE_KEY="im_congthienzz_dashboard_page";
-const WELCOME_KEY="im_congthienzz_welcome_config";
-const AVATAR="https://cdn.discordapp.com/embed/avatars/0.png";
+const BACKEND_URL =
+    "https://imcongthienzz.freesrv.com"
+        .replace(/\/$/, "");
 
-const state={session:null,user:null,guilds:[],guildId:null,page:localStorage.getItem(PAGE_KEY)||"overview",cache:{},loading:false};
+/*
+    QUAN TRỌNG
 
-const $=id=>document.getElementById(id);
-const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-const formatDate=x=>{if(!x)return"—";try{return new Date(x).toLocaleString("vi-VN")}catch{return String(x)}};
-const selectedGuild=()=>state.guilds.find(g=>g.id===state.guildId);
+    Frontend GitHub Pages và Backend Wispbyte
+    khác domain.
 
-function toast(message,type="ok"){
-  const d=document.createElement("div");d.className="toast "+(type==="err"?"err":"ok");d.textContent=message;
-  $("toastBox").appendChild(d);setTimeout(()=>d.remove(),3600);
-}
-function scrollFeatures(){const el=$("features");if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}
-function openInvite(){
-  const w=window.open(INVITE_URL,"_blank","noopener,noreferrer");
-  if(!w)location.href=INVITE_URL;
-}
+    Tất cả fetch API phải có:
+    credentials: "include"
+*/
 
-/* =========================
-   SESSION / OAUTH
-========================= */
+let currentUser = null;
+let guilds = [];
+let currentGuildId = null;
+let currentGuild = null;
+let editingPanelId = null;
 
-function saveSession(){
-  if(state.session)localStorage.setItem(SESSION_KEY,state.session);
-  if(state.user)localStorage.setItem(USER_KEY,JSON.stringify(state.user));
-}
-function clearSession(){
-  localStorage.removeItem(SESSION_KEY);
-  localStorage.removeItem(USER_KEY);
-  localStorage.removeItem(GUILD_KEY);
-  localStorage.removeItem(PAGE_KEY);
-  state.session=null;state.user=null;state.guilds=[];state.guildId=null;state.cache={};
-}
-function showHome(){
-  $("landing").style.display="block";$("app").style.display="none";
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function showDashboard(){
-  $("landing").style.display="none";$("app").style.display="block";
-}
-function goDashboard(){
-  if(state.session){showDashboard();navigate(state.page||"overview")}
-  else login();
-}
-function login(){
-  if(state.loading)return;
-  state.loading=true;
-  $("loginBtn").disabled=true;
-  window.location.assign(BACKEND_URL+"/auth/discord");
-}
-function authHeaders(){
-  return state.session
-    ? {"Authorization":"Bearer "+state.session,"Content-Type":"application/json"}
-    : {"Content-Type":"application/json"};
-}
-async function api(path,options={}){
-  const opts={credentials:"include",...options,headers:{...authHeaders(),...(options.headers||{})}};
-  let r;
-  try{r=await fetch(BACKEND_URL+path,opts)}
-  catch(e){throw new Error("Không kết nối được backend: "+e.message)}
-  let data={};
-  try{data=await r.json()}catch{data={error:"Backend trả về dữ liệu không hợp lệ."}}
-  if(r.status===401){
-    clearSession();showHome();
-    throw new Error("Phiên đăng nhập không hợp lệ hoặc đã hết hạn.");
-  }
-  if(!r.ok)throw new Error(data.error||"API request thất bại.");
-  return data;
-}
-function avatarUrl(u){
-  if(u?.avatarUrl)return u.avatarUrl;
-  if(u?.id&&u?.avatar)return `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`;
-  if(u?.id){
-    try{return `https://cdn.discordapp.com/embed/avatars/${Number(BigInt(u.id)%5n)}.png`}catch{}
-  }
-  return AVATAR;
-}
-function setUser(u){
-  state.user=u||null;
-  if(!u)return;
-  const av=avatarUrl(u);
-  $("navAvatar").src=av;
-  $("navName").textContent=u.global_name||u.username||"Discord User";
-  $("navUser").classList.remove("hidden");
-  $("brandMark").innerHTML=`<img src="${av}" alt="">`;
-  saveSession();
-}
+/* =========================================================
+   API
+========================================================= */
 
-/* =========================
-   IMPORTANT OAUTH FIX
-   Backend returns #oauth_session=...
-   The session is ALSO in HttpOnly cookie.
-   Store the opaque session id so API calls can
-   use Bearer and work from GitHub Pages.
-========================= */
+async function api(
+    endpoint,
+    options = {}
+) {
 
-async function init(){
-  try{
-    const hash=new URLSearchParams(location.hash.replace(/^#/,""));
-    const oauthSession=hash.get("oauth_session");
-    const oldAuth=hash.get("auth");
-    const oauthError=new URLSearchParams(location.search).get("oauth_error");
+    const config = {
+        credentials: "include",
+        ...options,
+        headers: {
+            "Content-Type": "application/json",
+            ...(options.headers || {})
+        }
+    };
 
-    if(oauthSession){
-      state.session=oauthSession;
-      localStorage.setItem(SESSION_KEY,oauthSession);
-      history.replaceState(null,document.title,location.pathname);
-    }else if(oldAuth){
-      /* Compatibility with an older frontend/backend response. */
-      state.session=oldAuth;
-      localStorage.setItem(SESSION_KEY,oldAuth);
-      history.replaceState(null,document.title,location.pathname);
-    }else{
-      state.session=localStorage.getItem(SESSION_KEY);
+    const response =
+        await fetch(
+            BACKEND_URL + endpoint,
+            config
+        );
+
+    let data = null;
+
+    try {
+        data = await response.json();
+    } catch {
+        data = {};
     }
 
-    if(oauthError){
-      history.replaceState(null,document.title,location.pathname);
-      toast("Đăng nhập Discord thất bại: "+oauthError,"err");
+    if (!response.ok) {
+
+        throw new Error(
+            data.error ||
+            `HTTP ${response.status}`
+        );
     }
 
-    if(!state.session){
-      showHome();
-      return;
+    return data;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(
+    message,
+    type = "success"
+) {
+
+    const container =
+        document.getElementById(
+            "toastContainer"
+        );
+
+    const item =
+        document.createElement(
+            "div"
+        );
+
+    item.className =
+        `toast ${type}`;
+
+    item.textContent =
+        message;
+
+    container.appendChild(
+        item
+    );
+
+    setTimeout(
+        () => item.remove(),
+        4500
+    );
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function loginDiscord() {
+
+    /*
+        Không dùng fetch.
+        Không dùng localStorage.
+
+        Trình duyệt đi thẳng tới Backend.
+        Backend redirect sang Discord.
+        Discord callback về Backend.
+        Backend set HttpOnly cookie.
+        Backend redirect về GitHub Pages.
+    */
+
+    window.location.href =
+        BACKEND_URL +
+        "/auth/discord";
+}
+
+document
+    .getElementById(
+        "discordLoginBtn"
+    )
+    .addEventListener(
+        "click",
+        loginDiscord
+    );
+
+/* =========================================================
+   CHECK LOGIN
+========================================================= */
+
+async function checkLogin() {
+
+    try {
+
+        const data =
+            await api(
+                "/api/me"
+            );
+
+        if (
+            !data ||
+            !data.loggedIn
+        ) {
+            showLogin();
+            return false;
+        }
+
+        currentUser =
+            data.user;
+
+        showApp();
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "CHECK LOGIN:",
+            error
+        );
+
+        showLogin();
+
+        return false;
+    }
+}
+
+/* =========================================================
+   SHOW LOGIN
+========================================================= */
+
+function showLogin() {
+
+    document
+        .getElementById(
+            "loading"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "app"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "loginPage"
+        )
+        .classList.remove(
+            "hidden"
+        );
+}
+
+/* =========================================================
+   SHOW APP
+========================================================= */
+
+async function showApp() {
+
+    document
+        .getElementById(
+            "loginPage"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "app"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "loading"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    if (currentUser) {
+
+        document
+            .getElementById(
+                "userName"
+            )
+            .textContent =
+            currentUser.global_name ||
+            currentUser.username;
+
+        document
+            .getElementById(
+                "userAvatar"
+            )
+            .src =
+            currentUser.avatarUrl;
     }
 
-    const me=await api("/api/me");
-    setUser(me.user);
-
-    const gs=await api("/api/guilds");
-    state.guilds=Array.isArray(gs)?gs:(gs.guilds||[]);
-
-    const savedGuild=localStorage.getItem(GUILD_KEY);
-    state.guildId=(savedGuild&&state.guilds.some(g=>g.id===savedGuild))
-      ?savedGuild:(state.guilds[0]?.id||"");
-
-    renderGuildSelect();
-
-    if(state.guildId)await loadGuildBase();
-
-    showDashboard();
-    await navigate(state.page||"overview",true);
-  }catch(e){
-    console.error(e);
-    clearSession();
-    showHome();
-    toast(e.message||"Không thể khôi phục đăng nhập.","err");
-  }finally{
-    state.loading=false;
-    $("loginBtn").disabled=false;
-    setTimeout(()=>$("boot").classList.add("hide"),120);
-  }
+    await loadGuilds();
 }
 
-function logout(){
-  const session=state.session;
-  clearSession();showHome();
-  if(session){
-    fetch(BACKEND_URL+"/api/logout",{
-      method:"POST",credentials:"include",
-      headers:{"Authorization":"Bearer "+session,"Content-Type":"application/json"}
-    }).catch(()=>{});
-  }
-  $("navUser").classList.add("hidden");
-  $("brandMark").textContent="IC";
-  toast("Đã đăng xuất");
+/* =========================================================
+   GUILDS
+========================================================= */
+
+async function loadGuilds() {
+
+    try {
+
+        const data =
+            await api(
+                "/api/guilds"
+            );
+
+        guilds =
+            Array.isArray(
+                data.guilds
+            )
+                ? data.guilds
+                : [];
+
+        const select =
+            document
+                .getElementById(
+                    "guildSelect"
+                );
+
+        select.innerHTML = "";
+
+        if (!guilds.length) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.textContent =
+                "Không có server quản lý";
+
+            select.appendChild(
+                option
+            );
+
+            return;
+        }
+
+        guilds.forEach(
+            guild => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    guild.id;
+
+                option.textContent =
+                    guild.name;
+
+                select.appendChild(
+                    option
+                );
+            }
+        );
+
+        const hash =
+            location.hash;
+
+        const match =
+            hash.match(
+                /#manage\/([^/]+)/
+            );
+
+        if (
+            match &&
+            guilds.some(
+                g =>
+                    g.id ===
+                    match[1]
+            )
+        ) {
+            currentGuildId =
+                match[1];
+        } else {
+
+            const installed =
+                guilds.find(
+                    g =>
+                        g.botInstalled
+                );
+
+            currentGuildId =
+                installed
+                    ? installed.id
+                    : guilds[0].id;
+        }
+
+        select.value =
+            currentGuildId;
+
+        await selectGuild();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
 }
 
-/* =========================
-   DASHBOARD
-========================= */
+/* =========================================================
+   SELECT GUILD
+========================================================= */
 
-function renderGuildSelect(){
-  const s=$("serverSelect");s.innerHTML="";
-  if(!state.guilds.length){
-    s.innerHTML="<option value=''>Không có server quản lý</option>";return;
-  }
-  state.guilds.forEach(g=>{
-    const o=document.createElement("option");
-    o.value=g.id;o.textContent=(g.botInstalled?"● ":"○ ")+g.name;
-    s.appendChild(o);
-  });
-  s.value=state.guildId||"";
-}
-async function selectGuild(id){
-  if(!id||state.loading)return;
-  state.loading=true;
-  try{
-    state.guildId=id;localStorage.setItem(GUILD_KEY,id);state.cache={};
-    await loadGuildBase();await navigate(state.page||"overview",true);
-  }catch(e){toast(e.message,"err")}
-  finally{state.loading=false}
-}
-async function loadGuildBase(){
-  if(!state.guildId)return;
-  try{state.cache.guild=(await api(`/api/guild/${encodeURIComponent(state.guildId)}`)).guild}
-  catch(e){throw e}
-}
-async function navigate(page,force=false){
-  if(!state.session){login();return}
-  if(!force&&state.loading)return;
-  state.page=page;localStorage.setItem(PAGE_KEY,page);
-  document.querySelectorAll(".sideBtn[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
-  const names={overview:"Tổng quan",tickets:"Ticket",server:"Server",panels:"Panels",teams:"Teams",blacklist:"Blacklist",transcripts:"Transcripts",logs:"Audit Logs",welcome:"Welcome / Goodbye",bot:"Bot Manager",settings:"Settings"};
-  $("crumb").textContent="Dashboard / "+(names[page]||page);
-  showDashboard();
-  const fn=pages[page]||pages.overview;
-  try{await fn()}catch(e){
-    $("pageRoot").innerHTML=`<div class="panel"><b>Không thể tải dữ liệu</b><p class="muted">${esc(e.message)}</p><button class="btnSmall" onclick="navigate('${esc(page)}',true)">↻ Thử lại</button></div>`;
-    toast(e.message,"err");
-  }
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function loadingPage(){
-  $("pageRoot").innerHTML='<div class="loginState"><div class="spinner"></div><p class="muted">Đang tải dữ liệu...</p></div>';
-}
-function guildRequired(){
-  if(!state.guildId){
-    $("pageRoot").innerHTML='<div class="panel empty">Hãy chọn một server Discord mà bạn có quyền quản lý.</div>';
-    return false;
-  }
-  return true;
-}
+document
+    .getElementById(
+        "guildSelect"
+    )
+    .addEventListener(
+        "change",
+        async function() {
 
-/* =========================
-   PAGES
-========================= */
+            currentGuildId =
+                this.value;
 
-const pages={
-overview:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const g=state.cache.guild||(await api(`/api/guild/${state.guildId}`)).guild;
-  state.cache.guild=g;
-  const [t,p,tr,teams,bl]=await Promise.all([
-    api(`/api/guild/${state.guildId}/tickets`),
-    api(`/api/guild/${state.guildId}/panels`),
-    api(`/api/guild/${state.guildId}/transcripts`),
-    api(`/api/guild/${state.guildId}/teams`),
-    api(`/api/guild/${state.guildId}/blacklist`)
-  ]);
-  $("pageRoot").innerHTML=`
-  <div class="page">
-    <div class="pageTitle">Xin chào, ${esc(state.user?.global_name||state.user?.username||"bạn")} 👋</div>
-    <div class="pageDesc">Quản lý <b>${esc(g.name)}</b> từ một nơi.</div>
-    <div class="cards4">
-      <div class="stat"><div class="label">Thành viên</div><div class="num">${g.memberCount??"—"}</div></div>
-      <div class="stat"><div class="label">Ticket đang mở</div><div class="num">${t.tickets?.length||0}</div></div>
-      <div class="stat"><div class="label">Ticket Panels</div><div class="num">${p.panels?.length||0}</div></div>
-      <div class="stat"><div class="label">Teams</div><div class="num">${teams.teams?.length||0}</div></div>
-    </div>
-    <div class="panel">
-      <div class="panelHead"><div><h3>${esc(g.name)}</h3><div class="muted">${g.channels||0} channels · ${g.roles||0} roles · ${tr.transcripts?.length||0} transcripts · ${bl.blacklist?.users?.length||0} blacklist user</div></div>
-      <span class="tag ${selectedGuild()?.botInstalled?"green":"red"}">${selectedGuild()?.botInstalled?"● Bot đã cài":"● Bot chưa cài"}</span></div>
-      <div class="toolbar">
-        <button class="btnSmall" onclick="navigate('server')">Quản lý Server</button>
-        <button class="btnSmall" onclick="navigate('panels')">Ticket Panels</button>
-        <button class="btnSmall" onclick="navigate('welcome')">Welcome / Goodbye</button>
-        <button class="btnSmall" onclick="openInvite()">🤖 Mời Bot</button>
-      </div>
-    </div>
-  </div>`;
-},
+            await selectGuild();
 
-tickets:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const d=await api(`/api/guild/${state.guildId}/tickets`),items=d.tickets||[];
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Ticket đang mở</div><div class="pageDesc">Danh sách ticket hiện tại của server.</div>
-  <div class="panel"><div class="panelHead"><h3>${items.length} ticket</h3><button class="btnSmall" onclick="navigate('tickets',true)">↻ Làm mới</button></div>
-  ${items.length?`<div class="tableWrap"><table class="table"><thead><tr><th>ID</th><th>User</th><th>Channel</th><th>Claimed</th><th>Tạo lúc</th></tr></thead><tbody>
-  ${items.map(x=>`<tr><td>#${esc(x.id)}</td><td>${esc(x.username||x.userId)}</td><td><code>${esc(x.channelId)}</code></td><td>${x.claimedById?esc(x.claimedById):"<span class='muted'>Chưa nhận</span>"}</td><td>${formatDate(x.createdAt)}</td></tr>`).join("")}
-  </tbody></table></div>`:'<div class="empty">Không có ticket đang mở.</div>'}</div></div>`;
-},
+            history.replaceState(
+                null,
+                "",
+                `#manage/${currentGuildId}/panels`
+            );
+        }
+    );
 
-server:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const g=state.cache.guild||(await api(`/api/guild/${state.guildId}`)).guild;
-  const [c,r]=await Promise.all([api(`/api/guild/${state.guildId}/channels`),api(`/api/guild/${state.guildId}/roles`)]);
-  state.cache.guild=g;state.cache.channels=c.channels||[];state.cache.roles=r.roles||[];
-  const s=g.setup||{};
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Server Manager</div><div class="pageDesc">Thiết lập hệ thống Ticket cho ${esc(g.name)}.</div>
-  <div class="notice">Nút Setup sẽ để backend tự tạo category, role và transcript channel theo cơ chế hiện tại.</div>
-  <div class="panel"><div class="panelHead"><div><h3>Cấu hình hiện tại</h3><div class="muted">Các ID đang được backend sử dụng.</div></div><button class="btn primary" onclick="runSetup()">⚡ Chạy Setup</button></div>
-  <div class="formGrid">
-    <div class="field"><label>Category ID</label><input value="${esc(s.categoryId||"Chưa thiết lập")}" readonly></div>
-    <div class="field"><label>Transcript Channel ID</label><input value="${esc(s.transcriptChannelId||"Chưa thiết lập")}" readonly></div>
-    <div class="field"><label>Admin Role ID</label><input value="${esc(s.adminRoleId||"Chưa thiết lập")}" readonly></div>
-    <div class="field"><label>Support Role ID</label><input value="${esc(s.supportRoleId||"Chưa thiết lập")}" readonly></div>
-  </div></div>
-  <div class="panel"><div class="panelHead"><h3>Channels</h3><span class="tag">${state.cache.channels.length}</span></div>
-  <div class="tableWrap"><table class="table"><thead><tr><th>Tên</th><th>ID</th><th>Type</th></tr></thead><tbody>
-  ${state.cache.channels.slice(0,100).map(x=>`<tr><td>#${esc(x.name)}</td><td><code>${esc(x.id)}</code></td><td>${esc(x.type)}</td></tr>`).join("")||'<tr><td colspan="3">Không có dữ liệu.</td></tr>'}
-  </tbody></table></div></div>
-  <div class="panel"><div class="panelHead"><h3>Roles</h3><span class="tag">${state.cache.roles.length}</span></div>
-  <div class="toolbar">${state.cache.roles.slice(0,80).map(x=>`<span class="tag">${esc(x.name)} · <code>${esc(x.id)}</code></span>`).join("")}</div></div>
-  </div>`;
-},
+async function selectGuild() {
 
-panels:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const [pd,cd]=await Promise.all([api(`/api/guild/${state.guildId}/panels`),api(`/api/guild/${state.guildId}/channels`)]);
-  state.cache.channels=cd.channels||[];const panels=pd.panels||[];
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Ticket Panels</div><div class="pageDesc">Tạo và chỉnh sửa panel Discord thật.</div>
-  <div class="toolbar"><button class="btn primary" onclick="openPanel()">＋ Tạo Panel</button><button class="btnSmall" onclick="navigate('panels',true)">↻ Làm mới</button></div>
-  <div class="panel" style="margin-top:15px">
-  ${panels.length?panels.map(p=>`
-    <div class="panel" style="margin:0 0 12px;background:#090c18">
-      <div class="panelHead"><div><h3>${esc(p.name||p.title||"Ticket Panel")}</h3><div class="muted">${esc(p.description||"")} · Channel: ${esc(p.channelId||"—")}</div></div>
-      <div class="toolbar"><button class="btnSmall" onclick='openPanel(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Sửa</button><button class="btnSmall danger" onclick="deletePanel('${esc(p.id)}')">Xóa</button></div></div>
-      <span class="tag">${esc(p.buttonEmoji||"🎫")} ${esc(p.buttonLabel||"Mở Ticket")} · ${esc(p.buttonStyle||"Primary")}</span>
-    </div>`).join(""):'<div class="empty">Chưa có panel. Bấm “Tạo Panel” để bắt đầu.</div>'}
-  </div></div>`;
-},
+    if (!currentGuildId) {
+        return;
+    }
 
-teams:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const [td,rd]=await Promise.all([api(`/api/guild/${state.guildId}/teams`),api(`/api/guild/${state.guildId}/roles`)]);
-  const teams=td.teams||[],roles=rd.roles||[];
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Teams</div><div class="pageDesc">Quản lý đội ngũ hỗ trợ và role Discord.</div>
-  <div class="toolbar"><button class="btn primary" onclick="createTeam()">＋ Tạo Team</button></div>
-  <div class="panel" style="margin-top:15px">${teams.map(t=>`
-    <div class="panel" style="margin:0 0 12px">
-      <div class="panelHead"><div><h3>${esc(t.name)}</h3><div class="muted">${t.roleIds?.length||0} role</div></div>
-      ${t.id!=="default"?`<button class="btnSmall danger" onclick="deleteTeam('${esc(t.id)}')">Xóa</button>`:"<span class='tag'>Default</span>"}</div>
-      <div class="toolbar">${(t.roleIds||[]).map(id=>{const r=roles.find(x=>x.id===id);return `<span class="tag">${esc(r?.name||id)}</span>`}).join("")||"<span class='muted'>Chưa có role</span>"}
-      <button class="btnSmall" onclick="addRoleToTeam('${esc(t.id)}')">＋ Thêm Role</button></div>
-    </div>`).join("")}</div></div>`;
-},
+    try {
 
-blacklist:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const d=(await api(`/api/guild/${state.guildId}/blacklist`)).blacklist||{users:[],roles:[]};
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Blacklist</div><div class="pageDesc">Quản lý user và role bị chặn.</div>
-  <div class="toolbar"><button class="btn primary" onclick="addBlacklistUser()">＋ Blacklist User</button><button class="btnSmall" onclick="addBlacklistRole()">＋ Blacklist Role</button></div>
-  <div class="panel" style="margin-top:15px"><div class="panelHead"><h3>Users</h3><span class="tag">${d.users?.length||0}</span></div>
-  ${d.users?.length?d.users.map(x=>`<div class="toolbar" style="margin-bottom:8px"><span class="tag">${esc(x)}</span><button class="btnSmall danger" onclick="removeBlacklist('user','${esc(x)}')">Gỡ</button></div>`).join(""):'<div class="empty">Chưa blacklist user.</div>'}</div>
-  <div class="panel"><div class="panelHead"><h3>Roles</h3><span class="tag">${d.roles?.length||0}</span></div>
-  ${d.roles?.length?d.roles.map(x=>`<div class="toolbar" style="margin-bottom:8px"><span class="tag">${esc(x)}</span><button class="btnSmall danger" onclick="removeBlacklist('role','${esc(x)}')">Gỡ</button></div>`).join(""):'<div class="empty">Chưa blacklist role.</div>'}</div></div>`;
-},
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}`
+            );
 
-transcripts:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const d=await api(`/api/guild/${state.guildId}/transcripts`),items=d.transcripts||[];
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Transcripts</div><div class="pageDesc">Lịch sử transcript ticket.</div>
-  <div class="panel"><div class="panelHead"><h3>${items.length} transcript</h3><button class="btnSmall" onclick="navigate('transcripts',true)">↻ Làm mới</button></div>
-  ${items.length?`<div class="tableWrap"><table class="table"><thead><tr><th>ID</th><th>Channel</th><th>User</th><th>Created</th><th></th></tr></thead><tbody>
-  ${items.map(x=>`<tr><td><code>${esc(x.id)}</code></td><td>${esc(x.channelName||x.channelId||"—")}</td><td>${esc(x.username||x.userId||"—")}</td><td>${formatDate(x.createdAt)}</td><td><button class="btnSmall" onclick="viewTranscript('${esc(x.id)}')">Xem</button></td></tr>`).join("")}
-  </tbody></table></div>`:'<div class="empty">Chưa có transcript.</div>'}</div></div>`;
-},
+        currentGuild =
+            data.guild;
 
-logs:async()=>{
-  loadingPage();if(!guildRequired())return;
-  const d=await api(`/api/guild/${state.guildId}/audit-log`),items=d.logs||[];
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Audit Logs</div><div class="pageDesc">Nhật ký hoạt động quản trị.</div>
-  <div class="panel"><div class="panelHead"><h3>${items.length} log</h3><button class="btnSmall" onclick="navigate('logs',true)">↻ Làm mới</button></div>
-  ${items.length?`<div class="tableWrap"><table class="table"><thead><tr><th>Thời gian</th><th>User</th><th>Action</th><th>Resource</th><th>Details</th></tr></thead><tbody>
-  ${items.map(x=>`<tr><td>${formatDate(x.timestamp)}</td><td>${esc(x.username||x.userId)}</td><td><span class="tag">${esc(x.action)}</span></td><td>${esc(x.resource)}</td><td><code>${esc(JSON.stringify(x.details||{}))}</code></td></tr>`).join("")}
-  </tbody></table></div>`:'<div class="empty">Chưa có log.</div>'}</div></div>`;
-},
+        await Promise.all([
+            loadPanels(),
+            loadTickets(),
+            loadTranscripts()
+        ]);
 
-welcome:()=>{
-  const saved=JSON.parse(localStorage.getItem(WELCOME_KEY)||"{}");
-  const c={welcomeEnabled:false,welcomeChannelId:"",welcomeMessage:"Chào mừng {user} đến với {server}! 🎉",goodbyeEnabled:false,goodbyeChannelId:"",goodbyeMessage:"{user} đã rời khỏi {server}. 👋",...saved};
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Welcome / Goodbye</div><div class="pageDesc">Khu vực cấu hình chuẩn bị cho chức năng Welcome và Goodbye.</div>
-  <div class="notice">Backend hiện tại chưa có API riêng cho Welcome / Goodbye, nên cấu hình được lưu trên trình duyệt.</div>
-  <div class="panel"><div class="panelHead"><h3>👋 Welcome</h3><label><input type="checkbox" id="welcomeEnabled" ${c.welcomeEnabled?"checked":""}> Bật</label></div>
-  <div class="formGrid"><div class="field"><label>Channel ID</label><input id="welcomeChannelId" value="${esc(c.welcomeChannelId)}" placeholder="ID channel"></div><div class="field full"><label>Nội dung</label><textarea id="welcomeMessage">${esc(c.welcomeMessage)}</textarea></div></div></div>
-  <div class="panel"><div class="panelHead"><h3>🚪 Goodbye</h3><label><input type="checkbox" id="goodbyeEnabled" ${c.goodbyeEnabled?"checked":""}> Bật</label></div>
-  <div class="formGrid"><div class="field"><label>Channel ID</label><input id="goodbyeChannelId" value="${esc(c.goodbyeChannelId)}" placeholder="ID channel"></div><div class="field full"><label>Nội dung</label><textarea id="goodbyeMessage">${esc(c.goodbyeMessage)}</textarea></div></div></div>
-  <button class="btn primary" onclick="saveWelcome()">💾 Lưu cấu hình</button></div>`;
-},
+        updateStats();
 
-bot:async()=>{
-  loadingPage();
-  const h=await api("/api/health");
-  const sg=selectedGuild();
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Bot Manager</div><div class="pageDesc">Trạng thái bot và liên kết mời bot.</div>
-  <div class="cards4">
-    <div class="stat"><div class="label">Bot</div><div class="num">${h.online?"ONLINE":"OFFLINE"}</div></div>
-    <div class="stat"><div class="label">Server bot đang ở</div><div class="num">${h.guilds||0}</div></div>
-    <div class="stat"><div class="label">Uptime</div><div class="num">${Math.floor((h.uptime||0)/3600)}h</div></div>
-    <div class="stat"><div class="label">Server hiện tại</div><div class="num">${sg?.botInstalled?"✓":"×"}</div></div>
-  </div>
-  <div class="panel"><div class="panelHead"><div><h3>Im Congthienzz Bot</h3><div class="muted">Client ID: <code>${CLIENT_ID}</code></div></div><span class="tag green">Administrator</span></div>
-  <button class="btn invite" onclick="openInvite()">🤖 Mời Bot vào Server</button></div></div>`;
-},
+        loadRoles();
+        loadChannels();
 
-settings:()=>{
-  $("pageRoot").innerHTML=`
-  <div class="page"><div class="pageTitle">Settings</div><div class="pageDesc">Tài khoản và phiên đăng nhập.</div>
-  <div class="panel"><div class="panelHead"><div><h3>Phiên đăng nhập</h3><p class="muted">Session ID được lưu cục bộ để giữ đăng nhập giữa các lần mở trang.</p></div><span class="tag green">Persistent Session</span></div>
-  <div class="toolbar"><button class="btnSmall danger" onclick="logout()">Đăng xuất</button><button class="btnSmall" onclick="clearSavedSession()">Xóa phiên đã lưu</button></div></div>
-  <div class="panel"><h3>Thông tin hệ thống</h3><p class="muted">Frontend: ${esc(FRONTEND_URL)}</p><p class="muted">Backend: ${esc(BACKEND_URL)}</p><p class="muted">Client ID: ${CLIENT_ID}</p><p class="muted">Tài khoản: ${esc(state.user?.global_name||state.user?.username||"—")}</p></div></div>`;
-}
-};
+    } catch (error) {
 
-/* =========================
-   ACTIONS / MODALS
-========================= */
+        console.error(
+            error
+        );
 
-async function runSetup(){
-  if(!guildRequired())return;
-  try{
-    await api(`/api/guild/${state.guildId}/setup`,{method:"POST",body:"{}"});
-    toast("Setup server thành công");state.cache={};await navigate("server",true);
-  }catch(e){toast(e.message,"err")}
-}
-function clearSavedSession(){clearSession();showHome();toast("Đã xóa phiên đăng nhập")}
-
-function closeModal(){$("modalRoot").innerHTML=""}
-
-function openPanel(p=null){
-  const channels=state.cache.channels||[];
-  $("modalRoot").innerHTML=`
-  <div class="modalBack" onclick="if(event.target===this)closeModal()"><div class="modal">
-    <h2>${p?"Chỉnh sửa":"Tạo"} Ticket Panel</h2>
-    <div class="formGrid">
-      <div class="field"><label>Tên Panel</label><input id="p_name" value="${esc(p?.name||"Ticket Panel")}"></div>
-      <div class="field"><label>Channel</label><select id="p_channel">${channels.filter(x=>[0,5].includes(Number(x.type))).map(x=>`<option value="${esc(x.id)}" ${x.id===p?.channelId?"selected":""}># ${esc(x.name)}</option>`).join("")}</select></div>
-      <div class="field"><label>Tiêu đề Embed</label><input id="p_title" value="${esc(p?.title||"Mở Ticket")}"></div>
-      <div class="field"><label>Màu</label><div class="colorRow"><input id="p_color" type="color" value="${/^#[0-9a-f]{6}$/i.test(p?.color||"")?p.color:"#5865F2"}"><input id="p_footer" value="${esc(p?.footer||"Ticket Support")}" placeholder="Footer"></div></div>
-      <div class="field full"><label>Mô tả</label><textarea id="p_desc">${esc(p?.description||"Nhấn nút bên dưới để mở ticket.")}</textarea></div>
-      <div class="field"><label>Nút</label><input id="p_label" value="${esc(p?.buttonLabel||"Mở Ticket")}"></div>
-      <div class="field"><label>Emoji</label><input id="p_emoji" value="${esc(p?.buttonEmoji||"🎫")}"></div>
-      <div class="field"><label>Style</label><select id="p_style"><option ${String(p?.buttonStyle||"Primary").toLowerCase()==="primary"?"selected":""}>Primary</option><option ${String(p?.buttonStyle||"").toLowerCase()==="success"?"selected":""}>Success</option><option ${String(p?.buttonStyle||"").toLowerCase()==="danger"?"selected":""}>Danger</option></select></div>
-    </div>
-    <div class="modalActions"><button class="btnSmall" onclick="closeModal()">Hủy</button><button class="btn primary" onclick='savePanel(${p?JSON.stringify(p).replace(/'/g,"&#39;"):"null"})'>Lưu</button></div>
-  </div></div>`;
-}
-async function savePanel(p){
-  try{
-    const body={name:$("p_name").value,title:$("p_title").value,description:$("p_desc").value,color:$("p_color").value,footer:$("p_footer").value,buttonLabel:$("p_label").value,buttonEmoji:$("p_emoji").value,buttonStyle:$("p_style").value,channelId:$("p_channel").value};
-    const path=p?`/api/guild/${state.guildId}/panels/${p.id}`:`/api/guild/${state.guildId}/panels`;
-    await api(path,{method:p?"PATCH":"POST",body:JSON.stringify(body)});
-    closeModal();toast(p?"Đã cập nhật panel":"Đã tạo panel");await navigate("panels",true);
-  }catch(e){toast(e.message,"err")}
-}
-async function deletePanel(id){
-  if(!confirm("Xóa panel này và message panel trên Discord?"))return;
-  try{await api(`/api/guild/${state.guildId}/panels/${id}`,{method:"DELETE"});toast("Đã xóa panel");await navigate("panels",true)}
-  catch(e){toast(e.message,"err")}
-}
-async function createTeam(){
-  const n=prompt("Tên Team:");if(!n)return;
-  try{await api(`/api/guild/${state.guildId}/teams`,{method:"POST",body:JSON.stringify({name:n})});toast("Đã tạo team");await navigate("teams",true)}
-  catch(e){toast(e.message,"err")}
-}
-async function deleteTeam(id){
-  if(!confirm("Xóa team này?"))return;
-  try{await api(`/api/guild/${state.guildId}/teams/${id}`,{method:"DELETE"});toast("Đã xóa team");await navigate("teams",true)}
-  catch(e){toast(e.message,"err")}
-}
-async function addRoleToTeam(teamId){
-  try{
-    const roles=state.cache.roles||((await api(`/api/guild/${state.guildId}/roles`)).roles||[]);
-    const list=roles.slice(0,40).map(r=>`${r.name} = ${r.id}`).join("\n");
-    const value=prompt("Nhập Role ID:\n\n"+list);if(!value)return;
-    await api(`/api/guild/${state.guildId}/teams/${teamId}/roles`,{method:"POST",body:JSON.stringify({roleId:value.trim()})});
-    toast("Đã thêm role");await navigate("teams",true);
-  }catch(e){toast(e.message,"err")}
-}
-async function addBlacklistUser(){
-  const id=prompt("Discord User ID:");if(!id)return;
-  try{await api(`/api/guild/${state.guildId}/blacklist/user`,{method:"POST",body:JSON.stringify({userId:id.trim()})});toast("Đã blacklist user");await navigate("blacklist",true)}
-  catch(e){toast(e.message,"err")}
-}
-async function addBlacklistRole(){
-  const id=prompt("Discord Role ID:");if(!id)return;
-  try{await api(`/api/guild/${state.guildId}/blacklist/role`,{method:"POST",body:JSON.stringify({roleId:id.trim()})});toast("Đã blacklist role");await navigate("blacklist",true)}
-  catch(e){toast(e.message,"err")}
-}
-async function removeBlacklist(kind,id){
-  try{await api(`/api/guild/${state.guildId}/blacklist/${kind}/${id}`,{method:"DELETE"});toast("Đã gỡ blacklist");await navigate("blacklist",true)}
-  catch(e){toast(e.message,"err")}
-}
-function saveWelcome(){
-  const c={
-    welcomeEnabled:$("welcomeEnabled").checked,
-    welcomeChannelId:$("welcomeChannelId").value.trim(),
-    welcomeMessage:$("welcomeMessage").value,
-    goodbyeEnabled:$("goodbyeEnabled").checked,
-    goodbyeChannelId:$("goodbyeChannelId").value.trim(),
-    goodbyeMessage:$("goodbyeMessage").value
-  };
-  localStorage.setItem(WELCOME_KEY,JSON.stringify(c));toast("Đã lưu cấu hình Welcome / Goodbye");
-}
-async function viewTranscript(id){
-  try{
-    const d=await api(`/api/guild/${state.guildId}/transcripts/${id}`);
-    const t=d.transcript||{};
-    $("modalRoot").innerHTML=`<div class="modalBack" onclick="if(event.target===this)closeModal()"><div class="modal"><h2>Transcript</h2><p class="muted">ID: ${esc(t.id)}</p><div class="panel"><pre style="white-space:pre-wrap;color:#dce0ef;font-family:inherit">${esc(JSON.stringify(t,null,2))}</pre></div><div class="modalActions"><button class="btnSmall" onclick="closeModal()">Đóng</button></div></div></div>`;
-  }catch(e){toast(e.message,"err")}
+        toast(
+            error.message,
+            "error"
+        );
+    }
 }
 
-window.addEventListener("pageshow",()=>{state.loading=false});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
-init();
+/* =========================================================
+   STATS
+========================================================= */
+
+async function updateStats() {
+
+    if (!currentGuild) {
+        return;
+    }
+
+    document
+        .getElementById(
+            "statMembers"
+        )
+        .textContent =
+        currentGuild.memberCount || 0;
+
+    document
+        .getElementById(
+            "statChannels"
+        )
+        .textContent =
+        currentGuild.channels || 0;
+
+    try {
+
+        const tickets =
+            await api(
+                `/api/guild/${currentGuildId}/tickets`
+            );
+
+        document
+            .getElementById(
+                "statTickets"
+            )
+            .textContent =
+            tickets.tickets?.length || 0;
+
+    } catch {}
+
+    try {
+
+        const panels =
+            await api(
+                `/api/guild/${currentGuildId}/panels`
+            );
+
+        document
+            .getElementById(
+                "statPanels"
+            )
+            .textContent =
+            panels.panels?.length || 0;
+
+    } catch {}
+}
+
+/* =========================================================
+   CHANNELS
+========================================================= */
+
+let cachedChannels = [];
+
+async function loadChannels() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/channels`
+            );
+
+        cachedChannels =
+            data.channels || [];
+
+        fillChannelSelect();
+
+        fillCategorySelect();
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+    }
+}
+
+function fillChannelSelect() {
+
+    const select =
+        document.getElementById(
+            "panelChannel"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML =
+        `<option value="">Chọn kênh...</option>`;
+
+    cachedChannels
+        .filter(
+            channel =>
+                channel.type === 0 ||
+                channel.type === 5
+        )
+        .forEach(
+            channel => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    channel.id;
+
+                option.textContent =
+                    `# ${channel.name}`;
+
+                select.appendChild(
+                    option
+                );
+            }
+        );
+}
+
+function fillCategorySelect() {
+
+    const select =
+        document.getElementById(
+            "panelCategory"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML =
+        `<option value="">Mặc định</option>`;
+
+    cachedChannels
+        .filter(
+            channel =>
+                channel.type === 4
+        )
+        .forEach(
+            channel => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    channel.id;
+
+                option.textContent =
+                    channel.name;
+
+                select.appendChild(
+                    option
+                );
+            }
+        );
+
+    if (
+        currentGuild?.setup?.categoryId
+    ) {
+
+        select.value =
+            currentGuild.setup.categoryId;
+    }
+}
+
+/* =========================================================
+   ROLES
+========================================================= */
+
+let cachedRoles = [];
+
+async function loadRoles() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/roles`
+            );
+
+        cachedRoles =
+            data.roles || [];
+
+        fillSupportRoles();
+        fillBlacklistRoles();
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+    }
+}
+
+function fillSupportRoles() {
+
+    const select =
+        document.getElementById(
+            "panelSupportRole"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML =
+        `<option value="">Mặc định</option>`;
+
+    cachedRoles.forEach(
+        role => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                role.id;
+
+            option.textContent =
+                `@${role.name}`;
+
+            select.appendChild(
+                option
+            );
+        }
+    );
+
+    if (
+        currentGuild?.setup?.supportRoleId
+    ) {
+
+        select.value =
+            currentGuild.setup.supportRoleId;
+    }
+}
+
+function fillBlacklistRoles() {
+
+    const select =
+        document.getElementById(
+            "blacklistRoleId"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML =
+        `<option value="">Chọn Role...</option>`;
+
+    cachedRoles.forEach(
+        role => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                role.id;
+
+            option.textContent =
+                `@${role.name}`;
+
+            select.appendChild(
+                option
+            );
+        }
+    );
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".side-btn"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const page =
+                        button.dataset.page;
+
+                    navigate(
+                        page
+                    );
+                }
+            );
+        }
+    );
+
+function navigate(page) {
+
+    document
+        .querySelectorAll(
+            ".side-btn"
+        )
+        .forEach(
+            btn => {
+
+                btn.classList.toggle(
+                    "active",
+                    btn.dataset.page === page
+                );
+            }
+        );
+
+    document
+        .querySelectorAll(
+            ".page"
+        )
+        .forEach(
+            item => {
+
+                item.classList.toggle(
+                    "active",
+                    item.id ===
+                    `page-${page}`
+                );
+            }
+        );
+
+    if (page === "panels") {
+        loadPanels();
+    }
+
+    if (page === "tickets") {
+        loadTickets();
+    }
+
+    if (page === "transcripts") {
+        loadTranscripts();
+    }
+
+    if (page === "teams") {
+        loadTeams();
+    }
+
+    if (page === "blacklist") {
+        loadBlacklist();
+    }
+
+    if (page === "audit") {
+        loadAudit();
+    }
+
+    if (page === "settings") {
+        loadSettings();
+    }
+}
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+async function loadPanels() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    const list =
+        document.getElementById(
+            "panelsList"
+        );
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/panels`
+            );
+
+        const panels =
+            data.panels || [];
+
+        document
+            .getElementById(
+                "statPanels"
+            )
+            .textContent =
+            panels.length;
+
+        if (!panels.length) {
+
+            list.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">▱</div>
+
+                    <h3>Chưa có Panel</h3>
+
+                    <p>
+                        Tạo Panel trên web,
+                        bot sẽ tự động gửi vào Discord.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        list.innerHTML =
+            panels
+                .map(
+                    panel => `
+
+                    <div class="panel-item">
+
+                        <div class="panel-info">
+
+                            <h3>
+                                🎫 ${escapeHtml(panel.name)}
+                            </h3>
+
+                            <p>
+                                ${escapeHtml(panel.title)}
+                                ·
+                                ${
+                                    panel.messageId
+                                        ? "Đã gửi Discord"
+                                        : "Chưa gửi"
+                                }
+                            </p>
+
+                        </div>
+
+                        <div class="panel-actions">
+
+                            <button
+                                class="btn btn-secondary btn-small"
+                                onclick="editPanel('${panel.id}')"
+                            >
+                                ✏️ Sửa
+                            </button>
+
+                            <button
+                                class="btn btn-danger btn-small"
+                                onclick="deletePanel('${panel.id}')"
+                            >
+                                🗑️ Xóa
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `
+                )
+                .join("");
+
+    } catch (error) {
+
+        list.innerHTML =
+            `<div style="color:#ff7777">
+                ${escapeHtml(error.message)}
+            </div>`;
+    }
+}
+
+/* =========================================================
+   OPEN CREATE PANEL
+========================================================= */
+
+function openCreatePanel() {
+
+    editingPanelId =
+        null;
+
+    document
+        .getElementById(
+            "panelModalTitle"
+        )
+        .textContent =
+        "Tạo Panel Ticket";
+
+    document
+        .getElementById(
+            "savePanelBtn"
+        )
+        .textContent =
+        "🚀 Tạo Panel";
+
+    document
+        .getElementById(
+            "panelName"
+        )
+        .value =
+        "Ticket Panel";
+
+    document
+        .getElementById(
+            "panelTitle"
+        )
+        .value =
+        "Mở Ticket";
+
+    document
+        .getElementById(
+            "panelDescription"
+        )
+        .value =
+        "Nhấn nút bên dưới để mở ticket.";
+
+    document
+        .getElementById(
+            "panelColor"
+        )
+        .value =
+        "#5865F2";
+
+    document
+        .getElementById(
+            "panelColorPicker"
+        )
+        .value =
+        "#5865F2";
+
+    document
+        .getElementById(
+            "panelFooter"
+        )
+        .value =
+        "Hỗ trợ Ticket";
+
+    document
+        .getElementById(
+            "panelButtonLabel"
+        )
+        .value =
+        "Mở Ticket";
+
+    document
+        .getElementById(
+            "panelButtonEmoji"
+        )
+        .value =
+        "🎫";
+
+    document
+        .getElementById(
+            "panelButtonStyle"
+        )
+        .value =
+        "Primary";
+
+    document
+        .getElementById(
+            "panelStatus"
+        )
+        .value =
+        "24/7";
+
+    if (
+        currentGuild?.setup
+    ) {
+
+        document
+            .getElementById(
+                "panelCategory"
+            )
+            .value =
+            currentGuild.setup.categoryId ||
+            "";
+
+        document
+            .getElementById(
+                "panelSupportRole"
+            )
+            .value =
+            currentGuild.setup.supportRoleId ||
+            "";
+    }
+
+    updatePreview();
+
+    document
+        .getElementById(
+            "panelModal"
+        )
+        .classList.add(
+            "show"
+        );
+}
+
+/* =========================================================
+   EDIT PANEL
+========================================================= */
+
+async function editPanel(
+    panelId
+) {
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/panels`
+            );
+
+        const panel =
+            data.panels.find(
+                p =>
+                    p.id ===
+                    panelId
+            );
+
+        if (!panel) {
+            throw new Error(
+                "Không tìm thấy Panel."
+            );
+        }
+
+        editingPanelId =
+            panel.id;
+
+        document
+            .getElementById(
+                "panelModalTitle"
+            )
+            .textContent =
+            "Sửa Panel Ticket";
+
+        document
+            .getElementById(
+                "savePanelBtn"
+            )
+            .textContent =
+            "💾 Lưu thay đổi";
+
+        document
+            .getElementById(
+                "panelName"
+            )
+            .value =
+            panel.name || "";
+
+        document
+            .getElementById(
+                "panelChannel"
+            )
+            .value =
+            panel.channelId || "";
+
+        document
+            .getElementById(
+                "panelTitle"
+            )
+            .value =
+            panel.title || "";
+
+        document
+            .getElementById(
+                "panelDescription"
+            )
+            .value =
+            panel.description || "";
+
+        document
+            .getElementById(
+                "panelColor"
+            )
+            .value =
+            panel.color || "#5865F2";
+
+        document
+            .getElementById(
+                "panelColorPicker"
+            )
+            .value =
+            panel.color || "#5865F2";
+
+        document
+            .getElementById(
+                "panelFooter"
+            )
+            .value =
+            panel.footer || "";
+
+        document
+            .getElementById(
+                "panelButtonLabel"
+            )
+            .value =
+            panel.buttonLabel || "Mở Ticket";
+
+        document
+            .getElementById(
+                "panelButtonEmoji"
+            )
+            .value =
+            panel.buttonEmoji || "🎫";
+
+        document
+            .getElementById(
+                "panelButtonStyle"
+            )
+            .value =
+            panel.buttonStyle || "Primary";
+
+        document
+            .getElementById(
+                "panelStatus"
+            )
+            .value =
+            panel.status || "24/7";
+
+        document
+            .getElementById(
+                "panelCategory"
+            )
+            .value =
+            panel.categoryId || "";
+
+        document
+            .getElementById(
+                "panelSupportRole"
+            )
+            .value =
+            panel.supportRoleId || "";
+
+        updatePreview();
+
+        document
+            .getElementById(
+                "panelModal"
+            )
+            .classList.add(
+                "show"
+            );
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function updatePreview() {
+
+    const title =
+        document
+            .getElementById(
+                "panelTitle"
+            )
+            .value ||
+        "Mở Ticket";
+
+    const description =
+        document
+            .getElementById(
+                "panelDescription"
+            )
+            .value ||
+        "Nhấn nút bên dưới để mở ticket.";
+
+    const footer =
+        document
+            .getElementById(
+                "panelFooter"
+            )
+            .value ||
+        "Hỗ trợ Ticket";
+
+    const color =
+        document
+            .getElementById(
+                "panelColor"
+            )
+            .value ||
+        "#5865F2";
+
+    const label =
+        document
+            .getElementById(
+                "panelButtonLabel"
+            )
+            .value ||
+        "Mở Ticket";
+
+    const emoji =
+        document
+            .getElementById(
+                "panelButtonEmoji"
+            )
+            .value ||
+        "🎫";
+
+    const style =
+        document
+            .getElementById(
+                "panelButtonStyle"
+            )
+            .value;
+
+    document
+        .getElementById(
+            "previewTitle"
+        )
+        .textContent =
+        title;
+
+    document
+        .getElementById(
+            "previewDescription"
+        )
+        .textContent =
+        description;
+
+    document
+        .getElementById(
+            "previewFooter"
+        )
+        .textContent =
+        footer;
+
+    document
+        .getElementById(
+            "previewEmbed"
+        )
+        .style.borderLeftColor =
+        color;
+
+    const button =
+        document
+            .getElementById(
+                "previewButton"
+            );
+
+    button.textContent =
+        `${emoji} ${label}`;
+
+    /*
+        Không dùng style CSS màu cố định
+        cho preview.
+    */
+
+    if (
+        style === "Success"
+    ) {
+        button.style.background =
+            "#2da66c";
+    } else if (
+        style === "Danger"
+    ) {
+        button.style.background =
+            "#d64040";
+    } else {
+        button.style.background =
+            "#5865f2";
+    }
+}
+
+/* =========================================================
+   COLOR SYNC
+========================================================= */
+
+document
+    .getElementById(
+        "panelColorPicker"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            document
+                .getElementById(
+                    "panelColor"
+                )
+                .value =
+                this.value;
+
+            updatePreview();
+        }
+    );
+
+document
+    .getElementById(
+        "panelColor"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            let value =
+                this.value;
+
+            if (
+                /^#[0-9A-Fa-f]{6}$/.test(
+                    value
+                )
+            ) {
+
+                document
+                    .getElementById(
+                        "panelColorPicker"
+                    )
+                    .value =
+                    value;
+            }
+
+            updatePreview();
+        }
+    );
+
+/* =========================================================
+   SAVE PANEL
+========================================================= */
+
+async function savePanel() {
+
+    if (!currentGuildId) {
+
+        toast(
+            "Chưa chọn server.",
+            "error"
+        );
+
+        return;
+    }
+
+    const channelId =
+        document
+            .getElementById(
+                "panelChannel"
+            )
+            .value;
+
+    if (!channelId) {
+
+        toast(
+            "Hãy chọn kênh gửi Panel.",
+            "error"
+        );
+
+        return;
+    }
+
+    const payload = {
+
+        name:
+            document
+                .getElementById(
+                    "panelName"
+                )
+                .value
+                .trim() ||
+            "Ticket Panel",
+
+        channelId,
+
+        title:
+            document
+                .getElementById(
+                    "panelTitle"
+                )
+                .value
+                .trim() ||
+            "Mở Ticket",
+
+        description:
+            document
+                .getElementById(
+                    "panelDescription"
+                )
+                .value ||
+            "Nhấn nút bên dưới để mở ticket.",
+
+        color:
+            document
+                .getElementById(
+                    "panelColor"
+                )
+                .value ||
+            "#5865F2",
+
+        footer:
+            document
+                .getElementById(
+                    "panelFooter"
+                )
+                .value ||
+            "Hỗ trợ Ticket",
+
+        buttonLabel:
+            document
+                .getElementById(
+                    "panelButtonLabel"
+                )
+                .value ||
+            "Mở Ticket",
+
+        buttonEmoji:
+            document
+                .getElementById(
+                    "panelButtonEmoji"
+                )
+                .value ||
+            "🎫",
+
+        buttonStyle:
+            document
+                .getElementById(
+                    "panelButtonStyle"
+                )
+                .value,
+
+        categoryId:
+            document
+                .getElementById(
+                    "panelCategory"
+                )
+                .value ||
+            null,
+
+        supportRoleId:
+            document
+                .getElementById(
+                    "panelSupportRole"
+                )
+                .value ||
+            null,
+
+        status:
+            document
+                .getElementById(
+                    "panelStatus"
+                )
+                .value ||
+            "24/7"
+    };
+
+    const saveButton =
+        document
+            .getElementById(
+                "savePanelBtn"
+            );
+
+    saveButton.disabled =
+        true;
+
+    saveButton.textContent =
+        "⏳ Đang xử lý...";
+
+    try {
+
+        let result;
+
+        if (editingPanelId) {
+
+            result =
+                await api(
+                    `/api/guild/${currentGuildId}/panels/${editingPanelId}`,
+                    {
+                        method:
+                            "PATCH",
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+                    }
+                );
+
+            toast(
+                "✅ Đã sửa Panel và cập nhật Discord."
+            );
+
+        } else {
+
+            result =
+                await api(
+                    `/api/guild/${currentGuildId}/panels`,
+                    {
+                        method:
+                            "POST",
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+                    }
+                );
+
+            toast(
+                "✅ Đã tạo Panel và gửi vào Discord."
+            );
+        }
+
+        closePanelModal();
+
+        await loadPanels();
+
+        updateStats();
+
+    } catch (error) {
+
+        console.error(
+            "SAVE PANEL:",
+            error
+        );
+
+        toast(
+            "❌ " +
+            error.message,
+            "error"
+        );
+
+    } finally {
+
+        saveButton.disabled =
+            false;
+
+        saveButton.textContent =
+            editingPanelId
+                ? "💾 Lưu thay đổi"
+                : "🚀 Tạo Panel";
+    }
+}
+
+/* =========================================================
+   DELETE PANEL
+========================================================= */
+
+async function deletePanel(
+    panelId
+) {
+
+    if (
+        !confirm(
+            "Bạn chắc chắn muốn xóa Panel này?"
+        )
+    ) {
+        return;
+    }
+
+    try {
+
+        await api(
+            `/api/guild/${currentGuildId}/panels/${panelId}`,
+            {
+                method:
+                    "DELETE"
+            }
+        );
+
+        toast(
+            "🗑️ Đã xóa Panel."
+        );
+
+        await loadPanels();
+
+        updateStats();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+/* =========================================================
+   CLOSE PANEL MODAL
+========================================================= */
+
+function closePanelModal() {
+
+    document
+        .getElementById(
+            "panelModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+    editingPanelId =
+        null;
+}
+
+/* =========================================================
+   TICKETS
+========================================================= */
+
+async function loadTickets() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    const list =
+        document.getElementById(
+            "ticketsList"
+        );
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/tickets`
+            );
+
+        const tickets =
+            data.tickets || [];
+
+        document
+            .getElementById(
+                "statTickets"
+            )
+            .textContent =
+            tickets.length;
+
+        if (!tickets.length) {
+
+            list.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">
+                        🎫
+                    </div>
+                    <h3>
+                        Không có Ticket đang mở
+                    </h3>
+                    <p>
+                        Hiện tại chưa có Ticket nào.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        list.innerHTML =
+            `
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Claimed</th>
+                            <th>Ngày tạo</th>
+                            <th>Channel</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        ${
+                            tickets
+                                .map(
+                                    ticket => `
+
+                                    <tr>
+
+                                        <td>
+                                            #${escapeHtml(ticket.id)}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(ticket.username)}
+                                        </td>
+
+                                        <td>
+                                            ${
+                                                ticket.claimedById
+                                                    ? `<@${ticket.claimedById}>`
+                                                    : "Chưa nhận"
+                                            }
+                                        </td>
+
+                                        <td>
+                                            ${formatDate(ticket.createdAt)}
+                                        </td>
+
+                                        <td>
+                                            <code>
+                                                ${escapeHtml(ticket.channelId)}
+                                            </code>
+                                        </td>
+
+                                    </tr>
+
+                                `
+                                )
+                                .join("")
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+            `;
+
+    } catch (error) {
+
+        list.innerHTML =
+            `<div style="color:#ff7777">
+                ${escapeHtml(error.message)}
+            </div>`;
+    }
+}
+
+/* =========================================================
+   TRANSCRIPTS
+========================================================= */
+
+async function loadTranscripts() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    const list =
+        document.getElementById(
+            "transcriptsList"
+        );
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/transcripts`
+            );
+
+        const transcripts =
+            data.transcripts || [];
+
+        if (!transcripts.length) {
+
+            list.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">
+                        📜
+                    </div>
+
+                    <h3>
+                        Chưa có Transcript
+                    </h3>
+
+                    <p>
+                        Transcript sẽ xuất hiện
+                        khi Ticket được đóng.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        list.innerHTML =
+            transcripts
+                .map(
+                    transcript => `
+
+                    <div class="panel-item">
+
+                        <div class="panel-info">
+
+                            <h3>
+                                🎫 Ticket #${escapeHtml(transcript.ticketId)}
+                            </h3>
+
+                            <p>
+                                ${escapeHtml(transcript.username)}
+                                ·
+                                ${formatDate(transcript.closedAt)}
+                            </p>
+
+                        </div>
+
+                        <div class="panel-actions">
+
+                            <button
+                                class="btn btn-primary btn-small"
+                                onclick="viewTranscript('${transcript.id}')"
+                            >
+                                📄 Xem
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `
+                )
+                .join("");
+
+    } catch (error) {
+
+        list.innerHTML =
+            `<div style="color:#ff7777">
+                ${escapeHtml(error.message)}
+            </div>`;
+    }
+}
+
+/* =========================================================
+   VIEW TRANSCRIPT
+========================================================= */
+
+async function viewTranscript(
+    id
+) {
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/transcripts/${id}`
+            );
+
+        const transcript =
+            data.transcript;
+
+        const content =
+            document.getElementById(
+                "transcriptContent"
+            );
+
+        content.innerHTML = `
+
+            <div
+                style="
+                    margin-bottom:20px;
+                    color:#aab8ca;
+                "
+            >
+
+                <b>
+                    Ticket #${escapeHtml(transcript.ticketId)}
+                </b>
+
+                <br>
+
+                User:
+                ${escapeHtml(transcript.username)}
+
+                <br>
+
+                Lý do:
+                ${escapeHtml(transcript.closeReason)}
+
+            </div>
+
+            ${
+                (transcript.messages || [])
+                    .map(
+                        message => `
+
+                        <div
+                            style="
+                                padding:12px;
+                                margin-bottom:10px;
+                                border:1px solid #34475f;
+                                border-radius:8px;
+                                background:#142235;
+                            "
+                        >
+
+                            <b>
+                                ${escapeHtml(message.author)}
+                            </b>
+
+                            <span
+                                style="
+                                    color:#7f8da1;
+                                    font-size:11px;
+                                    margin-left:8px;
+                                "
+                            >
+                                ${formatDate(message.timestamp)}
+                            </span>
+
+                            <div
+                                style="
+                                    margin-top:6px;
+                                    white-space:pre-wrap;
+                                "
+                            >
+                                ${escapeHtml(message.content || "(Không có nội dung)")}
+                            </div>
+
+                            ${
+                                (message.attachments || [])
+                                    .map(
+                                        attachment => `
+                                            <div style="margin-top:6px">
+                                                📎
+                                                <a
+                                                    href="${escapeAttribute(attachment.url)}"
+                                                    target="_blank"
+                                                    style="color:#5c9dff"
+                                                >
+                                                    ${escapeHtml(attachment.name)}
+                                                </a>
+                                            </div>
+                                        `
+                                    )
+                                    .join("")
+                            }
+
+                        </div>
+
+                    `
+                    )
+                    .join("")
+            }
+
+        `;
+
+        document
+            .getElementById(
+                "transcriptModal"
+            )
+            .classList.add(
+                "show"
+            );
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+function closeTranscriptModal() {
+
+    document
+        .getElementById(
+            "transcriptModal"
+        )
+        .classList.remove(
+            "show"
+        );
+}
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+async function loadTeams() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    const list =
+        document.getElementById(
+            "teamsList"
+        );
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/teams`
+            );
+
+        const teams =
+            data.teams || [];
+
+        if (!teams.length) {
+
+            list.innerHTML =
+                "Chưa có Team.";
+
+            return;
+        }
+
+        list.innerHTML =
+            teams
+                .map(
+                    team => `
+
+                    <div class="panel-item">
+
+                        <div class="panel-info">
+
+                            <h3>
+                                👥 ${escapeHtml(team.name)}
+                            </h3>
+
+                            <p>
+                                ${team.roleIds?.length || 0}
+                                Role
+                            </p>
+
+                        </div>
+
+                        ${
+                            team.id !== "default"
+                                ? `
+                                    <button
+                                        class="btn btn-danger btn-small"
+                                        onclick="deleteTeam('${team.id}')"
+                                    >
+                                        🗑️ Xóa
+                                    </button>
+                                `
+                                : `
+                                    <span style="color:#8fa0b4">
+                                        Mặc định
+                                    </span>
+                                `
+                        }
+
+                    </div>
+
+                `
+                )
+                .join("");
+
+    } catch (error) {
+
+        list.innerHTML =
+            `<div style="color:#ff7777">
+                ${escapeHtml(error.message)}
+            </div>`;
+    }
+}
+
+async function createTeam() {
+
+    const name =
+        prompt(
+            "Nhập tên Team:"
+        );
+
+    if (!name) {
+        return;
+    }
+
+    try {
+
+        await api(
+            `/api/guild/${currentGuildId}/teams`,
+            {
+                method:
+                    "POST",
+
+                body:
+                    JSON.stringify({
+                        name
+                    })
+            }
+        );
+
+        toast(
+            "✅ Đã tạo Team."
+        );
+
+        loadTeams();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+async function deleteTeam(
+    teamId
+) {
+
+    if (
+        !confirm(
+            "Xóa Team này?"
+        )
+    ) {
+        return;
+    }
+
+    try {
+
+        await api(
+            `/api/guild/${currentGuildId}/teams/${teamId}`,
+            {
+                method:
+                    "DELETE"
+            }
+        );
+
+        toast(
+            "🗑️ Đã xóa Team."
+        );
+
+        loadTeams();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+/* =========================================================
+   BLACKLIST
+========================================================= */
+
+async function loadBlacklist() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    const list =
+        document.getElementById(
+            "blacklistList"
+        );
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/blacklist`
+            );
+
+        const blacklist =
+            data.blacklist || {
+                users: [],
+                roles: []
+            };
+
+        let html = "";
+
+        html += `
+            <h3>
+                User bị chặn
+            </h3>
+        `;
+
+        if (
+            !blacklist.users.length
+        ) {
+
+            html += `
+                <p style="color:#91a0b3">
+                    Không có User bị chặn.
+                </p>
+            `;
+
+        } else {
+
+            html +=
+                blacklist.users
+                    .map(
+                        id => `
+
+                            <div class="panel-item">
+
+                                <div>
+                                    👤
+                                    ${escapeHtml(id)}
+                                </div>
+
+                                <button
+                                    class="btn btn-danger btn-small"
+                                    onclick="removeBlacklist('user','${id}')"
+                                >
+                                    Bỏ chặn
+                                </button>
+
+                            </div>
+
+                        `
+                    )
+                    .join("");
+        }
+
+        html += `
+            <h3 style="margin-top:25px">
+                Role bị chặn
+            </h3>
+        `;
+
+        if (
+            !blacklist.roles.length
+        ) {
+
+            html += `
+                <p style="color:#91a0b3">
+                    Không có Role bị chặn.
+                </p>
+            `;
+
+        } else {
+
+            html +=
+                blacklist.roles
+                    .map(
+                        id => `
+
+                            <div class="panel-item">
+
+                                <div>
+                                    🛡️
+                                    ${escapeHtml(id)}
+                                </div>
+
+                                <button
+                                    class="btn btn-danger btn-small"
+                                    onclick="removeBlacklist('role','${id}')"
+                                >
+                                    Bỏ chặn
+                                </button>
+
+                            </div>
+
+                        `
+                    )
+                    .join("");
+        }
+
+        list.innerHTML =
+            html;
+
+    } catch (error) {
+
+        list.innerHTML =
+            `<div style="color:#ff7777">
+                ${escapeHtml(error.message)}
+            </div>`;
+    }
+}
+
+async function addBlacklistUser() {
+
+    const userId =
+        document
+            .getElementById(
+                "blacklistUserId"
+            )
+            .value
+            .trim();
+
+    if (!userId) {
+        return;
+    }
+
+    try {
+
+        await api(
+            `/api/guild/${currentGuildId}/blacklist/user`,
+            {
+                method:
+                    "POST",
+
+                body:
+                    JSON.stringify({
+                        userId
+                    })
+            }
+        );
+
+        toast(
+            "⛔ Đã chặn User."
+        );
+
+        document
+            .getElementById(
+                "blacklistUserId"
+            )
+            .value = "";
+
+        loadBlacklist();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+async function addBlacklistRole() {
+
+    const roleId =
+        document
+            .getElementById(
+                "blacklistRoleId"
+            )
+            .value;
+
+    if (!roleId) {
+        return;
+    }
+
+    try {
+
+        await api(
+            `/api/guild/${currentGuildId}/blacklist/role`,
+            {
+                method:
+                    "POST",
+
+                body:
+                    JSON.stringify({
+                        roleId
+                    })
+            }
+        );
+
+        toast(
+            "⛔ Đã chặn Role."
+        );
+
+        loadBlacklist();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+async function removeBlacklist(
+    kind,
+    id
+) {
+
+    try {
+
+        await api(
+            `/api/guild/${currentGuildId}/blacklist/${kind}/${id}`,
+            {
+                method:
+                    "DELETE"
+            }
+        );
+
+        toast(
+            "✅ Đã bỏ chặn."
+        );
+
+        loadBlacklist();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+/* =========================================================
+   AUDIT
+========================================================= */
+
+async function loadAudit() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    const list =
+        document.getElementById(
+            "auditList"
+        );
+
+    try {
+
+        const data =
+            await api(
+                `/api/guild/${currentGuildId}/audit-log`
+            );
+
+        const logs =
+            data.logs || [];
+
+        if (!logs.length) {
+
+            list.innerHTML =
+                `<div class="empty">
+                    <div class="empty-icon">↩</div>
+                    <h3>Chưa có Log</h3>
+                </div>`;
+
+            return;
+        }
+
+        list.innerHTML =
+            logs
+                .map(
+                    log => `
+
+                    <div
+                        style="
+                            padding:13px;
+                            border-bottom:1px solid #34475f;
+                        "
+                    >
+
+                        <b>
+                            ${escapeHtml(log.action)}
+                        </b>
+
+                        <div
+                            style="
+                                color:#8fa0b4;
+                                margin-top:5px;
+                            "
+                        >
+                            ${escapeHtml(log.username || "")}
+                            ·
+                            ${formatDate(log.timestamp)}
+                        </div>
+
+                    </div>
+
+                `
+                )
+                .join("");
+
+    } catch (error) {
+
+        list.innerHTML =
+            `<div style="color:#ff7777">
+                ${escapeHtml(error.message)}
+            </div>`;
+    }
+}
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+async function loadSettings() {
+
+    const content =
+        document.getElementById(
+            "settingsContent"
+        );
+
+    if (!currentGuild) {
+        return;
+    }
+
+    const setup =
+        currentGuild.setup || {};
+
+    content.innerHTML = `
+
+        <div class="form-group">
+            <label>Category Ticket</label>
+            <input
+                class="form-control"
+                readonly
+                value="${escapeAttribute(setup.categoryId || "Chưa thiết lập")}"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Transcript Channel</label>
+            <input
+                class="form-control"
+                readonly
+                value="${escapeAttribute(setup.transcriptChannelId || "Chưa thiết lập")}"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Tickets Admin Role</label>
+            <input
+                class="form-control"
+                readonly
+                value="${escapeAttribute(setup.adminRoleId || "Chưa thiết lập")}"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Tickets Support Role</label>
+            <input
+                class="form-control"
+                readonly
+                value="${escapeAttribute(setup.supportRoleId || "Chưa thiết lập")}"
+            >
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="runSetup()"
+        >
+            ⚙️ Chạy Setup
+        </button>
+
+    `;
+}
+
+async function runSetup() {
+
+    try {
+
+        await api(
+            `/api/guild/${currentGuildId}/setup`,
+            {
+                method:
+                    "POST",
+
+                body:
+                    JSON.stringify({})
+            }
+        );
+
+        toast(
+            "✅ Đã thiết lập hệ thống Ticket."
+        );
+
+        await selectGuild();
+
+        loadSettings();
+
+    } catch (error) {
+
+        toast(
+            error.message,
+            "error"
+        );
+    }
+}
+
+/* =========================================================
+   SETUP BUTTON
+========================================================= */
+
+document
+    .getElementById(
+        "setupBtn"
+    )
+    .addEventListener(
+        "click",
+        runSetup
+    );
+
+/* =========================================================
+   LIBRARY
+========================================================= */
+
+function showPanelLibrary() {
+
+    toast(
+        "🌐 Thư viện Panel đang được giữ làm giao diện. Chức năng tạo Panel nằm ở nút Tạo Panel."
+    );
+}
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById(
+        "logoutBtn"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await api(
+                    "/api/logout",
+                    {
+                        method:
+                            "POST"
+                    }
+                );
+
+            } catch {}
+
+            currentUser =
+                null;
+
+            currentGuildId =
+                null;
+
+            currentGuild =
+                null;
+
+            showLogin();
+        }
+    );
+
+/* =========================================================
+   HASH ROUTING
+========================================================= */
+
+function loadHashRoute() {
+
+    const hash =
+        location.hash;
+
+    const match =
+        hash.match(
+            /#manage\/([^/]+)\/([^/]+)/
+        );
+
+    if (!match) {
+        return;
+    }
+
+    const guildId =
+        match[1];
+
+    const page =
+        match[2];
+
+    if (
+        guilds.some(
+            guild =>
+                guild.id ===
+                guildId
+        )
+    ) {
+
+        currentGuildId =
+            guildId;
+
+        const select =
+            document
+                .getElementById(
+                    "guildSelect"
+                );
+
+        select.value =
+            guildId;
+
+        selectGuild();
+    }
+
+    const allowedPages = [
+        "dashboard",
+        "tickets",
+        "transcripts",
+        "panels",
+        "teams",
+        "blacklist",
+        "audit",
+        "settings"
+    ];
+
+    if (
+        allowedPages.includes(
+            page
+        )
+    ) {
+
+        navigate(
+            page
+        );
+    }
+}
+
+window.addEventListener(
+    "hashchange",
+    loadHashRoute
+);
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+}
+
+function escapeAttribute(
+    value
+) {
+    return escapeHtml(
+        value
+    );
+}
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
+        return "-";
+    }
+
+    try {
+
+        return new Date(
+            value
+        ).toLocaleString(
+            "vi-VN"
+        );
+
+    } catch {
+
+        return value;
+    }
+}
+
+/* =========================================================
+   MODAL CLICK OUTSIDE
+========================================================= */
+
+document
+    .getElementById(
+        "panelModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+                closePanelModal();
+            }
+        }
+    );
+
+document
+    .getElementById(
+        "transcriptModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+                closeTranscriptModal();
+            }
+        }
+    );
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closePanelModal();
+
+            closeTranscriptModal();
+        }
+    }
+);
+
+/* =========================================================
+   START
+========================================================= */
+
+(async function() {
+
+    /*
+        Nếu Discord OAuth callback vừa redirect về:
+        ?oauth_error=...
+    */
+
+    const params =
+        new URLSearchParams(
+            location.search
+        );
+
+    const oauthError =
+        params.get(
+            "oauth_error"
+        );
+
+    if (oauthError) {
+
+        toast(
+            "❌ Đăng nhập Discord lỗi: " +
+            oauthError,
+            "error"
+        );
+
+        history.replaceState(
+            null,
+            "",
+            location.pathname +
+            location.hash
+        );
+    }
+
+    await checkLogin();
+
+})();
 </script>
+
 </body>
 </html>
