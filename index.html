@@ -3,768 +3,656 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Bot Documentation</title>
+<title>Bot Manager - Ticket V2</title>
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-:root {
-    --bg: #050611;
-    --panel: #0b0d1b;
-    --panel2: #101226;
-    --purple: #8b3dff;
-    --purple2: #b66cff;
-    --text: #ffffff;
-    --muted: #9295a9;
-    --border: rgba(255,255,255,0.08);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(115,40,255,.16), transparent 30%),
-        radial-gradient(circle at 80% 10%, rgba(70,70,255,.12), transparent 25%),
-        var(--bg);
-    color: var(--text);
+    background: #0b0d12;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* ================= LOGIN ================= */
+
+#loginPage {
     min-height: 100vh;
-}
-
-/* ================= HEADER ================= */
-
-header {
-    height: 72px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(5,6,17,.85);
-    backdrop-filter: blur(15px);
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 40px;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    z-index: 1000;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.logo-icon {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 12px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: linear-gradient(135deg,#722cff,#b75cff);
-
-    box-shadow: 0 0 25px rgba(139,61,255,.45);
+    background:
+        radial-gradient(circle at top left, #242844 0, transparent 35%),
+        radial-gradient(circle at bottom right, #171b38 0, transparent 35%),
+        #080a0f;
 }
 
-nav {
+.login-box {
+    width: 420px;
+    max-width: 92%;
+    background: rgba(20, 23, 32, .96);
+    border: 1px solid #292e3d;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 25px 80px rgba(0,0,0,.5);
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+    background: linear-gradient(135deg,#5865f2,#7c5cff);
     display: flex;
-    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 auto 20px;
 }
 
-nav button {
-    border: 0;
-    background: transparent;
-    color: #a7a9ba;
-
-    padding: 10px 15px;
-    border-radius: 8px;
-
-    cursor: pointer;
-    transition: .2s;
+.login-box h1 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 8px;
 }
 
-nav button:hover,
-nav button.active {
+.login-box p {
+    text-align: center;
+    color: #8e95a7;
+    margin-bottom: 28px;
+}
+
+.input {
+    width: 100%;
+    background: #11141c;
+    border: 1px solid #2b3040;
     color: white;
-    background: rgba(139,61,255,.12);
+    padding: 14px;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 15px;
 }
 
-.header-actions {
-    display: flex;
-    gap: 10px;
+.input:focus {
+    border-color: #5865f2;
 }
 
 .btn {
-    border: 1px solid var(--border);
-    background: var(--panel2);
-    color: white;
-
-    padding: 10px 17px;
-
-    border-radius: 9px;
-
+    border: 0;
     cursor: pointer;
+    border-radius: 10px;
+    padding: 13px 18px;
+    font-weight: bold;
+    color: white;
+    background: #5865f2;
     transition: .2s;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    border-color: var(--purple);
+    transform: translateY(-1px);
+    filter: brightness(1.1);
 }
 
-.btn-primary {
-    border: none;
-    background: linear-gradient(135deg,#722cff,#a848ff);
-
-    box-shadow: 0 0 25px rgba(139,61,255,.25);
+.btn.full {
+    width: 100%;
 }
 
-/* ================= SIDEBAR ================= */
+/* ================= APP ================= */
+
+#app {
+    display: none;
+    min-height: 100vh;
+}
 
 .sidebar {
     position: fixed;
-    top: 72px;
-    bottom: 0;
     left: 0;
-
-    width: 245px;
-
-    border-right: 1px solid var(--border);
-
-    background: rgba(7,8,18,.9);
-
-    padding: 25px 15px;
-
-    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background: #10131b;
+    border-right: 1px solid #252a37;
+    padding: 20px 14px;
+    z-index: 10;
 }
 
-.sidebar-title {
-    color: #626579;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px 25px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    background: #5865f2;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.brand strong {
+    font-size: 17px;
+}
+
+.brand small {
+    display: block;
+    color: #777f91;
+    margin-top: 3px;
+}
+
+.menu-title {
+    color: #606879;
     font-size: 11px;
     font-weight: bold;
-
-    margin: 20px 12px 8px;
+    margin: 20px 10px 8px;
     text-transform: uppercase;
 }
 
-.sidebar button {
-    width: 100%;
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
+.menu button {
     border: 0;
     background: transparent;
-
-    color: #999caf;
-
+    color: #9da4b5;
+    padding: 12px;
+    border-radius: 9px;
     text-align: left;
-
-    padding: 11px 13px;
-
-    border-radius: 8px;
-
     cursor: pointer;
-    transition: .2s;
+    font-size: 14px;
 }
 
-.sidebar button:hover,
-.sidebar button.active {
+.menu button:hover {
+    background: #191d28;
     color: white;
-    background: rgba(139,61,255,.15);
 }
 
-/* ================= CONTENT ================= */
-
-main {
-    margin-left: 245px;
-    padding-top: 72px;
+.menu button.active {
+    background: #5865f2;
+    color: white;
 }
+
+.logout {
+    position: absolute;
+    bottom: 20px;
+    left: 14px;
+    right: 14px;
+    background: #191d28 !important;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+.topbar {
+    height: 70px;
+    border-bottom: 1px solid #252a37;
+    background: rgba(11,13,18,.9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.topbar h2 {
+    font-size: 19px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #73d89b;
+    font-size: 13px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #45d483;
+    box-shadow: 0 0 10px #45d483;
+}
+
+.content {
+    padding: 30px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+/* ================= PAGES ================= */
 
 .page {
     display: none;
-    min-height: calc(100vh - 72px);
-
-    padding: 70px 7%;
 }
 
 .page.active {
     display: block;
 }
 
-/* ================= HERO ================= */
-
-.hero {
-    max-width: 1100px;
-    margin: auto;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    align-items: center;
-
-    gap: 60px;
+.page-title {
+    margin-bottom: 25px;
 }
 
-.badge {
-    display: inline-block;
-
-    padding: 7px 12px;
-
-    border: 1px solid rgba(160,80,255,.3);
-    border-radius: 30px;
-
-    color: #c28cff;
-
-    background: rgba(139,61,255,.08);
-
-    font-size: 12px;
+.page-title h1 {
+    font-size: 28px;
 }
 
-h1 {
-    font-size: clamp(38px,5vw,68px);
-    line-height: 1.05;
-
-    margin: 20px 0;
-}
-
-.gradient-text {
-    background: linear-gradient(90deg,#fff,#b66cff,#7f4cff);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.hero p {
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 600px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 28px;
-}
-
-.bot-visual {
-    height: 430px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-}
-
-.bot-circle {
-    width: 260px;
-    height: 260px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(circle,rgba(151,75,255,.4),transparent 60%);
-
-    box-shadow:
-        0 0 80px rgba(139,61,255,.3);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 100px;
-
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%,100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-15px);
-    }
+.page-title p {
+    color: #80889b;
+    margin-top: 7px;
 }
 
 /* ================= CARDS ================= */
 
 .cards {
-    max-width: 1100px;
-    margin: 70px auto 0;
-
     display: grid;
     grid-template-columns: repeat(4,1fr);
-
     gap: 15px;
+    margin-bottom: 25px;
 }
 
 .card {
-    background: rgba(12,14,29,.8);
-
-    border: 1px solid var(--border);
-
+    background: #11141c;
+    border: 1px solid #252a37;
     border-radius: 14px;
-
-    padding: 25px;
-
-    transition: .25s;
+    padding: 20px;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-
-    border-color: rgba(139,61,255,.45);
-
-    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+.card-label {
+    color: #80889b;
+    font-size: 13px;
 }
 
-.card-icon {
-    font-size: 28px;
-    margin-bottom: 15px;
+.card-value {
+    font-size: 27px;
+    font-weight: bold;
+    margin-top: 9px;
 }
 
-.card h3 {
-    margin-bottom: 8px;
+.card-info {
+    color: #45d483;
+    font-size: 12px;
+    margin-top: 7px;
 }
 
-.card p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.6;
+/* ================= PANELS ================= */
+
+.panel {
+    background: #11141c;
+    border: 1px solid #252a37;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
 }
 
-/* ================= AUTH ================= */
-
-.auth-container {
-    width: 100%;
-    max-width: 470px;
-
-    margin: auto;
-
-    background: rgba(11,13,27,.9);
-
-    border: 1px solid var(--border);
-
-    border-radius: 18px;
-
-    padding: 35px;
-
-    box-shadow: 0 25px 80px rgba(0,0,0,.4);
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.auth-container h2 {
-    font-size: 30px;
-    margin-bottom: 8px;
+.panel-header h3 {
+    font-size: 17px;
 }
 
-.auth-subtitle {
-    color: var(--muted);
-    margin-bottom: 25px;
+.panel-header span {
+    color: #7f8798;
+    font-size: 13px;
+}
+
+/* ================= FORM ================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
 }
 
 .form-group {
-    margin-bottom: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .form-group label {
-    display: block;
-
+    color: #b7bdca;
     font-size: 13px;
-
-    margin-bottom: 7px;
-
-    color: #c9cada;
 }
 
-.form-group input {
+.form-control {
     width: 100%;
-
-    padding: 13px 14px;
-
+    background: #0c0f15;
+    border: 1px solid #2a2f3d;
     border-radius: 9px;
-
-    border: 1px solid var(--border);
-
-    background: #070916;
-
+    padding: 12px;
     color: white;
-
     outline: none;
+}
 
+.form-control:focus {
+    border-color: #5865f2;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ================= TICKET ================= */
+
+.ticket-preview {
+    background: #0b0d12;
+    border: 1px solid #292e3b;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.discord-message {
+    background: #313338;
+    border-radius: 8px;
+    padding: 18px;
+    max-width: 700px;
+}
+
+.discord-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    background: #5865f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.bot-tag {
+    background: #5865f2;
+    padding: 2px 5px;
+    font-size: 10px;
+    border-radius: 3px;
+}
+
+.discord-content {
+    color: #dbdee1;
+    line-height: 1.6;
+}
+
+.discord-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.discord-btn {
+    padding: 9px 15px;
+    background: #5865f2;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item {
+    background: #0d1016;
+    border: 1px solid #292e3b;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.item-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: #1b2030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-desc {
+    color: #777f91;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.item-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.btn-danger {
+    background: #ed4245;
+}
+
+.btn-secondary {
+    background: #272c39;
+}
+
+/* ================= TOGGLE ================= */
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #252a37;
+}
+
+.toggle-row:last-child {
+    border-bottom: 0;
+}
+
+.toggle-text strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.toggle-text span {
+    color: #777f91;
+    font-size: 12px;
+}
+
+.switch {
+    position: relative;
+    width: 48px;
+    height: 25px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    background: #292e3b;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
     transition: .2s;
 }
 
-.form-group input:focus {
-    border-color: var(--purple);
-
-    box-shadow: 0 0 15px rgba(139,61,255,.15);
+.switch input:checked + .slider {
+    background: #5865f2;
 }
 
-.password-note {
-    color: #777b91;
-    font-size: 11px;
-    margin-top: 5px;
+.switch input:checked + .slider:before {
+    transform: translateX(23px);
 }
 
-.auth-submit {
-    width: 100%;
-    margin-top: 5px;
+/* ================= LOG ================= */
 
-    padding: 13px;
-
-    border: none;
-    border-radius: 9px;
-
-    color: white;
-    font-weight: bold;
-
-    background: linear-gradient(135deg,#722cff,#a848ff);
-
-    cursor: pointer;
-}
-
-.auth-bottom {
-    text-align: center;
-
-    margin-top: 20px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
-
-.auth-bottom a {
-    color: #b66cff;
-    cursor: pointer;
-}
-
-/* ================= COMMANDS ================= */
-
-.docs-title {
-    max-width: 1100px;
-    margin: auto;
-}
-
-.docs-title h2 {
-    font-size: 38px;
-    margin-bottom: 10px;
-}
-
-.docs-title p {
-    color: var(--muted);
-}
-
-.search {
-    max-width: 1100px;
-
-    margin: 30px auto;
-
-    display: flex;
-
-    gap: 10px;
-}
-
-.search input {
-    flex: 1;
-
-    padding: 14px;
-
-    border-radius: 9px;
-
-    border: 1px solid var(--border);
-
-    background: var(--panel);
-
-    color: white;
-
-    outline: none;
-}
-
-.command-list {
-    max-width: 1100px;
-    margin: auto;
-}
-
-.command {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 18px 20px;
-
-    margin-bottom: 10px;
-
-    background: rgba(12,14,29,.8);
-
-    border: 1px solid var(--border);
-
+.log-box {
+    background: #080a0e;
     border-radius: 10px;
-}
-
-.command-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.command-name {
-    color: #c084ff;
+    border: 1px solid #222733;
+    padding: 15px;
+    height: 420px;
+    overflow-y: auto;
     font-family: monospace;
-    font-size: 15px;
-}
-
-.command-description {
-    color: var(--muted);
     font-size: 13px;
 }
 
-/* ================= INVITE ================= */
-
-.center-box {
-    max-width: 750px;
-    margin: auto;
-    text-align: center;
+.log-line {
+    padding: 6px 0;
+    border-bottom: 1px solid #171b24;
 }
 
-.center-box h2 {
-    font-size: 42px;
-    margin-bottom: 15px;
+.log-time {
+    color: #6f7788;
 }
 
-.center-box p {
-    color: var(--muted);
-    line-height: 1.7;
+.log-success {
+    color: #63d894;
 }
 
-.invite-box {
-    margin-top: 35px;
-
-    padding: 20px;
-
-    background: var(--panel);
-
-    border: 1px solid var(--border);
-
-    border-radius: 12px;
-
-    display: flex;
-    gap: 10px;
+.log-error {
+    color: #ed6467;
 }
 
-.invite-box input {
-    flex: 1;
-
-    background: #060713;
-
-    border: 1px solid var(--border);
-
-    color: #aaa;
-
-    padding: 12px;
-
-    border-radius: 8px;
+.log-info {
+    color: #7e9cff;
 }
 
-/* ================= VIP ================= */
+/* ================= TABLE ================= */
 
-.vip-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.vip-title h2 {
-    font-size: 44px;
-}
-
-.vip-title p {
-    color: var(--muted);
-    margin-top: 10px;
-}
-
-.pricing {
-    max-width: 1100px;
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns: repeat(3,1fr);
-
-    gap: 20px;
-}
-
-.price-card {
-    position: relative;
-
-    background: rgba(11,13,27,.9);
-
-    border: 1px solid var(--border);
-
-    border-radius: 16px;
-
-    padding: 30px;
-}
-
-.price-card.featured {
-    border-color: #8b3dff;
-
-    box-shadow: 0 0 40px rgba(139,61,255,.12);
-}
-
-.popular {
-    position: absolute;
-
-    top: -12px;
-    right: 20px;
-
-    padding: 5px 10px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
-
-    background: #8b3dff;
-}
-
-.price {
-    font-size: 38px;
-
-    color: #bd7dff;
-
-    margin: 20px 0;
-}
-
-.features {
-    list-style: none;
-
-    color: #a9acbd;
-
-    line-height: 2;
-}
-
-.price-card .btn {
+.table {
     width: 100%;
-    margin-top: 25px;
+    border-collapse: collapse;
 }
 
-/* ================= LOADING ================= */
-
-.loading-screen {
-    position: fixed;
-
-    inset: 0;
-
-    background: #050611;
-
-    z-index: 9999;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-direction: column;
-
-    transition: opacity .5s;
+.table th,
+.table td {
+    padding: 13px;
+    border-bottom: 1px solid #252a37;
+    text-align: left;
+    font-size: 13px;
 }
 
-.loader {
-    width: 75px;
-    height: 75px;
-
-    border-radius: 50%;
-
-    border: 4px solid rgba(255,255,255,.08);
-
-    border-top-color: #9a4dff;
-
-    animation: spin 1s linear infinite;
-
-    margin-bottom: 25px;
+.table th {
+    color: #7f8798;
+    font-weight: normal;
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+.badge {
+    padding: 5px 9px;
+    border-radius: 5px;
+    background: #1d4630;
+    color: #68dc99;
+    font-size: 11px;
 }
 
-.loading-screen h2 {
-    margin-bottom: 8px;
+/* ================= MOBILE ================= */
+
+.mobile-menu {
+    display: none;
 }
 
-.loading-screen p {
-    color: var(--muted);
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:900px) {
-
-    header {
-        padding: 0 15px;
-    }
-
-    nav {
-        display: none;
-    }
-
-    .sidebar {
-        display: none;
-    }
-
-    main {
-        margin-left: 0;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-    }
-
+@media(max-width: 1000px) {
     .cards {
         grid-template-columns: repeat(2,1fr);
     }
 
-    .pricing {
+    .form-grid {
         grid-template-columns: 1fr;
     }
 }
 
-@media(max-width:550px) {
+@media(max-width: 700px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: .2s;
+    }
 
-    .page {
-        padding: 45px 20px;
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .mobile-menu {
+        display: block;
+        background: transparent;
+        color: white;
+        border: 0;
+        font-size: 22px;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .content {
+        padding: 18px;
     }
 
     .cards {
         grid-template-columns: 1fr;
-    }
-
-    .header-actions .btn:first-child {
-        display: none;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-    }
-
-    .invite-box {
-        flex-direction: column;
     }
 }
 </style>
@@ -772,943 +660,2072 @@ h1 {
 
 <body>
 
-<!-- ================= LOADING ================= -->
+<!-- ================= LOGIN ================= -->
 
-<div class="loading-screen" id="loading">
-    <div class="loader"></div>
+<div id="loginPage">
 
-    <h2>Đang khởi động Bot...</h2>
+    <div class="login-box">
 
-    <p>Vui lòng chờ trong giây lát</p>
-</div>
+        <div class="logo">B</div>
 
+        <h1>Bot Manager</h1>
+        <p>Đăng nhập bảng điều khiển Ticket V2</p>
 
-<!-- ================= HEADER ================= -->
+        <input
+            id="username"
+            class="input"
+            type="text"
+            placeholder="Tên đăng nhập"
+        >
 
-<header>
+        <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="Mật khẩu"
+        >
 
-    <div class="logo">
-
-        <div class="logo-icon">
-            🤖
-        </div>
-
-        Bot Documentation
-
-    </div>
-
-    <nav>
-
-        <button class="nav-btn active" data-page="home">
-            Trang chủ
-        </button>
-
-        <button class="nav-btn" data-page="commands">
-            Lệnh
-        </button>
-
-        <button class="nav-btn" data-page="invite">
-            Mời Bot
-        </button>
-
-        <button class="nav-btn" data-page="vip">
-            Mua Bot VIP
-        </button>
-
-    </nav>
-
-    <div class="header-actions">
-
-        <button class="btn" onclick="showPage('login')">
+        <button class="btn full" onclick="login()">
             Đăng nhập
         </button>
 
-        <button class="btn btn-primary" onclick="showPage('register')">
-            Đăng ký
-        </button>
-
     </div>
 
-</header>
+</div>
 
 
-<!-- ================= SIDEBAR ================= -->
+<!-- ================= APP ================= -->
 
-<aside class="sidebar">
+<div id="app">
 
-    <div class="sidebar-title">
-        Tổng quan
-    </div>
+    <!-- SIDEBAR -->
 
-    <button class="active" onclick="showPage('home')">
-        🏠 Trang chủ
-    </button>
+    <aside class="sidebar" id="sidebar">
 
-    <button onclick="showPage('commands')">
-        📖 Danh sách lệnh
-    </button>
+        <div class="brand">
 
-    <button onclick="showPage('invite')">
-        🤖 Mời Bot
-    </button>
+            <div class="brand-icon">
+                B
+            </div>
 
+            <div>
+                <strong>Bot Manager</strong>
+                <small>Ticket V2</small>
+            </div>
 
-    <div class="sidebar-title">
-        Bot Classic
-    </div>
-
-    <button onclick="showPage('commands')">
-        ⚙️ Chức năng
-    </button>
-
-    <button onclick="showPage('commands')">
-        🎵 Nhạc
-    </button>
-
-    <button onclick="showPage('commands')">
-        🎫 Ticket
-    </button>
-
-    <button onclick="showPage('commands')">
-        👋 Welcome & Goodbye
-    </button>
+        </div>
 
 
-    <div class="sidebar-title">
-        Bot Pro
-    </div>
+        <div class="menu-title">
+            Tổng quan
+        </div>
 
-    <button onclick="showPage('commands')">
-        🔐 Bảo mật
-    </button>
+        <div class="menu">
 
-    <button onclick="showPage('commands')">
-        🛡️ Moderation
-    </button>
+            <button class="active"
+                onclick="showPage('dashboard',this)">
+                🏠 Dashboard
+            </button>
 
-    <button onclick="showPage('commands')">
-        ⚡ Nâng cao
-    </button>
+        </div>
 
 
-    <div class="sidebar-title">
-        Khác
-    </div>
+        <div class="menu-title">
+            Ticket System
+        </div>
 
-    <button onclick="showPage('vip')">
-        💎 Mua Bot VIP
-    </button>
+        <div class="menu">
 
-    <button onclick="showPage('login')">
-        👤 Tài khoản
-    </button>
+            <button onclick="showPage('ticket',this)">
+                🎫 Ticket
+            </button>
 
-</aside>
+            <button onclick="showPage('products',this)">
+                🛒 Sản phẩm
+            </button>
+
+            <button onclick="showPage('sounds',this)">
+                🔊 Tiếng súng
+            </button>
+
+        </div>
 
 
-<main>
+        <div class="menu-title">
+            Discord
+        </div>
 
-<!-- ================= HOME ================= -->
+        <div class="menu">
 
-<section class="page active" id="home">
+            <button onclick="showPage('welcome',this)">
+                👋 Welcome / Goodbye
+            </button>
 
-    <div class="hero">
+            <button onclick="showPage('bot',this)">
+                🤖 Bot
+            </button>
 
-        <div>
+            <button onclick="showPage('logs',this)">
+                📋 Logs
+            </button>
 
-            <span class="badge">
-                #1 DISCORD BOT
-            </span>
+        </div>
 
-            <h1>
-                Bot Discord
-                <br>
-                <span class="gradient-text">
-                    Tốt Nhất
-                </span>
-                <br>
-                Dành Cho Server Của Bạn
-            </h1>
 
-            <p>
-                Một hệ thống bot Discord mạnh mẽ, dễ sử dụng
-                và được thiết kế để giúp server của bạn trở nên
-                chuyên nghiệp hơn.
-            </p>
+        <div class="menu-title">
+            Hệ thống
+        </div>
 
-            <div class="hero-buttons">
+        <div class="menu">
 
-                <button class="btn btn-primary"
-                        onclick="showPage('invite')">
-                    🤖 Mời Bot
+            <button onclick="showPage('settings',this)">
+                ⚙️ Cài đặt
+            </button>
+
+        </div>
+
+
+        <div class="menu">
+
+            <button class="logout" onclick="logout()">
+                🚪 Đăng xuất
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;">
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+                    ☰
                 </button>
 
-                <button class="btn"
-                        onclick="showPage('commands')">
-                    Xem lệnh →
-                </button>
+                <h2 id="pageTitle">
+                    Dashboard
+                </h2>
 
             </div>
 
-        </div>
+            <div class="status">
 
+                <span class="status-dot"></span>
 
-        <div class="bot-visual">
-
-            <div class="bot-circle">
-                🤖
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="card-icon">
-                🛡️
-            </div>
-
-            <h3>
-                Dễ sử dụng
-            </h3>
-
-            <p>
-                Giao diện thân thiện,
-                dễ dàng cấu hình.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                ⚡
-            </div>
-
-            <h3>
-                Đầy đủ tính năng
-            </h3>
-
-            <p>
-                Từ quản lý server đến
-                giải trí và tiện ích.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                🎵
-            </div>
-
-            <h3>
-                Ổn định
-            </h3>
-
-            <p>
-                Bot hoạt động 24/7
-                với hiệu suất cao.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                💬
-            </div>
-
-            <h3>
-                Hỗ trợ nhanh
-            </h3>
-
-            <p>
-                Đội ngũ hỗ trợ luôn
-                sẵn sàng giúp bạn.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= COMMANDS ================= -->
-
-<section class="page" id="commands">
-
-    <div class="docs-title">
-
-        <h2>
-            Danh sách lệnh
-            <span class="gradient-text">
-                Bot Classic
-            </span>
-        </h2>
-
-        <p>
-            Danh sách các lệnh và cách sử dụng bot.
-        </p>
-
-    </div>
-
-
-    <div class="search">
-
-        <input
-            type="text"
-            id="commandSearch"
-            placeholder="🔎 Tìm kiếm lệnh..."
-            oninput="searchCommands()"
-        >
-
-        <button class="btn">
-            Tất cả danh mục
-        </button>
-
-    </div>
-
-
-    <div class="command-list" id="commandList">
-
-        <div class="command">
-
-            <div class="command-left">
-
-                <span class="command-name">
-                    /avatar
-                </span>
-
-                <span class="command-description">
-                    Xem avatar của người dùng
-                </span>
+                Bot đang hoạt động
 
             </div>
 
-            <button class="btn"
-                    onclick="copyCommand('/avatar')">
-                Copy
-            </button>
+        </header>
 
-        </div>
 
+        <div class="content">
 
-        <div class="command">
 
-            <div class="command-left">
+            <!-- ================= DASHBOARD ================= -->
 
-                <span class="command-name">
-                    /server
-                </span>
+            <section id="dashboard" class="page active">
 
-                <span class="command-description">
-                    Xem thông tin server
-                </span>
+                <div class="page-title">
 
-            </div>
+                    <h1>Dashboard</h1>
 
-            <button class="btn"
-                    onclick="copyCommand('/server')">
-                Copy
-            </button>
+                    <p>
+                        Quản lý toàn bộ bot Discord của bạn
+                    </p>
 
-        </div>
-
-
-        <div class="command">
-
-            <div class="command-left">
-
-                <span class="command-name">
-                    /play
-                </span>
-
-                <span class="command-description">
-                    Phát nhạc từ YouTube
-                </span>
-
-            </div>
-
-            <button class="btn"
-                    onclick="copyCommand('/play')">
-                Copy
-            </button>
-
-        </div>
-
-
-        <div class="command">
-
-            <div class="command-left">
-
-                <span class="command-name">
-                    /skip
-                </span>
-
-                <span class="command-description">
-                    Bỏ qua bài hát hiện tại
-                </span>
-
-            </div>
-
-            <button class="btn"
-                    onclick="copyCommand('/skip')">
-                Copy
-            </button>
-
-        </div>
-
-
-        <div class="command">
-
-            <div class="command-left">
-
-                <span class="command-name">
-                    /stop
-                </span>
-
-                <span class="command-description">
-                    Dừng phát nhạc
-                </span>
-
-            </div>
-
-            <button class="btn"
-                    onclick="copyCommand('/stop')">
-                Copy
-            </button>
-
-        </div>
-
-
-        <div class="command">
-
-            <div class="command-left">
-
-                <span class="command-name">
-                    /ticket
-                </span>
-
-                <span class="command-description">
-                    Tạo hệ thống hỗ trợ Ticket
-                </span>
-
-            </div>
-
-            <button class="btn"
-                    onclick="copyCommand('/ticket')">
-                Copy
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= INVITE ================= -->
-
-<section class="page" id="invite">
-
-    <div class="center-box">
-
-        <h2>
-            Mời Bot vào server
-        </h2>
-
-        <p>
-            Chỉ với một cú nhấp chuột,
-            bạn có thể thêm bot vào server Discord của mình.
-        </p>
-
-
-        <div style="font-size:100px;margin:40px 0;">
-            🤖
-        </div>
-
-
-        <button class="btn btn-primary"
-                style="padding:15px 35px;"
-                onclick="alert('https://discord.com/oauth2/authorize?client_id=1532642645862518874&permissions=8&integration_type=0&scope=applications.commands+bot')">
-
-            💬 Mời Bot ngay
-
-        </button>
-
-
-        <div class="invite-box">
-
-            <input
-                id="inviteLink"
-                value="https://discord.com/oauth2/authorize?client_id=1532642645862518874&permissions=8&integration_type=0&scope=applications.commands+bot"
-                readonly
-            >
-
-            <button class="btn"
-                    onclick="copyInvite()">
-                Sao chép
-            </button>
-
-        </div>
-
-        <p style="margin-top:15px;font-size:12px;">
-            ⚠️ Các chức năng có thể hạn chế hơn đối với bot pro.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- ================= VIP ================= -->
-
-<section class="page" id="vip">
-
-    <div class="vip-title">
-
-        <h2>
-            Nâng cấp
-            <span class="gradient-text">
-                Bot VIP
-            </span>
-        </h2>
-
-        <p>
-            Trải nghiệm đầy đủ tính năng nâng cao
-            và hỗ trợ ưu tiên.
-        </p>
-
-    </div>
-
-
-    <div class="pricing">
-
-
-        <div class="price-card">
-
-            <h3>
-                VIP 1 THÁNG
-            </h3>
-
-            <div class="price">
-                49.000đ
-            </div>
-
-            <ul class="features">
-
-                <li>✓ Tất cả tính năng cơ bản</li>
-                <li>✓ Tính năng nâng cao</li>
-                <li>✓ Hỗ trợ ưu tiên</li>
-                <li>✓ Không giới hạn server</li>
-
-            </ul>
-
-            <button class="btn btn-primary">
-                Mua ngay
-            </button>
-
-        </div>
-
-
-        <div class="price-card featured">
-
-            <span class="popular">
-                PHỔ BIẾN
-            </span>
-
-            <h3>
-                VIP 6 THÁNG
-            </h3>
-
-            <div class="price">
-                249.000đ
-            </div>
-
-            <ul class="features">
-
-                <li>✓ Tất cả tính năng cơ bản</li>
-                <li>✓ Tính năng nâng cao</li>
-                <li>✓ Hỗ trợ ưu tiên</li>
-                <li>✓ Không giới hạn server</li>
-                <li>✓ Cập nhật sớm</li>
-
-            </ul>
-
-            <button class="btn btn-primary">
-                Mua ngay
-            </button>
-
-        </div>
-
-
-        <div class="price-card">
-
-            <h3>
-                VIP 12 THÁNG
-            </h3>
-
-            <div class="price">
-                449.000đ
-            </div>
-
-            <ul class="features">
-
-                <li>✓ Tất cả tính năng cơ bản</li>
-                <li>✓ Tính năng nâng cao</li>
-                <li>✓ Hỗ trợ ưu tiên</li>
-                <li>✓ Không giới hạn server</li>
-                <li>✓ Cập nhật sớm</li>
-
-            </ul>
-
-            <button class="btn btn-primary">
-                Mua ngay
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= REGISTER ================= -->
-
-<section class="page" id="register">
-
-    <div class="auth-container">
-
-        <h2>
-            Tạo tài khoản mới
-        </h2>
-
-        <p class="auth-subtitle">
-            Tham gia cộng đồng người dùng Bot.
-        </p>
-
-
-        <form onsubmit="register(event)">
-
-            <div class="form-group">
-
-                <label>
-                    Tên người dùng
-                </label>
-
-                <input
-                    type="text"
-                    id="registerUsername"
-                    placeholder="Nhập tên người dùng"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Email
-                </label>
-
-                <input
-                    type="email"
-                    id="registerEmail"
-                    placeholder="Nhập email của bạn"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Mật khẩu
-                </label>
-
-                <input
-                    type="password"
-                    id="registerPassword"
-                    placeholder="Nhập mật khẩu"
-                    required
-                >
-
-                <div class="password-note">
-                    Mật khẩu nên có ít nhất 8 ký tự.
                 </div>
 
-            </div>
+
+                <div class="cards">
+
+                    <div class="card">
+
+                        <div class="card-label">
+                            Trạng thái Bot
+                        </div>
+
+                        <div class="card-value">
+                            Online
+                        </div>
+
+                        <div class="card-info">
+                            ● Đang hoạt động
+                        </div>
+
+                    </div>
 
 
-            <!-- NHẬP LẠI MẬT KHẨU -->
+                    <div class="card">
 
-            <div class="form-group">
+                        <div class="card-label">
+                            Ticket đang mở
+                        </div>
 
-                <label>
-                    Nhập lại mật khẩu
-                </label>
+                        <div
+                            class="card-value"
+                            id="openTickets">
+                            0
+                        </div>
 
-                <input
-                    type="password"
-                    id="registerPasswordConfirm"
-                    placeholder="Nhập lại mật khẩu"
-                    required
-                >
+                        <div class="card-info">
+                            Đang chờ xử lý
+                        </div>
 
-            </div>
-
-
-            <button
-                class="auth-submit"
-                type="submit"
-            >
-                Đăng ký
-            </button>
-
-        </form>
+                    </div>
 
 
-        <div class="auth-bottom">
+                    <div class="card">
 
-            Đã có tài khoản?
+                        <div class="card-label">
+                            Sản phẩm
+                        </div>
 
-            <a onclick="showPage('login')">
-                Đăng nhập
-            </a>
+                        <div
+                            class="card-value"
+                            id="productCount">
+                            2
+                        </div>
+
+                        <div class="card-info">
+                            Đang bán
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-label">
+                            Thành viên
+                        </div>
+
+                        <div
+                            class="card-value"
+                            id="memberCount">
+                            0
+                        </div>
+
+                        <div class="card-info">
+                            Discord Server
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Trạng thái hệ thống</h3>
+
+                        <span>Realtime</span>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Discord Bot</strong>
+
+                            <span>
+                                Kết nối Discord
+                            </span>
+
+                        </div>
+
+                        <span class="badge">
+                            ONLINE
+                        </span>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Ticket System</strong>
+
+                            <span>
+                                Hệ thống ticket
+                            </span>
+
+                        </div>
+
+                        <span class="badge">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Database</strong>
+
+                            <span>
+                                Lưu cấu hình bot
+                            </span>
+
+                        </div>
+
+                        <span class="badge">
+                            CONNECTED
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TICKET ================= -->
+
+            <section id="ticket" class="page">
+
+                <div class="page-title">
+
+                    <h1>Quản lý Ticket</h1>
+
+                    <p>
+                        Chỉnh toàn bộ hệ thống ticket trực tiếp trên web
+                    </p>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Cấu hình Ticket</h3>
+
+                        <button class="btn"
+                            onclick="saveTicket()">
+                            Lưu thay đổi
+                        </button>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Tên Category
+                            </label>
+
+                            <input
+                                id="ticketCategory"
+                                class="form-control"
+                                placeholder="Ticket"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Staff Role
+                            </label>
+
+                            <input
+                                id="staffRole"
+                                class="form-control"
+                                placeholder="Staff"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Kênh Log Ticket
+                            </label>
+
+                            <input
+                                id="logChannel"
+                                class="form-control"
+                                placeholder="log-ticket"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Tên Ticket
+                            </label>
+
+                            <input
+                                id="ticketName"
+                                class="form-control"
+                                placeholder="ticket-{username}"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Nội dung Ticket</h3>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Nội dung tin nhắn
+                        </label>
+
+                        <textarea
+                            id="ticketMessage"
+                            class="form-control"
+                        >Mày Muốn Gì ? Nhấn Vào Nút Phía Dưới Để Được Hỗ Trợ 1 Cách Tốt Nhất</textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Xem trước</h3>
+
+                    </div>
+
+
+                    <div class="ticket-preview">
+
+                        <div class="discord-message">
+
+                            <div class="discord-user">
+
+                                <div class="avatar">
+                                    B
+                                </div>
+
+                                <div>
+
+                                    <span class="username">
+                                        Bot Manager
+                                    </span>
+
+                                    <span class="bot-tag">
+                                        BOT
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                class="discord-content"
+                                id="previewMessage">
+
+                                Mày Muốn Gì ? Nhấn Vào Nút Phía Dưới Để Được Hỗ Trợ 1 Cách Tốt Nhất
+
+                            </div>
+
+
+                            <div class="discord-buttons">
+
+                                <div class="discord-btn">
+                                    🛒 Mua Hàng
+                                </div>
+
+                                <div class="discord-btn">
+                                    🛠️ Hỗ Trợ
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PRODUCTS ================= -->
+
+            <section id="products" class="page">
+
+                <div class="page-title">
+
+                    <h1>Sản phẩm</h1>
+
+                    <p>
+                        Quản lý sản phẩm xuất hiện trong Ticket
+                    </p>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Danh sách sản phẩm</h3>
+
+                        <button class="btn"
+                            onclick="addProduct()">
+                            + Thêm sản phẩm
+                        </button>
+
+                    </div>
+
+
+                    <div class="items" id="productList">
+
+                        <div class="item">
+
+                            <div class="item-left">
+
+                                <div class="item-icon">
+                                    🔫
+                                </div>
+
+                                <div>
+
+                                    <div class="item-name">
+                                        1 Tiếng Súng
+                                    </div>
+
+                                    <div class="item-desc">
+                                        Chọn Sound 1 - Sound 10
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="item-actions">
+
+                                <button
+                                    class="btn btn-secondary">
+                                    Sửa
+                                </button>
+
+                                <button
+                                    class="btn btn-danger">
+                                    Xóa
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="item">
+
+                            <div class="item-left">
+
+                                <div class="item-icon">
+                                    🎨
+                                </div>
+
+                                <div>
+
+                                    <div class="item-name">
+                                        2 Reshade Costum
+                                    </div>
+
+                                    <div class="item-desc">
+                                        Sản phẩm Reshade
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="item-actions">
+
+                                <button
+                                    class="btn btn-secondary">
+                                    Sửa
+                                </button>
+
+                                <button
+                                    class="btn btn-danger">
+                                    Xóa
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SOUNDS ================= -->
+
+            <section id="sounds" class="page">
+
+                <div class="page-title">
+
+                    <h1>Tiếng súng</h1>
+
+                    <p>
+                        Quản lý Sound 1 đến Sound 10
+                    </p>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Danh sách Sound</h3>
+
+                        <button class="btn"
+                            onclick="addSound()">
+                            + Thêm Sound
+                        </button>
+
+                    </div>
+
+
+                    <div class="items" id="soundList">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= WELCOME ================= -->
+
+            <section id="welcome" class="page">
+
+                <div class="page-title">
+
+                    <h1>Welcome / Goodbye</h1>
+
+                    <p>
+                        Cấu hình tin nhắn thành viên vào và rời server
+                    </p>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Welcome Message</strong>
+
+                            <span>
+                                Gửi tin nhắn khi thành viên tham gia
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                id="welcomeEnabled"
+                                type="checkbox"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="form-grid"
+                        style="margin-top:20px;">
+
+                        <div class="form-group">
+
+                            <label>
+                                Welcome Channel
+                            </label>
+
+                            <input
+                                id="welcomeChannel"
+                                class="form-control"
+                                placeholder="welcome">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Nội dung Welcome
+                            </label>
+
+                            <input
+                                id="welcomeMessage"
+                                class="form-control"
+                                value="Chào mừng {user} đến với server!">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Goodbye Message</strong>
+
+                            <span>
+                                Gửi tin nhắn khi thành viên rời server
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                id="goodbyeEnabled"
+                                type="checkbox"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="form-grid"
+                        style="margin-top:20px;">
+
+                        <div class="form-group">
+
+                            <label>
+                                Goodbye Channel
+                            </label>
+
+                            <input
+                                id="goodbyeChannel"
+                                class="form-control"
+                                placeholder="goodbye">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Nội dung Goodbye
+                            </label>
+
+                            <input
+                                id="goodbyeMessage"
+                                class="form-control"
+                                value="Tạm biệt {user}!">
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn"
+                        style="margin-top:20px;"
+                        onclick="saveWelcome()">
+
+                        Lưu thay đổi
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= BOT ================= -->
+
+            <section id="bot" class="page">
+
+                <div class="page-title">
+
+                    <h1>Bot Discord</h1>
+
+                    <p>
+                        Quản lý trạng thái và cấu hình bot
+                    </p>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Thông tin Bot</h3>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Bot Name
+                            </label>
+
+                            <input
+                                id="botName"
+                                class="form-control"
+                                placeholder="Bot Manager">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Prefix
+                            </label>
+
+                            <input
+                                id="botPrefix"
+                                class="form-control"
+                                value="t!">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Discord Server ID
+                            </label>
+
+                            <input
+                                id="guildId"
+                                class="form-control"
+                                placeholder="Server ID">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Bot Status
+                            </label>
+
+                            <select
+                                id="botStatus"
+                                class="form-control">
+
+                                <option>Online</option>
+                                <option>Idle</option>
+                                <option>Do Not Disturb</option>
+                                <option>Invisible</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn"
+                        style="margin-top:20px;"
+                        onclick="saveBot()">
+
+                        Lưu cấu hình
+
+                    </button>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Chức năng</h3>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Ticket System</strong>
+
+                            <span>
+                                Cho phép bot tạo ticket
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input type="checkbox" checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Welcome / Goodbye</strong>
+
+                            <span>
+                                Tự động chào thành viên
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input type="checkbox" checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Command System</strong>
+
+                            <span>
+                                Kích hoạt lệnh bot
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input type="checkbox" checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= LOGS ================= -->
+
+            <section id="logs" class="page">
+
+                <div class="page-title">
+
+                    <h1>Logs</h1>
+
+                    <p>
+                        Theo dõi hoạt động của bot
+                    </p>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>System Logs</h3>
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="clearLogs()">
+
+                            Xóa
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="logBox"
+                        class="log-box">
+
+                        <div class="log-line">
+
+                            <span class="log-time">
+                                [14:00:01]
+                            </span>
+
+                            <span class="log-success">
+                                [SUCCESS]
+                            </span>
+
+                            Bot đã kết nối Discord.
+
+                        </div>
+
+
+                        <div class="log-line">
+
+                            <span class="log-time">
+                                [14:00:03]
+                            </span>
+
+                            <span class="log-info">
+                                [INFO]
+                            </span>
+
+                            Ticket System đã khởi động.
+
+                        </div>
+
+
+                        <div class="log-line">
+
+                            <span class="log-time">
+                                [14:00:04]
+                            </span>
+
+                            <span class="log-success">
+                                [SUCCESS]
+                            </span>
+
+                            Database đã kết nối.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SETTINGS ================= -->
+
+            <section id="settings" class="page">
+
+                <div class="page-title">
+
+                    <h1>Cài đặt</h1>
+
+                    <p>
+                        Cài đặt bảng điều khiển
+                    </p>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Giao diện</h3>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Dark Mode</strong>
+
+                            <span>
+                                Sử dụng giao diện tối
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                disabled>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div class="toggle-text">
+
+                            <strong>Realtime Update</strong>
+
+                            <span>
+                                Tự động cập nhật trạng thái bot
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>Bảo mật</h3>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Tên đăng nhập
+                            </label>
+
+                            <input
+                                id="adminUser"
+                                class="form-control"
+                                value="admin">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Mật khẩu mới
+                            </label>
+
+                            <input
+                                id="adminPassword"
+                                type="password"
+                                class="form-control"
+                                placeholder="••••••••">
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn"
+                        style="margin-top:20px;"
+                        onclick="changePassword()">
+
+                        Đổi mật khẩu
+
+                    </button>
+
+                </div>
+
+            </section>
+
 
         </div>
 
-    </div>
+    </main>
 
-</section>
-
-
-<!-- ================= LOGIN ================= -->
-
-<section class="page" id="login">
-
-    <div class="auth-container">
-
-        <h2>
-            Chào mừng trở lại!
-        </h2>
-
-        <p class="auth-subtitle">
-            Đăng nhập để tiếp tục sử dụng Bot.
-        </p>
-
-
-        <form onsubmit="login(event)">
-
-            <div class="form-group">
-
-                <label>
-                    Email
-                </label>
-
-                <input
-                    type="email"
-                    placeholder="Nhập email của bạn"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Mật khẩu
-                </label>
-
-                <input
-                    type="password"
-                    placeholder="Nhập mật khẩu"
-                    required
-                >
-
-            </div>
-
-
-            <button
-                class="auth-submit"
-                type="submit"
-            >
-                Đăng nhập
-            </button>
-
-        </form>
-
-
-        <div class="auth-bottom">
-
-            Chưa có tài khoản?
-
-            <a onclick="showPage('register')">
-                Đăng ký
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
+</div>
 
 
 <script>
 
-/* ================= PAGE SYSTEM ================= */
-
-function showPage(page) {
-
-    document.querySelectorAll(".page")
-        .forEach(p => p.classList.remove("active"));
-
-    const target = document.getElementById(page);
-
-    if (target) {
-        target.classList.add("active");
-    }
-
-    document.querySelectorAll(".nav-btn")
-        .forEach(btn => btn.classList.remove("active"));
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* ================= LOADING ================= */
-
-window.addEventListener("load", () => {
-
-    setTimeout(() => {
-
-        const loading =
-            document.getElementById("loading");
-
-        loading.style.opacity = "0";
-
-        setTimeout(() => {
-            loading.style.display = "none";
-        },500);
-
-    },1000);
-
-});
-
-
-/* ================= REGISTER ================= */
-
-function register(event) {
-
-    event.preventDefault();
-
-    const password =
-        document.getElementById("registerPassword").value;
-
-    const confirmPassword =
-        document.getElementById("registerPasswordConfirm").value;
-
-
-    if (password !== confirmPassword) {
-
-        alert("❌ Mật khẩu nhập lại không trùng khớp!");
-
-        return;
-    }
-
-
-    if (password.length < 8) {
-
-        alert("❌ Mật khẩu phải có ít nhất 8 ký tự!");
-
-        return;
-    }
-
-
-    alert("✅ Đăng ký thành công!");
-
-}
-
-
 /* ================= LOGIN ================= */
 
-function login(event) {
+function login() {
 
-    event.preventDefault();
+    const username =
+        document.getElementById("username").value;
 
-    alert("✅ Đăng nhập thành công!");
+    const password =
+        document.getElementById("password").value;
+
+    if (!username || !password) {
+
+        alert("Vui lòng nhập đầy đủ thông tin.");
+
+        return;
+    }
+
+    /*
+       Tạm thời đăng nhập ở frontend.
+
+       Sau khi nối với index.js,
+       phần này sẽ chuyển sang API thật.
+    */
+
+    localStorage.setItem(
+        "botManagerLogin",
+        "true"
+    );
+
+    document.getElementById("loginPage").style.display =
+        "none";
+
+    document.getElementById("app").style.display =
+        "block";
 
 }
 
 
-/* ================= COPY COMMAND ================= */
+/* ================= LOGOUT ================= */
 
-function copyCommand(command) {
+function logout() {
 
-    navigator.clipboard.writeText(command);
+    localStorage.removeItem(
+        "botManagerLogin"
+    );
 
-    alert("Đã copy: " + command);
-
-}
-
-
-/* ================= COPY INVITE ================= */
-
-function copyInvite() {
-
-    const link =
-        document.getElementById("inviteLink").value;
-
-    navigator.clipboard.writeText(link);
-
-    alert("✅ Đã sao chép link mời Bot!");
+    location.reload();
 
 }
 
 
-/* ================= SEARCH ================= */
+/* ================= PAGE ================= */
 
-function searchCommands() {
+const pageNames = {
 
-    const keyword =
-        document
-        .getElementById("commandSearch")
-        .value
-        .toLowerCase();
+    dashboard: "Dashboard",
 
+    ticket: "Quản lý Ticket",
+
+    products: "Sản phẩm",
+
+    sounds: "Tiếng súng",
+
+    welcome: "Welcome / Goodbye",
+
+    bot: "Bot Discord",
+
+    logs: "Logs",
+
+    settings: "Cài đặt"
+
+};
+
+
+function showPage(page, button) {
 
     document
-        .querySelectorAll(".command")
-        .forEach(command => {
+        .querySelectorAll(".page")
+        .forEach(el => {
 
-            const text =
-                command.innerText.toLowerCase();
-
-            command.style.display =
-                text.includes(keyword)
-                ? "flex"
-                : "none";
+            el.classList.remove("active");
 
         });
 
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".menu button")
+        .forEach(el => {
+
+            el.classList.remove("active");
+
+        });
+
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+
+    document.getElementById("pageTitle")
+        .textContent =
+        pageNames[page] || page;
+
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
 }
+
+
+/* ================= MOBILE ================= */
+
+function toggleSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* ================= TICKET ================= */
+
+const ticketMessage =
+    document.getElementById("ticketMessage");
+
+if (ticketMessage) {
+
+    ticketMessage.addEventListener(
+        "input",
+        function() {
+
+            document.getElementById(
+                "previewMessage"
+            ).textContent = this.value;
+
+        }
+    );
+
+}
+
+
+function saveTicket() {
+
+    const data = {
+
+        category:
+            document.getElementById(
+                "ticketCategory"
+            ).value,
+
+        staffRole:
+            document.getElementById(
+                "staffRole"
+            ).value,
+
+        logChannel:
+            document.getElementById(
+                "logChannel"
+            ).value,
+
+        ticketName:
+            document.getElementById(
+                "ticketName"
+            ).value,
+
+        message:
+            document.getElementById(
+                "ticketMessage"
+            ).value
+
+    };
+
+
+    localStorage.setItem(
+        "ticketSettings",
+        JSON.stringify(data)
+    );
+
+
+    addLog(
+        "SUCCESS",
+        "Đã lưu cấu hình Ticket."
+    );
+
+    alert("Đã lưu cấu hình Ticket.");
+}
+
+
+/* ================= PRODUCTS ================= */
+
+let products = [
+
+    {
+        name: "1 Tiếng Súng",
+        description: "Chọn Sound 1 - Sound 10"
+    },
+
+    {
+        name: "2 Reshade Costum",
+        description: "Sản phẩm Reshade"
+    }
+
+];
+
+
+function renderProducts() {
+
+    const list =
+        document.getElementById(
+            "productList"
+        );
+
+    list.innerHTML = "";
+
+
+    products.forEach((product,index) => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "item";
+
+        item.innerHTML = `
+
+            <div class="item-left">
+
+                <div class="item-icon">
+                    🛒
+                </div>
+
+                <div>
+
+                    <div class="item-name">
+                        ${escapeHtml(product.name)}
+                    </div>
+
+                    <div class="item-desc">
+                        ${escapeHtml(product.description)}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="item-actions">
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="editProduct(${index})">
+                    Sửa
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteProduct(${index})">
+                    Xóa
+                </button>
+
+            </div>
+
+        `;
+
+        list.appendChild(item);
+
+    });
+
+
+    document.getElementById(
+        "productCount"
+    ).textContent = products.length;
+
+}
+
+
+function addProduct() {
+
+    const name =
+        prompt("Tên sản phẩm:");
+
+    if (!name) return;
+
+
+    const description =
+        prompt("Mô tả sản phẩm:") || "";
+
+
+    products.push({
+
+        name,
+        description
+
+    });
+
+
+    renderProducts();
+
+    addLog(
+        "SUCCESS",
+        "Đã thêm sản phẩm: " + name
+    );
+
+}
+
+
+function editProduct(index) {
+
+    const name =
+        prompt(
+            "Tên sản phẩm:",
+            products[index].name
+        );
+
+    if (!name) return;
+
+
+    const description =
+        prompt(
+            "Mô tả:",
+            products[index].description
+        );
+
+
+    products[index] = {
+
+        name,
+        description
+
+    };
+
+
+    renderProducts();
+
+}
+
+
+function deleteProduct(index) {
+
+    if (
+        !confirm(
+            "Bạn có chắc muốn xóa sản phẩm này?"
+        )
+    ) return;
+
+
+    products.splice(index,1);
+
+    renderProducts();
+
+}
+
+
+/* ================= SOUNDS ================= */
+
+let sounds = [];
+
+for (let i = 1; i <= 10; i++) {
+
+    sounds.push({
+
+        name: "Sound " + i,
+
+        price: "50k",
+
+        url: ""
+
+    });
+
+}
+
+
+function renderSounds() {
+
+    const list =
+        document.getElementById(
+            "soundList"
+        );
+
+    list.innerHTML = "";
+
+
+    sounds.forEach((sound,index) => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "item";
+
+        item.innerHTML = `
+
+            <div class="item-left">
+
+                <div class="item-icon">
+                    🔊
+                </div>
+
+                <div>
+
+                    <div class="item-name">
+                        ${sound.name}
+                    </div>
+
+                    <div class="item-desc">
+                        Giá: ${sound.price}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="item-actions">
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="editSound(${index})">
+                    Sửa
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteSound(${index})">
+                    Xóa
+                </button>
+
+            </div>
+
+        `;
+
+        list.appendChild(item);
+
+    });
+
+}
+
+
+function addSound() {
+
+    const name =
+        prompt("Tên Sound:");
+
+    if (!name) return;
+
+
+    const price =
+        prompt("Giá:", "50k") || "50k";
+
+
+    sounds.push({
+
+        name,
+        price,
+        url: ""
+
+    });
+
+
+    renderSounds();
+
+}
+
+
+function editSound(index) {
+
+    const name =
+        prompt(
+            "Tên Sound:",
+            sounds[index].name
+        );
+
+    if (!name) return;
+
+
+    const price =
+        prompt(
+            "Giá:",
+            sounds[index].price
+        );
+
+
+    sounds[index].name = name;
+
+    sounds[index].price =
+        price || sounds[index].price;
+
+
+    renderSounds();
+
+}
+
+
+function deleteSound(index) {
+
+    if (
+        !confirm(
+            "Xóa Sound này?"
+        )
+    ) return;
+
+
+    sounds.splice(index,1);
+
+    renderSounds();
+
+}
+
+
+/* ================= WELCOME ================= */
+
+function saveWelcome() {
+
+    const data = {
+
+        welcomeEnabled:
+            document.getElementById(
+                "welcomeEnabled"
+            ).checked,
+
+        welcomeChannel:
+            document.getElementById(
+                "welcomeChannel"
+            ).value,
+
+        welcomeMessage:
+            document.getElementById(
+                "welcomeMessage"
+            ).value,
+
+        goodbyeEnabled:
+            document.getElementById(
+                "goodbyeEnabled"
+            ).checked,
+
+        goodbyeChannel:
+            document.getElementById(
+                "goodbyeChannel"
+            ).value,
+
+        goodbyeMessage:
+            document.getElementById(
+                "goodbyeMessage"
+            ).value
+
+    };
+
+
+    localStorage.setItem(
+        "welcomeSettings",
+        JSON.stringify(data)
+    );
+
+
+    addLog(
+        "SUCCESS",
+        "Đã lưu Welcome / Goodbye."
+    );
+
+
+    alert(
+        "Đã lưu Welcome / Goodbye."
+    );
+
+}
+
+
+/* ================= BOT ================= */
+
+function saveBot() {
+
+    const data = {
+
+        name:
+            document.getElementById(
+                "botName"
+            ).value,
+
+        prefix:
+            document.getElementById(
+                "botPrefix"
+            ).value,
+
+        guildId:
+            document.getElementById(
+                "guildId"
+            ).value,
+
+        status:
+            document.getElementById(
+                "botStatus"
+            ).value
+
+    };
+
+
+    localStorage.setItem(
+        "botSettings",
+        JSON.stringify(data)
+    );
+
+
+    addLog(
+        "SUCCESS",
+        "Đã lưu cấu hình Bot."
+    );
+
+
+    alert(
+        "Đã lưu cấu hình Bot."
+    );
+
+}
+
+
+/* ================= LOG ================= */
+
+function addLog(type,message) {
+
+    const box =
+        document.getElementById(
+            "logBox"
+        );
+
+
+    const now =
+        new Date().toLocaleTimeString(
+            "vi-VN"
+        );
+
+
+    let className =
+        "log-info";
+
+
+    if (type === "SUCCESS")
+        className = "log-success";
+
+
+    if (type === "ERROR")
+        className = "log-error";
+
+
+    const line =
+        document.createElement("div");
+
+    line.className = "log-line";
+
+    line.innerHTML = `
+
+        <span class="log-time">
+            [${now}]
+        </span>
+
+        <span class="${className}">
+            [${type}]
+        </span>
+
+        ${escapeHtml(message)}
+
+    `;
+
+
+    box.appendChild(line);
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+function clearLogs() {
+
+    document.getElementById(
+        "logBox"
+    ).innerHTML = "";
+
+}
+
+
+/* ================= PASSWORD ================= */
+
+function changePassword() {
+
+    const password =
+        document.getElementById(
+            "adminPassword"
+        ).value;
+
+
+    if (!password) {
+
+        alert(
+            "Hãy nhập mật khẩu mới."
+        );
+
+        return;
+
+    }
+
+
+    /*
+      Khi nối backend thật,
+      mật khẩu sẽ được lưu server.
+    */
+
+    localStorage.setItem(
+        "adminPassword",
+        password
+    );
+
+
+    document.getElementById(
+        "adminPassword"
+    ).value = "";
+
+
+    alert(
+        "Đã thay đổi mật khẩu."
+    );
+
+}
+
+
+/* ================= SECURITY ================= */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text ?? "";
+
+    return div.innerHTML;
+
+}
+
+
+/* ================= LOAD ================= */
+
+function loadData() {
+
+    const ticket =
+        localStorage.getItem(
+            "ticketSettings"
+        );
+
+
+    if (ticket) {
+
+        const data =
+            JSON.parse(ticket);
+
+
+        document.getElementById(
+            "ticketCategory"
+        ).value =
+            data.category || "";
+
+
+        document.getElementById(
+            "staffRole"
+        ).value =
+            data.staffRole || "";
+
+
+        document.getElementById(
+            "logChannel"
+        ).value =
+            data.logChannel || "";
+
+
+        document.getElementById(
+            "ticketName"
+        ).value =
+            data.ticketName || "";
+
+
+        document.getElementById(
+            "ticketMessage"
+        ).value =
+            data.message || "";
+
+
+        document.getElementById(
+            "previewMessage"
+        ).textContent =
+            data.message || "";
+
+    }
+
+
+    renderProducts();
+
+    renderSounds();
+
+}
+
+
+/* ================= START ================= */
+
+if (
+    localStorage.getItem(
+        "botManagerLogin"
+    ) === "true"
+) {
+
+    document.getElementById(
+        "loginPage"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "app"
+    ).style.display = "block";
+
+}
+
+
+loadData();
 
 </script>
 
