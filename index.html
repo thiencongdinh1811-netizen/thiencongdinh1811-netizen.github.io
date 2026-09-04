@@ -1,518 +1,703 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Bot Manager</title>
+<title>Bot Manager</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100%;
-        }
+body {
 
-        body {
+    margin: 0;
 
-            min-height: 100vh;
+    min-height: 100vh;
 
-            background:
-                radial-gradient(
-                    circle at top left,
-                    #151b3d 0%,
-                    transparent 40%
-                ),
-                radial-gradient(
-                    circle at bottom right,
-                    #101b38 0%,
-                    transparent 40%
-                ),
-                #080b12;
+    background:
+        radial-gradient(
+            circle at top left,
+            #151b3d 0%,
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #101b38 0%,
+            transparent 40%
+        ),
+        #080b12;
 
-            color: white;
+    color: white;
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-        }
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
 
-        /* =====================================================
-           LOGIN
-        ===================================================== */
+/* ========================================================= */
+/* LOGIN */
+/* ========================================================= */
 
-        .center {
+.center {
 
-            min-height: 100vh;
+    min-height: 100vh;
 
-            display: flex;
+    display: flex;
 
-            justify-content: center;
+    justify-content: center;
 
-            align-items: center;
+    align-items: center;
 
-            padding: 20px;
-        }
+    padding: 20px;
+}
 
-        .login-box {
+.login-box {
 
-            width: 430px;
+    width: 430px;
 
-            max-width: 100%;
+    max-width: 100%;
 
-            padding: 40px;
+    padding: 40px;
 
-            background:
-                rgba(25, 28, 38, 0.96);
+    background:
+        rgba(25, 28, 38, 0.96);
 
-            border:
-                1px solid #303544;
+    border:
+        1px solid #303544;
 
-            border-radius: 18px;
+    border-radius: 18px;
 
-            text-align: center;
+    text-align: center;
 
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, .45);
-        }
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
+}
 
-        .logo {
+.logo {
 
-            width: 82px;
-            height: 82px;
+    width: 82px;
 
-            margin:
-                0 auto 25px;
+    height: 82px;
 
-            border-radius: 50%;
+    margin:
+        0 auto 25px;
 
-            background: #5865f2;
+    border-radius: 50%;
 
-            display: flex;
+    background: #5865f2;
 
-            align-items: center;
+    display: flex;
 
-            justify-content: center;
+    align-items: center;
 
-            font-size: 42px;
+    justify-content: center;
 
-            font-weight: bold;
-        }
+    font-size: 42px;
 
-        h1 {
+    font-weight: bold;
+}
 
-            margin:
-                0 0 12px;
+h1 {
 
-            font-size: 28px;
-        }
+    margin:
+        0 0 12px;
 
-        p {
+    font-size: 28px;
+}
 
-            color: #aeb4c2;
+p {
 
-            line-height: 1.6;
-        }
+    color: #aeb4c2;
 
-        .login-button {
+    line-height: 1.6;
+}
 
-            width: 100%;
+button {
 
-            margin-top: 20px;
+    border: 0;
 
-            padding: 15px;
+    border-radius: 9px;
 
-            border: 0;
+    background: #5865f2;
 
-            border-radius: 9px;
+    color: white;
 
-            background: #5865f2;
+    font-size: 15px;
 
-            color: white;
+    font-weight: bold;
 
-            font-size: 16px;
+    cursor: pointer;
+}
 
-            font-weight: bold;
+button:hover {
 
-            cursor: pointer;
+    background: #4752c4;
+}
 
-            transition:
-                background .2s,
-                transform .1s;
-        }
+.login-button {
 
-        .login-button:hover {
+    width: 100%;
 
-            background: #4752c4;
-        }
+    margin-top: 20px;
 
-        .login-button:active {
+    padding: 15px;
+}
 
-            transform: scale(.99);
-        }
+.error {
 
-        .login-button:disabled {
+    color: #ff6b6b;
 
-            opacity: .6;
+    margin-top: 15px;
 
-            cursor: not-allowed;
-        }
+    line-height: 1.5;
+}
 
-        .loading {
+/* ========================================================= */
+/* DASHBOARD */
+/* ========================================================= */
 
-            color: #aeb4c2;
+.dashboard {
 
-            text-align: center;
-        }
+    display: none;
 
-        .error {
+    min-height: 100vh;
+}
 
-            color: #ff6b6b;
+.topbar {
 
-            margin-top: 15px;
+    min-height: 70px;
 
-            line-height: 1.5;
-        }
+    padding:
+        12px 30px;
 
-        /* =====================================================
-           DASHBOARD
-        ===================================================== */
+    display: flex;
 
-        .dashboard {
+    align-items: center;
 
-            display: none;
+    justify-content: space-between;
 
-            min-height: 100vh;
-        }
+    gap: 20px;
 
-        .topbar {
+    background: #111522;
 
-            min-height: 70px;
+    border-bottom:
+        1px solid #292e3d;
+}
 
-            padding:
-                12px 30px;
+.brand {
 
-            display: flex;
+    font-size: 21px;
 
-            align-items: center;
+    font-weight: bold;
+}
 
-            justify-content: space-between;
+.user {
 
-            gap: 20px;
+    display: flex;
 
-            background: #111522;
+    align-items: center;
 
-            border-bottom:
-                1px solid #292e3d;
-        }
+    gap: 12px;
+}
 
-        .brand {
+.avatar {
 
-            font-size: 21px;
+    width: 40px;
 
-            font-weight: bold;
-        }
+    height: 40px;
 
-        .user {
+    border-radius: 50%;
 
-            display: flex;
+    background: #5865f2;
 
-            align-items: center;
+    background-size: cover;
 
-            gap: 12px;
-        }
+    background-position: center;
 
-        .username {
+    display: flex;
 
-            font-weight: bold;
+    align-items: center;
 
-            color: #ffffff;
-        }
+    justify-content: center;
 
-        .avatar {
+    font-weight: bold;
+}
 
-            width: 40px;
-            height: 40px;
+.logout {
 
-            border-radius: 50%;
+    width: auto;
 
-            background: #5865f2;
+    padding:
+        9px 15px;
 
-            background-size: cover;
+    background: #ed4245;
 
-            background-position: center;
+    font-size: 14px;
+}
 
-            display: flex;
+.logout:hover {
 
-            align-items: center;
+    background: #c93639;
+}
 
-            justify-content: center;
+.content {
 
-            font-weight: bold;
+    max-width: 1150px;
 
-            overflow: hidden;
-        }
+    margin: auto;
 
-        .logout {
+    padding:
+        40px 25px;
+}
 
-            width: auto;
+.welcome {
 
-            margin: 0;
+    background: #151927;
 
-            padding:
-                9px 15px;
+    border:
+        1px solid #2b3040;
 
-            border: 0;
+    border-radius: 15px;
 
-            border-radius: 7px;
+    padding: 25px;
 
-            background: #ed4245;
+    margin-bottom: 30px;
+}
 
-            color: white;
+.guild-grid {
 
-            font-size: 14px;
+    display: grid;
 
-            font-weight: bold;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        );
 
-            cursor: pointer;
-        }
+    gap: 18px;
+}
 
-        .logout:hover {
+.guild {
 
-            background: #c93639;
-        }
+    background: #151927;
 
-        .content {
+    border:
+        1px solid #2b3040;
 
-            max-width: 1100px;
+    border-radius: 14px;
 
-            margin: auto;
+    padding: 22px;
 
-            padding:
-                40px 25px;
-        }
+    transition:
+        transform .2s,
+        border-color .2s;
+}
 
-        .welcome {
+.guild:hover {
 
-            background: #151927;
+    transform:
+        translateY(-3px);
 
-            border:
-                1px solid #2b3040;
+    border-color:
+        #5865f2;
+}
 
-            border-radius: 15px;
+.guild-icon {
 
-            padding: 25px;
+    width: 60px;
 
-            margin-bottom: 30px;
-        }
+    height: 60px;
 
-        .welcome h2 {
+    border-radius: 15px;
 
-            margin-top: 0;
-        }
+    background: #5865f2;
 
-        .guild-grid {
+    display: flex;
 
-            display: grid;
+    align-items: center;
 
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(250px, 1fr)
-                );
+    justify-content: center;
 
-            gap: 18px;
-        }
+    font-size: 22px;
 
-        .guild {
+    margin-bottom: 15px;
 
-            background: #151927;
+    overflow: hidden;
+}
 
-            border:
-                1px solid #2b3040;
+.guild-icon img {
 
-            border-radius: 14px;
+    width: 60px;
 
-            padding: 22px;
+    height: 60px;
 
-            transition:
-                transform .2s,
-                border-color .2s,
-                box-shadow .2s;
-        }
+    object-fit: cover;
+}
 
-        .guild:hover {
+.guild-name {
 
-            transform:
-                translateY(-3px);
+    font-size: 18px;
 
-            border-color:
-                #5865f2;
+    font-weight: bold;
 
-            box-shadow:
-                0 10px 30px
-                rgba(0, 0, 0, .25);
-        }
+    margin-bottom: 10px;
+}
 
-        .guild-icon {
+.status {
 
-            width: 55px;
-            height: 55px;
+    font-size: 14px;
 
-            border-radius: 15px;
+    margin-bottom: 15px;
+}
 
-            background: #5865f2;
+.online {
 
-            display: flex;
+    color: #55d17a;
+}
 
-            align-items: center;
+.offline {
 
-            justify-content: center;
+    color: #999;
+}
 
-            font-size: 22px;
+.manage-button {
 
-            margin-bottom: 15px;
+    width: 100%;
 
-            overflow: hidden;
-        }
+    padding: 12px;
 
-        .guild-icon img {
+    margin-top: 5px;
+}
 
-            width: 55px;
-            height: 55px;
+.invite-button {
 
-            object-fit: cover;
+    width: 100%;
 
-            border-radius: 15px;
-        }
+    padding: 12px;
 
-        .guild-name {
+    margin-top: 8px;
 
-            font-size: 18px;
+    background: #3ba55d;
+}
 
-            font-weight: bold;
+.invite-button:hover {
 
-            margin-bottom: 8px;
+    background: #2d7d46;
+}
 
-            word-break: break-word;
-        }
+/* ========================================================= */
+/* MANAGEMENT */
+/* ========================================================= */
 
-        .status {
+#managementPage {
 
-            font-size: 14px;
+    display: none;
+}
 
-            margin-top: 8px;
-        }
+.back-button {
 
-        .status.online {
+    width: auto;
 
-            color: #55d17a;
-        }
+    padding:
+        10px 16px;
 
-        .status.offline {
+    margin-bottom: 20px;
 
-            color: #aeb4c2;
-        }
+    background: #2b3040;
+}
 
-        .guild-button {
+.back-button:hover {
 
-            width: 100%;
+    background: #3a4052;
+}
 
-            margin-top: 18px;
+.server-header {
 
-            padding: 11px;
+    background: #151927;
 
-            border: 0;
+    border:
+        1px solid #2b3040;
 
-            border-radius: 8px;
+    border-radius: 15px;
 
-            background: #5865f2;
+    padding: 25px;
 
-            color: white;
+    margin-bottom: 20px;
+}
 
-            font-weight: bold;
+.server-header-row {
 
-            cursor: pointer;
-        }
+    display: flex;
 
-        .guild-button:hover {
+    align-items: center;
 
-            background: #4752c4;
-        }
+    gap: 18px;
+}
 
-        .empty {
+.server-big-icon {
 
-            grid-column: 1 / -1;
+    width: 70px;
 
-            background: #151927;
+    height: 70px;
 
-            border:
-                1px solid #2b3040;
+    border-radius: 18px;
 
-            border-radius: 14px;
+    object-fit: cover;
 
-            padding: 30px;
+    background: #5865f2;
+}
 
-            text-align: center;
+.tabs {
 
-            color: #aeb4c2;
-        }
+    display: flex;
 
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
+    gap: 10px;
 
-        @media (max-width: 600px) {
+    flex-wrap: wrap;
 
-            .login-box {
+    margin-bottom: 20px;
+}
 
-                padding: 30px 22px;
-            }
+.tab-button {
 
-            .topbar {
+    width: auto;
 
-                padding:
-                    12px 15px;
+    padding:
+        11px 18px;
 
-                flex-wrap: wrap;
-            }
+    background: #1b2030;
+}
 
-            .user {
+.tab-button.active {
 
-                width: 100%;
+    background: #5865f2;
+}
 
-                justify-content: flex-end;
-            }
+.panel {
 
-            .content {
+    display: none;
 
-                padding:
-                    25px 15px;
-            }
-        }
+    background: #151927;
 
-    </style>
+    border:
+        1px solid #2b3040;
+
+    border-radius: 15px;
+
+    padding: 25px;
+}
+
+.panel.active {
+
+    display: block;
+}
+
+/* ========================================================= */
+/* TICKET */
+/* ========================================================= */
+
+.form-group {
+
+    margin-bottom: 18px;
+}
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+input,
+textarea,
+select {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border:
+        1px solid #363c4e;
+
+    border-radius: 8px;
+
+    background: #0e121c;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+textarea {
+
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color:
+        #5865f2;
+}
+
+.checkbox-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.checkbox-row input {
+
+    width: auto;
+}
+
+.save-button {
+
+    padding:
+        12px 22px;
+}
+
+.message {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    display: none;
+}
+
+.success-message {
+
+    display: block;
+
+    background:
+        rgba(46, 204, 113, .15);
+
+    color: #55d17a;
+}
+
+.error-message {
+
+    display: block;
+
+    background:
+        rgba(237, 66, 69, .15);
+
+    color: #ff6b6b;
+}
+
+/* ========================================================= */
+/* INFO */
+/* ========================================================= */
+
+.info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px, 1fr)
+        );
+
+    gap: 15px;
+}
+
+.info-card {
+
+    background: #10141f;
+
+    border:
+        1px solid #292f3f;
+
+    border-radius: 12px;
+
+    padding: 20px;
+}
+
+.info-number {
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+.loading {
+
+    color: #aeb4c2;
+}
+
+.empty {
+
+    color: #999;
+
+    padding: 20px 0;
+}
+
+/* ========================================================= */
+/* RESPONSIVE */
+/* ========================================================= */
+
+@media (max-width: 700px) {
+
+    .topbar {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .user {
+
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .server-header-row {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+}
+
+</style>
 
 </head>
 
 <body>
 
-
-<!-- =========================================================
-     LOGIN PAGE
-========================================================= -->
+<!-- ======================================================= -->
+<!-- LOGIN PAGE -->
+<!-- ======================================================= -->
 
 <div
     id="loginPage"
@@ -535,7 +720,6 @@
         </p>
 
         <button
-            id="loginButton"
             class="login-button"
             onclick="loginDiscord()"
         >
@@ -543,15 +727,7 @@
         </button>
 
         <div
-            id="loginLoading"
-            class="loading"
-            style="display:none;"
-        >
-            Đang kiểm tra đăng nhập...
-        </div>
-
-        <div
-            id="error"
+            id="loginError"
             class="error"
         ></div>
 
@@ -560,9 +736,9 @@
 </div>
 
 
-<!-- =========================================================
-     DASHBOARD
-========================================================= -->
+<!-- ======================================================= -->
+<!-- DASHBOARD -->
+<!-- ======================================================= -->
 
 <div
     id="dashboard"
@@ -577,10 +753,7 @@
 
         <div class="user">
 
-            <div
-                id="username"
-                class="username"
-            >
+            <div id="username">
                 Đang tải...
             </div>
 
@@ -592,7 +765,6 @@
             </div>
 
             <button
-                id="logoutButton"
                 class="logout"
                 onclick="logout()"
             >
@@ -604,7 +776,10 @@
     </div>
 
 
-    <div class="content">
+    <div
+        id="homePage"
+        class="content"
+    >
 
         <div class="welcome">
 
@@ -617,25 +792,345 @@
             </h2>
 
             <p>
-                Đây là trang quản lý bot Discord của mày.
-                Chọn server bên dưới để bắt đầu cấu hình.
+                Chọn một server bên dưới để quản lý bot.
             </p>
 
         </div>
 
-
         <h2>
             Server của bạn
         </h2>
-
 
         <div
             id="guilds"
             class="guild-grid"
         >
 
-            <div class="empty">
+            <p class="loading">
                 Đang tải danh sách server...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================== -->
+    <!-- MANAGEMENT PAGE -->
+    <!-- =================================================== -->
+
+    <div
+        id="managementPage"
+        class="content"
+    >
+
+        <button
+            class="back-button"
+            onclick="backToGuilds()"
+        >
+            ← Quay lại danh sách server
+        </button>
+
+
+        <div class="server-header">
+
+            <div class="server-header-row">
+
+                <img
+                    id="managementIcon"
+                    class="server-big-icon"
+                    src=""
+                    alt=""
+                >
+
+                <div>
+
+                    <h2
+                        id="managementName"
+                        style="margin:0 0 8px;"
+                    >
+                        Server
+                    </h2>
+
+                    <div
+                        id="managementId"
+                        class="loading"
+                    >
+                        ID
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="tabs">
+
+            <button
+                id="tabOverview"
+                class="tab-button active"
+                onclick="showTab('overview')"
+            >
+                📊 Tổng quan
+            </button>
+
+            <button
+                id="tabTicket"
+                class="tab-button"
+                onclick="showTab('ticket')"
+            >
+                🎫 Ticket
+            </button>
+
+            <button
+                id="tabChannels"
+                class="tab-button"
+                onclick="showTab('channels')"
+            >
+                📁 Kênh
+            </button>
+
+            <button
+                id="tabRoles"
+                class="tab-button"
+                onclick="showTab('roles')"
+            >
+                👥 Role
+            </button>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- OVERVIEW -->
+        <!-- ================================================= -->
+
+        <div
+            id="panelOverview"
+            class="panel active"
+        >
+
+            <h2>
+                📊 Tổng quan server
+            </h2>
+
+            <div
+                id="overviewLoading"
+                class="loading"
+            >
+                Đang tải...
+            </div>
+
+            <div
+                id="overviewData"
+                class="info-grid"
+            ></div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- TICKET -->
+        <!-- ================================================= -->
+
+        <div
+            id="panelTicket"
+            class="panel"
+        >
+
+            <h2>
+                🎫 Cấu hình Ticket
+            </h2>
+
+            <div class="checkbox-row">
+
+                <input
+                    type="checkbox"
+                    id="ticketEnabled"
+                >
+
+                <label for="ticketEnabled">
+                    Bật hệ thống Ticket
+                </label>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Tiêu đề panel
+                </label>
+
+                <input
+                    id="ticketTitle"
+                    type="text"
+                    placeholder="Hỗ Trợ"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mô tả panel
+                </label>
+
+                <textarea
+                    id="ticketDescription"
+                    placeholder="Nhấn nút bên dưới để tạo yêu cầu hỗ trợ."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Màu Embed
+                </label>
+
+                <input
+                    id="ticketColor"
+                    type="text"
+                    placeholder="#5865F2"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Footer
+                </label>
+
+                <input
+                    id="ticketFooter"
+                    type="text"
+                    placeholder="Support System"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Category Ticket
+                </label>
+
+                <select
+                    id="ticketCategory"
+                >
+
+                    <option value="">
+                        -- Chọn Category --
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Staff Role
+                </label>
+
+                <select
+                    id="ticketStaffRole"
+                >
+
+                    <option value="">
+                        -- Chọn Staff Role --
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Log Channel
+                </label>
+
+                <select
+                    id="ticketLogChannel"
+                >
+
+                    <option value="">
+                        -- Chọn Log Channel --
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="save-button"
+                onclick="saveTicket()"
+            >
+                💾 Lưu cấu hình Ticket
+            </button>
+
+
+            <div
+                id="ticketMessage"
+                class="message"
+            ></div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- CHANNELS -->
+        <!-- ================================================= -->
+
+        <div
+            id="panelChannels"
+            class="panel"
+        >
+
+            <h2>
+                📁 Kênh trong server
+            </h2>
+
+            <div
+                id="channelsList"
+                class="loading"
+            >
+                Đang tải...
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ROLES -->
+        <!-- ================================================= -->
+
+        <div
+            id="panelRoles"
+            class="panel"
+        >
+
+            <h2>
+                👥 Roles trong server
+            </h2>
+
+            <div
+                id="rolesList"
+                class="loading"
+            >
+                Đang tải...
             </div>
 
         </div>
@@ -647,20 +1142,26 @@
 
 <script>
 
-/* ============================================================
-   CONFIG
-============================================================ */
+// ============================================================
+// CONFIG
+// ============================================================
 
 const BACKEND_URL =
     "https://imcongthienzz.freesrv.com";
 
 const TOKEN_KEY =
-    "dashboard_token";
+    "bot_manager_dashboard_token";
+
+let currentGuildId =
+    null;
+
+let currentGuild =
+    null;
 
 
-/* ============================================================
-   LẤY TOKEN
-============================================================ */
+// ============================================================
+// TOKEN
+// ============================================================
 
 function getToken() {
 
@@ -669,16 +1170,7 @@ function getToken() {
     );
 }
 
-
-/* ============================================================
-   LƯU TOKEN
-============================================================ */
-
 function saveToken(token) {
-
-    if (!token) {
-        return;
-    }
 
     localStorage.setItem(
         TOKEN_KEY,
@@ -686,12 +1178,7 @@ function saveToken(token) {
     );
 }
 
-
-/* ============================================================
-   XÓA TOKEN
-============================================================ */
-
-function clearToken() {
+function removeToken() {
 
     localStorage.removeItem(
         TOKEN_KEY
@@ -699,166 +1186,41 @@ function clearToken() {
 }
 
 
-/* ============================================================
-   XỬ LÝ #auth=TOKEN
-============================================================ */
+// ============================================================
+// API HELPER
+// ============================================================
 
-function handleOAuthHash() {
-
-    const hash =
-        window.location.hash;
-
-    if (!hash) {
-
-        return false;
-    }
-
-    const params =
-        new URLSearchParams(
-            hash.substring(1)
-        );
-
-    const authToken =
-        params.get("auth");
-
-    const error =
-        params.get("error");
-
-
-    /* --------------------------------------------------------
-       ĐĂNG NHẬP THÀNH CÔNG
-    -------------------------------------------------------- */
-
-    if (authToken) {
-
-        console.log(
-            "✅ Nhận được Dashboard Token"
-        );
-
-        saveToken(
-            authToken
-        );
-
-        /*
-         * Xóa token khỏi URL ngay lập tức.
-         *
-         * Token vẫn còn trong localStorage.
-         */
-
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname +
-            window.location.search
-        );
-
-        return true;
-    }
-
-
-    /* --------------------------------------------------------
-       OAUTH ERROR
-    -------------------------------------------------------- */
-
-    if (error) {
-
-        console.error(
-            "❌ OAuth error:",
-            error
-        );
-
-        const errorElement =
-            document.getElementById(
-                "error"
-            );
-
-        errorElement.textContent =
-            "❌ Đăng nhập Discord thất bại: " +
-            error;
-
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-        );
-
-        return false;
-    }
-
-
-    return false;
-}
-
-
-/* ============================================================
-   ĐĂNG NHẬP DISCORD
-============================================================ */
-
-function loginDiscord() {
-
-    const button =
-        document.getElementById(
-            "loginButton"
-        );
-
-    button.disabled = true;
-
-    button.textContent =
-        "⏳ Đang chuyển đến Discord...";
-
-
-    window.location.href =
-        BACKEND_URL +
-        "/auth/discord";
-}
-
-
-/* ============================================================
-   API REQUEST
-   TẤT CẢ API ĐỀU DÙNG BEARER TOKEN
-============================================================ */
-
-async function apiFetch(
-    endpoint,
+async function api(
+    path,
     options = {}
 ) {
 
     const token =
         getToken();
 
-
     const headers = {
 
         ...(options.headers || {})
     };
 
-
-    if (token) {
-
-        headers.Authorization =
-            "Bearer " + token;
-    }
-
-
     if (
         options.body &&
-        typeof options.body === "object" &&
-        !(options.body instanceof FormData)
+        !headers["Content-Type"]
     ) {
 
         headers["Content-Type"] =
             "application/json";
-
-        options.body =
-            JSON.stringify(
-                options.body
-            );
     }
 
+    if (token) {
+
+        headers["Authorization"] =
+            `Bearer ${token}`;
+    }
 
     const response =
         await fetch(
-            BACKEND_URL + endpoint,
+            BACKEND_URL + path,
             {
                 ...options,
                 headers,
@@ -866,40 +1228,102 @@ async function apiFetch(
             }
         );
 
+    if (
+        response.status === 401
+    ) {
 
-    /*
-     * Token không còn hợp lệ.
-     */
-
-    if (response.status === 401) {
-
-        clearToken();
+        removeToken();
 
         showLogin();
 
         throw new Error(
-            "Phiên đăng nhập đã hết hạn."
+            "Phiên đăng nhập đã hết hạn"
         );
     }
-
 
     return response;
 }
 
 
-/* ============================================================
-   KIỂM TRA LOGIN
-============================================================ */
+// ============================================================
+// LOGIN
+// ============================================================
+
+function loginDiscord() {
+
+    window.location.href =
+        BACKEND_URL +
+        "/auth/discord";
+}
+
+
+// ============================================================
+// READ OAUTH HASH
+// ============================================================
+
+function readOAuthHash() {
+
+    const hash =
+        window.location.hash;
+
+    if (!hash) {
+        return;
+    }
+
+    const params =
+        new URLSearchParams(
+            hash.substring(1)
+        );
+
+    const token =
+        params.get("auth");
+
+    const error =
+        params.get("error");
+
+    if (token) {
+
+        console.log(
+            "✅ Nhận dashboard token"
+        );
+
+        saveToken(token);
+
+        // XÓA TOKEN KHỎI URL
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+
+        return;
+    }
+
+    if (error) {
+
+        document.getElementById(
+            "loginError"
+        ).textContent =
+            "❌ Đăng nhập thất bại: " +
+            error;
+
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+    }
+}
+
+
+// ============================================================
+// CHECK LOGIN
+// ============================================================
 
 async function checkLogin() {
 
     const token =
         getToken();
-
-
-    /*
-     * Không có token.
-     */
 
     if (!token) {
 
@@ -908,62 +1332,47 @@ async function checkLogin() {
         return;
     }
 
-
-    showLoginChecking();
-
-
     try {
 
         const response =
-            await apiFetch(
-                "/api/me",
-                {
-                    method: "GET"
-                }
+            await api(
+                "/api/me"
             );
-
 
         if (!response.ok) {
 
-            clearToken();
+            removeToken();
 
             showLogin();
 
             return;
         }
-
 
         const data =
             await response.json();
 
-
         if (
-            !data ||
             !data.loggedIn ||
             !data.user
         ) {
 
-            clearToken();
+            removeToken();
 
             showLogin();
 
             return;
         }
 
-
         console.log(
-            "✅ Đăng nhập hợp lệ:",
+            "✅ Dashboard đã đăng nhập",
             data.user
         );
-
 
         showDashboard(
             data.user
         );
 
-
         await loadGuilds();
-
 
     } catch (error) {
 
@@ -972,54 +1381,13 @@ async function checkLogin() {
             error
         );
 
-
-        /*
-         * Nếu là lỗi mạng thì KHÔNG xóa token.
-         */
-
-        if (
-            error.message !==
-            "Phiên đăng nhập đã hết hạn."
-        ) {
-
-            showLoginError(
-                "❌ Không thể kết nối đến máy chủ. Hãy thử tải lại trang."
-            );
-        }
     }
-
 }
 
 
-/* ============================================================
-   LOGIN CHECKING
-============================================================ */
-
-function showLoginChecking() {
-
-    document.getElementById(
-        "loginPage"
-    ).style.display = "flex";
-
-    document.getElementById(
-        "dashboard"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "loginLoading"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "loginButton"
-    ).style.display = "none";
-}
-
-
-/* ============================================================
-   HIỆN LOGIN
-============================================================ */
+// ============================================================
+// SHOW LOGIN
+// ============================================================
 
 function showLogin() {
 
@@ -1027,37 +1395,15 @@ function showLogin() {
         "loginPage"
     ).style.display = "flex";
 
-
     document.getElementById(
         "dashboard"
     ).style.display = "none";
-
-
-    document.getElementById(
-        "loginLoading"
-    ).style.display = "none";
-
-
-    const button =
-        document.getElementById(
-            "loginButton"
-        );
-
-
-    button.style.display =
-        "block";
-
-    button.disabled =
-        false;
-
-    button.textContent =
-        "🎮 Đăng nhập bằng Discord";
 }
 
 
-/* ============================================================
-   HIỆN DASHBOARD
-============================================================ */
+// ============================================================
+// SHOW DASHBOARD
+// ============================================================
 
 function showDashboard(user) {
 
@@ -1065,62 +1411,61 @@ function showDashboard(user) {
         "loginPage"
     ).style.display = "none";
 
-
     document.getElementById(
         "dashboard"
     ).style.display = "block";
 
+    document.getElementById(
+        "homePage"
+    ).style.display = "block";
+
+    document.getElementById(
+        "managementPage"
+    ).style.display = "none";
 
     const name =
         user.global_name ||
         user.username ||
         "User";
 
-
     document.getElementById(
         "username"
     ).textContent =
         name;
-
 
     document.getElementById(
         "welcomeName"
     ).textContent =
         name;
 
-
     const avatar =
         document.getElementById(
             "avatar"
         );
 
-
-    avatar.style.backgroundImage =
-        "";
-
-
     if (user.avatar) {
 
         avatar.style.backgroundImage =
-            `url("https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128")`;
+            `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128)`;
 
-        avatar.textContent =
-            "";
+        avatar.textContent = "";
 
     } else {
+
+        avatar.style.backgroundImage =
+            "";
 
         avatar.textContent =
             name
                 .charAt(0)
                 .toUpperCase();
     }
-
 }
 
 
-/* ============================================================
-   LOAD GUILDS
-============================================================ */
+// ============================================================
+// LOAD GUILDS
+// ============================================================
 
 async function loadGuilds() {
 
@@ -1129,57 +1474,44 @@ async function loadGuilds() {
             "guilds"
         );
 
-
-    container.innerHTML = `
-        <div class="empty">
-            ⏳ Đang tải danh sách server...
-        </div>
-    `;
-
+    container.innerHTML =
+        `<p class="loading">
+            Đang tải danh sách server...
+        </p>`;
 
     try {
 
         const response =
-            await apiFetch(
-                "/api/guilds",
-                {
-                    method: "GET"
-                }
+            await api(
+                "/api/guilds"
             );
-
 
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
             throw new Error(
                 data.error ||
-                "Không lấy được danh sách server"
+                "Không lấy được server"
             );
         }
 
-
-        container.innerHTML =
-            "";
-
+        container.innerHTML = "";
 
         if (
             !data.guilds ||
             data.guilds.length === 0
         ) {
 
-            container.innerHTML = `
-                <div class="empty">
-                    🏠 Không tìm thấy server nào
+            container.innerHTML =
+                `<p class="empty">
+                    Không tìm thấy server nào
                     mà bạn có quyền quản lý.
-                </div>
-            `;
+                </p>`;
 
             return;
         }
-
 
         data.guilds.forEach(
             guild => {
@@ -1189,83 +1521,67 @@ async function loadGuilds() {
                         "div"
                     );
 
-
                 card.className =
                     "guild";
 
-
-                const iconHTML =
+                const icon =
                     guild.icon
                         ? `
                             <img
                                 src="${escapeAttribute(guild.icon)}"
                                 alt=""
                             >
-                        `
+                          `
                         : "🏠";
 
-
-                const statusClass =
+                const status =
                     guild.botInstalled
-                        ? "online"
-                        : "offline";
+                        ? `
+                            <div class="status online">
+                                🟢 Bot đang ở server
+                            </div>
+                          `
+                        : `
+                            <div class="status offline">
+                                ⚪ Bot chưa vào server
+                            </div>
+                          `;
 
-
-                const statusText =
+                const manageButton =
                     guild.botInstalled
-                        ? "🟢 Bot đang ở server"
-                        : "⚪ Bot chưa vào server";
-
+                        ? `
+                            <button
+                                class="manage-button"
+                                onclick="openGuild('${guild.id}')"
+                            >
+                                ⚙️ Quản lý server
+                            </button>
+                          `
+                        : `
+                            <button
+                                class="invite-button"
+                                onclick="inviteBot('${guild.id}')"
+                            >
+                                ➕ Mời bot vào server
+                            </button>
+                          `;
 
                 card.innerHTML = `
 
                     <div class="guild-icon">
-
-                        ${iconHTML}
-
+                        ${icon}
                     </div>
 
-
                     <div class="guild-name">
-
                         ${escapeHtml(
                             guild.name
                         )}
-
                     </div>
 
+                    ${status}
 
-                    <div
-                        class="status ${statusClass}"
-                    >
-
-                        ${statusText}
-
-                    </div>
-
-
-                    ${
-                        guild.botInstalled
-                        ? `
-                            <button
-                                class="guild-button"
-                                onclick="openGuild('${escapeAttribute(guild.id)}')"
-                            >
-                                ⚙️ Quản lý server
-                            </button>
-                        `
-                        : `
-                            <button
-                                class="guild-button"
-                                onclick="alert('Bot chưa ở server này.')"
-                            >
-                                ➕ Bot chưa vào server
-                            </button>
-                        `
-                    }
-
+                    ${manageButton}
                 `;
-
 
                 container.appendChild(
                     card
@@ -1273,44 +1589,26 @@ async function loadGuilds() {
             }
         );
 
-
     } catch (error) {
 
         console.error(
-            "❌ Load guilds:",
             error
         );
 
-
         container.innerHTML = `
-
-            <div class="empty">
-
-                <div class="error">
-                    ❌ ${escapeHtml(
-                        error.message ||
-                        "Không thể tải danh sách server."
-                    )}
-                </div>
-
-                <button
-                    class="guild-button"
-                    onclick="loadGuilds()"
-                >
-                    🔄 Thử lại
-                </button>
-
-            </div>
-
+            <p class="error">
+                ❌ ${escapeHtml(
+                    error.message
+                )}
+            </p>
         `;
     }
-
 }
 
 
-/* ============================================================
-   OPEN GUILD
-============================================================ */
+// ============================================================
+// OPEN GUILD
+// ============================================================
 
 async function openGuild(
     guildId
@@ -1318,144 +1616,939 @@ async function openGuild(
 
     try {
 
-        const response =
-            await apiFetch(
-                `/api/guild/${encodeURIComponent(guildId)}`,
-                {
-                    method: "GET"
-                }
-            );
+        currentGuildId =
+            guildId;
 
+        const response =
+            await api(
+                `/api/guild/${guildId}`
+            );
 
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
             throw new Error(
                 data.error ||
-                "Không thể mở server"
+                "Không thể truy cập server"
             );
         }
 
+        currentGuild =
+            data.guild;
 
-        /*
-         * Hiện tại backend mới cung cấp
-         * API server.
-         *
-         * Sau này có thể chuyển sang
-         * trang cấu hình riêng.
-         */
+        document.getElementById(
+            "homePage"
+        ).style.display =
+            "none";
 
-        alert(
-            "Đã chọn server: " +
-            data.guild.name +
-            "\n\n" +
+        document.getElementById(
+            "managementPage"
+        ).style.display =
+            "block";
+
+        document.getElementById(
+            "managementName"
+        ).textContent =
+            data.guild.name;
+
+        document.getElementById(
+            "managementId"
+        ).textContent =
             "Server ID: " +
-            data.guild.id +
-            "\n" +
-            "Thành viên: " +
-            data.guild.memberCount
+            data.guild.id;
+
+        const icon =
+            document.getElementById(
+                "managementIcon"
+            );
+
+        if (data.guild.icon) {
+
+            icon.src =
+                data.guild.icon;
+
+        } else {
+
+            icon.removeAttribute(
+                "src"
+            );
+        }
+
+        showTab(
+            "overview"
         );
 
+        await loadOverview();
 
     } catch (error) {
-
-        console.error(
-            error
-        );
 
         alert(
             "❌ " +
-            (
-                error.message ||
-                "Không thể mở server"
-            )
+            error.message
         );
     }
-
 }
 
 
-/* ============================================================
-   LOGOUT
-============================================================ */
+// ============================================================
+// BACK
+// ============================================================
 
-async function logout() {
+function backToGuilds() {
 
-    const token =
-        getToken();
+    currentGuildId =
+        null;
 
+    currentGuild =
+        null;
+
+    document.getElementById(
+        "managementPage"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "homePage"
+    ).style.display =
+        "block";
+
+    loadGuilds();
+}
+
+
+// ============================================================
+// TABS
+// ============================================================
+
+function showTab(
+    tab
+) {
+
+    const panels = [
+        "overview",
+        "ticket",
+        "channels",
+        "roles"
+    ];
+
+    panels.forEach(
+        name => {
+
+            document.getElementById(
+                "panel" +
+                capitalize(name)
+            ).classList.remove(
+                "active"
+            );
+
+            document.getElementById(
+                "tab" +
+                capitalize(name)
+            ).classList.remove(
+                "active"
+            );
+        }
+    );
+
+    document.getElementById(
+        "panel" +
+        capitalize(tab)
+    ).classList.add(
+        "active"
+    );
+
+    document.getElementById(
+        "tab" +
+        capitalize(tab)
+    ).classList.add(
+        "active"
+    );
+
+    if (tab === "overview") {
+        loadOverview();
+    }
+
+    if (tab === "ticket") {
+        loadTicket();
+    }
+
+    if (tab === "channels") {
+        loadChannels();
+    }
+
+    if (tab === "roles") {
+        loadRoles();
+    }
+}
+
+function capitalize(text) {
+
+    return text
+        .charAt(0)
+        .toUpperCase() +
+        text.slice(1);
+}
+
+
+// ============================================================
+// OVERVIEW
+// ============================================================
+
+async function loadOverview() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    const loading =
+        document.getElementById(
+            "overviewLoading"
+        );
+
+    const dataBox =
+        document.getElementById(
+            "overviewData"
+        );
+
+    loading.style.display =
+        "block";
+
+    dataBox.innerHTML = "";
 
     try {
 
-        if (token) {
+        const response =
+            await api(
+                `/api/guild/${currentGuildId}`
+            );
 
-            await fetch(
-                BACKEND_URL +
-                "/auth/logout",
-                {
-                    method: "POST",
+        const data =
+            await response.json();
 
-                    headers: {
-                        Authorization:
-                            "Bearer " +
-                            token
-                    },
+        if (!response.ok) {
 
-                    cache:
-                        "no-store"
-                }
+            throw new Error(
+                data.error
             );
         }
 
+        loading.style.display =
+            "none";
+
+        dataBox.innerHTML = `
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    ${data.guild.memberCount}
+                </div>
+
+                <div>
+                    Thành viên
+                </div>
+
+            </div>
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    ${data.guild.channels}
+                </div>
+
+                <div>
+                    Kênh
+                </div>
+
+            </div>
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    ${data.guild.roles}
+                </div>
+
+                <div>
+                    Roles
+                </div>
+
+            </div>
+
+        `;
+
     } catch (error) {
 
-        console.error(
-            "Logout error:",
-            error
+        loading.textContent =
+            "❌ " +
+            error.message;
+    }
+}
+
+
+// ============================================================
+// LOAD TICKET
+// ============================================================
+
+async function loadTicket() {
+
+    if (!currentGuildId) {
+        return;
+    }
+
+    try {
+
+        await Promise.all([
+            loadTicketChannels(),
+            loadTicketRoles()
+        ]);
+
+        const response =
+            await api(
+                `/api/guild/${currentGuildId}/ticket`
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error
+            );
+        }
+
+        const config =
+            data.config;
+
+        document.getElementById(
+            "ticketEnabled"
+        ).checked =
+            !!config.enabled;
+
+        document.getElementById(
+            "ticketTitle"
+        ).value =
+            config.panel?.title ||
+            "";
+
+        document.getElementById(
+            "ticketDescription"
+        ).value =
+            config.panel?.description ||
+            "";
+
+        document.getElementById(
+            "ticketColor"
+        ).value =
+            config.panel?.color ||
+            "#5865F2";
+
+        document.getElementById(
+            "ticketFooter"
+        ).value =
+            config.panel?.footer ||
+            "";
+
+        document.getElementById(
+            "ticketCategory"
+        ).value =
+            config.categoryId ||
+            "";
+
+        document.getElementById(
+            "ticketStaffRole"
+        ).value =
+            config.staffRoleId ||
+            "";
+
+        document.getElementById(
+            "ticketLogChannel"
+        ).value =
+            config.logChannelId ||
+            "";
+
+    } catch (error) {
+
+        showTicketMessage(
+            "❌ " +
+            error.message,
+            true
+        );
+    }
+}
+
+
+// ============================================================
+// LOAD CHANNELS FOR TICKET
+// ============================================================
+
+async function loadTicketChannels() {
+
+    const response =
+        await api(
+            `/api/guild/${currentGuildId}/channels`
         );
 
-    } finally {
+    const data =
+        await response.json();
 
-        clearToken();
+    if (!response.ok) {
 
-        showLogin();
-
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
+        throw new Error(
+            data.error ||
+            "Không lấy được channels"
         );
     }
 
-}
-
-
-/* ============================================================
-   HIỆN LỖI LOGIN
-============================================================ */
-
-function showLoginError(
-    message
-) {
-
-    const errorElement =
+    const category =
         document.getElementById(
-            "error"
+            "ticketCategory"
         );
 
-    errorElement.textContent =
-        message;
+    const log =
+        document.getElementById(
+            "ticketLogChannel"
+        );
+
+    category.innerHTML =
+        `<option value="">
+            -- Chọn Category --
+        </option>`;
+
+    log.innerHTML =
+        `<option value="">
+            -- Chọn Log Channel --
+        </option>`;
+
+    data.channels.forEach(
+        channel => {
+
+            // Discord channel type 4 = Category
+            if (
+                channel.type === 4
+            ) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    channel.id;
+
+                option.textContent =
+                    channel.name;
+
+                category.appendChild(
+                    option
+                );
+            }
+
+            // Text channel thường
+            if (
+                channel.type === 0
+            ) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    channel.id;
+
+                option.textContent =
+                    "#" +
+                    channel.name;
+
+                log.appendChild(
+                    option
+                );
+            }
+        }
+    );
 }
 
 
-/* ============================================================
-   ESCAPE HTML
-============================================================ */
+// ============================================================
+// LOAD ROLES FOR TICKET
+// ============================================================
 
-function escapeHtml(text) {
+async function loadTicketRoles() {
+
+    const response =
+        await api(
+            `/api/guild/${currentGuildId}/roles`
+        );
+
+    const data =
+        await response.json();
+
+    if (!response.ok) {
+
+        throw new Error(
+            data.error ||
+            "Không lấy được roles"
+        );
+    }
+
+    const select =
+        document.getElementById(
+            "ticketStaffRole"
+        );
+
+    select.innerHTML =
+        `<option value="">
+            -- Chọn Staff Role --
+        </option>`;
+
+    data.roles.forEach(
+        role => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                role.id;
+
+            option.textContent =
+                "@" +
+                role.name;
+
+            select.appendChild(
+                option
+            );
+        }
+    );
+}
+
+
+// ============================================================
+// SAVE TICKET
+// ============================================================
+
+async function saveTicket() {
+
+    if (!currentGuildId) {
+
+        showTicketMessage(
+            "❌ Chưa chọn server",
+            true
+        );
+
+        return;
+    }
+
+    const config = {
+
+        enabled:
+            document.getElementById(
+                "ticketEnabled"
+            ).checked,
+
+        panel: {
+
+            title:
+                document.getElementById(
+                    "ticketTitle"
+                ).value,
+
+            description:
+                document.getElementById(
+                    "ticketDescription"
+                ).value,
+
+            color:
+                document.getElementById(
+                    "ticketColor"
+                ).value,
+
+            footer:
+                document.getElementById(
+                    "ticketFooter"
+                ).value
+        },
+
+        categoryId:
+            document.getElementById(
+                "ticketCategory"
+            ).value ||
+            null,
+
+        staffRoleId:
+            document.getElementById(
+                "ticketStaffRole"
+            ).value ||
+            null,
+
+        logChannelId:
+            document.getElementById(
+                "ticketLogChannel"
+            ).value ||
+            null,
+
+        buttons: [
+
+            {
+                id:
+                    "support",
+
+                label:
+                    "Hỗ Trợ",
+
+                emoji:
+                    "🎫",
+
+                style:
+                    "Primary"
+            }
+        ]
+    };
+
+    try {
+
+        const response =
+            await api(
+                `/api/guild/${currentGuildId}/ticket`,
+                {
+                    method: "POST",
+
+                    body:
+                        JSON.stringify(
+                            config
+                        )
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Không lưu được"
+            );
+        }
+
+        showTicketMessage(
+            "✅ Đã lưu cấu hình Ticket!",
+            false
+        );
+
+    } catch (error) {
+
+        showTicketMessage(
+            "❌ " +
+            error.message,
+            true
+        );
+    }
+}
+
+
+// ============================================================
+// TICKET MESSAGE
+// ============================================================
+
+function showTicketMessage(
+    message,
+    isError
+) {
+
+    const box =
+        document.getElementById(
+            "ticketMessage"
+        );
+
+    box.textContent =
+        message;
+
+    box.className =
+        "message " +
+        (
+            isError
+                ? "error-message"
+                : "success-message"
+        );
+
+    setTimeout(
+        () => {
+
+            box.className =
+                "message";
+
+        },
+        4000
+    );
+}
+
+
+// ============================================================
+// CHANNEL LIST
+// ============================================================
+
+async function loadChannels() {
+
+    const box =
+        document.getElementById(
+            "channelsList"
+        );
+
+    box.textContent =
+        "Đang tải...";
+
+    try {
+
+        const response =
+            await api(
+                `/api/guild/${currentGuildId}/channels`
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error
+            );
+        }
+
+        if (
+            !data.channels.length
+        ) {
+
+            box.innerHTML =
+                `<div class="empty">
+                    Không có channel.
+                </div>`;
+
+            return;
+        }
+
+        box.innerHTML =
+            data.channels
+                .map(
+                    channel => `
+
+                        <div class="info-card"
+                             style="margin-bottom:10px;">
+
+                            <b>
+                                ${
+                                    channel.type === 4
+                                        ? "📁 "
+                                        : "# "
+                                }
+
+                                ${escapeHtml(
+                                    channel.name
+                                )}
+                            </b>
+
+                            <div
+                                style="
+                                    color:#777;
+                                    margin-top:5px;
+                                    font-size:12px;
+                                "
+                            >
+                                ID: ${channel.id}
+                            </div>
+
+                        </div>
+                    `
+                )
+                .join("");
+
+    } catch (error) {
+
+        box.innerHTML =
+            `<div class="error">
+                ❌ ${escapeHtml(
+                    error.message
+                )}
+            </div>`;
+    }
+}
+
+
+// ============================================================
+// ROLE LIST
+// ============================================================
+
+async function loadRoles() {
+
+    const box =
+        document.getElementById(
+            "rolesList"
+        );
+
+    box.textContent =
+        "Đang tải...";
+
+    try {
+
+        const response =
+            await api(
+                `/api/guild/${currentGuildId}/roles`
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error
+            );
+        }
+
+        if (
+            !data.roles.length
+        ) {
+
+            box.innerHTML =
+                `<div class="empty">
+                    Không có role.
+                </div>`;
+
+            return;
+        }
+
+        box.innerHTML =
+            data.roles
+                .map(
+                    role => `
+
+                        <div class="info-card"
+                             style="
+                                margin-bottom:10px;
+                                border-left:
+                                    4px solid
+                                    ${escapeAttribute(
+                                        role.color
+                                    )};
+                             ">
+
+                            <b>
+                                @${escapeHtml(
+                                    role.name
+                                )}
+                            </b>
+
+                            <div
+                                style="
+                                    color:#777;
+                                    margin-top:5px;
+                                    font-size:12px;
+                                "
+                            >
+                                ID: ${role.id}
+                            </div>
+
+                        </div>
+                    `
+                )
+                .join("");
+
+    } catch (error) {
+
+        box.innerHTML =
+            `<div class="error">
+                ❌ ${escapeHtml(
+                    error.message
+                )}
+            </div>`;
+    }
+}
+
+
+// ============================================================
+// INVITE BOT
+// ============================================================
+
+function inviteBot(guildId) {
+
+    const url =
+        "https://discord.com/oauth2/authorize" +
+        "?client_id=" +
+        encodeURIComponent(
+            getClientIdFromConfig()
+        ) +
+        "&scope=bot%20applications.commands" +
+        "&permissions=8" +
+        "&guild_id=" +
+        encodeURIComponent(
+            guildId
+        );
+
+    window.open(
+        url,
+        "_blank"
+    );
+}
+
+
+// ============================================================
+// CLIENT ID
+// ============================================================
+// Frontend không nên chứa CLIENT_SECRET.
+// CLIENT_ID có thể public.
+//
+// Nếu muốn nút "Mời bot" hoạt động,
+// điền CLIENT_ID của bot tại đây.
+// ============================================================
+
+function getClientIdFromConfig() {
+
+    return "YOUR_CLIENT_ID";
+}
+
+
+// ============================================================
+// LOGOUT
+// ============================================================
+
+async function logout() {
+
+    try {
+
+        await api(
+            "/api/logout",
+            {
+                method: "POST"
+            }
+        );
+
+    } catch {
+
+        // Bỏ qua lỗi logout
+    }
+
+    removeToken();
+
+    currentGuildId =
+        null;
+
+    currentGuild =
+        null;
+
+    showLogin();
+}
+
+
+// ============================================================
+// ESCAPE HTML
+// ============================================================
+
+function escapeHtml(
+    text
+) {
 
     const div =
         document.createElement(
@@ -1471,16 +2564,16 @@ function escapeHtml(text) {
 }
 
 
-/* ============================================================
-   ESCAPE ATTRIBUTE
-============================================================ */
+// ============================================================
+// ESCAPE ATTRIBUTE
+// ============================================================
 
-function escapeAttribute(text) {
+function escapeAttribute(
+    text
+) {
 
     return String(
-        text == null
-            ? ""
-            : text
+        text || ""
     )
         .replace(
             /&/g,
@@ -1489,10 +2582,6 @@ function escapeAttribute(text) {
         .replace(
             /"/g,
             "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
         )
         .replace(
             /</g,
@@ -1505,31 +2594,20 @@ function escapeAttribute(text) {
 }
 
 
-/* ============================================================
-   START
-============================================================ */
+// ============================================================
+// START
+// ============================================================
 
 (async function start() {
 
-    /*
-     * BƯỚC 1:
-     *
-     * Nếu Discord vừa redirect về:
-     *
-     * #auth=TOKEN
-     *
-     * thì lưu token trước.
-     */
+    console.log(
+        "🚀 Bot Manager starting..."
+    );
 
-    handleOAuthHash();
+    // Lấy token từ #auth=...
+    readOAuthHash();
 
-
-    /*
-     * BƯỚC 2:
-     *
-     * Kiểm tra token.
-     */
-
+    // Kiểm tra token
     await checkLogin();
 
 })();
