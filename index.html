@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!doctype html>
+<html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+<meta charset="utf-8">
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width,initial-scale=1"
 >
 
-<title>Bot Manager</title>
+<title>Tickets | Dashboard</title>
 
 <style>
 
@@ -19,673 +19,441 @@
 }
 
 body {
-
     margin: 0;
-
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at top left,
-            #151b3d 0%,
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at bottom right,
-            #101b38 0%,
-            transparent 40%
-        ),
-        #080b12;
-
-    color: white;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0f192b;
+    color: #f5f7fb;
 }
 
-/* ========================================================= */
-/* LOGIN */
-/* ========================================================= */
-
-.center {
-
-    min-height: 100vh;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 20px;
-}
-
-.login-box {
-
-    width: 430px;
-
-    max-width: 100%;
-
-    padding: 40px;
-
-    background:
-        rgba(25, 28, 38, 0.96);
-
-    border:
-        1px solid #303544;
-
-    border-radius: 18px;
-
-    text-align: center;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.45);
-}
-
-.logo {
-
-    width: 82px;
-
-    height: 82px;
-
-    margin:
-        0 auto 25px;
-
-    border-radius: 50%;
-
-    background: #5865f2;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 42px;
-
-    font-weight: bold;
-}
-
-h1 {
-
-    margin:
-        0 0 12px;
-
-    font-size: 28px;
-}
-
-p {
-
-    color: #aeb4c2;
-
-    line-height: 1.6;
+button,
+input,
+select,
+textarea {
+    font: inherit;
 }
 
 button {
-
-    border: 0;
-
-    border-radius: 9px;
-
-    background: #5865f2;
-
-    color: white;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
     cursor: pointer;
+    border: 0;
 }
 
-button:hover {
-
-    background: #4752c4;
+:root {
+    --p: #1e2a3d;
+    --p2: #202e43;
+    --in: #3a485d;
+    --line: #35445a;
+    --blue: #2166f3;
+    --muted: #b5c2d5;
 }
 
-.login-button {
-
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 15px;
-}
-
-.error {
-
-    color: #ff6b6b;
-
-    margin-top: 15px;
-
-    line-height: 1.5;
-}
-
-/* ========================================================= */
-/* DASHBOARD */
-/* ========================================================= */
-
-.dashboard {
-
-    display: none;
-
+#login {
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #172746,
+            #080d17
+        );
 }
 
-.topbar {
+.loginbox {
+    width: 430px;
+    padding: 42px;
+    background: #181f2b;
+    border: 1px solid #394456;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow:
+        0 20px 70px #0007;
+}
 
-    min-height: 70px;
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: auto;
+    background: #5865f2;
+    display: grid;
+    place-items: center;
+    font-size: 42px;
+    font-weight: 900;
+}
 
-    padding:
-        12px 30px;
+.loginbox h1 {
+    margin: 25px 0 12px;
+}
 
+.loginbox p {
+    color: #aebbd0;
+    line-height: 1.7;
+}
+
+.primary {
+    background: #2166f3;
+    color: white;
+    border-radius: 6px;
+    padding: 11px 17px;
+    font-weight: 700;
+}
+
+.loginbtn {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.app {
+    min-height: 100vh;
     display: flex;
+}
 
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    background: #111522;
-
-    border-bottom:
-        1px solid #292e3d;
+.side {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    background: #1c293b;
+    border-right: 1px solid #2c3a4d;
+    z-index: 10;
 }
 
 .brand {
+    height: 82px;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+    border-bottom: 1px solid #2d3a4e;
+}
 
+.nav button {
+    width: 100%;
+    height: 64px;
+    background: transparent;
+    color: #fff;
     font-size: 21px;
+    border-left: 3px solid transparent;
+}
 
-    font-weight: bold;
+.nav button:hover,
+.nav button.active {
+    background: #24344b;
+    border-left-color: #2775ff;
+}
+
+.main {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+    min-height: 100vh;
+}
+
+.top {
+    height: 70px;
+    background: #111c2e;
+    border-bottom: 1px solid #27364b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.server-select {
+    background: #35445a;
+    border: 1px solid #506078;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 13px;
+    min-width: 280px;
 }
 
 .user {
-
     display: flex;
-
     align-items: center;
-
-    gap: 12px;
+    gap: 10px;
 }
 
 .avatar {
-
-    width: 40px;
-
-    height: 40px;
-
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-
+    object-fit: cover;
     background: #5865f2;
-
-    background-size: cover;
-
-    background-position: center;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: bold;
-}
-
-.logout {
-
-    width: auto;
-
-    padding:
-        9px 15px;
-
-    background: #ed4245;
-
-    font-size: 14px;
-}
-
-.logout:hover {
-
-    background: #c93639;
 }
 
 .content {
-
-    max-width: 1150px;
-
+    max-width: 1160px;
     margin: auto;
-
-    padding:
-        40px 25px;
+    padding: 34px 30px 70px;
 }
 
-.welcome {
-
-    background: #151927;
-
-    border:
-        1px solid #2b3040;
-
-    border-radius: 15px;
-
-    padding: 25px;
-
-    margin-bottom: 30px;
+.title {
+    text-align: center;
+    margin: 8px 0 6px;
+    font-size: 30px;
 }
 
-.guild-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(250px, 1fr)
-        );
-
-    gap: 18px;
+.subtitle {
+    text-align: center;
+    color: #b8c5d7;
+    margin-bottom: 34px;
 }
 
-.guild {
-
-    background: #151927;
-
-    border:
-        1px solid #2b3040;
-
-    border-radius: 14px;
-
-    padding: 22px;
-
-    transition:
-        transform .2s,
-        border-color .2s;
-}
-
-.guild:hover {
-
-    transform:
-        translateY(-3px);
-
-    border-color:
-        #5865f2;
-}
-
-.guild-icon {
-
-    width: 60px;
-
-    height: 60px;
-
-    border-radius: 15px;
-
-    background: #5865f2;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 22px;
-
-    margin-bottom: 15px;
-
+.card {
+    background: var(--p);
+    border-radius: 12px;
+    margin: 22px 0;
+    border: 1px solid #25354b;
     overflow: hidden;
 }
 
-.guild-icon img {
-
-    width: 60px;
-
-    height: 60px;
-
-    object-fit: cover;
-}
-
-.guild-name {
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    margin-bottom: 10px;
-}
-
-.status {
-
-    font-size: 14px;
-
-    margin-bottom: 15px;
-}
-
-.online {
-
-    color: #55d17a;
-}
-
-.offline {
-
-    color: #999;
-}
-
-.manage-button {
-
-    width: 100%;
-
-    padding: 12px;
-
-    margin-top: 5px;
-}
-
-.invite-button {
-
-    width: 100%;
-
-    padding: 12px;
-
-    margin-top: 8px;
-
-    background: #3ba55d;
-}
-
-.invite-button:hover {
-
-    background: #2d7d46;
-}
-
-/* ========================================================= */
-/* MANAGEMENT */
-/* ========================================================= */
-
-#managementPage {
-
-    display: none;
-}
-
-.back-button {
-
-    width: auto;
-
-    padding:
-        10px 16px;
-
-    margin-bottom: 20px;
-
-    background: #2b3040;
-}
-
-.back-button:hover {
-
-    background: #3a4052;
-}
-
-.server-header {
-
-    background: #151927;
-
-    border:
-        1px solid #2b3040;
-
-    border-radius: 15px;
-
-    padding: 25px;
-
-    margin-bottom: 20px;
-}
-
-.server-header-row {
-
+.cardhead {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--line);
     display: flex;
-
     align-items: center;
-
-    gap: 18px;
+    justify-content: space-between;
 }
 
-.server-big-icon {
-
-    width: 70px;
-
-    height: 70px;
-
-    border-radius: 18px;
-
-    object-fit: cover;
-
-    background: #5865f2;
+.cardhead h2 {
+    margin: 0;
+    font-size: 22px;
 }
 
-.tabs {
-
-    display: flex;
-
-    gap: 10px;
-
-    flex-wrap: wrap;
-
-    margin-bottom: 20px;
-}
-
-.tab-button {
-
-    width: auto;
-
-    padding:
-        11px 18px;
-
-    background: #1b2030;
-}
-
-.tab-button.active {
-
-    background: #5865f2;
-}
-
-.panel {
-
-    display: none;
-
-    background: #151927;
-
-    border:
-        1px solid #2b3040;
-
-    border-radius: 15px;
-
-    padding: 25px;
-}
-
-.panel.active {
-
-    display: block;
-}
-
-/* ========================================================= */
-/* TICKET */
-/* ========================================================= */
-
-.form-group {
-
-    margin-bottom: 18px;
-}
-
-.form-group label {
-
-    display: block;
-
-    margin-bottom: 8px;
-
-    font-weight: bold;
-}
-
-input,
-textarea,
-select {
-
-    width: 100%;
-
-    padding: 12px;
-
-    border:
-        1px solid #363c4e;
-
-    border-radius: 8px;
-
-    background: #0e121c;
-
-    color: white;
-
-    outline: none;
-
-    font-size: 14px;
-}
-
-textarea {
-
-    min-height: 110px;
-
-    resize: vertical;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-
-    border-color:
-        #5865f2;
-}
-
-.checkbox-row {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 20px;
-}
-
-.checkbox-row input {
-
-    width: auto;
-}
-
-.save-button {
-
-    padding:
-        12px 22px;
-}
-
-.message {
-
-    margin-top: 15px;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    display: none;
-}
-
-.success-message {
-
-    display: block;
-
-    background:
-        rgba(46, 204, 113, .15);
-
-    color: #55d17a;
-}
-
-.error-message {
-
-    display: block;
-
-    background:
-        rgba(237, 66, 69, .15);
-
-    color: #ff6b6b;
-}
-
-/* ========================================================= */
-/* INFO */
-/* ========================================================= */
-
-.info-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(180px, 1fr)
-        );
-
-    gap: 15px;
-}
-
-.info-card {
-
-    background: #10141f;
-
-    border:
-        1px solid #292f3f;
-
-    border-radius: 12px;
-
+.body {
     padding: 20px;
 }
 
-.info-number {
-
-    font-size: 27px;
-
-    font-weight: bold;
-
-    margin-bottom: 5px;
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
 }
 
-.loading {
+.field {
+    margin-bottom: 17px;
+}
 
-    color: #aeb4c2;
+.field label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    background: var(--in);
+    border: 1px solid #55657d;
+    color: #fff;
+    border-radius: 5px;
+    padding: 11px 12px;
+    outline: none;
+}
+
+.textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.secondary {
+    background: #586579;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.danger {
+    background: #ed1b2f;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.success {
+    background: #087f4f;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.tablewrap {
+    overflow: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background: #3a485d;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #d8e1ed;
+}
+
+.table td,
+.table th {
+    padding: 14px 10px;
+    border-bottom: 1px solid #344359;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #24539b;
+    color: #fff;
+    font-size: 12px;
+}
+
+.muted {
+    color: #93a3ba;
 }
 
 .empty {
-
-    color: #999;
-
-    padding: 20px 0;
+    text-align: center;
+    padding: 55px;
+    color: #b4c0d0;
 }
 
-/* ========================================================= */
-/* RESPONSIVE */
-/* ========================================================= */
+.panelrow {
+    display: grid;
+    grid-template-columns:
+        1.2fr 1fr .7fr .8fr auto;
+    gap: 8px;
+    align-items: center;
+    padding: 13px 8px;
+    border-bottom: 1px solid #344359;
+}
 
-@media (max-width: 700px) {
+.panelrow.head {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #b8c5d7;
+}
 
-    .topbar {
+.smallbtn {
+    padding: 8px 11px;
+    border-radius: 5px;
+    background: #46546a;
+    color: white;
+}
 
-        align-items: flex-start;
+.filtergrid {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 15px;
+}
 
-        flex-direction: column;
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.listitem {
+    background: #26364b;
+    padding: 13px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: #0008;
+    display: grid;
+    place-items: center;
+    z-index: 50;
+}
+
+.modalbox {
+    width: min(720px, 92vw);
+    max-height: 90vh;
+    overflow: auto;
+    background: #1b2739;
+    border: 1px solid #45566e;
+    border-radius: 10px;
+}
+
+.modalhead {
+    padding: 18px;
+    border-bottom: 1px solid #3b4a60;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalbody {
+    padding: 20px;
+}
+
+.closex {
+    background: transparent;
+    color: #fff;
+    font-size: 22px;
+}
+
+.toast {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    background: #222e42;
+    border: 1px solid #53637a;
+    padding: 13px 18px;
+    border-radius: 7px;
+    z-index: 100;
+}
+
+@media(max-width:800px) {
+
+    .side {
+        width: 58px;
     }
 
-    .user {
-
-        width: 100%;
-
-        justify-content: space-between;
+    .main {
+        margin-left: 58px;
+        width: calc(100% - 58px);
     }
 
-    .server-header-row {
+    .grid2,
+    .filtergrid {
+        grid-template-columns: 1fr;
+    }
 
-        align-items: flex-start;
+    .panelrow {
+        grid-template-columns: 1fr;
+    }
 
-        flex-direction: column;
+    .top {
+        padding: 0 12px;
+    }
+
+    .server-select {
+        min-width: 160px;
+    }
+
+    .content {
+        padding: 20px 12px;
     }
 }
 
@@ -695,637 +463,369 @@ select:focus {
 
 <body>
 
-<!-- ======================================================= -->
-<!-- LOGIN PAGE -->
-<!-- ======================================================= -->
+<!-- LOGIN -->
 
-<div
-    id="loginPage"
-    class="center"
->
+<div id="login">
 
-    <div class="login-box">
+    <div class="loginbox">
 
         <div class="logo">
-            B
+            T
         </div>
 
         <h1>
-            Bot Manager
+            Tickets
         </h1>
 
         <p>
-            Đăng nhập bằng Discord để quản lý bot
-            và cấu hình các server mà bot đang tham gia.
+            Login with Discord to manage
+            your server, panels, tickets
+            and support system.
         </p>
 
         <button
-            class="login-button"
-            onclick="loginDiscord()"
+            class="primary loginbtn"
+            onclick="login()"
         >
-            🎮 Đăng nhập bằng Discord
+            🎮 Login with Discord
         </button>
-
-        <div
-            id="loginError"
-            class="error"
-        ></div>
 
     </div>
 
 </div>
 
 
-<!-- ======================================================= -->
-<!-- DASHBOARD -->
-<!-- ======================================================= -->
+<!-- APP -->
 
 <div
-    id="dashboard"
-    class="dashboard"
+    id="app"
+    class="app hidden"
 >
 
-    <div class="topbar">
+    <aside class="side">
 
         <div class="brand">
-            🤖 Bot Manager
+            🎫
         </div>
 
-        <div class="user">
-
-            <div id="username">
-                Đang tải...
-            </div>
-
-            <div
-                id="avatar"
-                class="avatar"
-            >
-                U
-            </div>
+        <div class="nav">
 
             <button
-                class="logout"
-                onclick="logout()"
+                data-page="tickets"
+                title="Tickets"
             >
-                Đăng xuất
+                🎟️
+            </button>
+
+            <button
+                data-page="transcripts"
+                title="Transcripts"
+            >
+                🧾
+            </button>
+
+            <button
+                data-page="panels"
+                title="Panels"
+            >
+                ▣
+            </button>
+
+            <button
+                data-page="teams"
+                title="Teams"
+            >
+                👥
+            </button>
+
+            <button
+                data-page="blacklist"
+                title="Blacklist"
+            >
+                ⊘
+            </button>
+
+            <button
+                data-page="audit-log"
+                title="Audit Log"
+            >
+                ↶
+            </button>
+
+            <button
+                data-page="settings"
+                title="Settings"
+            >
+                ⚙
             </button>
 
         </div>
 
-    </div>
+    </aside>
 
 
-    <div
-        id="homePage"
-        class="content"
-    >
+    <main class="main">
 
-        <div class="welcome">
+        <header class="top">
 
-            <h2>
-                Xin chào,
-                <span id="welcomeName">
-                    User
-                </span>
-                👋
-            </h2>
+            <select
+                id="serverSelect"
+                class="server-select"
+            ></select>
 
-            <p>
-                Chọn một server bên dưới để quản lý bot.
-            </p>
-
-        </div>
-
-        <h2>
-            Server của bạn
-        </h2>
-
-        <div
-            id="guilds"
-            class="guild-grid"
-        >
-
-            <p class="loading">
-                Đang tải danh sách server...
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================== -->
-    <!-- MANAGEMENT PAGE -->
-    <!-- =================================================== -->
-
-    <div
-        id="managementPage"
-        class="content"
-    >
-
-        <button
-            class="back-button"
-            onclick="backToGuilds()"
-        >
-            ← Quay lại danh sách server
-        </button>
-
-
-        <div class="server-header">
-
-            <div class="server-header-row">
+            <div class="user">
 
                 <img
-                    id="managementIcon"
-                    class="server-big-icon"
-                    src=""
-                    alt=""
+                    id="userAvatar"
+                    class="avatar"
                 >
 
-                <div>
-
-                    <h2
-                        id="managementName"
-                        style="margin:0 0 8px;"
-                    >
-                        Server
-                    </h2>
-
-                    <div
-                        id="managementId"
-                        class="loading"
-                    >
-                        ID
-                    </div>
-
-                </div>
+                <span
+                    id="userName"
+                ></span>
 
             </div>
 
-        </div>
+        </header>
 
 
-        <div class="tabs">
+        <section
+            id="content"
+            class="content"
+        ></section>
 
-            <button
-                id="tabOverview"
-                class="tab-button active"
-                onclick="showTab('overview')"
-            >
-                📊 Tổng quan
-            </button>
-
-            <button
-                id="tabTicket"
-                class="tab-button"
-                onclick="showTab('ticket')"
-            >
-                🎫 Ticket
-            </button>
-
-            <button
-                id="tabChannels"
-                class="tab-button"
-                onclick="showTab('channels')"
-            >
-                📁 Kênh
-            </button>
-
-            <button
-                id="tabRoles"
-                class="tab-button"
-                onclick="showTab('roles')"
-            >
-                👥 Role
-            </button>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- OVERVIEW -->
-        <!-- ================================================= -->
-
-        <div
-            id="panelOverview"
-            class="panel active"
-        >
-
-            <h2>
-                📊 Tổng quan server
-            </h2>
-
-            <div
-                id="overviewLoading"
-                class="loading"
-            >
-                Đang tải...
-            </div>
-
-            <div
-                id="overviewData"
-                class="info-grid"
-            ></div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- TICKET -->
-        <!-- ================================================= -->
-
-        <div
-            id="panelTicket"
-            class="panel"
-        >
-
-            <h2>
-                🎫 Cấu hình Ticket
-            </h2>
-
-            <div class="checkbox-row">
-
-                <input
-                    type="checkbox"
-                    id="ticketEnabled"
-                >
-
-                <label for="ticketEnabled">
-                    Bật hệ thống Ticket
-                </label>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Tiêu đề panel
-                </label>
-
-                <input
-                    id="ticketTitle"
-                    type="text"
-                    placeholder="Hỗ Trợ"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Mô tả panel
-                </label>
-
-                <textarea
-                    id="ticketDescription"
-                    placeholder="Nhấn nút bên dưới để tạo yêu cầu hỗ trợ."
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Màu Embed
-                </label>
-
-                <input
-                    id="ticketColor"
-                    type="text"
-                    placeholder="#5865F2"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Footer
-                </label>
-
-                <input
-                    id="ticketFooter"
-                    type="text"
-                    placeholder="Support System"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Category Ticket
-                </label>
-
-                <select
-                    id="ticketCategory"
-                >
-
-                    <option value="">
-                        -- Chọn Category --
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Staff Role
-                </label>
-
-                <select
-                    id="ticketStaffRole"
-                >
-
-                    <option value="">
-                        -- Chọn Staff Role --
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Log Channel
-                </label>
-
-                <select
-                    id="ticketLogChannel"
-                >
-
-                    <option value="">
-                        -- Chọn Log Channel --
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <button
-                class="save-button"
-                onclick="saveTicket()"
-            >
-                💾 Lưu cấu hình Ticket
-            </button>
-
-
-            <div
-                id="ticketMessage"
-                class="message"
-            ></div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- CHANNELS -->
-        <!-- ================================================= -->
-
-        <div
-            id="panelChannels"
-            class="panel"
-        >
-
-            <h2>
-                📁 Kênh trong server
-            </h2>
-
-            <div
-                id="channelsList"
-                class="loading"
-            >
-                Đang tải...
-            </div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- ROLES -->
-        <!-- ================================================= -->
-
-        <div
-            id="panelRoles"
-            class="panel"
-        >
-
-            <h2>
-                👥 Roles trong server
-            </h2>
-
-            <div
-                id="rolesList"
-                class="loading"
-            >
-                Đang tải...
-            </div>
-
-        </div>
-
-    </div>
+    </main>
 
 </div>
+
+
+<div
+    id="modal"
+    class="modal hidden"
+></div>
+
+<div
+    id="toast"
+    class="toast hidden"
+></div>
 
 
 <script>
 
-// ============================================================
-// CONFIG
-// ============================================================
-
-const BACKEND_URL =
+const API =
     "https://imcongthienzz.freesrv.com";
 
-const TOKEN_KEY =
-    "bot_manager_dashboard_token";
+let TOKEN =
+    localStorage.getItem(
+        "dashboard_token"
+    ) || "";
 
-let currentGuildId =
+let ME =
     null;
 
-let currentGuild =
+let GUILDS =
+    [];
+
+let GUILD =
     null;
 
+let DATA =
+    {};
 
-// ============================================================
-// TOKEN
-// ============================================================
 
-function getToken() {
+function esc(value) {
 
-    return localStorage.getItem(
-        TOKEN_KEY
+    return String(
+        value ?? ""
+    ).replace(
+        /[&<>"']/g,
+        char => ({
+
+            "&":
+                "&amp;",
+
+            "<":
+                "&lt;",
+
+            ">":
+                "&gt;",
+
+            '"':
+                "&quot;",
+
+            "'":
+                "&#39;"
+
+        }[char])
     );
 }
 
-function saveToken(token) {
 
-    localStorage.setItem(
-        TOKEN_KEY,
-        token
+function val(id) {
+
+    return (
+        document.getElementById(
+            id
+        )?.value || ""
     );
 }
 
-function removeToken() {
-
-    localStorage.removeItem(
-        TOKEN_KEY
-    );
-}
-
-
-// ============================================================
-// API HELPER
-// ============================================================
 
 async function api(
     path,
     options = {}
 ) {
 
-    const token =
-        getToken();
+    options.headers = {
 
-    const headers = {
+        ...(options.headers || {}),
 
-        ...(options.headers || {})
+        Authorization:
+            "Bearer " +
+            TOKEN,
+
+        "Content-Type":
+            "application/json"
     };
-
-    if (
-        options.body &&
-        !headers["Content-Type"]
-    ) {
-
-        headers["Content-Type"] =
-            "application/json";
-    }
-
-    if (token) {
-
-        headers["Authorization"] =
-            `Bearer ${token}`;
-    }
 
     const response =
         await fetch(
-            BACKEND_URL + path,
-            {
-                ...options,
-                headers,
-                cache: "no-store"
-            }
+            API + path,
+            options
         );
 
-    if (
-        response.status === 401
-    ) {
+    let data =
+        {};
 
-        removeToken();
+    try {
 
-        showLogin();
+        data =
+            await response.json();
+
+    } catch {}
+
+    if (!response.ok) {
 
         throw new Error(
-            "Phiên đăng nhập đã hết hạn"
+            data.error ||
+            "Request failed"
         );
     }
 
-    return response;
+    return data;
 }
 
 
-// ============================================================
-// LOGIN
-// ============================================================
+function toast(
+    message
+) {
 
-function loginDiscord() {
+    const element =
+        document.getElementById(
+            "toast"
+        );
 
-    window.location.href =
-        BACKEND_URL +
+    element.textContent =
+        message;
+
+    element.classList.remove(
+        "hidden"
+    );
+
+    setTimeout(
+        () => {
+
+            element.classList.add(
+                "hidden"
+            );
+
+        },
+        2500
+    );
+}
+
+
+function login() {
+
+    location.href =
+        API +
         "/auth/discord";
 }
 
 
-// ============================================================
-// READ OAUTH HASH
-// ============================================================
+function route() {
 
-function readOAuthHash() {
+    const parts =
+        location.hash
+            .slice(1)
+            .split("/");
 
-    const hash =
-        window.location.hash;
+    if (
+        parts[0] ===
+        "manage"
+    ) {
 
-    if (!hash) {
+        return {
+
+            guildId:
+                parts[1],
+
+            page:
+                parts[2] ||
+                "panels"
+        };
+    }
+
+    return {
+        page:
+            "servers"
+    };
+}
+
+
+function go(page) {
+
+    if (!GUILD) {
         return;
     }
 
-    const params =
-        new URLSearchParams(
-            hash.substring(1)
-        );
-
-    const token =
-        params.get("auth");
-
-    const error =
-        params.get("error");
-
-    if (token) {
-
-        console.log(
-            "✅ Nhận dashboard token"
-        );
-
-        saveToken(token);
-
-        // XÓA TOKEN KHỎI URL
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-        );
-
-        return;
-    }
-
-    if (error) {
-
-        document.getElementById(
-            "loginError"
-        ).textContent =
-            "❌ Đăng nhập thất bại: " +
-            error;
-
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-        );
-    }
+    location.hash =
+        `manage/${GUILD.id}/${page}`;
 }
 
 
 // ============================================================
-// CHECK LOGIN
+// BOOT
 // ============================================================
 
-async function checkLogin() {
+async function boot() {
 
-    const token =
-        getToken();
+    const hash =
+        location.hash.slice(1);
 
-    if (!token) {
+    if (
+        hash.startsWith(
+            "auth="
+        )
+    ) {
+
+        TOKEN =
+            hash.slice(5);
+
+        localStorage.setItem(
+            "dashboard_token",
+            TOKEN
+        );
+
+        history.replaceState(
+            null,
+            "",
+            location.pathname +
+            "#"
+        );
+    }
+
+    if (!TOKEN) {
 
         showLogin();
 
@@ -1334,358 +834,285 @@ async function checkLogin() {
 
     try {
 
-        const response =
-            await api(
-                "/api/me"
-            );
+        ME =
+            (
+                await api(
+                    "/api/me"
+                )
+            ).user;
 
-        if (!response.ok) {
+        userName.textContent =
+            ME.global_name ||
+            ME.username;
 
-            removeToken();
+        userAvatar.src =
+            ME.avatarUrl;
 
-            showLogin();
+        GUILDS =
+            (
+                await api(
+                    "/api/guilds"
+                )
+            ).guilds;
 
-            return;
-        }
+        renderServers();
 
-        const data =
-            await response.json();
-
-        if (
-            !data.loggedIn ||
-            !data.user
-        ) {
-
-            removeToken();
-
-            showLogin();
-
-            return;
-        }
-
-        console.log(
-            "✅ Dashboard đã đăng nhập",
-            data.user
-        );
-
-        showDashboard(
-            data.user
-        );
-
-        await loadGuilds();
-
-    } catch (error) {
-
-        console.error(
-            "❌ Check login:",
-            error
-        );
-
-    }
-}
-
-
-// ============================================================
-// SHOW LOGIN
-// ============================================================
-
-function showLogin() {
-
-    document.getElementById(
-        "loginPage"
-    ).style.display = "flex";
-
-    document.getElementById(
-        "dashboard"
-    ).style.display = "none";
-}
-
-
-// ============================================================
-// SHOW DASHBOARD
-// ============================================================
-
-function showDashboard(user) {
-
-    document.getElementById(
-        "loginPage"
-    ).style.display = "none";
-
-    document.getElementById(
-        "dashboard"
-    ).style.display = "block";
-
-    document.getElementById(
-        "homePage"
-    ).style.display = "block";
-
-    document.getElementById(
-        "managementPage"
-    ).style.display = "none";
-
-    const name =
-        user.global_name ||
-        user.username ||
-        "User";
-
-    document.getElementById(
-        "username"
-    ).textContent =
-        name;
-
-    document.getElementById(
-        "welcomeName"
-    ).textContent =
-        name;
-
-    const avatar =
-        document.getElementById(
-            "avatar"
-        );
-
-    if (user.avatar) {
-
-        avatar.style.backgroundImage =
-            `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128)`;
-
-        avatar.textContent = "";
-
-    } else {
-
-        avatar.style.backgroundImage =
-            "";
-
-        avatar.textContent =
-            name
-                .charAt(0)
-                .toUpperCase();
-    }
-}
-
-
-// ============================================================
-// LOAD GUILDS
-// ============================================================
-
-async function loadGuilds() {
-
-    const container =
-        document.getElementById(
-            "guilds"
-        );
-
-    container.innerHTML =
-        `<p class="loading">
-            Đang tải danh sách server...
-        </p>`;
-
-    try {
-
-        const response =
-            await api(
-                "/api/guilds"
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error ||
-                "Không lấy được server"
-            );
-        }
-
-        container.innerHTML = "";
+        const routeData =
+            route();
 
         if (
-            !data.guilds ||
-            data.guilds.length === 0
+            routeData.guildId
         ) {
 
-            container.innerHTML =
-                `<p class="empty">
-                    Không tìm thấy server nào
-                    mà bạn có quyền quản lý.
-                </p>`;
-
-            return;
-        }
-
-        data.guilds.forEach(
-            guild => {
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.className =
-                    "guild";
-
-                const icon =
-                    guild.icon
-                        ? `
-                            <img
-                                src="${escapeAttribute(guild.icon)}"
-                                alt=""
-                            >
-                          `
-                        : "🏠";
-
-                const status =
-                    guild.botInstalled
-                        ? `
-                            <div class="status online">
-                                🟢 Bot đang ở server
-                            </div>
-                          `
-                        : `
-                            <div class="status offline">
-                                ⚪ Bot chưa vào server
-                            </div>
-                          `;
-
-                const manageButton =
-                    guild.botInstalled
-                        ? `
-                            <button
-                                class="manage-button"
-                                onclick="openGuild('${guild.id}')"
-                            >
-                                ⚙️ Quản lý server
-                            </button>
-                          `
-                        : `
-                            <button
-                                class="invite-button"
-                                onclick="inviteBot('${guild.id}')"
-                            >
-                                ➕ Mời bot vào server
-                            </button>
-                          `;
-
-                card.innerHTML = `
-
-                    <div class="guild-icon">
-                        ${icon}
-                    </div>
-
-                    <div class="guild-name">
-                        ${escapeHtml(
-                            guild.name
-                        )}
-                    </div>
-
-                    ${status}
-
-                    ${manageButton}
-                `;
-
-                container.appendChild(
-                    card
-                );
-            }
-        );
-
-    } catch (error) {
-
-        console.error(
-            error
-        );
-
-        container.innerHTML = `
-            <p class="error">
-                ❌ ${escapeHtml(
-                    error.message
-                )}
-            </p>
-        `;
-    }
-}
-
-
-// ============================================================
-// OPEN GUILD
-// ============================================================
-
-async function openGuild(
-    guildId
-) {
-
-    try {
-
-        currentGuildId =
-            guildId;
-
-        const response =
-            await api(
-                `/api/guild/${guildId}`
+            await selectGuild(
+                routeData.guildId,
+                false
             );
 
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error ||
-                "Không thể truy cập server"
+            renderPage(
+                routeData.page
             );
-        }
-
-        currentGuild =
-            data.guild;
-
-        document.getElementById(
-            "homePage"
-        ).style.display =
-            "none";
-
-        document.getElementById(
-            "managementPage"
-        ).style.display =
-            "block";
-
-        document.getElementById(
-            "managementName"
-        ).textContent =
-            data.guild.name;
-
-        document.getElementById(
-            "managementId"
-        ).textContent =
-            "Server ID: " +
-            data.guild.id;
-
-        const icon =
-            document.getElementById(
-                "managementIcon"
-            );
-
-        if (data.guild.icon) {
-
-            icon.src =
-                data.guild.icon;
 
         } else {
 
-            icon.removeAttribute(
-                "src"
-            );
+            showServers();
         }
-
-        showTab(
-            "overview"
-        );
-
-        await loadOverview();
 
     } catch (error) {
 
-        alert(
-            "❌ " +
+        localStorage.removeItem(
+            "dashboard_token"
+        );
+
+        TOKEN =
+            "";
+
+        showLogin();
+
+        toast(
+            error.message
+        );
+    }
+}
+
+
+function showLogin() {
+
+    document
+        .getElementById("login")
+        .classList.remove(
+            "hidden"
+        );
+
+    document
+        .getElementById("app")
+        .classList.add(
+            "hidden"
+        );
+}
+
+
+function showApp() {
+
+    document
+        .getElementById("login")
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById("app")
+        .classList.remove(
+            "hidden"
+        );
+}
+
+
+// ============================================================
+// SERVERS
+// ============================================================
+
+function renderServers() {
+
+    serverSelect.innerHTML =
+        GUILDS.map(
+            guild => `
+
+                <option
+                    value="${guild.id}"
+                >
+                    ${esc(guild.name)}
+                    ${
+                        guild.botInstalled
+                            ? ""
+                            : " — Bot not installed"
+                    }
+                </option>
+            `
+        ).join("");
+
+    serverSelect.onchange =
+        () =>
+            selectGuild(
+                serverSelect.value,
+                true
+            );
+}
+
+
+function showServers() {
+
+    showApp();
+
+    content.innerHTML = `
+
+        <h1 class="title">
+            Your Servers
+        </h1>
+
+        <p class="subtitle">
+            Select a server to manage
+        </p>
+
+        <div class="grid2">
+
+            ${GUILDS.map(
+                guild => `
+
+                    <div class="card">
+
+                        <div class="body">
+
+                            <div
+                                style="
+                                    display:flex;
+                                    gap:15px;
+                                    align-items:center
+                                "
+                            >
+
+                                <img
+                                    class="avatar"
+                                    style="
+                                        width:58px;
+                                        height:58px
+                                    "
+                                    src="${
+                                        guild.icon ||
+                                        "https://cdn.discordapp.com/embed/avatars/0.png"
+                                    }"
+                                >
+
+                                <div>
+
+                                    <h2>
+                                        ${esc(guild.name)}
+                                    </h2>
+
+                                    <div class="muted">
+
+                                        ${
+                                            guild.botInstalled
+                                                ? "🟢 Bot is in server"
+                                                : "⚪ Bot is not in server"
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="primary"
+                                style="
+                                    width:100%;
+                                    margin-top:18px
+                                "
+                                ${
+                                    guild.botInstalled
+                                        ? ""
+                                        : "disabled"
+                                }
+                                onclick="
+                                    selectGuild(
+                                        '${guild.id}',
+                                        true
+                                    )
+                                "
+                            >
+
+                                ${
+                                    guild.botInstalled
+                                        ? "⚙ Manage Server"
+                                        : "＋ Bot not in server"
+                                }
+
+                            </button>
+
+                        </div>
+
+                    </div>
+                `
+            ).join("")}
+
+        </div>
+    `;
+}
+
+
+async function selectGuild(
+    id,
+    redirect = true
+) {
+
+    const guild =
+        GUILDS.find(
+            x =>
+                x.id === id
+        );
+
+    if (!guild) {
+
+        return showServers();
+    }
+
+    if (!guild.botInstalled) {
+
+        return toast(
+            "Bot chưa vào server này"
+        );
+    }
+
+    try {
+
+        GUILD = {
+
+            ...guild,
+
+            ...(
+                await api(
+                    "/api/guild/" +
+                    guild.id
+                )
+            ).guild
+        };
+
+        showApp();
+
+        serverSelect.value =
+            guild.id;
+
+        if (redirect) {
+
+            go(
+                "panels"
+            );
+        }
+
+    } catch (error) {
+
+        toast(
             error.message
         );
     }
@@ -1693,904 +1120,2112 @@ async function openGuild(
 
 
 // ============================================================
-// BACK
+// NAVIGATION
 // ============================================================
 
-function backToGuilds() {
-
-    currentGuildId =
-        null;
-
-    currentGuild =
-        null;
-
-    document.getElementById(
-        "managementPage"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "homePage"
-    ).style.display =
-        "block";
-
-    loadGuilds();
-}
-
-
-// ============================================================
-// TABS
-// ============================================================
-
-function showTab(
-    tab
+async function renderPage(
+    page
 ) {
 
-    const panels = [
-        "overview",
-        "ticket",
-        "channels",
-        "roles"
-    ];
-
-    panels.forEach(
-        name => {
-
-            document.getElementById(
-                "panel" +
-                capitalize(name)
-            ).classList.remove(
-                "active"
-            );
-
-            document.getElementById(
-                "tab" +
-                capitalize(name)
-            ).classList.remove(
-                "active"
-            );
-        }
-    );
-
-    document.getElementById(
-        "panel" +
-        capitalize(tab)
-    ).classList.add(
-        "active"
-    );
-
-    document.getElementById(
-        "tab" +
-        capitalize(tab)
-    ).classList.add(
-        "active"
-    );
-
-    if (tab === "overview") {
-        loadOverview();
-    }
-
-    if (tab === "ticket") {
-        loadTicket();
-    }
-
-    if (tab === "channels") {
-        loadChannels();
-    }
-
-    if (tab === "roles") {
-        loadRoles();
-    }
-}
-
-function capitalize(text) {
-
-    return text
-        .charAt(0)
-        .toUpperCase() +
-        text.slice(1);
-}
-
-
-// ============================================================
-// OVERVIEW
-// ============================================================
-
-async function loadOverview() {
-
-    if (!currentGuildId) {
-        return;
-    }
-
-    const loading =
-        document.getElementById(
-            "overviewLoading"
-        );
-
-    const dataBox =
-        document.getElementById(
-            "overviewData"
-        );
-
-    loading.style.display =
-        "block";
-
-    dataBox.innerHTML = "";
-
-    try {
-
-        const response =
-            await api(
-                `/api/guild/${currentGuildId}`
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error
-            );
-        }
-
-        loading.style.display =
-            "none";
-
-        dataBox.innerHTML = `
-
-            <div class="info-card">
-
-                <div class="info-number">
-                    ${data.guild.memberCount}
-                </div>
-
-                <div>
-                    Thành viên
-                </div>
-
-            </div>
-
-            <div class="info-card">
-
-                <div class="info-number">
-                    ${data.guild.channels}
-                </div>
-
-                <div>
-                    Kênh
-                </div>
-
-            </div>
-
-            <div class="info-card">
-
-                <div class="info-number">
-                    ${data.guild.roles}
-                </div>
-
-                <div>
-                    Roles
-                </div>
-
-            </div>
-
-        `;
-
-    } catch (error) {
-
-        loading.textContent =
-            "❌ " +
-            error.message;
-    }
-}
-
-
-// ============================================================
-// LOAD TICKET
-// ============================================================
-
-async function loadTicket() {
-
-    if (!currentGuildId) {
-        return;
-    }
-
-    try {
-
-        await Promise.all([
-            loadTicketChannels(),
-            loadTicketRoles()
-        ]);
-
-        const response =
-            await api(
-                `/api/guild/${currentGuildId}/ticket`
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error
-            );
-        }
-
-        const config =
-            data.config;
-
-        document.getElementById(
-            "ticketEnabled"
-        ).checked =
-            !!config.enabled;
-
-        document.getElementById(
-            "ticketTitle"
-        ).value =
-            config.panel?.title ||
-            "";
-
-        document.getElementById(
-            "ticketDescription"
-        ).value =
-            config.panel?.description ||
-            "";
-
-        document.getElementById(
-            "ticketColor"
-        ).value =
-            config.panel?.color ||
-            "#5865F2";
-
-        document.getElementById(
-            "ticketFooter"
-        ).value =
-            config.panel?.footer ||
-            "";
-
-        document.getElementById(
-            "ticketCategory"
-        ).value =
-            config.categoryId ||
-            "";
-
-        document.getElementById(
-            "ticketStaffRole"
-        ).value =
-            config.staffRoleId ||
-            "";
-
-        document.getElementById(
-            "ticketLogChannel"
-        ).value =
-            config.logChannelId ||
-            "";
-
-    } catch (error) {
-
-        showTicketMessage(
-            "❌ " +
-            error.message,
-            true
-        );
-    }
-}
-
-
-// ============================================================
-// LOAD CHANNELS FOR TICKET
-// ============================================================
-
-async function loadTicketChannels() {
-
-    const response =
-        await api(
-            `/api/guild/${currentGuildId}/channels`
-        );
-
-    const data =
-        await response.json();
-
-    if (!response.ok) {
-
-        throw new Error(
-            data.error ||
-            "Không lấy được channels"
-        );
-    }
-
-    const category =
-        document.getElementById(
-            "ticketCategory"
-        );
-
-    const log =
-        document.getElementById(
-            "ticketLogChannel"
-        );
-
-    category.innerHTML =
-        `<option value="">
-            -- Chọn Category --
-        </option>`;
-
-    log.innerHTML =
-        `<option value="">
-            -- Chọn Log Channel --
-        </option>`;
-
-    data.channels.forEach(
-        channel => {
-
-            // Discord channel type 4 = Category
-            if (
-                channel.type === 4
-            ) {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-                option.value =
-                    channel.id;
-
-                option.textContent =
-                    channel.name;
-
-                category.appendChild(
-                    option
+    document
+        .querySelectorAll(
+            ".nav button"
+        )
+        .forEach(
+            button => {
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.page ===
+                    page
                 );
             }
+        );
 
-            // Text channel thường
-            if (
-                channel.type === 0
-            ) {
+    const pages = {
 
-                const option =
-                    document.createElement(
-                        "option"
-                    );
+        tickets:
+            renderTickets,
 
-                option.value =
-                    channel.id;
+        transcripts:
+            renderTranscripts,
 
-                option.textContent =
-                    "#" +
-                    channel.name;
+        panels:
+            renderPanels,
 
-                log.appendChild(
-                    option
-                );
-            }
-        }
-    );
+        teams:
+            renderTeams,
+
+        blacklist:
+            renderBlacklist,
+
+        "audit-log":
+            renderAudit,
+
+        settings:
+            renderSettings
+    };
+
+    (
+        pages[page] ||
+        renderPanels
+    )();
 }
 
 
-// ============================================================
-// LOAD ROLES FOR TICKET
-// ============================================================
+document
+    .querySelectorAll(
+        ".nav button"
+    )
+    .forEach(
+        button => {
 
-async function loadTicketRoles() {
+            button.onclick =
+                () =>
+                    go(
+                        button.dataset.page
+                    );
+        }
+    );
 
-    const response =
-        await api(
-            `/api/guild/${currentGuildId}/roles`
-        );
 
-    const data =
-        await response.json();
+addEventListener(
+    "hashchange",
+    async () => {
 
-    if (!response.ok) {
+        const routeData =
+            route();
 
-        throw new Error(
-            data.error ||
-            "Không lấy được roles"
-        );
-    }
+        if (
+            routeData.guildId &&
+            (
+                !GUILD ||
+                GUILD.id !==
+                routeData.guildId
+            )
+        ) {
 
-    const select =
-        document.getElementById(
-            "ticketStaffRole"
-        );
-
-    select.innerHTML =
-        `<option value="">
-            -- Chọn Staff Role --
-        </option>`;
-
-    data.roles.forEach(
-        role => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                role.id;
-
-            option.textContent =
-                "@" +
-                role.name;
-
-            select.appendChild(
-                option
+            await selectGuild(
+                routeData.guildId,
+                false
             );
         }
-    );
+
+        renderPage(
+            routeData.page
+        );
+    }
+);
+
+
+// ============================================================
+// CHANNELS / ROLES
+// ============================================================
+
+async function channels() {
+
+    DATA.channels =
+        (
+            await api(
+                `/api/guild/${GUILD.id}/channels`
+            )
+        ).channels;
+
+    return DATA.channels;
+}
+
+
+async function roles() {
+
+    DATA.roles =
+        (
+            await api(
+                `/api/guild/${GUILD.id}/roles`
+            )
+        ).roles;
+
+    return DATA.roles;
 }
 
 
 // ============================================================
-// SAVE TICKET
+// PANELS
 // ============================================================
 
-async function saveTicket() {
+async function renderPanels() {
 
-    if (!currentGuildId) {
-
-        showTicketMessage(
-            "❌ Chưa chọn server",
-            true
+    const data =
+        await api(
+            `/api/guild/${GUILD.id}/panels`
         );
 
-        return;
-    }
+    DATA.channels =
+        DATA.channels ||
+        [];
 
-    const config = {
+    content.innerHTML = `
 
-        enabled:
-            document.getElementById(
-                "ticketEnabled"
-            ).checked,
+        <h1 class="title">
+            Panels for Server
+            ${esc(GUILD.name)}
+        </h1>
 
-        panel: {
+        <p class="subtitle">
+            View and manage all panels and multi-panels
+        </p>
+
+        <div class="card">
+
+            <div class="cardhead">
+
+                <h2>
+                    Panels
+                </h2>
+
+                <div class="actions">
+
+                    <button
+                        class="secondary"
+                    >
+                        ◉ Browse Gallery
+                    </button>
+
+                    <button
+                        class="primary"
+                        onclick="panelModal()"
+                    >
+                        ＋ Create Panel
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="body">
+
+                <p>
+                    You've used
+                    <b>
+                        ${data.panels.length}
+                    </b>
+                    out of
+                    <b>
+                        3
+                    </b>
+                    panels
+                </p>
+
+                ${
+                    data.panels.length
+                        ? `
+
+                            <div class="panelrow head">
+
+                                <div>
+                                    CHANNEL
+                                </div>
+
+                                <div>
+                                    PANEL NAME
+                                </div>
+
+                                <div>
+                                    STATUS
+                                </div>
+
+                                <div>
+                                    MESSAGE
+                                </div>
+
+                                <div>
+                                    ACTION
+                                </div>
+
+                            </div>
+
+                            ${data.panels.map(
+                                panel => `
+
+                                    <div class="panelrow">
+
+                                        <div>
+                                            #${
+                                                esc(
+                                                    (
+                                                        DATA.channels.find(
+                                                            channel =>
+                                                                channel.id ===
+                                                                panel.channelId
+                                                        ) ||
+                                                        {}
+                                                    ).name ||
+                                                    panel.channelId ||
+                                                    "—"
+                                                )
+                                            }
+                                        </div>
+
+                                        <div>
+                                            <b>
+                                                ${esc(panel.name)}
+                                            </b>
+                                        </div>
+
+                                        <div>
+
+                                            <span class="badge">
+                                                ${esc(
+                                                    panel.status ||
+                                                    "24/7"
+                                                )}
+                                            </span>
+
+                                        </div>
+
+                                        <div>
+                                            ${
+                                                panel.messageId
+                                                    ? "Sent"
+                                                    : "—"
+                                            }
+                                        </div>
+
+                                        <div>
+
+                                            <button
+                                                class="smallbtn"
+                                                onclick="
+                                                    editPanel(
+                                                        '${panel.id}'
+                                                    )
+                                                "
+                                            >
+                                                ⋮
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                `
+                            ).join("")}
+
+                        `
+                        : `
+
+                            <div class="empty">
+
+                                ▱
+
+                                <h3>
+                                    No panels yet
+                                </h3>
+
+                                <p>
+                                    Create a panel and it
+                                    will be sent automatically
+                                    to Discord.
+                                </p>
+
+                            </div>
+                        `
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="cardhead">
+
+                <h2>
+                    Multi-Panels
+                </h2>
+
+                <button
+                    class="secondary"
+                    disabled
+                >
+                    ＋ Create Multi-Panel
+                </button>
+
+            </div>
+
+            <div class="empty">
+
+                ▱
+
+                <h3>
+                    No multi-panels yet
+                </h3>
+
+                <p>
+                    Multi-panels combine multiple
+                    panels into a single message.
+                </p>
+
+            </div>
+
+        </div>
+    `;
+
+    await channels();
+}
+
+
+async function panelModal(
+    existing = null
+) {
+
+    const channelList =
+        await channels();
+
+    const roleList =
+        await roles();
+
+    const panel =
+        existing || {
+
+            name:
+                "Ticket Panel",
 
             title:
-                document.getElementById(
-                    "ticketTitle"
-                ).value,
+                "Need Help?",
 
             description:
-                document.getElementById(
-                    "ticketDescription"
-                ).value,
+                "Click the button below to open a ticket.",
 
             color:
-                document.getElementById(
-                    "ticketColor"
-                ).value,
+                "#5865F2",
 
             footer:
-                document.getElementById(
-                    "ticketFooter"
-                ).value
-        },
+                "Ticket Support",
+
+            buttonLabel:
+                "Open Ticket",
+
+            buttonEmoji:
+                "🎫",
+
+            buttonStyle:
+                "Primary",
+
+            channelId:
+                "",
+
+            categoryId:
+                GUILD.setup?.categoryId ||
+                "",
+
+            supportRoleId:
+                GUILD.setup?.supportRoleId ||
+                ""
+        };
+
+    modal.innerHTML = `
+
+        <div class="modalbox">
+
+            <div class="modalhead">
+
+                <h2>
+                    ${
+                        existing
+                            ? "Edit Panel"
+                            : "Create Panel"
+                    }
+                </h2>
+
+                <button
+                    class="closex"
+                    onclick="closeModal()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="modalbody">
+
+                <div class="grid2">
+
+                    <div class="field">
+
+                        <label>
+                            Panel Name
+                        </label>
+
+                        <input
+                            id="pn"
+                            class="input"
+                            value="${esc(panel.name)}"
+                        >
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>
+                            Channel
+                        </label>
+
+                        <select
+                            id="pc"
+                            class="select"
+                        >
+
+                            ${
+                                channelList
+                                    .filter(
+                                        channel =>
+                                            channel.type ===
+                                                0 ||
+                                            channel.type ===
+                                                5
+                                    )
+                                    .map(
+                                        channel => `
+
+                                            <option
+                                                value="${channel.id}"
+                                                ${
+                                                    channel.id ===
+                                                    panel.channelId
+                                                        ? "selected"
+                                                        : ""
+                                                }
+                                            >
+                                                #${esc(
+                                                    channel.name
+                                                )}
+                                            </option>
+                                        `
+                                    )
+                                    .join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Title
+                    </label>
+
+                    <input
+                        id="pt"
+                        class="input"
+                        value="${esc(panel.title)}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        id="pd"
+                        class="textarea"
+                    >${esc(panel.description)}</textarea>
+
+                </div>
+
+
+                <div class="grid2">
+
+                    <div class="field">
+
+                        <label>
+                            Color
+                        </label>
+
+                        <input
+                            id="pco"
+                            class="input"
+                            value="${esc(panel.color)}"
+                        >
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>
+                            Footer
+                        </label>
+
+                        <input
+                            id="pf"
+                            class="input"
+                            value="${esc(panel.footer)}"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="grid2">
+
+                    <div class="field">
+
+                        <label>
+                            Button Label
+                        </label>
+
+                        <input
+                            id="pbl"
+                            class="input"
+                            value="${esc(panel.buttonLabel)}"
+                        >
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>
+                            Button Emoji
+                        </label>
+
+                        <input
+                            id="pbe"
+                            class="input"
+                            value="${esc(panel.buttonEmoji)}"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="grid2">
+
+                    <div class="field">
+
+                        <label>
+                            Ticket Category
+                        </label>
+
+                        <select
+                            id="pca"
+                            class="select"
+                        >
+
+                            <option value="">
+                                Default setup category
+                            </option>
+
+                            ${
+                                channelList
+                                    .filter(
+                                        channel =>
+                                            channel.type ===
+                                            4
+                                    )
+                                    .map(
+                                        channel => `
+
+                                            <option
+                                                value="${channel.id}"
+                                                ${
+                                                    channel.id ===
+                                                    panel.categoryId
+                                                        ? "selected"
+                                                        : ""
+                                                }
+                                            >
+                                                ${esc(
+                                                    channel.name
+                                                )}
+                                            </option>
+                                        `
+                                    )
+                                    .join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Support Role
+                        </label>
+
+                        <select
+                            id="pr"
+                            class="select"
+                        >
+
+                            <option value="">
+                                Default Tickets Support
+                            </option>
+
+                            ${
+                                roleList.map(
+                                    role => `
+
+                                        <option
+                                            value="${role.id}"
+                                            ${
+                                                role.id ===
+                                                panel.supportRoleId
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            @${esc(
+                                                role.name
+                                            )}
+                                        </option>
+                                    `
+                                ).join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        class="primary"
+                        onclick="
+                            savePanel(
+                                '${existing?.id || ""}'
+                            )
+                        "
+                    >
+
+                        ${
+                            existing
+                                ? "Save Changes"
+                                : "Create Panel"
+                        }
+
+                    </button>
+
+                    <button
+                        class="secondary"
+                        onclick="closeModal()"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+
+                <p class="muted">
+
+                    Create Panel sẽ gửi panel
+                    ngay lập tức vào Discord.
+
+                    Không có /panel.
+
+                </p>
+
+            </div>
+
+        </div>
+    `;
+
+    modal.classList.remove(
+        "hidden"
+    );
+}
+
+
+function closeModal() {
+
+    modal.classList.add(
+        "hidden"
+    );
+}
+
+
+async function editPanel(
+    id
+) {
+
+    const data =
+        await api(
+            `/api/guild/${GUILD.id}/panels`
+        );
+
+    const panel =
+        data.panels.find(
+            x =>
+                x.id === id
+        );
+
+    panelModal(
+        panel
+    );
+}
+
+
+async function savePanel(
+    id
+) {
+
+    const body = {
+
+        name:
+            val("pn"),
+
+        channelId:
+            val("pc"),
+
+        title:
+            val("pt"),
+
+        description:
+            val("pd"),
+
+        color:
+            val("pco"),
+
+        footer:
+            val("pf"),
+
+        buttonLabel:
+            val("pbl"),
+
+        buttonEmoji:
+            val("pbe"),
 
         categoryId:
-            document.getElementById(
-                "ticketCategory"
-            ).value ||
-            null,
+            val("pca"),
 
-        staffRoleId:
-            document.getElementById(
-                "ticketStaffRole"
-            ).value ||
-            null,
-
-        logChannelId:
-            document.getElementById(
-                "ticketLogChannel"
-            ).value ||
-            null,
-
-        buttons: [
-
-            {
-                id:
-                    "support",
-
-                label:
-                    "Hỗ Trợ",
-
-                emoji:
-                    "🎫",
-
-                style:
-                    "Primary"
-            }
-        ]
+        supportRoleId:
+            val("pr")
     };
 
     try {
 
-        const response =
-            await api(
-                `/api/guild/${currentGuildId}/ticket`,
-                {
-                    method: "POST",
-
-                    body:
-                        JSON.stringify(
-                            config
-                        )
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error ||
-                "Không lưu được"
-            );
-        }
-
-        showTicketMessage(
-            "✅ Đã lưu cấu hình Ticket!",
-            false
-        );
-
-    } catch (error) {
-
-        showTicketMessage(
-            "❌ " +
-            error.message,
-            true
-        );
-    }
-}
-
-
-// ============================================================
-// TICKET MESSAGE
-// ============================================================
-
-function showTicketMessage(
-    message,
-    isError
-) {
-
-    const box =
-        document.getElementById(
-            "ticketMessage"
-        );
-
-    box.textContent =
-        message;
-
-    box.className =
-        "message " +
-        (
-            isError
-                ? "error-message"
-                : "success-message"
-        );
-
-    setTimeout(
-        () => {
-
-            box.className =
-                "message";
-
-        },
-        4000
-    );
-}
-
-
-// ============================================================
-// CHANNEL LIST
-// ============================================================
-
-async function loadChannels() {
-
-    const box =
-        document.getElementById(
-            "channelsList"
-        );
-
-    box.textContent =
-        "Đang tải...";
-
-    try {
-
-        const response =
-            await api(
-                `/api/guild/${currentGuildId}/channels`
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error
-            );
-        }
-
-        if (
-            !data.channels.length
-        ) {
-
-            box.innerHTML =
-                `<div class="empty">
-                    Không có channel.
-                </div>`;
-
-            return;
-        }
-
-        box.innerHTML =
-            data.channels
-                .map(
-                    channel => `
-
-                        <div class="info-card"
-                             style="margin-bottom:10px;">
-
-                            <b>
-                                ${
-                                    channel.type === 4
-                                        ? "📁 "
-                                        : "# "
-                                }
-
-                                ${escapeHtml(
-                                    channel.name
-                                )}
-                            </b>
-
-                            <div
-                                style="
-                                    color:#777;
-                                    margin-top:5px;
-                                    font-size:12px;
-                                "
-                            >
-                                ID: ${channel.id}
-                            </div>
-
-                        </div>
-                    `
-                )
-                .join("");
-
-    } catch (error) {
-
-        box.innerHTML =
-            `<div class="error">
-                ❌ ${escapeHtml(
-                    error.message
-                )}
-            </div>`;
-    }
-}
-
-
-// ============================================================
-// ROLE LIST
-// ============================================================
-
-async function loadRoles() {
-
-    const box =
-        document.getElementById(
-            "rolesList"
-        );
-
-    box.textContent =
-        "Đang tải...";
-
-    try {
-
-        const response =
-            await api(
-                `/api/guild/${currentGuildId}/roles`
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error
-            );
-        }
-
-        if (
-            !data.roles.length
-        ) {
-
-            box.innerHTML =
-                `<div class="empty">
-                    Không có role.
-                </div>`;
-
-            return;
-        }
-
-        box.innerHTML =
-            data.roles
-                .map(
-                    role => `
-
-                        <div class="info-card"
-                             style="
-                                margin-bottom:10px;
-                                border-left:
-                                    4px solid
-                                    ${escapeAttribute(
-                                        role.color
-                                    )};
-                             ">
-
-                            <b>
-                                @${escapeHtml(
-                                    role.name
-                                )}
-                            </b>
-
-                            <div
-                                style="
-                                    color:#777;
-                                    margin-top:5px;
-                                    font-size:12px;
-                                "
-                            >
-                                ID: ${role.id}
-                            </div>
-
-                        </div>
-                    `
-                )
-                .join("");
-
-    } catch (error) {
-
-        box.innerHTML =
-            `<div class="error">
-                ❌ ${escapeHtml(
-                    error.message
-                )}
-            </div>`;
-    }
-}
-
-
-// ============================================================
-// INVITE BOT
-// ============================================================
-
-function inviteBot(guildId) {
-
-    const url =
-        "https://discord.com/oauth2/authorize" +
-        "?client_id=" +
-        encodeURIComponent(
-            getClientIdFromConfig()
-        ) +
-        "&scope=bot%20applications.commands" +
-        "&permissions=8" +
-        "&guild_id=" +
-        encodeURIComponent(
-            guildId
-        );
-
-    window.open(
-        url,
-        "_blank"
-    );
-}
-
-
-// ============================================================
-// CLIENT ID
-// ============================================================
-// Frontend không nên chứa CLIENT_SECRET.
-// CLIENT_ID có thể public.
-//
-// Nếu muốn nút "Mời bot" hoạt động,
-// điền CLIENT_ID của bot tại đây.
-// ============================================================
-
-function getClientIdFromConfig() {
-
-    return "YOUR_CLIENT_ID";
-}
-
-
-// ============================================================
-// LOGOUT
-// ============================================================
-
-async function logout() {
-
-    try {
-
         await api(
-            "/api/logout",
+
+            `/api/guild/${GUILD.id}/panels${
+                id
+                    ? "/" + id
+                    : ""
+            }`,
+
             {
-                method: "POST"
+
+                method:
+                    id
+                        ? "PATCH"
+                        : "POST",
+
+                body:
+                    JSON.stringify(
+                        body
+                    )
             }
         );
 
-    } catch {
+        closeModal();
 
-        // Bỏ qua lỗi logout
+        toast(
+            id
+                ? "Panel updated"
+                : "Panel created and sent to Discord"
+        );
+
+        renderPanels();
+
+    } catch (error) {
+
+        toast(
+            error.message
+        );
+    }
+}
+
+
+// ============================================================
+// TICKETS PAGE
+// ============================================================
+
+async function renderTickets() {
+
+    const data =
+        await api(
+            `/api/guild/${GUILD.id}/tickets`
+        );
+
+    content.innerHTML = `
+
+        <h1 class="title">
+            Open Tickets for Server
+            ${esc(GUILD.name)}
+        </h1>
+
+        <p class="subtitle">
+            View and manage all open tickets
+        </p>
+
+
+        <div class="card">
+
+            <div class="cardhead">
+
+                <h2>
+                    Filter tickets by
+                </h2>
+
+                <button class="secondary">
+                    🏷 Manage Labels
+                </button>
+
+            </div>
+
+            <div class="body">
+
+                <div class="filtergrid">
+
+                    <input
+                        class="input"
+                        placeholder="Ticket ID"
+                    >
+
+                    <input
+                        class="input"
+                        placeholder="Username"
+                    >
+
+                    <input
+                        class="input"
+                        placeholder="User ID"
+                    >
+
+                    <input
+                        class="input"
+                        placeholder="Claimed By ID"
+                    >
+
+                </div>
+
+                <p>
+                    Only Show Unclaimed &
+                    My Tickets
+                </p>
+
+                <button class="secondary">
+                    ◯
+                </button>
+
+                <p>
+                    Unclaimed &
+                    Awaiting Response First
+                </p>
+
+                <button class="primary">
+                    ●
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="tablewrap">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Ticket ID
+                            </th>
+
+                            <th>
+                                Username
+                            </th>
+
+                            <th>
+                                User ID
+                            </th>
+
+                            <th>
+                                Claimed By ID
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        ${
+                            data.tickets.length
+                                ? data.tickets
+                                    .map(
+                                        ticket => `
+
+                                            <tr>
+
+                                                <td>
+                                                    ${esc(
+                                                        ticket.id
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${esc(
+                                                        ticket.username
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${esc(
+                                                        ticket.userId
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${
+                                                        esc(
+                                                            ticket.claimedById ||
+                                                            "Unclaimed"
+                                                        )
+                                                    }
+                                                </td>
+
+                                                <td>
+
+                                                    <span class="badge">
+                                                        Open
+                                                    </span>
+
+                                                </td>
+
+                                                <td>
+
+                                                    <a
+                                                        style="
+                                                            color:#6fa0ff
+                                                        "
+                                                        target="_blank"
+                                                        href="
+                                                            https://discord.com/channels/${GUILD.id}/${ticket.channelId}
+                                                        "
+                                                    >
+                                                        Open
+                                                    </a>
+
+                                                </td>
+
+                                            </tr>
+                                        `
+                                    )
+                                    .join("")
+                                : `
+
+                                    <tr>
+
+                                        <td
+                                            colspan="6"
+                                            class="empty"
+                                        >
+                                            No open tickets
+                                        </td>
+
+                                    </tr>
+                                `
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+// ============================================================
+// TRANSCRIPTS
+// ============================================================
+
+async function renderTranscripts() {
+
+    const data =
+        await api(
+            `/api/guild/${GUILD.id}/transcripts`
+        );
+
+    content.innerHTML = `
+
+        <h1 class="title">
+            Transcripts for Server
+            ${esc(GUILD.name)}
+        </h1>
+
+        <p class="subtitle">
+            View all closed ticket transcripts
+        </p>
+
+
+        <div class="card">
+
+            <div class="cardhead">
+
+                <h2>
+                    Filter transcripts by
+                </h2>
+
+                <button class="secondary">
+                    🏷 Manage Labels
+                </button>
+
+            </div>
+
+            <div class="body">
+
+                <div class="grid2">
+
+                    <select class="select">
+
+                        <option>
+                            Select a topic...
+                        </option>
+
+                    </select>
+
+                    <input
+                        class="input"
+                        placeholder="Closed By ID"
+                    >
+
+                </div>
+
+                <div
+                    class="grid2"
+                    style="margin-top:15px"
+                >
+
+                    <input
+                        class="input"
+                        placeholder="Claimed By ID"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="cardhead">
+
+                <h2>
+                    Transcripts
+                    (${data.transcripts.length})
+                </h2>
+
+                <button class="secondary">
+                    ▦ Columns
+                </button>
+
+            </div>
+
+            <div class="tablewrap">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Ticket ID
+                            </th>
+
+                            <th>
+                                Username
+                            </th>
+
+                            <th>
+                                Rating
+                            </th>
+
+                            <th>
+                                Close Reason
+                            </th>
+
+                            <th>
+                                Claimed By
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        ${
+                            data.transcripts.length
+                                ? data.transcripts
+                                    .map(
+                                        transcript => `
+
+                                            <tr>
+
+                                                <td>
+                                                    ${esc(
+                                                        transcript.ticketId
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${esc(
+                                                        transcript.username
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    No rating
+                                                </td>
+
+                                                <td>
+                                                    ${esc(
+                                                        transcript.closeReason
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${esc(
+                                                        transcript.claimedById ||
+                                                        "—"
+                                                    )}
+                                                </td>
+
+                                                <td>
+
+                                                    <button
+                                                        class="smallbtn"
+                                                        onclick="
+                                                            alert(
+                                                                ${JSON.stringify(
+                                                                    (
+                                                                        transcript.messages ||
+                                                                        []
+                                                                    )
+                                                                        .join(
+                                                                            "\n"
+                                                                        )
+                                                                        .slice(
+                                                                            0,
+                                                                            5000
+                                                                        )
+                                                                )}
+                                                            )
+                                                        "
+                                                    >
+                                                        ⋮
+                                                    </button>
+
+                                                </td>
+
+                                            </tr>
+                                        `
+                                    )
+                                    .join("")
+                                : `
+
+                                    <tr>
+
+                                        <td
+                                            colspan="6"
+                                            class="empty"
+                                        >
+                                            No transcripts yet
+                                        </td>
+
+                                    </tr>
+                                `
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+// ============================================================
+// TEAMS
+// ============================================================
+
+async function renderTeams() {
+
+    const data =
+        await api(
+            `/api/guild/${GUILD.id}/teams`
+        );
+
+    const roleList =
+        await roles();
+
+    DATA.teams =
+        data.teams;
+
+    content.innerHTML = `
+
+        <h1 class="title">
+            Support Teams for Server
+            ${esc(GUILD.name)}
+        </h1>
+
+        <p class="subtitle">
+            Manage support teams and their members
+        </p>
+
+
+        <div class="card">
+
+            <div class="body">
+
+                <h2>
+                    Create Team
+                </h2>
+
+                <div class="actions">
+
+                    <input
+                        id="tn"
+                        class="input"
+                        style="max-width:450px"
+                        placeholder="Team Name"
+                    >
+
+                    <button
+                        class="success"
+                        onclick="createTeam()"
+                    >
+                        ➤ Submit
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="body">
+
+                <h2>
+                    Manage Teams
+                </h2>
+
+                <div class="field">
+
+                    <label>
+                        Team
+                    </label>
+
+                    <select
+                        id="ts"
+                        class="select"
+                        onchange="teamMembers()"
+                    >
+
+                        ${
+                            data.teams
+                                .map(
+                                    team => `
+
+                                        <option
+                                            value="${team.id}"
+                                        >
+                                            ${esc(
+                                                team.name
+                                            )}
+                                        </option>
+                                    `
+                                )
+                                .join("")
+                        }
+
+                    </select>
+
+                </div>
+
+                <div id="tm"></div>
+
+            </div>
+
+        </div>
+    `;
+
+    DATA.roles =
+        roleList;
+
+    teamMembers();
+}
+
+
+function teamMembers() {
+
+    const team =
+        DATA.teams.find(
+            x =>
+                x.id ===
+                val("ts")
+        );
+
+    if (!team) {
+        return;
     }
 
-    removeToken();
+    tm.innerHTML = `
 
-    currentGuildId =
-        null;
+        <div class="grid2">
 
-    currentGuild =
-        null;
+            <div>
 
-    showLogin();
+                <h3>
+                    Manage Members
+                </h3>
+
+                ${
+                    team.roleIds.length
+                        ? team.roleIds
+                            .map(
+                                roleId => `
+
+                                    <div class="listitem">
+
+                                        @${esc(
+                                            (
+                                                DATA.roles.find(
+                                                    role =>
+                                                        role.id ===
+                                                        roleId
+                                                ) ||
+                                                {}
+                                            ).name ||
+                                            roleId
+                                        )}
+
+                                    </div>
+                                `
+                            )
+                            .join("")
+                        : `
+
+                            <div class="empty">
+                                No members
+                            </div>
+                        `
+                }
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Add Role
+                </h3>
+
+                <div class="actions">
+
+                    <select
+                        id="ar"
+                        class="select"
+                    >
+
+                        ${
+                            DATA.roles
+                                .map(
+                                    role => `
+
+                                        <option
+                                            value="${role.id}"
+                                        >
+                                            ${esc(
+                                                role.name
+                                            )}
+                                        </option>
+                                    `
+                                )
+                                .join("")
+                        }
+
+                    </select>
+
+                    <button
+                        class="success"
+                        onclick="addRole()"
+                    >
+                        ＋ Add To Team
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+async function createTeam() {
+
+    if (
+        !val("tn").trim()
+    ) {
+
+        return toast(
+            "Nhập tên team"
+        );
+    }
+
+    await api(
+        `/api/guild/${GUILD.id}/teams`,
+        {
+
+            method:
+                "POST",
+
+            body:
+                JSON.stringify({
+                    name:
+                        val("tn")
+                })
+        }
+    );
+
+    renderTeams();
+}
+
+
+async function addRole() {
+
+    await api(
+        `/api/guild/${GUILD.id}/teams/${val("ts")}/roles`,
+        {
+
+            method:
+                "POST",
+
+            body:
+                JSON.stringify({
+                    roleId:
+                        val("ar")
+                })
+        }
+    );
+
+    renderTeams();
 }
 
 
 // ============================================================
-// ESCAPE HTML
+// BLACKLIST
 // ============================================================
 
-function escapeHtml(
-    text
-) {
+async function renderBlacklist() {
 
-    const div =
-        document.createElement(
-            "div"
+    const data =
+        await api(
+            `/api/guild/${GUILD.id}/blacklist`
         );
 
-    div.textContent =
-        text == null
-            ? ""
-            : String(text);
+    const roleList =
+        await roles();
 
-    return div.innerHTML;
+    DATA.roles =
+        roleList;
+
+    content.innerHTML = `
+
+        <h1 class="title">
+            Blacklist for Server
+            ${esc(GUILD.name)}
+        </h1>
+
+        <p class="subtitle">
+            Manage blacklisted users and roles
+            who cannot open tickets
+        </p>
+
+
+        <div class="card">
+
+            <div class="body">
+
+                <h2>
+                    Blacklist
+                </h2>
+
+                <div class="actions">
+
+                    <button
+                        class="primary"
+                        onclick="blackUser()"
+                    >
+                        ⊘ Blacklist User
+                    </button>
+
+                    <button
+                        class="primary"
+                        onclick="blackRole()"
+                    >
+                        ⊘ Blacklist Role
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="body">
+
+                <h2>
+                    Blacklisted Roles
+                </h2>
+
+                ${
+                    data.blacklist.roles.length
+                        ? data.blacklist.roles
+                            .map(
+                                roleId => `
+
+                                    <div class="listitem">
+
+                                        @${esc(
+                                            (
+                                                roleList.find(
+                                                    role =>
+                                                        role.id ===
+                                                        roleId
+                                                ) ||
+                                                {}
+                                            ).name ||
+                                            roleId
+                                        )}
+
+                                        <button
+                                            class="danger"
+                                            onclick="
+                                                unblack(
+                                                    'role',
+                                                    '${roleId}'
+                                                )
+                                            "
+                                        >
+                                            Remove
+                                        </button>
+
+                                    </div>
+                                `
+                            )
+                            .join("")
+                        : `
+
+                            <div class="empty">
+
+                                ⊘
+
+                                <h3>
+                                    No blacklisted roles
+                                </h3>
+
+                                <p>
+                                    Blacklisted roles
+                                    cannot open tickets
+                                    in your server.
+                                </p>
+
+                            </div>
+                        `
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="body">
+
+                <h2>
+                    Blacklisted Users
+                </h2>
+
+                ${
+                    data.blacklist.users.length
+                        ? data.blacklist.users
+                            .map(
+                                userId => `
+
+                                    <div class="listitem">
+
+                                        ${esc(
+                                            userId
+                                        )}
+
+                                        <button
+                                            class="danger"
+                                            onclick="
+                                                unblack(
+                                                    'user',
+                                                    '${userId}'
+                                                )
+                                            "
+                                        >
+                                            Remove
+                                        </button>
+
+                                    </div>
+                                `
+                            )
+                            .join("")
+                        : `
+
+                            <div class="empty">
+                                No blacklisted users
+                            </div>
+                        `
+                }
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+async function blackUser() {
+
+    const id =
+        prompt(
+            "User ID"
+        );
+
+    if (!id) {
+        return;
+    }
+
+    await api(
+        `/api/guild/${GUILD.id}/blacklist/user`,
+        {
+
+            method:
+                "POST",
+
+            body:
+                JSON.stringify({
+                    userId:
+                        id
+                })
+        }
+    );
+
+    renderBlacklist();
+}
+
+
+async function blackRole() {
+
+    const input =
+        prompt(
+            DATA.roles
+                .map(
+                    (role, index) =>
+                        `${index}: ${role.name}`
+                )
+                .join("\n")
+        );
+
+    if (input === null) {
+        return;
+    }
+
+    const role =
+        DATA.roles[
+            Number(input)
+        ];
+
+    if (!role) {
+        return;
+    }
+
+    await api(
+        `/api/guild/${GUILD.id}/blacklist/role`,
+        {
+
+            method:
+                "POST",
+
+            body:
+                JSON.stringify({
+                    roleId:
+                        role.id
+                })
+        }
+    );
+
+    renderBlacklist();
+}
+
+
+async function unblack(
+    kind,
+    id
+) {
+
+    await api(
+        `/api/guild/${GUILD.id}/blacklist/${kind}/${id}`,
+        {
+
+            method:
+                "DELETE"
+        }
+    );
+
+    renderBlacklist();
 }
 
 
 // ============================================================
-// ESCAPE ATTRIBUTE
+// AUDIT
 // ============================================================
 
-function escapeAttribute(
-    text
-) {
+async function renderAudit() {
 
-    return String(
-        text || ""
-    )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
+    const data =
+        await api(
+            `/api/guild/${GUILD.id}/audit-log`
         );
+
+    content.innerHTML = `
+
+        <h1 class="title">
+            Audit Log
+        </h1>
+
+
+        <div class="card">
+
+            <div class="cardhead">
+
+                <h2>
+                    ⌁ Filter Audit Logs
+                </h2>
+
+            </div>
+
+            <div class="body">
+
+                <div class="filtergrid">
+
+                    <input
+                        class="input"
+                        placeholder="User ID"
+                    >
+
+                    <select class="select">
+
+                        <option>
+                            All Actions
+                        </option>
+
+                    </select>
+
+                    <select class="select">
+
+                        <option>
+                            All Resources
+                        </option>
+
+                    </select>
+
+                    <input
+                        class="input"
+                        type="date"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="cardhead">
+
+                <h2>
+                    ↶ Audit Logs
+                    (${data.logs.length}
+                    entries)
+                </h2>
+
+                <button class="secondary">
+                    ▦ Columns
+                </button>
+
+            </div>
+
+            <div class="tablewrap">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Timestamp
+                            </th>
+
+                            <th>
+                                User
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                            <th>
+                                Resource
+                            </th>
+
+                            <th>
+                                Details
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        ${
+                            data.logs
+                                .map(
+                                    log => `
+
+                                        <tr>
+
+                                            <td>
+                                                ${new Date(
+                                                    log.timestamp
+                                                ).toLocaleString()}
+                                            </td>
+
+                                            <td>
+                                                ${esc(
+                                                    log.username
+                                                )}
+                                            </td>
+
+                                            <td>
+
+                                                <span class="badge">
+                                                    ${esc(
+                                                        log.action
+                                                    )}
+                                                </span>
+
+                                            </td>
+
+                                            <td>
+                                                ${esc(
+                                                    log.resource
+                                                )}
+                                            </td>
+
+                                            <td>
+                                                ${esc(
+                                                    JSON.stringify(
+                                                        log.details ||
+                                                        {}
+                                                    )
+                                                )}
+                                            </td>
+
+                                        </tr>
+                                    `
+                                )
+                                .join("")
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+// ============================================================
+// SETTINGS
+// ============================================================
+
+async function renderSettings() {
+
+    content.innerHTML = `
+
+        <h1 class="title">
+            Settings for Server
+            ${esc(GUILD.name)}
+        </h1>
+
+        <p class="subtitle">
+            Configure the Ticket system
+        </p>
+
+
+        <div class="card">
+
+            <div class="body">
+
+                <h2>
+                    Setup
+                </h2>
+
+                <p>
+                    Ticket v2 style setup creates
+                    staff roles, transcripts channel
+                    and Tickets category.
+                </p>
+
+                <p>
+                    Admin role:
+                    <code>
+                        ${
+                            GUILD.setup?.adminRoleId ||
+                            "Not configured"
+                        }
+                    </code>
+                </p>
+
+                <p>
+                    Support role:
+                    <code>
+                        ${
+                            GUILD.setup?.supportRoleId ||
+                            "Not configured"
+                        }
+                    </code>
+                </p>
+
+                <p>
+                    Category:
+                    <code>
+                        ${
+                            GUILD.setup?.categoryId ||
+                            "Not configured"
+                        }
+                    </code>
+                </p>
+
+                <p>
+                    Transcripts:
+                    <code>
+                        ${
+                            GUILD.setup?.transcriptChannelId ||
+                            "Not configured"
+                        }
+                    </code>
+                </p>
+
+                <button
+                    class="primary"
+                    onclick="runSetup()"
+                >
+                    ✓ Run /setup
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+async function runSetup() {
+
+    await api(
+        `/api/guild/${GUILD.id}/setup`,
+        {
+            method:
+                "POST"
+        }
+    );
+
+    GUILD = {
+
+        ...GUILD,
+
+        ...(
+            await api(
+                `/api/guild/${GUILD.id}`
+            )
+        ).guild
+    };
+
+    toast(
+        "Setup complete"
+    );
+
+    renderSettings();
 }
 
 
@@ -2598,19 +3233,7 @@ function escapeAttribute(
 // START
 // ============================================================
 
-(async function start() {
-
-    console.log(
-        "🚀 Bot Manager starting..."
-    );
-
-    // Lấy token từ #auth=...
-    readOAuthHash();
-
-    // Kiểm tra token
-    await checkLogin();
-
-})();
+boot();
 
 </script>
 
